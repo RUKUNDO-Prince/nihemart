@@ -1,10 +1,12 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Home, About, Contact, Help, Products, Product, Cart, NotFound } from './pages';
+import { Footer, Navbar } from '../components';
 
 const App = () => {
   return (
     <div>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -17,6 +19,7 @@ const App = () => {
         {/* Route for handling 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </div>
   );
 };
