@@ -5,7 +5,6 @@ const accountRouter = require("./routes/account");
 const dbConn = require("./config/db");
 const authRouter = require("./routes/auth");
 const cookieParser = require("cookie-parser");
-// const chalk = require("chalk");
 
 dotenv.config();
 const app = express();
@@ -18,5 +17,5 @@ app.use(cookieParser());
 app.use("/auth", authRouter);
 app.use("/account", accountRouter);
 app.listen(3000, () => {
-  console.log("Server started on port 3000");
+  console.log("Server is running on port 3000");
 });
