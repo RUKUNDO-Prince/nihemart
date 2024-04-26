@@ -1,6 +1,3 @@
-const express = require("express");
-const router = express.Router();
-const mongoose = require("mongoose");
 const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
@@ -94,7 +91,7 @@ const adminPanelDisplay = async (userInfo) => {
     console.error("Error displaying user information to admin panel:", error);
   }
 };
-
+module.exports = { addProduct, likeProduct, adminPanelDisplay, upload };
 
 
 
@@ -127,5 +124,4 @@ const adminPanelDisplay = async (userInfo) => {
 
 
 
-module.exports = { addProduct, likeProduct, adminPanelDisplay };
-module.exports = upload;
+
