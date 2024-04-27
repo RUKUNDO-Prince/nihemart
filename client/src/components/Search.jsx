@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { categories } from '../constants/data'
-import Dropdown from './Dropdown'
 import { search } from '../assets'
 import { AiOutlineCaretDown, AiOutlineCaretUp } from 'react-icons/ai';
 import { PiCaretDownBold, PiCaretUpBold } from "react-icons/pi";
@@ -14,7 +13,6 @@ const Search = () => {
         <img src={search} alt="search icon" />
         <input type="text" name="searchQuery" id="searchQuery" placeholder='search' className='bg-transparent outline-none' />
       </form>
-      {/* <Dropdown data={categories} /> */}
       <div className='h-[30px] w-[2px] bg-black'></div>
       <div className='relative flex flex-col items-center rounded-lg'>
         <button className='flex items-center justify-between w-full px-2 duration-300 active:text-gray-60 gap-1' onClick={() => setIsOpen((prev) => !prev)}>categories {isOpen ? (<PiCaretUpBold />) : (<PiCaretDownBold />)}</button>
