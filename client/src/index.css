@@ -17,3 +17,7 @@
     height: 2px;
     background-color: #FE8900;
 }
+
+.bg-glass {
+    @apply h-full w-full bg-yellow-900 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100
+}
