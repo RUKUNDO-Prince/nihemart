@@ -5,6 +5,8 @@ import Help from "./Help";
 import Product from "./Product";
 import Products from "./Products";
 import NotFound from "./NotFound";
+import Cart from './Cart'
+import Likes from "./Likes";
 
 export {
     Home,
@@ -13,5 +15,7 @@ export {
     Help,
     Product,
     Products,
-    NotFound
+    NotFound,
+    Cart,
+    Likes
 }
