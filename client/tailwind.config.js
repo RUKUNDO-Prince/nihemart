@@ -55,8 +55,8 @@ export default {
                 80: "#a4a9b2",
                 90: "#b7bbc2",
               },
-              blue: "#3B9DF8",
-              black: "#000000",
+              blue: "#002B53",
+              dark: "#241400",
           },
           borderRadius: {
               "4xl": "32px",

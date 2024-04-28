@@ -1,45 +1,66 @@
 import React from "react";
-import ItemsContainer from "./ItemsContainer";
-import SocialIcons from "./SocialIcons";
-import { Icons } from "./Menus";
+import Newsletter from "./Newsletter";
+import { footerEndData, footerLinks, footerActions } from "../constants/data";
+import { Link } from "react-router-dom";
+import { FaInstagram, FaWhatsapp, FaTiktok } from "react-icons/fa";
+import { logo } from "../assets";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="md:flex md:justify-between md:items-center sm:px-12 px-4 bg-[#ffffff19] py-7">
-        <h1
-          className="lg:text-4xl text-3xl md:mb-0 mb-6 lg:leading-normal font-semibold
-         md:w-2/5"
-        >
-          <span className="text-teal-400">Free</span> until you're ready to
-          launch
-        </h1>
-        <div>
-          <input
-            type="text"
-            placeholder="Enter Your ph.no"
-            className="text-gray-800
-           sm:w-72 w-full sm:mr-5 mr-1 lg:mb-0 mb-4 py-2.5 rounded px-2 focus:outline-none"
-          />
-          <button
-            className="bg-teal-400 hover:bg-teal-500 duration-300 px-5 py-2.5 font-[Poppins]
-           rounded-md text-white md:w-auto w-full"
-          >
-            Request Code
-          </button>
+    <footer className="bg-gradient-to-b from-blue to-dark">
+      <Newsletter />
+      <hr />
+      {/* MAIN FOOTER */}
+      <div>
+        {/* FOOTER LINKS */}
+        <div className="flex justify-around items-start gap-5 p-[10px]">
+          <img src={logo} alt="logo" />
+          <div className="w-[15%]">
+            <h1 className="text-white font-bold">Nihe Mart</h1>
+            <p className="text-white">Buy Goods and order on our commercial website</p>
+          </div>
+          {footerLinks.map((item, index) => (
+            <div key={index} className="flex flex-col">
+              <h1 className="text-white font-bold">{item.title}</h1>
+              {item.links.map((link, index) => (
+                <Link className="text-white" key={index} to={link.link}>{link.text}</Link>
+              ))}
+            </div>
+          ))}
+          {footerActions.map((item, index) => (
+            <div className="flex flex-col" key={index}>
+              <h1 className="text-white font-bold">{item.title}</h1>
+              {item.links.map((link, index) => (
+                <Link className="text-white" key={index} to={link.link}>{link.text}</Link>
+              ))}
+            </div>
+          ))}
+          <div>
+            <h1 className="text-white font-bold">Find Us Online</h1>
+            <div className="flex">
+              <FaInstagram color="white" />
+              <FaWhatsapp color="white" />
+              <FaTiktok color="white" />
+            </div>
+          </div>
+        </div>
+        <hr />
+        {/* FOOTER END */}
+        <div className="flex justify-around">
+          <p className="text-white">
+            Copyright © 2025 Nihe Mart . All rights reserved
+          </p>
+          <p className="flex gap-5">
+            {footerEndData.map((item, index) => (
+              <span className="text-white" key={index}>
+                {item}
+              </span>
+            ))}
+          </p>
         </div>
       </div>
-      <ItemsContainer />
-      <div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10
-      text-center pt-2 text-gray-400 text-sm pb-8"
-      >
-        <span>© 2020 Appy. All rights reserved.</span>
-        <span>Terms · Privacy Policy</span>
-        <SocialIcons Icons={Icons} />
-      </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

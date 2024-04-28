@@ -42,4 +42,50 @@ export const languages = [
         name: "Ko",
         icon: ""
     },
-]
+];
+
+export const footerEndData = ["Privacy Policy", "Terms and Conditions", "User Agreement", "License"];
+
+export const footerLinks = [
+    {
+        title: "Useful Links",
+        links: [
+            {
+                text: "Home",
+                link: '/'
+            },
+            {
+                text: "About",
+                link: '/about'
+            },
+            {
+                text: "Contact",
+                link: '/contact'
+            },
+            {
+                text: "Help",
+                link: '/help'
+            },
+        ],
+    },
+];
+
+export const footerActions = [
+    {
+        title: "Quick Actions",
+        links: [
+            {
+                text: "Likes",
+                link: '/likes'
+            },
+            {
+                text: "Cart",
+                link: '/cart'
+            },
+            {
+                text: "Order",
+                link: '/order'
+            },
+        ],
+    },
+];
