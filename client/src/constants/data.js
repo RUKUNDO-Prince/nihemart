@@ -23,23 +23,23 @@ export const categories = [
 
 export const languages = [
     {
-        name: "English",
+        name: "En",
         icon: ""
     },
     {
-        name: "Spanish",
+        name: "Sp",
         icon: ""
     },
     {
-        name: "French",
+        name: "Fr",
         icon: ""
     },
     {
-        name: "Kinyarwanda",
+        name: "Ki",
         icon: ""
     },
     {
-        name: "Korean",
+        name: "Ko",
         icon: ""
     },
 ]
