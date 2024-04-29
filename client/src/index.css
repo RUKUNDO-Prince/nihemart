@@ -17,3 +17,13 @@
     height: 2px;
     background-color: #FE8900;
 }
+
+@layer components {
+	.bg-glass {
+		@apply bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 
+		hover:bg-gray-600/10 border border-gray-800 text-white;
+	}
+    .bg-glass2 {
+        @apply bg-gray-100/10 border border-gray-800
+    }
+}
