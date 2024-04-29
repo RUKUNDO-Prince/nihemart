@@ -7,4 +7,5 @@ const accountRouter = express.Router();
 accountRouter.post("/", createAccount);
 accountRouter.use(authenticate);
 
+
 module.exports = accountRouter;

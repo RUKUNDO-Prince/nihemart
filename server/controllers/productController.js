@@ -46,7 +46,7 @@ const likeProduct = async (req, res) => {
     const { productId } = req.params;
     const userId = req.user._id;
 
-    const { name, email, phoneNumber, location } = req.body;
+    const { name, email, phoneNumber, city, destination, fee } = req.body;
 
     const product = await Product.findById(productId);
 
@@ -54,7 +54,7 @@ const likeProduct = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    if (product.likes.includes(userId)) {
+    if (product.likes.some((like) => like.user.equals(userId))) {
       return res
         .status(400)
         .json({ message: "You have already liked this product" });
@@ -62,11 +62,21 @@ const likeProduct = async (req, res) => {
 
     product.likes.push({
       user: userId,
-      userInfo: { name, email, phoneNumber, location },
+      userInfo: {
+        name,
+        email,
+        phoneNumber,
+        location: { city, destination, fee },
+      },
     });
     await product.save();
 
-    const userInfo = { name, email, phoneNumber, location };
+    const userInfo = {
+      name,
+      email,
+      phoneNumber,
+      location: { city, destination, fee },
+    };
     adminPanelDisplay(userInfo);
 
     res.status(200).json({ message: "Product liked successfully", product });
@@ -75,6 +85,7 @@ const likeProduct = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
 
 const adminPanelDisplay = async (userInfo) => {
   try {
