@@ -18,9 +18,9 @@ const Search = () => {
         <button className='flex items-center justify-between w-full px-2 duration-300 active:text-gray-60 gap-1' onClick={() => setIsOpen((prev) => !prev)}>categories {isOpen ? (<PiCaretUpBold />) : (<PiCaretDownBold />)}</button>
         {
           isOpen && (
-            <div className='absolute top-20 bg-blue flex flex-col items-start rounded-lg p-2 w-[400%]'>
+            <div className='absolute top-20 bg-glass flex flex-col items-start rounded-lg p-2 w-[400%]'>
               {categories.map((category, index) => (
-                <div className='flex w-full justify-between p-4 hover:bg-primary hover:border-l-white border-l-4 cursor-pointer rounded-r-lg border-l-transparent' key={index}>
+                <div className='flex w-full justify-between p-4 hover:bg-glass2 hover:border-l-white border-l-4 cursor-pointer rounded-r-lg border-l-transparent' key={index}>
                   <p>{category.name}</p>
                   <p>{category.icon}</p>
                 </div>

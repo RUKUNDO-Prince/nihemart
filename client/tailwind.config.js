@@ -15,7 +15,8 @@ export default {
       fontFamily: {
           lato: ["Lato", "sans-serif"],
           inter: ["inter", "sans-serif"],
-          poppins: ["poppins", "sans-serif"]
+          poppins: ["poppins", "sans-serif"],
+          'libre': ['Libre Baskerville', 'serif'],
       },
       extend: {
           fontSize: {
@@ -56,6 +57,7 @@ export default {
                 90: "#b7bbc2",
               },
               blue: "#002B53",
+              blue2: "#0386FF",
               dark: "#241400",
           },
           borderRadius: {

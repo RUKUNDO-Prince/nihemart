@@ -4,6 +4,7 @@ import cart from './cart.svg'
 import likes from './likes.svg'
 import search from './search.svg'
 import Language from './languages.svg'
+import push from './push.svg'
 
 export {
     logo,
@@ -11,5 +12,6 @@ export {
     cart,
     likes,
     search,
-    Language
+    Language,
+    push
 }
