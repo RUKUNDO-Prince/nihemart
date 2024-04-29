@@ -16,7 +16,7 @@ export default {
           lato: ["Lato", "sans-serif"],
           inter: ["inter", "sans-serif"],
           poppins: ["poppins", "sans-serif"],
-          libre: ["Libre Baskerville", "sans-serif"]
+          'libre': ['Libre Baskerville', 'serif'],
       },
       extend: {
           fontSize: {

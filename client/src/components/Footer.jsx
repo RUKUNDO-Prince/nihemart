@@ -12,7 +12,7 @@ const Footer = () => {
       <div className="w-full h-[1.5px] bg-white"></div>
       {/* MAIN FOOTER */}
       <div>
-        <div className=" h-[30vh] content-center">
+        <div className=" h-[30vh] content-center mx-10">
 
         {/* FOOTER LINKS */}
         <div className="flex justify-around items-start gap-5 p-[10px]">
@@ -52,15 +52,19 @@ const Footer = () => {
         <div className="w-[70%] m-auto h-[0.7px] bg-gray-70"></div>
         {/* FOOTER END */}
         <div className="flex justify-between items-center h-[15vh] w-[70%] m-auto">
-          <p className="text-white">
+          <p className="text-white font-light">
             Copyright © 2024 Nihe Mart . All rights reserved
           </p>
           <p className="flex gap-5">
-            {footerEndData.map((item, index) => (
-              <span className="text-white" key={index}>
-                {item}
-              </span>
-            ))}
+          {footerEndData.map((item, index) => (
+  <React.Fragment key={index}>
+    <span className="text-white hover:opacity-[80%] hover:underline transition-opacity font-light">
+      {item}
+    </span>
+    {index !== footerEndData.length - 1 && <span className="text-white"> | </span>}
+  </React.Fragment>
+))}
+
           </p>
         </div>
       </div>
