@@ -26,7 +26,7 @@ const Footer = () => {
             <div key={index} className="flex flex-col">
               <h1 className="text-white font-bold">{item.title}</h1>
               {item.links.map((link, index) => (
-                <Link className="text-white hover:opacity-[80%] hover:underline transition-opacity" key={index} to={link.link}>{link.text}</Link>
+                <Link target="_blank" className="text-white hover:opacity-[80%] hover:underline transition-opacity" key={index} to={link.link}>{link.text}</Link>
               ))}
             </div>
           ))}
@@ -34,14 +34,14 @@ const Footer = () => {
             <div className="flex flex-col" key={index}>
               <h1 className="text-white font-bold">{item.title}</h1>
               {item.links.map((link, index) => (
-                <Link className="text-white hover:opacity-[80%] hover:underline transition-opacity" key={index} to={link.link}>{link.text}</Link>
+                <Link target="_blank" className="text-white hover:opacity-[80%] hover:underline transition-opacity" key={index} to={link.link}>{link.text}</Link>
               ))}
             </div>
           ))}
           <div>
             <h1 className="text-white font-bold mb-3">Find Us Online</h1>
             <div className="flex gap-5">
-              <Link to={"https://instagram.com"}><FaInstagram color="white" size={30} /></Link>
+              <Link target="_blank" to={"https://instagram.com"}><FaInstagram color="white" size={30} /></Link>
               <FaWhatsapp color="white" size={30} />
               <FaTiktok color="white" size={30} />
             </div>
