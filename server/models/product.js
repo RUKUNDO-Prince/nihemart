@@ -6,7 +6,11 @@ const userSchema = new Schema({
   name: String,
   email: String,
   phoneNumber: String,
-  location: String,
+  location: {
+    city: String,
+    destination: String,
+    fee: Number,
+  },
 });
 
 const productSchema = new Schema({
