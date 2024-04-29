@@ -1,3 +1,5 @@
+import { usa, spain, france, rwanda, korea } from "../assets";
+
 export const categories = [
     {
         name: "men",
@@ -24,23 +26,23 @@ export const categories = [
 export const languages = [
     {
         name: "En",
-        icon: ""
+        icon: usa
     },
     {
         name: "Sp",
-        icon: ""
+        icon: spain
     },
     {
         name: "Fr",
-        icon: ""
+        icon: france
     },
     {
         name: "Ki",
-        icon: ""
+        icon: rwanda
     },
     {
         name: "Ko",
-        icon: ""
+        icon: korea
     },
 ];
 
