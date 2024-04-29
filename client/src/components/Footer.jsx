@@ -12,12 +12,13 @@ const Footer = () => {
       <hr />
       {/* MAIN FOOTER */}
       <div>
+        <div className=" h-[30vh] content-center">
+
         {/* FOOTER LINKS */}
         <div className="flex justify-around items-start gap-5 p-[10px]">
           <div className="w-[20%] flex">
           <img src={logo} alt="logo" />
           <div>
-
             <h1 className="text-white font-bold">Nihe Mart</h1>
             <p className="text-white">Buy Goods and order on our commercial website</p>
           </div>
@@ -47,9 +48,10 @@ const Footer = () => {
             </div>
           </div>
         </div>
+          </div>
         <hr />
         {/* FOOTER END */}
-        <div className="flex justify-around">
+        <div className="flex justify-around items-center h-[15vh]">
           <p className="text-white">
             Copyright © 2025 Nihe Mart . All rights reserved
           </p>
