@@ -10,6 +10,9 @@ import spain from './spain.svg'
 import france from './france.svg'
 import rwanda from './rwanda.svg'
 import korea from './korea.svg'
+import apple from './apple.svg'
+import nike from './nike.svg'
+import iphone from './iphone.png'
 
 export {
     logo,
@@ -23,5 +26,8 @@ export {
     spain,
     france,
     rwanda,
-    korea
+    korea,
+    apple,
+    nike,
+    iphone
 }
