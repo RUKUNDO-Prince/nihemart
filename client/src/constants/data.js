@@ -1,4 +1,4 @@
-import { usa, spain, france, rwanda, korea, apple, nike, iphone } from "../assets";
+import { usa, spain, france, rwanda, korea, apple, nike, iphone, shoes } from "../assets";
 
 export const categories = [
     {
@@ -115,6 +115,6 @@ export const homeSlider = [
         icon: nike,
         name: "Nike impact 4",
         heading: "Get monthly credit",
-        image: ""
+        image: shoes
     },
 ]

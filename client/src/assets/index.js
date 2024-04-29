@@ -13,6 +13,7 @@ import korea from './korea.svg'
 import apple from './apple.svg'
 import nike from './nike.svg'
 import iphone from './iphone.png'
+import shoes from './shoes.png'
 
 export {
     logo,
@@ -29,5 +30,6 @@ export {
     korea,
     apple,
     nike,
-    iphone
+    iphone,
+    shoes
 }
