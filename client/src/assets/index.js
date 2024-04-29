@@ -5,6 +5,15 @@ import likes from './likes.svg'
 import search from './search.svg'
 import Language from './languages.svg'
 import push from './push.svg'
+import usa from './usa.svg'
+import spain from './spain.svg'
+import france from './france.svg'
+import rwanda from './rwanda.svg'
+import korea from './korea.svg'
+import apple from './apple.svg'
+import nike from './nike.svg'
+import iphone from './iphone.png'
+import shoes from './shoes.png'
 
 export {
     logo,
@@ -13,5 +22,14 @@ export {
     likes,
     search,
     Language,
-    push
+    push,
+    usa,
+    spain,
+    france,
+    rwanda,
+    korea,
+    apple,
+    nike,
+    iphone,
+    shoes
 }
