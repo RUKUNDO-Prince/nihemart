@@ -102,8 +102,23 @@ const adminPanelDisplay = async (userInfo) => {
     console.error("Error displaying user information to admin panel:", error);
   }
 };
-module.exports = { addProduct, likeProduct, adminPanelDisplay, upload };
+const redirectToWhatsApp = (req, res) => {
+  try {
+    const sellerNumber = "+250788515608"; // Seller's WhatsApp number
+    const message =
+      "Hello, I'm interested in your product. Can you provide more information?"; // Message to the seller
+    const whatsappLink = `https://wa.me/${sellerNumber}?text=${encodeURIComponent(
+      message
+    )}`;
 
+    return res.redirect(whatsappLink);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+module.exports = { addProduct, likeProduct, adminPanelDisplay, upload, redirectToWhatsApp };
 
 
 // const likeProduct = async (req, res) => {
