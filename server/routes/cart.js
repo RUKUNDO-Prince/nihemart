@@ -4,7 +4,7 @@ const { authenticate } = require("../middleware/authMiddleware");
 const cartRoute = express.Router()
 
 cartRoute.get("/", getCart);
-accountRouter.use(authenticate);
+cartRoute.use(authenticate);
 cartRoute.post("/", addToCart);
 cartRoute.delete("/:id", deleteCartItem);
 

@@ -67,6 +67,5 @@ productSchema.virtual("averageRating").get(function () {
   return sum / this.ratings.length;
 });
 
-const Product = mongoose.model("Product", productSchema);
 
-module.exports = Product;
+module.exports = mongoose.model("Product", productSchema);
