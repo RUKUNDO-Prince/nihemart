@@ -4,7 +4,7 @@ import { Hero, Sidebar, Categories, Products, Arrivals, Cta } from '../component
 const Home = () => {
   return (
     <div>
-      <div className='flex items-center justify-between'>
+      <div className='flex items-center justify-between mx-[50px]'>
       <Sidebar />
       <Hero />
       </div>

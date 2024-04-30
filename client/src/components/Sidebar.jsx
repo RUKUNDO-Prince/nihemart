@@ -7,7 +7,7 @@ const Sidebar = () => {
     <div className='w-[15%]'>
       <ul>
         {categories.map((category, index) => (
-          <li key={index} className="group flex items-center justify-between gap-5 py-2 px-4 hover:text-black">
+          <li key={index} className="group flex items-center justify-between gap-5 py-2 hover:text-black">
             {category.name}
             <FaAngleRight className="icon hidden group-hover:block" />
           </li>
