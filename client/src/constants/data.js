@@ -117,4 +117,28 @@ export const homeSlider = [
         heading: "Get monthly credit",
         image: shoes
     },
+    {
+        icon: apple,
+        name: "iPhone 14 series",
+        heading: "Up to 10% voucher",
+        image: iphone
+    },
+    {
+        icon: nike,
+        name: "Nike impact 4",
+        heading: "Get monthly credit",
+        image: shoes
+    },
+    {
+        icon: apple,
+        name: "iPhone 14 series",
+        heading: "Up to 10% voucher",
+        image: iphone
+    },
+    {
+        icon: nike,
+        name: "Nike impact 4",
+        heading: "Get monthly credit",
+        image: shoes
+    },
 ]
