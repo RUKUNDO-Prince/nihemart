@@ -119,35 +119,3 @@ const redirectToWhatsApp = (req, res) => {
 };
 
 module.exports = { addProduct, likeProduct, adminPanelDisplay, upload, redirectToWhatsApp };
-
-
-// const likeProduct = async (req, res) => {
-//   try {
-//     const { productId } = req.params;
-//     const userId = req.user._id;
-
-//     const product = await Product.findById(productId);
-
-//     if (!product) {
-//       return res.status(404).json({ message: "Product not found" });
-//     }
-
-//     if (product.likes.includes(userId)) {
-//       return res
-//         .status(400)
-//         .json({ message: "You have already liked this product" });
-//     }
-
-//     product.likes.push(userId);
-//     await product.save();
-
-//     res.status(200).json({ message: "Product liked successfully", product });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Internal server error" });
-//   }
-// };
-
-
-
-

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const productSchema = new mongoose.Schema({
+const cartSchema = new mongoose.Schema({
   photos: [
     {
       type: String,
@@ -20,16 +20,12 @@ const productSchema = new mongoose.Schema({
   },
 });
 
-
-productSchema.virtual("subtotal").get(function () {
+cartSchema.virtual("subtotal").get(function () {
   return this.price * this.quantity;
 });
 
-
-productSchema.virtual("photo").get(function () {
+cartSchema.virtual("photo").get(function () {
   return this.photos && this.photos.length > 0 ? this.photos[0] : null;
 });
 
-const Product = mongoose.model("Product", productSchema);
-
-module.exports = Product;
+module.exports = mongoose.model("Cart", cartSchema);
