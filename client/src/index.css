@@ -28,8 +28,8 @@
     content: "";
     position: absolute;
     left: 0;
-    bottom: -0.5em;
-    width: 100%;
+    bottom: -0.3em;
+    width: 110%;
     height: 0.7px;
     background-color: #ffffff;
 }
