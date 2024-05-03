@@ -28,6 +28,10 @@ import gamepad from './products/gamepad.png'
 import kit from './products/kit.png'
 import phone2 from './products/phone2.png'
 import eye from './eye.svg'
+import woman from './products/woman.png'
+import ps from './products/ps.png'
+import perfume from './products/perfume.png'
+import speakers from './products/speakers.png'
 
 export {
     logo,
@@ -59,5 +63,9 @@ export {
     gamepad,
     kit,
     phone2,
-    eye
+    eye,
+    speakers,
+    woman,
+    ps,
+    perfume
 }
