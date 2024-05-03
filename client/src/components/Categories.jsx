@@ -2,6 +2,7 @@ import React from "react";
 import SubHeading from "./SubHeading";
 import Heading from "./Heading";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import CategoriesList from "./CategoriesList";
 
 const Categories = () => {
   return (
@@ -14,6 +15,7 @@ const Categories = () => {
         <FaArrowRight className="bg-gray-90 rounded-full p-[20px]" />
         </div>
       </div>
+      <CategoriesList />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { usa, spain, france, rwanda, korea, apple, nike, iphone, shoes } from "../assets";
+import { usa, spain, france, rwanda, korea, apple, nike, iphone, shoes, computer, headphones, camera, phone, airpods,material } from "../assets";
 
 export const categories = [
     {
@@ -111,4 +111,31 @@ export const homeSlider = [
         heading: "Up to 10% off voucher",
         image: iphone
     }
+];
+
+export const categoriesList = [
+    {
+        icon: headphones,
+        name: "Headphones"
+    },
+    {
+        icon: phone,
+        name: "Smartphone"
+    },
+    {
+        icon: camera,
+        name: "Camera"
+    },
+    {
+        icon: computer,
+        name: "Computers"
+    },
+    {
+        icon: airpods,
+        name: "Air-pods"
+    },
+    {
+        icon: material,
+        name: "Home materials"
+    },
 ]

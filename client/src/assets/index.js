@@ -14,6 +14,12 @@ import apple from './apple.svg'
 import nike from './nike.svg'
 import iphone from './iphone.png'
 import shoes from './shoes.png'
+import airpods from './airpods.svg'
+import phone from './phone.svg'
+import material from './material.svg'
+import camera from './camera.svg'
+import computer from './computer.svg'
+import headphones from './headphones.svg'
 
 export {
     logo,
@@ -31,5 +37,11 @@ export {
     apple,
     nike,
     iphone,
-    shoes
+    shoes,
+    camera,
+    phone,
+    material,
+    airpods,
+    computer,
+    headphones
 }
