@@ -12,7 +12,7 @@ const Products = () => {
         <Heading title="Best of this month" />
         <Link to="/products" className="bg-blue3 px-[30px] py-[10px] rounded-md text-white hover:bg-blue2">View All</Link>
       </div>
-      <ProductsList />
+      <ProductsList maxProducts={8} />
     </div>
   );
 };

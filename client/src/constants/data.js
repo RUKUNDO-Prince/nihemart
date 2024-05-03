@@ -182,21 +182,21 @@ export const productsList = [
         isNew: false
     },
     {
-        img: phone,
+        img: phone2,
         name: "iPhone",
         price: 8939,
         updatedPrice: 3323,
-        starCount: 4,
+        starCount: 4.3,
         reviewCount: 44,
         category: "Smartphones",
         isNew: true
     },
     {
-        img: computer,
+        img: computer2,
         name: "Lenovo Thinkbook",
         price: 9499,
         updatedPrice: 3388,
-        starCount: 2,
+        starCount: 2.5,
         reviewCount: 848,
         category: "Computers"
     },
@@ -205,7 +205,7 @@ export const productsList = [
         name: "Multi-case",
         price: 1122,
         updatedPrice: 3939,
-        starCount: 1,
+        starCount: 1.7,
         reviewCount: 33,
         category: "Materials"
     },
@@ -336,7 +336,7 @@ export const productsList = [
         isNew: false
     },
     {
-        img: phone,
+        img: phone2,
         name: "iPhone",
         price: 8939,
         updatedPrice: 3323,
@@ -346,7 +346,7 @@ export const productsList = [
         isNew: true
     },
     {
-        img: computer,
+        img: computer2,
         name: "Lenovo Thinkbook",
         price: 9499,
         updatedPrice: 3388,
