@@ -58,6 +58,7 @@ export default {
               },
               blue: "#002B53",
               blue2: "#0386FF",
+              blue3: "#3B9DF8",
               blueGradient: "#3B9DF8",
               orangeGradient: "#FF8A00",
               dark: "#241400",
