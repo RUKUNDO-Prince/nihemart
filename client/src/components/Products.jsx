@@ -1,9 +1,20 @@
-import React from 'react'
+import React from "react";
+import SubHeading from "./SubHeading";
+import Heading from "./Heading";
+import { Link } from "react-router-dom";
+import ProductsList from "./ProductsList";
 
 const Products = () => {
   return (
-    <div>Products</div>
-  )
-}
+    <div className="p-[50px]">
+      <SubHeading title="Our Products" />
+      <div className="flex justify-between items-center">
+        <Heading title="Best of this month" />
+        <Link to="/products" className="bg-blue3 px-[30px] py-[10px] rounded-md text-white hover:bg-blue2">View All</Link>
+      </div>
+      <ProductsList />
+    </div>
+  );
+};
 
-export default Products
+export default Products;

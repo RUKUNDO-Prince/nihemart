@@ -1,4 +1,4 @@
-import { usa, spain, france, rwanda, korea, apple, nike, iphone, shoes, computer, headphones, camera, phone, airpods,material } from "../assets";
+import { usa, spain, france, rwanda, korea, apple, nike, iphone, shoes, computer, headphones, camera, phone, airpods, material, bag, caseB, computer2, coat, gamepad, kit, phone2 } from "../assets";
 
 export const categories = [
     {
@@ -138,4 +138,238 @@ export const categoriesList = [
         icon: material,
         name: "Home materials"
     },
-]
+];
+
+export const productsList = [
+    {
+        img: coat,
+        name: "The north coat",
+        price: 3600,
+        updatedPrice: 2600,
+        starCount: 5,
+        reviewCount: 65,
+        category: "Fashion",
+        isNew: false
+    },
+    {
+        img: bag,
+        name: "Women bags",
+        price: 8389,
+        updatedPrice: 3292,
+        starCount: 4,
+        reviewCount: 89,
+        category: "Fashion",
+        isNew: false
+    },
+    {
+        img: kit,
+        name: "Sports wear",
+        price: 4985,
+        updatedPrice: 2234,
+        starCount: 5,
+        reviewCount: 49,
+        category: "Sports",
+        isNew: false
+    },
+    {
+        img: coat,
+        name: "The north coat",
+        price: 3984,
+        updatedPrice: 2294,
+        starCount: 5,
+        reviewCount: 84,
+        category: "Fashion",
+        isNew: false
+    },
+    {
+        img: phone,
+        name: "iPhone",
+        price: 8939,
+        updatedPrice: 3323,
+        starCount: 4,
+        reviewCount: 44,
+        category: "Smartphones",
+        isNew: true
+    },
+    {
+        img: computer,
+        name: "Lenovo Thinkbook",
+        price: 9499,
+        updatedPrice: 3388,
+        starCount: 2,
+        reviewCount: 848,
+        category: "Computers"
+    },
+    {
+        img: caseB,
+        name: "Multi-case",
+        price: 1122,
+        updatedPrice: 3939,
+        starCount: 1,
+        reviewCount: 33,
+        category: "Materials"
+    },
+    {
+        img: gamepad,
+        name: "Gamepad",
+        price: 8485,
+        updatedPrice: 4744,
+        starCount: 3,
+        reviewCount: 854,
+        category: "Gaming"
+    }, 
+    {
+        img: coat,
+        name: "The north coat",
+        price: 3600,
+        updatedPrice: 2600,
+        starCount: 5,
+        reviewCount: 65,
+        category: "Fashion",
+        isNew: false
+    },
+    {
+        img: bag,
+        name: "Women bags",
+        price: 8389,
+        updatedPrice: 3292,
+        starCount: 4,
+        reviewCount: 89,
+        category: "Fashion",
+        isNew: false
+    },
+    {
+        img: kit,
+        name: "Sports wear",
+        price: 4985,
+        updatedPrice: 2234,
+        starCount: 5,
+        reviewCount: 49,
+        category: "Sports",
+        isNew: false
+    },
+    {
+        img: coat,
+        name: "The north coat",
+        price: 3984,
+        updatedPrice: 2294,
+        starCount: 5,
+        reviewCount: 84,
+        category: "Fashion",
+        isNew: false
+    },
+    {
+        img: phone2,
+        name: "iPhone",
+        price: 8939,
+        updatedPrice: 3323,
+        starCount: 4,
+        reviewCount: 44,
+        category: "Smartphones",
+        isNew: true
+    },
+    {
+        img: computer,
+        name: "Lenovo Thinkbook",
+        price: 9499,
+        updatedPrice: 3388,
+        starCount: 2,
+        reviewCount: 848,
+        category: "Computers"
+    },
+    {
+        img: caseB,
+        name: "Multi-case",
+        price: 1122,
+        updatedPrice: 3939,
+        starCount: 1,
+        reviewCount: 33,
+        category: "Materials"
+    },
+    {
+        img: gamepad,
+        name: "Gamepad",
+        price: 8485,
+        updatedPrice: 4744,
+        starCount: 3,
+        reviewCount: 854,
+        category: "Gaming"
+    }, 
+    {
+        img: coat,
+        name: "The north coat",
+        price: 3600,
+        updatedPrice: 2600,
+        starCount: 5,
+        reviewCount: 65,
+        category: "Fashion",
+        isNew: false
+    },
+    {
+        img: bag,
+        name: "Women bags",
+        price: 8389,
+        updatedPrice: 3292,
+        starCount: 4,
+        reviewCount: 89,
+        category: "Fashion",
+        isNew: false
+    },
+    {
+        img: kit,
+        name: "Sports wear",
+        price: 4985,
+        updatedPrice: 2234,
+        starCount: 5,
+        reviewCount: 49,
+        category: "Sports",
+        isNew: false
+    },
+    {
+        img: coat,
+        name: "The north coat",
+        price: 3984,
+        updatedPrice: 2294,
+        starCount: 5,
+        reviewCount: 84,
+        category: "Fashion",
+        isNew: false
+    },
+    {
+        img: phone,
+        name: "iPhone",
+        price: 8939,
+        updatedPrice: 3323,
+        starCount: 4,
+        reviewCount: 44,
+        category: "Smartphones",
+        isNew: true
+    },
+    {
+        img: computer,
+        name: "Lenovo Thinkbook",
+        price: 9499,
+        updatedPrice: 3388,
+        starCount: 2,
+        reviewCount: 848,
+        category: "Computers"
+    },
+    {
+        img: caseB,
+        name: "Multi-case",
+        price: 1122,
+        updatedPrice: 3939,
+        starCount: 1,
+        reviewCount: 33,
+        category: "Materials"
+    },
+    {
+        img: gamepad,
+        name: "Gamepad",
+        price: 8485,
+        updatedPrice: 4744,
+        starCount: 3,
+        reviewCount: 854,
+        category: "Gaming"
+    }, 
+];

@@ -9,6 +9,7 @@ const Home = () => {
       <Hero />
       </div>
       <Categories />
+      <div className='w-[95%] h-[2px] bg-gray-90 m-auto'></div>
       <Products />
       <Arrivals />
       <Cta />

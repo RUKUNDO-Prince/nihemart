@@ -20,6 +20,14 @@ import material from './material.svg'
 import camera from './camera.svg'
 import computer from './computer.svg'
 import headphones from './headphones.svg'
+import bag from './products/bag.png'
+import caseB from './products/case.png'
+import coat from './products/coat.png'
+import computer2 from './products/computer.png'
+import gamepad from './products/gamepad.png'
+import kit from './products/kit.png'
+import phone2 from './products/phone2.png'
+import eye from './eye.svg'
 
 export {
     logo,
@@ -43,5 +51,13 @@ export {
     material,
     airpods,
     computer,
-    headphones
+    headphones,
+    bag,
+    caseB,
+    coat,
+    computer2,
+    gamepad,
+    kit,
+    phone2,
+    eye
 }
