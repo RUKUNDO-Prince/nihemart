@@ -32,6 +32,8 @@ import woman from './products/woman.png'
 import ps from './products/ps.png'
 import perfume from './products/perfume.png'
 import speakers from './products/speakers.png'
+import delivery from './delivery.svg'
+import service from './service.svg'
 
 export {
     logo,
@@ -67,5 +69,7 @@ export {
     speakers,
     woman,
     ps,
-    perfume
+    perfume,
+    delivery,
+    service
 }
