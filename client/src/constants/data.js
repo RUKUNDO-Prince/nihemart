@@ -1,4 +1,4 @@
-import { usa, spain, france, rwanda, korea, apple, nike, iphone, shoes, computer, headphones, camera, phone, airpods, material, bag, caseB, computer2, coat, gamepad, kit, phone2, woman, perfume, ps, speakers } from "../assets";
+import { usa, spain, france, rwanda, korea, apple, nike, iphone, shoes, computer, headphones, camera, phone, airpods, material, bag, caseB, computer2, coat, gamepad, kit, phone2, woman, perfume, ps, speakers, main, other1, other2, other3, other4 } from "../assets";
 
 export const categories = [
     {
@@ -142,6 +142,7 @@ export const categoriesList = [
 
 export const productsList = [
     {
+        id: 1,
         img: coat,
         name: "The north coat",
         price: 3600,
@@ -152,6 +153,7 @@ export const productsList = [
         isNew: false
     },
     {
+        id: 2,
         img: bag,
         name: "Women bags",
         price: 8389,
@@ -162,6 +164,7 @@ export const productsList = [
         isNew: false
     },
     {
+        id: 3,
         img: kit,
         name: "Sports wear",
         price: 4985,
@@ -172,6 +175,7 @@ export const productsList = [
         isNew: false
     },
     {
+        id: 4,
         img: coat,
         name: "The north coat",
         price: 3984,
@@ -182,6 +186,7 @@ export const productsList = [
         isNew: false
     },
     {
+        id: 5,
         img: phone2,
         name: "iPhone",
         price: 8939,
@@ -192,6 +197,7 @@ export const productsList = [
         isNew: true
     },
     {
+        id: 6,
         img: computer2,
         name: "Lenovo Thinkbook",
         price: 9499,
@@ -201,6 +207,7 @@ export const productsList = [
         category: "Computers"
     },
     {
+        id: 7,
         img: caseB,
         name: "Multi-case",
         price: 1122,
@@ -210,6 +217,7 @@ export const productsList = [
         category: "Materials"
     },
     {
+        id: 8,
         img: gamepad,
         name: "Gamepad",
         price: 8485,
@@ -219,6 +227,7 @@ export const productsList = [
         category: "Gaming"
     }, 
     {
+        id: 9,
         img: coat,
         name: "The north coat",
         price: 3600,
@@ -229,6 +238,7 @@ export const productsList = [
         isNew: false
     },
     {
+        id: 10,
         img: bag,
         name: "Women bags",
         price: 8389,
@@ -239,6 +249,7 @@ export const productsList = [
         isNew: false
     },
     {
+        id: 11,
         img: kit,
         name: "Sports wear",
         price: 4985,
@@ -249,6 +260,7 @@ export const productsList = [
         isNew: false
     },
     {
+        id: 12,
         img: coat,
         name: "The north coat",
         price: 3984,
@@ -259,111 +271,38 @@ export const productsList = [
         isNew: false
     },
     {
+        id: 13,
         img: phone2,
         name: "iPhone",
         price: 8939,
         updatedPrice: 3323,
-        starCount: 4,
+        starCount: 4.3,
         reviewCount: 44,
         category: "Smartphones",
         isNew: true
     },
     {
-        img: computer,
-        name: "Lenovo Thinkbook",
-        price: 9499,
-        updatedPrice: 3388,
-        starCount: 2,
-        reviewCount: 848,
-        category: "Computers"
-    },
-    {
-        img: caseB,
-        name: "Multi-case",
-        price: 1122,
-        updatedPrice: 3939,
-        starCount: 1,
-        reviewCount: 33,
-        category: "Materials"
-    },
-    {
-        img: gamepad,
-        name: "Gamepad",
-        price: 8485,
-        updatedPrice: 4744,
-        starCount: 3,
-        reviewCount: 854,
-        category: "Gaming"
-    }, 
-    {
-        img: coat,
-        name: "The north coat",
-        price: 3600,
-        updatedPrice: 2600,
-        starCount: 5,
-        reviewCount: 65,
-        category: "Fashion",
-        isNew: false
-    },
-    {
-        img: bag,
-        name: "Women bags",
-        price: 8389,
-        updatedPrice: 3292,
-        starCount: 4,
-        reviewCount: 89,
-        category: "Fashion",
-        isNew: false
-    },
-    {
-        img: kit,
-        name: "Sports wear",
-        price: 4985,
-        updatedPrice: 2234,
-        starCount: 5,
-        reviewCount: 49,
-        category: "Sports",
-        isNew: false
-    },
-    {
-        img: coat,
-        name: "The north coat",
-        price: 3984,
-        updatedPrice: 2294,
-        starCount: 5,
-        reviewCount: 84,
-        category: "Fashion",
-        isNew: false
-    },
-    {
-        img: phone2,
-        name: "iPhone",
-        price: 8939,
-        updatedPrice: 3323,
-        starCount: 4,
-        reviewCount: 44,
-        category: "Smartphones",
-        isNew: true
-    },
-    {
+        id: 14,
         img: computer2,
         name: "Lenovo Thinkbook",
         price: 9499,
         updatedPrice: 3388,
-        starCount: 2,
+        starCount: 2.5,
         reviewCount: 848,
         category: "Computers"
     },
     {
+        id: 15,
         img: caseB,
         name: "Multi-case",
         price: 1122,
         updatedPrice: 3939,
-        starCount: 1,
+        starCount: 1.7,
         reviewCount: 33,
         category: "Materials"
     },
     {
+        id: 16,
         img: gamepad,
         name: "Gamepad",
         price: 8485,
@@ -372,6 +311,107 @@ export const productsList = [
         reviewCount: 854,
         category: "Gaming"
     }, 
+    {
+        id: 17,
+        img: coat,
+        name: "The north coat",
+        price: 3600,
+        updatedPrice: 2600,
+        starCount: 5,
+        reviewCount: 65,
+        category: "Fashion",
+        isNew: false
+    },
+    {
+        id: 18,
+        img: bag,
+        name: "Women bags",
+        price: 8389,
+        updatedPrice: 3292,
+        starCount: 4,
+        reviewCount: 89,
+        category: "Fashion",
+        isNew: false
+    },
+    {
+        id: 19,
+        img: kit,
+        name: "Sports wear",
+        price: 4985,
+        updatedPrice: 2234,
+        starCount: 5,
+        reviewCount: 49,
+        category: "Sports",
+        isNew: false
+    },
+    {
+        id: 20,
+        img: coat,
+        name: "The north coat",
+        price: 3984,
+        updatedPrice: 2294,
+        starCount: 5,
+        reviewCount: 84,
+        category: "Fashion",
+        isNew: false
+    },
+    {
+        id: 21,
+        img: phone2,
+        name: "iPhone",
+        price: 8939,
+        updatedPrice: 3323,
+        starCount: 4.3,
+        reviewCount: 44,
+        category: "Smartphones",
+        isNew: true
+    },
+    {
+        id: 22,
+        img: computer2,
+        name: "Lenovo Thinkbook",
+        price: 9499,
+        updatedPrice: 3388,
+        starCount: 2.5,
+        reviewCount: 848,
+        category: "Computers"
+    },
+    {
+        id: 23,
+        img: caseB,
+        name: "Multi-case",
+        price: 1122,
+        updatedPrice: 3939,
+        starCount: 1.7,
+        reviewCount: 33,
+        category: "Materials"
+    },
+    {
+        id: 24,
+        img: gamepad,
+        name: "Gamepad",
+        price: 8485,
+        updatedPrice: 4744,
+        starCount: 3,
+        reviewCount: 854,
+        category: "Gaming"
+    }, 
+];
+
+export const singleProduct = [
+    {
+        id: 100,
+        name: "Havic HV G-92 Gamepad",
+        desc: "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
+        img: main,
+        imgs: [other1, other2, other3, other4],
+        price: 1122344,
+        updatedPrice: 84849495,
+        starCount: 4.5,
+        reviewCount: 8485,
+        isAvailable: true,
+        category: "Gaming",
+    }
 ];
 
 export const arrivals = [

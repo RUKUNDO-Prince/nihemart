@@ -34,6 +34,11 @@ import perfume from './products/perfume.png'
 import speakers from './products/speakers.png'
 import delivery from './delivery.svg'
 import service from './service.svg'
+import main from './product/main.png'
+import other1 from './product/other1.png'
+import other2 from './product/other2.png'
+import other3 from './product/other3.png'
+import other4 from './product/other4.png'
 
 export {
     logo,
@@ -71,5 +76,10 @@ export {
     ps,
     perfume,
     delivery,
-    service
+    service,
+    main,
+    other1,
+    other2,
+    other3,
+    other4
 }
