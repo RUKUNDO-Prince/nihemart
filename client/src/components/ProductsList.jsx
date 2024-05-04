@@ -2,6 +2,7 @@ import React from 'react';
 import { productsList } from '../constants/data';
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 import { eye, likes } from '../assets';
+import { Link } from 'react-router-dom';
 
 const StarRating = ({ starCount }) => {
   const fullStars = Math.floor(starCount);
@@ -25,6 +26,10 @@ const ProductsList = ({ maxProducts = Infinity }) => {
   return (
     <div className='flex flex-wrap max-items-4 mt-[40px] justify-between gap-y-5'>
       {limitedProducts.map((product, index) => (
+        <Link to={`/product/${product.id}`}>
+        {/* <Link to="/product/100"> */}
+
+        
         <div key={index}>
           <div className='flex bg-blue2 bg-opacity-[20%] p-[20px] h-[320px] w-[320px] justify-between items-start  mb-[10px]'>
             <img src={product.img} className='m-auto' alt="img" />
@@ -45,6 +50,7 @@ const ProductsList = ({ maxProducts = Infinity }) => {
             </div>
           </div>
         </div>
+        </Link>
       ))}
     </div>
   );
