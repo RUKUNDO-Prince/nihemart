@@ -8,6 +8,7 @@ import Arrivals from "./Arrivals";
 import Cta from "./Cta";
 import SubHeading from "./SubHeading";
 import Heading from "./Heading";
+import ProductsList from "./ProductsList";
 
 export {
     Navbar,
@@ -19,5 +20,6 @@ export {
     Arrivals,
     Cta,
     Heading,
-    SubHeading
+    SubHeading,
+    ProductsList
 }
