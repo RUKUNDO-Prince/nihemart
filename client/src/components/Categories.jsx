@@ -11,8 +11,8 @@ const Categories = () => {
       <div className="flex justify-between mb-[60px]">
         <Heading title="Browse By Category" />
         <div className="flex gap-3">
-        <FaArrowLeft className="bg-gray-90 rounded-full p-[20px]" color="#000" />
-        <FaArrowRight className="bg-gray-90 rounded-full p-[20px]" />
+        <FaArrowLeft className="bg-gray-90 rounded-full p-[10px] w-[40px] h-[40px]" />
+        <FaArrowRight className="bg-gray-90 rounded-full p-[10px] w-[40px] h-[40px]" />
         </div>
       </div>
       <CategoriesList />
