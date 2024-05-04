@@ -1,9 +1,11 @@
 import React from 'react'
+import { ProductsList, SubHeading } from '../components'
 
 const Products = () => {
   return (
-    <div>
-      Products
+    <div className='p-[50px]'>
+      <SubHeading title="Our Products" />
+      <ProductsList />
     </div>
   )
 }
