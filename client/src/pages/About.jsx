@@ -1,5 +1,6 @@
 import React from "react";
 import { about } from "../assets";
+import { Cta } from "../components";
 
 const About = () => {
   return (
@@ -47,6 +48,7 @@ const About = () => {
         </div>
         <div></div>
       </div>
+      <Cta />
     </div>
   );
 };

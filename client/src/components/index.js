@@ -21,5 +21,5 @@ export {
     Cta,
     Heading,
     SubHeading,
-    ProductsList
+    ProductsList,
 }
