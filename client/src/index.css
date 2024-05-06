@@ -42,4 +42,7 @@
     .bg-glass2 {
         @apply bg-primary border border-primary
     }
+    .bg-glass3 {
+         @apply bg-gray-100/10 border border-gray-800
+    }
 }
