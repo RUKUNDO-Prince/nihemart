@@ -1,11 +1,11 @@
 import React from 'react'
-import { service, delivery } from '../assets'
+import { service, deliver } from '../assets'
 
 const Cta = () => {
   return (
     <div className='flex gap-9 justify-center items-center mb-[50px]'>
       <div className='flex flex-col items-center'>
-        <img src={delivery} alt="icon" className='bg-blue2 border-[7px] border-gray-80 rounded-full w-[60px] h-[60px] p-[5px]' />
+        <img src={deliver} alt="icon" className='bg-blue2 border-[7px] border-gray-80 rounded-full w-[60px] h-[60px] p-[5px]' />
         <h1 className='font-bold text-[1.2em]'>FAST DELIVERY</h1>
         <p>Fast delivery for all customers all over Rwanda</p>
       </div>

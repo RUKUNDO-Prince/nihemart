@@ -18,7 +18,7 @@ const Hero = () => {
               {item.heading}
             </p>
             <div className="flex items-center gap-3 mt-5">
-              <a href="/" className="text-white link">
+              <a href="/products" className="text-white link">
                 Shop now
               </a>
               <FaArrowRightLong color="#fff" />
