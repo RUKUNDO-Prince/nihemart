@@ -10,6 +10,7 @@ import SubHeading from "./SubHeading";
 import Heading from "./Heading";
 import ProductsList from "./ProductsList";
 import Team from "./Team";
+import Accordion from "./Accordion";
 
 export {
     Navbar,
@@ -23,5 +24,6 @@ export {
     Heading,
     SubHeading,
     ProductsList,
-    Team
+    Team,
+    Accordion
 }
