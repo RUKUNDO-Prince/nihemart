@@ -42,6 +42,11 @@ import other4 from './product/other4.png'
 import whatsapp from './whatsapp.svg'
 import circle from './circle.svg'
 import about from './about.png'
+import deliver from './deliver.svg'
+import team1 from './team/team1.png'
+import team2 from './team/team2.png'
+import team3 from './team/team3.png'
+import team4 from './team/team4.png'
 
 export {
     logo,
@@ -87,5 +92,10 @@ export {
     other4,
     whatsapp,
     circle,
-    about
+    about,
+    deliver,
+    team1,
+    team2,
+    team3,
+    team4
 }

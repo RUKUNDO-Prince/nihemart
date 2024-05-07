@@ -1,4 +1,4 @@
-import { usa, spain, france, rwanda, korea, apple, nike, iphone, shoes, computer, headphones, camera, phone, airpods, material, bag, caseB, computer2, coat, gamepad, kit, phone2, woman, perfume, ps, speakers, main, other1, other2, other3, other4 } from "../assets";
+import { usa, spain, france, rwanda, korea, apple, nike, iphone, shoes, computer, headphones, camera, phone, airpods, material, bag, caseB, computer2, coat, gamepad, kit, phone2, woman, perfume, ps, speakers, main, other1, other2, other3, other4, team1, team2, team3, team4 } from "../assets";
 
 export const categories = [
     {
@@ -434,5 +434,28 @@ export const arrivals = [
         img: perfume,
         name: "Perfume",
         text: "GUCCI INTENSE OUD EDP"
+    },
+];
+
+export const team = [
+    {
+        img: team1,
+        name: "RUKUNDO David",
+        position: "Co-Founder&CEO"
+    },
+    {
+        img: team2,
+        name: "UWINEZA Linda",
+        position: "Co-Founder&COO"
+    },
+    {
+        img: team3,
+        name: "KEZA Ange",
+        position: "Product Designer"
+    },
+    {
+        img: team4,
+        name: "BAHATI Paul",
+        position: "Manager"
     },
 ];

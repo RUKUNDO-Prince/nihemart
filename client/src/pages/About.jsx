@@ -1,6 +1,6 @@
 import React from "react";
 import { about } from "../assets";
-import { Cta } from "../components";
+import { Cta, Team } from "../components";
 
 const About = () => {
   return (
@@ -15,8 +15,8 @@ const About = () => {
         </div>
         <img src={about} alt="img" />
       </div>
-      <div className="flex">
-        <div className="flex flex-col">
+      <div className="flex items-start max-w-full justify-around p-[50px]">
+        <div className="flex flex-col w-[50%]">
           <div>
             <h1 className="text-black font-bold text-[50px]">Who are we</h1>
             <p className="text-[16px] font-poppins">
@@ -46,7 +46,10 @@ const About = () => {
             </ul>
           </div>
         </div>
-        <div></div>
+        <div>
+          <h1 className="text-black font-bold text-[50px]">Meet Our Team</h1>
+          <Team />
+        </div>
       </div>
       <Cta />
     </div>

@@ -9,6 +9,7 @@ import Cta from "./Cta";
 import SubHeading from "./SubHeading";
 import Heading from "./Heading";
 import ProductsList from "./ProductsList";
+import Team from "./Team";
 
 export {
     Navbar,
@@ -22,4 +23,5 @@ export {
     Heading,
     SubHeading,
     ProductsList,
+    Team
 }
