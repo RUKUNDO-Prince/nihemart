@@ -459,3 +459,61 @@ export const team = [
         position: "Manager"
     },
 ];
+
+export const accordionData = [
+    {
+        question: "What is Nihe Mart ?",
+        answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
+    },
+    {
+        question: "What can Nihe Mart help you with ? ",
+        answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
+    },
+    {
+        question: "How can i shop from Nihe Mart ?",
+        answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
+    },
+    {
+        question: "How many products sold on Nihe Mart ?",
+        answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
+    },
+    {
+        question: "Can you make money on Nihe Mart ?",
+        answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
+    },
+];
+
+export const helpData = [
+    {
+        title: "Product help",
+        desc: "if you have any problem with our product like an expired or not working product"
+    },
+    {
+        title: "Order status",
+        desc: "if you have any problem with our product like an expired or not working product"
+    },
+    {
+        title: "Delivery",
+        desc: "if you have any problem with our product like an expired or not working product"
+    },
+    {
+        title: "Return",
+        desc: "if you have any problem with our product like an expired or not working product"
+    },
+    {
+        title: "Product help",
+        desc: "if you have any problem with our product like an expired or not working product"
+    },
+    {
+        title: "Order status",
+        desc: "if you have any problem with our product like an expired or not working product"
+    },
+    {
+        title: "Delivery",
+        desc: "if you have any problem with our product like an expired or not working product"
+    },
+    {
+        title: "Return",
+        desc: "if you have any problem with our product like an expired or not working product"
+    },
+];

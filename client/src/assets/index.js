@@ -49,6 +49,7 @@ import team3 from './team/team3.png'
 import team4 from './team/team4.png'
 import call from './call.svg'
 import write from './write.svg'
+import help from './help.png'
 
 export {
     logo,
@@ -101,5 +102,6 @@ export {
     team3,
     team4,
     call,
-    write
+    write,
+    help
 }
