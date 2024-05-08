@@ -460,7 +460,7 @@ export const team = [
     },
 ];
 
-export const accordionData = [
+export const faqs = [
     {
         question: "What is Nihe Mart ?",
         answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
