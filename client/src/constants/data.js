@@ -1,4 +1,4 @@
-import { usa, spain, france, rwanda, korea, apple, nike, iphone, shoes, computer, headphones, camera, phone, airpods, material, bag, caseB, computer2, coat, gamepad, kit, phone2, woman, perfume, ps, speakers, main, other1, other2, other3, other4, team1, team2, team3, team4 } from "../assets";
+import { usa, spain, france, rwanda, korea, apple, nike, iphone, shoes, computer, headphones, camera, phone, airpods, material, bag, caseB, computer2, coat, gamepad, kit, phone2, woman, perfume, ps, speakers, main, other1, other2, other3, other4, team1, team2, team3, team4, likes1, likes2, likes3, likes4 } from "../assets";
 
 export const categories = [
     {
@@ -515,5 +515,32 @@ export const helpData = [
     {
         title: "Return",
         desc: "if you have any problem with our product like an expired or not working product"
+    },
+];
+
+export const likesData = [
+    {
+        img: likes1,
+        name: "Car",
+        price: 84845,
+        updatedPrice: 8485883
+    },
+    {
+        img: likes2,
+        name: "Camera",
+        price: 9844,
+        updatedPrice: 98475
+    },
+    {
+        img: likes3,
+        name: "Sports Boots",
+        price: 8943,
+        updatedPrice: 88432
+    },
+    {
+        img: likes4,
+        name: "PlayStation",
+        price: 2944,
+        updatedPrice: 88445
     },
 ];

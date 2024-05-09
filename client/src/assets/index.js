@@ -50,6 +50,10 @@ import team4 from './team/team4.png'
 import call from './call.svg'
 import write from './write.svg'
 import help from './help.png'
+import likes1 from './likes/likes1.png'
+import likes2 from './likes/likes2.png'
+import likes3 from './likes/likes3.png'
+import likes4 from './likes/likes4.png'
 
 export {
     logo,
@@ -103,5 +107,9 @@ export {
     team4,
     call,
     write,
-    help
+    help,
+    likes1,
+    likes2,
+    likes3,
+    likes4
 }
