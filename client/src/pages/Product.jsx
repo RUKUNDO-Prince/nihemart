@@ -13,15 +13,15 @@ const Product = () => {
           <div key={index}>
             <p className='m-[20px] text-gray-90'>/   {item.category}      /       <span className='text-black'>{item.name}</span></p>
             <div className='flex max-h-[100vh] justify-between'>
-              <div className='min-h-full w-[15%]'>
+              <div className='w-[15%] min-h-full flex gap-5 flex-col my-[10px]'>
                 {
                   item.imgs.map((img, index) => (
-                    <img className='bg-gray-90 bg-opacity-[30%] p-[20px] my-[10px] hover:bg-opacity-[20%] w-full' src={img} alt="img" key={index} />
+                    <img className='bg-gray-90 bg-opacity-[30%] p-[20px] hover:bg-opacity-[20%] w-full' src={img} alt="img" key={index} />
                   ))
                 }
               </div>
-              <div className='min-h-full bg-gray-90 bg-opacity-[30%] content-center px-[40px] my-[10px] mx-[20px] hover:bg-opacity-[20%] w-[70%]'><img src={item.img} alt="item" /></div>
-              <div className='my-[10px] px-[50px] flex flex-col gap-3'>
+              <div className='bg-gray-90 bg-opacity-[30%] content-center px-[40px] my-[10px]  mx-[20px] hover:bg-opacity-[20%] w-[70%]'><img src={item.img} alt="item" /></div>
+              <div className='px-[50px] flex flex-col gap-3'>
                 <h1 className='text-[24px] font-semibold'>{item.name}</h1>
                 <div className='flex gap-3'>
                   <p>{item.starCount}</p>
@@ -49,7 +49,7 @@ const Product = () => {
                     </div>
                     <div className='flex items-center gap-3 bg-[#00FF38] rounded-lg w-[30%] px-[10px] py-[10px]'>
                       <img src={whatsapp} alt="" />
-                      <p className='text-white'>Whatsapp</p>
+                      <button className='text-white'>Whatsapp</button>
                     </div>
                   </div>
                   <hr className='bg-gray-90 h-[2px]' />
