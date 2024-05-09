@@ -49,7 +49,7 @@ const Product = () => {
                     </div>
                     <div className='flex items-center gap-3 bg-[#00FF38] rounded-lg w-[30%] px-[10px] py-[10px]'>
                       <img src={whatsapp} alt="" />
-                      <p className='text-white'>Whatsapp</p>
+                      <button className='text-white'>Whatsapp</button>
                     </div>
                   </div>
                   <hr className='bg-gray-90 h-[2px]' />
