@@ -14,7 +14,7 @@ const Sidebar = () => {
           </li>
         ))}
       </ul>
-      <Link to="/products" className="bg-blue3 px-[30px] py-[10px] rounded-md text-white hover:bg-blue2">View All</Link>
+      <Link to="/products" className="bg-blue3 px-[70px] py-[10px] rounded-md text-white hover:bg-blue2 ">View All</Link>
     </div>
   );
 };
