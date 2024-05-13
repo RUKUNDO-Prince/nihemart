@@ -11,6 +11,7 @@ import Heading from "./Heading";
 import ProductsList from "./ProductsList";
 import Team from "./Team";
 import Accordion from "./Accordion";
+import OrderModal from "./OrderModal";
 
 export {
     Navbar,
@@ -25,5 +26,6 @@ export {
     SubHeading,
     ProductsList,
     Team,
-    Accordion
+    Accordion,
+    OrderModal
 }
