@@ -15,10 +15,10 @@ const Likes = () => {
               <div key={index} className='my-[30px] flex flex-col justify-start items-start'>
                 <div className='bg-gray-70 bg-opacity-[30%] flex flex-col m-[10px] p-t-[20px] w-[300px] min-h-[300px] rounded-md justify-between'>
                   <img src={item.img} className='m-auto w-[150px]' alt="img" />
-                  <button className='bg-[#808080] flex w-full rounded-b-md p-[10px] justify-center items-center'>
+                  <Link to="/order" className='bg-[#808080] flex w-full rounded-b-md p-[10px] justify-center items-center'>
                     <img src={deliver} alt="" />
                     <p className='text-white m-0 text-lg'>Order Now</p>
-                  </button>
+                  </Link>
                 </div>
                 <p className='font-semibold text-lg mx-[10px]'>{item.name}</p>
                 <p className='text-primary mx-[10px]'>{item.updatedPrice} frw <span className='text-gray-50 line-through'>{item.price} frw</span></p>
