@@ -1,17 +1,22 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
-import { AddProduct, Analytics, Login, NotFound, Notifications, Orders, Product, Products, Profile, Signup } from './pages'
-import { Footer, Navbar } from './components'
+import React from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AddProduct, Analytics, Login, NotFound, Notifications, Orders, Product, Products, Profile, Signup } from './pages';
+import { Footer, Navbar } from './components';
 
 const App = () => {
+  const location = useLocation();
+
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
+
   return (
     <>
+      {!isAuthPage && <Navbar />}
       <Routes>
         <Route path={"/login"} element={<Login />} />
         <Route path={"/signup"} element={<Signup />} />
       </Routes>
+      {!isAuthPage && (
         <>
-          <Navbar />
           <Routes>
             <Route path={"/"} element={<Analytics />} />
             <Route path={"/addProduct"} element={<AddProduct />} />
@@ -24,8 +29,9 @@ const App = () => {
           </Routes>
           <Footer />
         </>
+      )}
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
