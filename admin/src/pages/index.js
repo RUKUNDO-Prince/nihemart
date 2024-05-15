@@ -7,6 +7,7 @@ import Notifications from "./Notifications";
 import Orders from "./Orders";
 import Products from "./Products";
 import Profile from "./Profile";
+import Product from "./Product";
 
 export {
     Login,
@@ -17,5 +18,6 @@ export {
     Notifications,
     Orders,
     Products,
-    Profile
+    Profile,
+    Product
 }

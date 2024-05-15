@@ -1,9 +1,37 @@
-import React from 'react'
+import React from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AddProduct, Analytics, Login, NotFound, Notifications, Orders, Product, Products, Profile, Signup } from './pages';
+import { Footer, Navbar } from './components';
 
 const App = () => {
-  return (
-    <div>App</div>
-  )
-}
+  const location = useLocation();
 
-export default App
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
+
+  return (
+    <>
+      {!isAuthPage && <Navbar />}
+      <Routes>
+        <Route path={"/login"} element={<Login />} />
+        <Route path={"/signup"} element={<Signup />} />
+      </Routes>
+      {!isAuthPage && (
+        <>
+          <Routes>
+            <Route path={"/"} element={<Analytics />} />
+            <Route path={"/addProduct"} element={<AddProduct />} />
+            <Route path={"/notifications"} element={<Notifications />} />
+            <Route path={"/orders"} element={<Orders />} />
+            <Route path={"/products"} element={<Products />} />
+            <Route path={"/profile"} element={<Profile />} />
+            <Route path={"/product/:id"} element={<Product />} />
+            <Route path={"*"} element={<NotFound />} />
+          </Routes>
+          <Footer />
+        </>
+      )}
+    </>
+  );
+};
+
+export default App;
