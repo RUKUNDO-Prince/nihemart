@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
+const bodyParser = require("body-parser");
 const accountRouter = require("./routes/account");
 const dbConn = require("./config/db");
 const authRouter = require("./routes/auth");
@@ -8,17 +9,40 @@ const cookieParser = require("cookie-parser");
 const productRouter = require("./routes/product");
 const contactRouter = require("./routes/contact");
 const cartRoute = require("./routes/cart");
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsdoc = require("swagger-jsdoc")
+const { swaggerDoc } = require("./swagger");
 require("dotenv").config();
-
 
 dotenv.config();
 const app = express();
 
 dbConn();
+
+app.use(bodyParser.json());
+const options = {
+  definition: {
+    coolnerds: "3.0.0",
+    info: {
+      title: "Backend API",
+      description: "API documentation for the backend services",
+      version: "1.0.0",
+    },
+    servers: [
+      {
+        url: "http://localhost:3000/api",
+      },
+    ],
+  },
+  apis: ["./config/swagger.yaml"], 
+};
+
+const specs = swaggerJsdoc(options);
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.use("/auth", authRouter);
 app.use("/account", accountRouter);
 app.use("/product", productRouter);

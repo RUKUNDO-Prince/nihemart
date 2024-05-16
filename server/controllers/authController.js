@@ -1,5 +1,5 @@
 const { compare } = require("bcrypt");
-const Account = require("../models/user");
+const Account = require("../models/admin");
 const jwt = require("jsonwebtoken");
 // const chalk = require("chalk");
 

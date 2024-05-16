@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const Account = require("../models/user");
+const Account = require("../models/admin");
 // const chalk = require("chalk");
 
 const { compare, genSalt, hash } = bcrypt;
