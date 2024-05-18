@@ -54,9 +54,9 @@ const Signup = () => {
                   className="bg-[#FFF6F4] text-black outline-none p-[10px] rounded-lg"
                 />
               </div>
-              <button className="bg-blue2 flex items-center justify-center hover:bg-blue3 mb-[10px] text-white gap-5 p-2.5 rounded-xl w-full m-auto">
+              <Link to="/" className="bg-blue2 flex items-center justify-center hover:bg-blue3 mb-[10px] text-white gap-5 p-2.5 rounded-xl w-full m-auto">
                 Sign Up <AiOutlineSwapRight />
-              </button>
+              </Link>
             </form>
             <p className="text-[#224957]">
               Already have an account? <Link to="/login" className="text-blue2 hover:underline">Log in</Link>
