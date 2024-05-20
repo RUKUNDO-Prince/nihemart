@@ -5,16 +5,24 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
-    <div className='w-[15%]'>
-      <ul className='mb-[20px]'>
+    <div className="w-[15%] flex flex-col">
+      <ul className="mb-[20px]">
         {categories.map((category, index) => (
-          <li key={index} className="group flex items-center justify-between gap-5 py-2 hover:text-black">
+          <li
+            key={index}
+            className="group flex items-center justify-between gap-5 py-2 hover:text-black"
+          >
             {category.name}
             <FaAngleRight className="icon hidden group-hover:block" />
           </li>
         ))}
       </ul>
-      <Link to="/products" className="bg-blue3 px-[70px] py-[10px] rounded-md text-white hover:bg-blue2 ">View All</Link>
+      <Link
+        to="/products"
+        className="bg-blue3  py-[10px] items-center rounded-md text-white hover:bg-blue2 text-nowrap"
+      >
+        <span className="flex items-center justify-center">View All</span>
+      </Link>
     </div>
   );
 };

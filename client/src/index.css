@@ -36,13 +36,13 @@
 
 @layer components {
 	.bg-glass {
-		@apply bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-[25%] 
-		bg-primary border border-primary text-white;
-	}
-    .bg-glass2 {
-        @apply bg-primary border border-primary
-    }
-    .bg-glass3 {
-         @apply bg-gray-100/10 border border-gray-800
-    }
+        @apply bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-[25%] 
+             border text-white;
+      }
+      .bg-glass2 {
+        @apply  border border-white;
+      }
+      .bg-glass3 {
+        @apply bg-gray-100/10 border border-gray-800;
+      }
 }

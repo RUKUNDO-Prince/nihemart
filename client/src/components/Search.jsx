@@ -20,7 +20,7 @@ const Search = () => {
           isOpen && (
             <div className='absolute top-20 bg-glass flex flex-col items-start rounded-lg p-2 w-[400%]'>
               {categories.map((category, index) => (
-                <div className='flex w-full justify-between p-4 hover:bg-glass2 hover:border-l-white border-l-4 cursor-pointer rounded-r-lg border-l-transparent' key={index}>
+                <div className='flex w-full justify-between p-2 border border-transparent hover:bg-glass3 cursor-pointer rounded-r-lg border-l-transparent' key={index}>
                   <p>{category.name}</p>
                   <p>{category.icon}</p>
                 </div>
