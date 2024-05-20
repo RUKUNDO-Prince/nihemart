@@ -5,7 +5,7 @@ import ArrivalsGrid from './ArrivalsGrid'
 
 const Arrivals = () => {
   return (
-    <div className='p-[50px]'>
+    <div className=' p-5 md:p-[50px]'>
       <SubHeading title="Featured" />
         <Heading title="New Arrival" />
         <ArrivalsGrid />

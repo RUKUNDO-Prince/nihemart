@@ -12,12 +12,11 @@ const Footer = () => {
       <div className="w-full h-[1.5px] bg-white"></div>
       {/* MAIN FOOTER */}
       <div>
-        <div className=" h-[30vh] content-center mx-10">
+        <div>
 
         {/* FOOTER LINKS */}
-        <div className="flex justify-around items-start gap-5 p-[10px]">
-          <div className="w-[20%] flex">
-          <img src={logo} alt="logo" />
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 p-5 lg:w-[80%] mx-auto">
+          <div className="flex">
           <div>
             <h1 className="text-white font-bold text-[1.2em]">Nihe Mart</h1>
             <p className="text-white">Buy Goods and order on our commercial website</p>
@@ -49,22 +48,11 @@ const Footer = () => {
           </div>
         </div>
           </div>
-        <div className="w-[70%] m-auto h-[0.7px] bg-gray-70"></div>
+        <div className="w-[80%] m-auto h-[0.7px] bg-gray-70"></div>
         {/* FOOTER END */}
-        <div className="flex justify-between items-center h-[15vh] w-[70%] m-auto">
-          <p className="text-white font-light">
+        <div className="grid lg:grid-cols-4  lg:w-[80%] md:mx-auto p-7">
+          <p className="text-white font-light text-nowrap">
             Copyright © 2024 Nihe Mart . All rights reserved
-          </p>
-          <p className="flex gap-5">
-          {footerEndData.map((item, index) => (
-  <React.Fragment key={index}>
-    <span className="text-white hover:opacity-[80%] hover:underline transition-opacity font-light">
-      {item}
-    </span>
-    {index !== footerEndData.length - 1 && <span className="text-white"> | </span>}
-  </React.Fragment>
-))}
-
           </p>
         </div>
       </div>
