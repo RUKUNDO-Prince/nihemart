@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AddProduct, Analytics, Login, NotFound, Notifications, Orders, Product, Products, Profile, Signup } from './pages';
 import { Footer, Navbar } from './components';
+import './App.css'
 
 const App = () => {
   const location = useLocation();
