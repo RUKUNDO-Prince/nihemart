@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
-    <div className="w-[15%] flex flex-col">
+    <div className="w-[15%] hidden lg:flex  flex-col">
       <ul className="mb-[20px]">
         {categories.map((category, index) => (
           <li
