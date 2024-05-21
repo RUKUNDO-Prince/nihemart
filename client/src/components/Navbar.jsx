@@ -5,6 +5,7 @@ import Search from "./Search";
 import Languages from "./Languages";
 import { Icon } from "@iconify/react";
 import { FaX } from "react-icons/fa6";
+import { FaSearch } from "react-icons/fa";
 
 const Navbar = () => {
   const [search, setSearch] = useState(false);
@@ -17,7 +18,7 @@ const Navbar = () => {
     setSidebarOpen(false);
   };
   return (
-    <div className="flex justify-between gap-3 items-center md:m-5 shadow-lg rounded-lg px-5">
+    <div className="flex justify-between gap-3 items-center m-5 shadow-lg rounded-lg px-5 relative">
       <Link to="/" className="w-[82px] h-[87px]">
         <img
           src={logo}
@@ -98,13 +99,15 @@ const Navbar = () => {
         </div>
 
       </div>
+
+{/* mobile search */}
       <div
         className={` xl:hidden absolute bg-white p-4 w-full flex items-center justify-center gap-4 ${
           search ? "top-0" : "-top-[100%]"
         } transition-all duration-100`}
       >
-        <div className="md:w-[60%] border">
-          <Search />
+        <div className=" border w-full md:w-[60%]">
+          <Search search={search} />
         </div>
         <div
           className="flex items-center justify-center p-2 rounded-full hover:bg-gray-100"
