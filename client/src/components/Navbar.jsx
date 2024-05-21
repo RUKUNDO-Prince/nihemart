@@ -34,6 +34,7 @@ const Navbar = () => {
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
+          
           Home
         </NavLink>
         <NavLink
