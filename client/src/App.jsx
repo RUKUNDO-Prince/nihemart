@@ -5,7 +5,7 @@ import { Home,  About, Contact, Help, Product, Products, NotFound, Cart, Likes, 
 
 const App = () => {
   return (
-    <>
+    <div>
       <Navbar />
       <Routes>
         <Route path={"/"} element={<Home />} />
@@ -20,7 +20,7 @@ const App = () => {
         <Route path={"*"} element={<NotFound />} />
       </Routes>
       <Footer />
-    </>
+    </div>
   )
 }
 

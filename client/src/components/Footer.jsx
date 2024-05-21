@@ -50,7 +50,13 @@ const Footer = () => {
           </div>
         <div className="w-[80%] m-auto h-[0.7px] bg-gray-70"></div>
         {/* FOOTER END */}
-        <div className="grid lg:grid-cols-4  lg:w-[80%] md:mx-auto p-7">
+        <div className="grid lg:grid-cols-4  p-7">
+          <p className="text-white font-light text-nowrap">
+            Copyright © 2024 Nihe Mart . All rights reserved
+          </p>
+          <p className="text-white font-light text-nowrap">
+            Copyright © 2024 Nihe Mart . All rights reserved
+          </p>
           <p className="text-white font-light text-nowrap">
             Copyright © 2024 Nihe Mart . All rights reserved
           </p>

@@ -47,7 +47,7 @@
 }
 @layer components {
 	.bg-glass {
-        @apply bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-[25%] 
+        @apply bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-[25%]  bg-blue/35
              border text-white;
       }
       .bg-glass2 {
