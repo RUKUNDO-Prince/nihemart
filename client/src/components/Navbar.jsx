@@ -18,7 +18,7 @@ const Navbar = () => {
     setSidebarOpen(false);
   };
   return (
-    <div className="flex justify-between gap-3 items-center m-5 shadow-lg rounded-lg px-5 relative">
+    <div className="flex justify-between gap-3 items-center m-5 shadow-lg rounded-lg px-5 sticky -top-1 z-50 bg-white">
       <Link to="/" className="w-[82px] h-[87px]">
         <img
           src={logo}

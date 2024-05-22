@@ -4,22 +4,24 @@ import { Cta, Team } from "../components";
 
 const About = () => {
   return (
-    <div className="flex flex-col">
-      <div className="bg-gradient-to-r from-blue2 to-deepBlue flex justify-around p-[20px]">
-        <div className="content-center w-[30%]">
-          <h1 className="text-white text-[60px] font-bold">About Us</h1>
-          <p className="text-white text-[24px]">
+    <div className="flex flex-col font-poppins">
+      <div className="bg-gradient-to-r from-blue2 to-deepBlue flex flex-col md:flex-row justify-around p-7 gap-5">
+        <div className="content-center md:w-[50%]">
+          <h1 className="text-white text-[28px] md:text-[48px] lg:text-[60px] font-bold text-center md:text-start">About Us</h1>
+          <p className="text-white text-base md:text-[22px] text-center md:text-start md:w-[70%]">
             Explore a world of possibilities and join thousands of satisfied
             customers{" "}
           </p>
         </div>
+        <div className="md:w-[50%]">
         <img src={about} alt="img" />
+        </div>
       </div>
-      <div className="flex items-start max-w-full justify-around p-[50px]">
-        <div className="flex flex-col w-[50%]">
+      <div className="flex flex-col md:flex-row p-[50px] gap-5">
+        <div className="flex flex-col md:w-[50%] gap-5">
           <div>
-            <h1 className="text-black font-bold text-[50px]">Who are we</h1>
-            <p className="text-[16px] font-poppins">
+            <h1 className="text-black font-bold text-[30px] text-center md:text-start">Who are we</h1>
+            <p className="text-[16px] font-poppins text-center md:text-start">
               Launced in 2015, Exclusive is South Asia’s premier online shopping
               makterplace with an active presense in Bangladesh. Supported by
               wide range of tailored marketing, data and service solutions,
@@ -30,15 +32,15 @@ const About = () => {
             </p>
           </div>
           <div>
-            <h1 className="text-black font-bold text-[50px]">Our mission</h1>
-            <p className="text-[16px] font-poppins">
+            <h1 className="text-black font-bold text-[30px] text-center md:text-start">Our mission</h1>
+            <p className="text-[16px] font-poppins text-center md:text-start">
               To satisfy our customers through the provision of our goods by
               delivering them to any location fast and secure
             </p>
           </div>
           <div>
-            <h1 className="text-black font-bold text-[50px]">Delivery fee</h1>
-            <ul>
+            <h1 className="text-black font-bold text-[30px] text-center md:text-start">Delivery fee</h1>
+            <ul className="flex flex-col items-center md:items-start">
               <li>Kigali: 1k</li>
               <li>Other provinces: 2k</li>
               <li>Other parts of kigali: 1.5k</li>
@@ -46,8 +48,8 @@ const About = () => {
             </ul>
           </div>
         </div>
-        <div>
-          <h1 className="text-black font-bold text-[50px]">Meet Our Team</h1>
+        <div className="md:w-[50%] flex flex-col items-center">
+          <h1 className="text-black font-bold text-[30px]">Meet Our Team</h1>
           <Team />
         </div>
       </div>
