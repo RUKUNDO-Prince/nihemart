@@ -1,11 +1,18 @@
 import React from "react";
 import { homeSlider } from "../constants/data";
 import { FaArrowRightLong } from "react-icons/fa6";
+import EmblaCarousel from "./EmblaCarousel";
+import "../embla.css";
+
+const OPTIONS = { loop: true }
+const SLIDE_COUNT = 5
+const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
 const Hero = () => {
   return (
-    <div className="bg-gradient-to-r from-blueGradient to-orangeGradient w-full lg:w-[80%] p-[20px] md:p-[50px] h-fit">
-      {homeSlider.map((item, index) => (
+    // bg-gradient-to-r from-blueGradient to-orangeGradient
+    <div className=" w-full lg:w-[80%] p-[20px] md:p-[50px] min-h-[350px] border-4 border-black">
+      {/* {homeSlider.map((item, index) => (
         <div className="flex justify-between flex-col sm:flex-row items-center md:items-start gap-5" key={index}>
           <div className="">
             <div className="flex gap-5 items-center justify-center md:justify-start mb-4">
@@ -28,7 +35,8 @@ const Hero = () => {
             <img src={item.image} alt="" className="min-w-[342px]" />
           </div>
         </div>
-      ))}
+      ))} */}
+      <EmblaCarousel slides={SLIDES} options={OPTIONS} />
     </div>
   );
 };

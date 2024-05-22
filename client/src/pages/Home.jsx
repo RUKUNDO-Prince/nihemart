@@ -19,7 +19,7 @@ const Home = () => {
         ))}
       </ul>
       </div>
-      <div className='flex items-center justify-between mx-5 md:mx-[50px]'>
+      <div className='flex justify-between mx-5 md:mx-[50px]'>
       <Sidebar />
       <Hero />
       </div>
