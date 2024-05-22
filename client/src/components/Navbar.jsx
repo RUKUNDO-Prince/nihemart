@@ -18,7 +18,7 @@ const Navbar = () => {
     setSidebarOpen(false);
   };
   return (
-    <div className="flex justify-between gap-3 items-center m-5 shadow-lg rounded-lg px-5 relative">
+    <div className="flex justify-between gap-3 items-center m-5 shadow-lg rounded-lg px-5 sticky -top-1 z-50 bg-white">
       <Link to="/" className="w-[82px] h-[87px]">
         <img
           src={logo}
@@ -29,11 +29,11 @@ const Navbar = () => {
 
       <ul className=" hidden md:flex gap-5 xl:gap-10">
         <NavLink
-          exact
           to={"/"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
+          
           Home
         </NavLink>
         <NavLink
@@ -143,7 +143,6 @@ const Navbar = () => {
         </div>
         <div className=" md:hidden flex flex-col gap-5 xl:gap-10 mt-5">
         <NavLink
-          exact
           to={"/"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
