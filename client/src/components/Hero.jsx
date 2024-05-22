@@ -9,7 +9,6 @@ const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
 const Hero = () => {
   return (
-    // bg-gradient-to-r from-blueGradient to-orangeGradient
     <div className=" w-full lg:w-[80%] min-h-[350px]">
       <EmblaCarousel slides={homeSlider} options={OPTIONS} />
     </div>

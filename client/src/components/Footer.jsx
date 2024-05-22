@@ -15,7 +15,7 @@ const Footer = () => {
         <div>
 
         {/* FOOTER LINKS */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 p-5 lg:w-[80%] mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 p-5 lg:w-[80%] mx-auto font-poppins">
           <div className="flex">
           <div>
             <h1 className="text-white font-bold text-[1.2em]">Nihe Mart</h1>
