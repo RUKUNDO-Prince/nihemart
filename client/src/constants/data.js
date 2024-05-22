@@ -110,6 +110,24 @@ export const homeSlider = [
         name: "iPhone 14 series",
         heading: "Up to 10% off voucher",
         image: iphone
+    },
+    {
+        icon: apple,
+        name: "iPhone 14 series test1",
+        heading: "Up to 10% off voucher",
+        image: iphone
+    },
+    {
+        icon: apple,
+        name: "iPhone 14 series test2",
+        heading: "Up to 10% off voucher",
+        image: iphone
+    },
+    {
+        icon: apple,
+        name: "iPhone 14 series test3",
+        heading: "Up to 10% off voucher",
+        image: iphone
     }
 ];
 

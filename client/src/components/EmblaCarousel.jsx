@@ -1,36 +1,46 @@
-import React, { useEffect } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
-import Autoplay from 'embla-carousel-autoplay'
+import React, { useEffect } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+import { FaArrowRightLong } from "react-icons/fa6";
+
+import { homeSlider } from "../constants/data";
+import CarouselCard from "./CarouselCard";
 
 const EmblaCarousel = (props) => {
-  const { slides, options } = props
+  const { options } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-    Autoplay({ playOnInit: true, delay: 5000 })
-  ])
-
+    Autoplay({ playOnInit: true, delay: 5000 }),
+  ]);
 
   useEffect(() => {
-    const autoplay = emblaApi?.plugins()?.autoplay
-    if (!autoplay) return
-    //   const playOrStop =  autoplay.play
-    // playOrStop()
-  }, [emblaApi])
+    const autoplay = emblaApi?.plugins()?.autoplay;
+    if (!autoplay) return;
+    const playOrStop = autoplay.play;
+    playOrStop();
+  }, [emblaApi]);
 
   return (
-    <div className="embla h-full border border-black flex flex-col">
+    <div className="embla h-full flex flex-col">
       <div className="embla__viewport flex-1" ref={emblaRef}>
         <div className="embla__container h-full">
-          {slides.map((index) => (
-            <div className="embla__slide border border-black" key={index}>
-              <div className="embla__slide__number">
-                <span>{index + 1}</span>
-              </div>
+          {homeSlider?.map((item, index) => (
+            <div
+              className="embla__slide bg-gradient-to-r from-blueGradient to-orangeGradient"
+              key={index}
+            >
+              <CarouselCard
+                priductIcon={item.icon}
+                productImage={item.image}
+                ProductName={item.name}
+                desc={item.heading}
+                link={"#"}
+              />
             </div>
           ))}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default EmblaCarousel
+export default EmblaCarousel;

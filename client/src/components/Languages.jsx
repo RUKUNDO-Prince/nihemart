@@ -26,7 +26,7 @@ const Languages = () => {
         } origin-top transition-all duration-300 z-40`}
       >
         {languages.map((language, index) => (
-          <div className="flex w-full justify-start gap-5 border border-transparent items-center p-4 hover:bg-glass2 cursor-pointer rounded-lg">
+          <div className="flex w-full justify-start gap-5 border border-transparent items-center p-4 hover:bg-glass2 cursor-pointer rounded-lg" key={index}>
             <img src={language.icon} className="w-[20px]" alt="icon" />
             <p className="" key={index}>
               {language.name}

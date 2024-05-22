@@ -29,7 +29,6 @@ const Navbar = () => {
 
       <ul className=" hidden md:flex gap-5 xl:gap-10">
         <NavLink
-          exact
           to={"/"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
@@ -144,7 +143,6 @@ const Navbar = () => {
         </div>
         <div className=" md:hidden flex flex-col gap-5 xl:gap-10 mt-5">
         <NavLink
-          exact
           to={"/"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
