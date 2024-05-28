@@ -54,6 +54,9 @@ import likes1 from './likes/likes1.png'
 import likes2 from './likes/likes2.png'
 import likes3 from './likes/likes3.png'
 import likes4 from './likes/likes4.png'
+import figure from './figure.svg'
+import icon from './icon.svg'
+import profile from './profile.svg'
 
 export {
     logo,
@@ -111,5 +114,8 @@ export {
     likes1,
     likes2,
     likes3,
-    likes4
+    likes4,
+    figure,
+    icon,
+    profile
 }
