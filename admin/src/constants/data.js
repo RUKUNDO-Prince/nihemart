@@ -562,3 +562,86 @@ export const likesData = [
         updatedPrice: 88445
     },
 ];
+
+export const ordersList = [
+    {
+        id: 1,
+        name: "Kagabo",
+        phone: 2785363746,
+        price: 20000,
+        date: "5 Jun 2024",
+        status: "waiting"
+    },
+    {
+        id: 1,
+        name: "Kagabo",
+        phone: 2785363746,
+        price: 20000,
+        date: "5 Jun 2024",
+        status: "canceled"
+    },
+    {
+        id: 1,
+        name: "Kagabo",
+        phone: 2785363746,
+        price: 20000,
+        date: "5 Jun 2024",
+        status: "waiting"
+    },
+    {
+        id: 1,
+        name: "Kagabo",
+        phone: 2785363746,
+        price: 20000,
+        date: "5 Jun 2024",
+        status: "waiting"
+    },
+    {
+        id: 1,
+        name: "Kagabo",
+        phone: 2785363746,
+        price: 20000,
+        date: "5 Jun 2024",
+        status: "waiting"
+    },
+    {
+        id: 1,
+        name: "Kagabo",
+        phone: 2785363746,
+        price: 20000,
+        date: "5 Jun 2024",
+        status: "completed"
+    },
+    {
+        id: 1,
+        name: "Kagabo",
+        phone: 2785363746,
+        price: 20000,
+        date: "5 Jun 2024",
+        status: "canceled"
+    },
+    {
+        id: 1,
+        name: "Kagabo",
+        phone: 2785363746,
+        price: 20000,
+        date: "5 Jun 2024",
+        status: "waiting"
+    },
+    {
+        id: 1,
+        name: "Kagabo",
+        phone: 2785363746,
+        price: 20000,
+        date: "5 Jun 2024",
+        status: "completed"
+    },
+    {
+        id: 1,
+        name: "Kagabo",
+        phone: 2785363746,
+        price: 20000,
+        date: "5 Jun 2024",
+        status: "waiting"
+    },
+];

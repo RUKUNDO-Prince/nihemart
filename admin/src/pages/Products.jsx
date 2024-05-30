@@ -5,7 +5,7 @@ import { plus } from "../assets";
 
 const Products = () => {
   return (
-    <div className="m-[50px]">
+    <div className="m-[50px] flex-1">
       <div className="flex justify-between py-0">
         <SubHeading title="Recently added" />
         <button className="flex items-center px-8 rounded-lg outline-none text-primary m-8 float-end font-lato font-medium text-[20px] my-0 py-0 hover:opacity-[80%]">
