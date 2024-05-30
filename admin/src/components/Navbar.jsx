@@ -43,7 +43,7 @@ const Navbar = () => {
       <div className="flex justify-between gap-5 items-center">
         <Link to="/notifications"><HiOutlineBell size={26} color="#5D6E8B" /></Link>
         <CiSearch size={26} color="#5D6E8B" />
-        <Link to="/profile"><img src={profile} alt="" className="w-[32px]" /></Link>
+        {/* <Link to="/profile"><img src={profile} alt="" className="w-[32px]" /></Link> */}
       </div>
     </div>
   );
