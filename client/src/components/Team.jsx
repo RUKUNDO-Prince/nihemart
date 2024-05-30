@@ -3,7 +3,7 @@ import { team } from "../constants/data";
 
 const Team = () => {
   return (
-    <div className="grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-5">
+    <div className="grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-1 gap-5">
       {team.map((item, index) => (
         <div className="flex items-center gap-5 my-5" key={index}>
           <div className="rounded-full border-[3px] border-primary w-[64px] h-[64px] p-[9px] overflow-hidden">
