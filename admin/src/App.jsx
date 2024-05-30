@@ -25,11 +25,9 @@ const App = () => {
             <Route path={"/notifications"} element={<Notifications />} />
             <Route path={"/orders"} element={<Orders />} />
             <Route path={"/products"} element={<Products />} />
-            <Route path={"/profile"} element={<Profile />} />
+            {/* <Route path={"/profile"} element={<Profile />} /> */}
             <Route path={"/product/:id"} element={<Product />} />
             <Route path={"*"} element={<NotFound />} />
-       
-            
           </Routes>
           <Footer />
         </>
