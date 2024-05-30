@@ -3,8 +3,8 @@ import { likesData } from "../constants/data";
 
 const Cart = () => {
   return (
-    <div className="relative overflow-x-auto m-[10px]">
-    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <div className="relative overflow-x-auto m-[10px] scrollbar">
+    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 min-w-[1012px]">
         <thead className="text-[16px] text-black font-poppins drop-shadow-lg my-[20px]">
             <tr className="shadow-md">
                 <th scope="col" className="px-6 py-8">
