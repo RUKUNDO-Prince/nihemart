@@ -4,8 +4,8 @@ import { AiOutlineSwapRight } from "react-icons/ai";
 
 const Analytics = () => {
   return (
-    <div>
-    <div className='grid grid-rows-1 grid-cols-4 gap-5 w-full p-8'>
+    <div className='flex-1'>
+    <div className='grid grid-rows-1 grid-cols-4 gap-5 w-full p-8 '>
       <div className='bg-white border-[1px] border-gray-90 row-span-1 col-span-1 p-8 rounded-lg '>
         <div className='flex items-center gap-3'>
           <img src={icon} alt="icon" />

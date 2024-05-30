@@ -10,7 +10,7 @@ const App = () => {
   const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
 
   return (
-    <>
+    <div className='flex flex-col min-h-screen'>
       {!isAuthPage && <Navbar />}
       <Routes>
         <Route path={"/login"} element={<Login />} />
@@ -19,6 +19,7 @@ const App = () => {
       {!isAuthPage && (
         <>
           <Routes>
+            
             <Route path={"/"} element={<Analytics />} />
             <Route path={"/addProduct"} element={<AddProduct />} />
             <Route path={"/notifications"} element={<Notifications />} />
@@ -27,11 +28,13 @@ const App = () => {
             <Route path={"/profile"} element={<Profile />} />
             <Route path={"/product/:id"} element={<Product />} />
             <Route path={"*"} element={<NotFound />} />
+       
+            
           </Routes>
           <Footer />
         </>
       )}
-    </>
+    </div>
   );
 };
 
