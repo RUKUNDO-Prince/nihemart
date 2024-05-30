@@ -6,17 +6,17 @@ const Order = () => {
 
   return (
     <>
-      <div className="m-[50px]">
+      <div className=" px-5 md:px-10 py-5">
         <p className="text-gray-90 font-regular text-[14px] font-poppins">
           / Gaming / Order / <span className="text-black">Info</span>
         </p>
         <p className="text-primary font-poppins font-semibold text-[16px] my-[20px]">
           Fill the following 🖋️
         </p>
-        <div className="flex gap-5">
+        <div className="grid gap-5 grid-cols-1 md:grid-cols-2">
           <form
             action=""
-            className="bg-[#3B7EF8] bg-opacity-[5%] p-[20px] w-[48%] rounded-md"
+            className="bg-[#3B7EF8] bg-opacity-[5%] p-[20px] rounded-md"
           >
             <h1 className="font-bold text-[16px] font-lato mb-[20px]">
               Personal information
@@ -45,7 +45,7 @@ const Order = () => {
           </form>
           <form
             action=""
-            className="bg-[#3B7EF8] bg-opacity-[5%] p-[20px] w-[48%] rounded-md"
+            className="bg-[#3B7EF8] bg-opacity-[5%] p-[20px] rounded-md"
           >
             <h1 className="font-bold font-lato text-[16px] mb-[20px]">
               Personal information
@@ -73,10 +73,10 @@ const Order = () => {
             </div>
           </form>
         </div>
-        <h1 className="text-primary font-bold font-poppins text-[24px] my-[20px]">
+        <h1 className="text-primary font-bold font-poppins text-[24px] my-[20px] text-center md:text-start">
           🔔You pay after getting the product
         </h1>
-        <div className="flex gap-3 justify-end">
+        <div className="flex gap-3 justify-center md:justify-end">
           <button className="py-[10px] px-[50px] border-blue2 border-[1px] rounded-lg">
             Leave
           </button>
