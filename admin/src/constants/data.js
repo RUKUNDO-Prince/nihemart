@@ -645,3 +645,36 @@ export const ordersList = [
         status: "waiting"
     },
 ];
+
+export const notificationsData = [
+    {
+        img: likes1,
+        name: "Car",
+        action: "New product added",
+        price: 7374754
+    },
+    {
+        img: likes1,
+        name: "Car",
+        action: "Product updated",
+        price: 7374754
+    },
+    {
+        img: likes1,
+        name: "Car",
+        action: "Product deleted",
+        price: 7374754
+    },
+    {
+        img: likes1,
+        name: "Car",
+        action: "New product added",
+        price: 7374754
+    },
+    {
+        img: likes1,
+        name: "Car",
+        action: "New product added",
+        price: 7374754
+    },
+];

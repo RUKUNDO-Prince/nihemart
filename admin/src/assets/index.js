@@ -58,6 +58,7 @@ import figure from './figure.svg'
 import icon from './icon.svg'
 import profile from './profile.svg'
 import plus from './plus.svg'
+import deleteIcon from './delete.svg'
 
 export {
     logo,
@@ -119,5 +120,6 @@ export {
     figure,
     icon,
     profile,
-    plus
+    plus,
+    deleteIcon
 }
