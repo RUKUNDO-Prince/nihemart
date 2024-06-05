@@ -60,6 +60,9 @@ import profile from './profile.svg'
 import plus from './plus.svg'
 import deleteIcon from './delete.svg'
 import profile2 from './profile.jpg'
+import anonymous from './anonymous.svg'
+import draft from './draft.svg'
+import tick from './tick.svg'
 
 export {
     logo,
@@ -123,5 +126,8 @@ export {
     profile,
     plus,
     deleteIcon,
-    profile2
+    profile2,
+    anonymous,
+    draft,
+    tick
 }
