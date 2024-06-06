@@ -14,7 +14,7 @@ const swaggerDoc = {
     "/account": {
       post: {
         summary: "Admin registration",
-        description: "Register a new user with email confirmation",
+        description: "Register a new admin user with email confirmation",
         requestBody: {
           required: true,
           content: {
@@ -22,6 +22,9 @@ const swaggerDoc = {
               schema: {
                 type: "object",
                 properties: {
+                  name: {
+                    type: "string",
+                  },
                   email: {
                     type: "string",
                     format: "email",
@@ -30,21 +33,23 @@ const swaggerDoc = {
                     type: "string",
                   },
                 },
-                required: ["email", "password"],
+                required: ["name", "email", "password"],
               },
             },
           },
         },
         responses: {
-          200: {
-            description:
-              "User registered successfully. Please check your email for confirmation.",
+          201: {
+            description: "Account Created Successfully",
           },
           400: {
-            description: "Email already registered or missing fields.",
+            description: "Missing required fields",
+          },
+          409: {
+            description: "Email is already in use",
           },
           500: {
-            description: "Internal server error during registration.",
+            description: "Internal server error",
           },
         },
       },
@@ -104,14 +109,57 @@ const swaggerDoc = {
         },
       },
     },
-    "/product": {
+    "/auth/signup": {
       post: {
-        summary: "product registration",
-        description: "Admin adding a product to the site",
+        summary: "User signup",
+        description: "Register a new user",
         requestBody: {
           required: true,
           content: {
             "application/json": {
+              schema: {
+                type: "object",
+                properties: {
+                  name: {
+                    type: "string",
+                  },
+                  email: {
+                    type: "string",
+                    format: "email",
+                  },
+                  password: {
+                    type: "string",
+                  },
+                  phone: {
+                    type: "string",
+                  },
+                },
+                required: ["name", "email", "password"],
+              },
+            },
+          },
+        },
+        responses: {
+          201: {
+            description: "Signup successful.",
+          },
+          400: {
+            description: "All fields are compulsory.",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+        },
+      },
+    },
+    "/product": {
+      post: {
+        summary: "Product registration",
+        description: "Admin adding a product to the site",
+        requestBody: {
+          required: true,
+          content: {
+            "multipart/form-data": {
               schema: {
                 type: "object",
                 properties: {
@@ -127,14 +175,15 @@ const swaggerDoc = {
                   quantity: {
                     type: "number",
                   },
+                  category: {
+                    type: "string",
+                  },
                   photos: {
                     type: "array",
                     items: {
                       type: "string",
+                      format: "binary",
                     },
-                  },
-                  category: {
-                    type: "string",
                   },
                 },
                 required: [
@@ -142,15 +191,15 @@ const swaggerDoc = {
                   "description",
                   "price",
                   "quantity",
-                  "photos",
                   "category",
+                  "photos",
                 ],
               },
             },
           },
         },
         responses: {
-          200: {
+          201: {
             description: "Product added successfully",
           },
           500: {
@@ -159,16 +208,27 @@ const swaggerDoc = {
         },
       },
     },
-    "/cart": {
+    "/product/{category}": {
       get: {
-        summary: "User cart",
-        description: "Cart containing items user has liked",
+        summary: "Get products by category",
+        description: "Get all products in a specific category",
+        parameters: [
+          {
+            in: "path",
+            name: "category",
+            required: true,
+            schema: {
+              type: "string",
+            },
+            description: "Category of the products.",
+          },
+        ],
         responses: {
           200: {
-            description: "Cart is generated",
+            description: "Products retrieved successfully",
           },
           404: {
-            description: "Cart not found",
+            description: "No products found",
           },
           500: {
             description: "Internal server error",
@@ -176,10 +236,10 @@ const swaggerDoc = {
         },
       },
     },
-    "/cart/{productId}": {
+    "/product/{productId}/like": {
       post: {
-        summary: "Add item to the cart",
-        description: "Adding an item to the cart",
+        summary: "Like a product",
+        description: "Like a product by its ID",
         parameters: [
           {
             in: "path",
@@ -188,7 +248,7 @@ const swaggerDoc = {
             schema: {
               type: "string",
             },
-            description: "ID of the product to be added to the cart.",
+            description: "ID of the product to be liked.",
           },
         ],
         requestBody: {
@@ -201,35 +261,55 @@ const swaggerDoc = {
                   name: {
                     type: "string",
                   },
-                  price: {
-                    type: "number",
+                  email: {
+                    type: "string",
+                    format: "email",
                   },
-                  quantity: {
+                  phoneNumber: {
+                    type: "string",
+                  },
+                  city: {
+                    type: "string",
+                  },
+                  destination: {
+                    type: "string",
+                  },
+                  fee: {
                     type: "number",
                   },
                 },
-                required: ["name", "price", "quantity"],
+                required: [
+                  "name",
+                  "email",
+                  "phoneNumber",
+                  "city",
+                  "destination",
+                  "fee",
+                ],
               },
             },
           },
         },
         responses: {
           200: {
-            description: "Product added to your cart successfully",
+            description: "Product liked successfully",
+          },
+          400: {
+            description: "You have already liked this product",
           },
           404: {
             description: "Product not found",
           },
           500: {
-            description: "Internal server error.",
+            description: "Internal server error",
           },
         },
       },
     },
-    "/cart/delete/{productId}": {
-      delete: {
-        summary: "Delete item from the cart",
-        description: "Deleting an item from the cart",
+    "/product/{productId/order": {
+      post: {
+        summary: "Order a product via WhatsApp",
+        description: "Order a product via WhatsApp by its ID",
         parameters: [
           {
             in: "path",
@@ -238,7 +318,86 @@ const swaggerDoc = {
             schema: {
               type: "string",
             },
-            description: "ID of the product to be deleted from the cart.",
+            description: "ID of the product to order.",
+          },
+        ],
+        responses: {
+          302: {
+            description: "Redirect to WhatsApp",
+            headers: {
+              Location: {
+                schema: {
+                  type: "string",
+                  format: "uri",
+                },
+                description: "URL to WhatsApp",
+              },
+            },
+          },
+          500: {
+            description: "Internal server error",
+          },
+        },
+      },
+    },
+    "/cart": {
+      get: {
+        summary: "Get user cart",
+        description: "Retrieve the user's cart",
+        responses: {
+          200: {
+            description: "Cart retrieved successfully",
+          },
+          404: {
+            description: "Cart not found",
+          },
+          500: {
+            description: "Internal server error",
+          },
+        },
+      },
+    },
+    "/cart/{productId}": {
+      post: {
+        summary: "Add item to cart",
+        description: "Add an item to the user's cart",
+        parameters: [
+          {
+            in: "path",
+            name: "productId",
+            required: true,
+            schema: {
+              type: "string",
+            },
+            description: "ID of the product to add to the cart.",
+          },
+        ],
+        responses: {
+          200: {
+            description: "Product added to cart successfully",
+          },
+          404: {
+            description: "Product not found",
+          },
+          500: {
+            description: "Internal server error",
+          },
+        },
+      },
+    },
+    "/cart/delete/{itemId}": {
+      delete: {
+        summary: "Delete item from cart",
+        description: "Delete an item from the user's cart",
+        parameters: [
+          {
+            in: "path",
+            name: "itemId",
+            required: true,
+            schema: {
+              type: "string",
+            },
+            description: "ID of the item to delete from the cart.",
           },
         ],
         responses: {
@@ -249,12 +408,11 @@ const swaggerDoc = {
             description: "Item not found in cart",
           },
           500: {
-            description: "Internal server error.",
+            description: "Internal server error",
           },
         },
       },
     },
-
     "/contact": {
       post: {
         summary: "Submit contact form",
@@ -284,19 +442,61 @@ const swaggerDoc = {
         },
         responses: {
           200: {
-            description: "Contact form submitted successfully.",
+            description: "Message sent successfully",
           },
           400: {
-            description: "Missing fields in the contact form.",
+            description: "Missing required fields",
           },
           500: {
-            description:
-              "Internal server error during contact form submission.",
+            description: "Internal server error",
+          },
+        },
+      },
+    },
+    "/user/confirmation/{token}": {
+      get: {
+        summary: "Confirm email",
+        description: "Confirm the user's email using a token",
+        parameters: [
+          {
+            in: "path",
+            name: "token",
+            required: true,
+            schema: {
+              type: "string",
+            },
+            description: "Token to confirm the email.",
+          },
+        ],
+        responses: {
+          200: {
+            description: "Email confirmed successfully",
+          },
+          400: {
+            description: "Invalid token",
+          },
+          500: {
+            description: "Internal server error",
           },
         },
       },
     },
   },
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: "http",
+        scheme: "bearer",
+        bearerFormat: "JWT",
+      },
+    },
+  },
+  security: [
+    {
+      bearerAuth: [],
+    },
+  ],
 };
 
-module.exports = { swaggerDoc };
+
+module.exports={swaggerDoc}
