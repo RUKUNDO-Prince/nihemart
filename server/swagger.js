@@ -117,31 +117,34 @@ const swaggerDoc = {
                 properties: {
                   name: {
                     type: "string",
-                    required: true,
                   },
                   description: {
                     type: "string",
-                    required: true,
                   },
                   price: {
                     type: "number",
-                    required: true,
                   },
                   quantity: {
                     type: "number",
-                    required: true,
                   },
-                  photos: [
-                    {
+                  photos: {
+                    type: "array",
+                    items: {
                       type: "string",
                     },
-                  ],
+                  },
                   category: {
-                    type: String,
-                    required: true,
+                    type: "string",
                   },
                 },
-                required: ["photos", "category"],
+                required: [
+                  "name",
+                  "description",
+                  "price",
+                  "quantity",
+                  "photos",
+                  "category",
+                ],
               },
             },
           },
@@ -197,18 +200,15 @@ const swaggerDoc = {
                 properties: {
                   name: {
                     type: "string",
-                    required: true,
                   },
                   price: {
                     type: "number",
-                    required: true,
                   },
                   quantity: {
                     type: "number",
-                    required: true,
                   },
                 },
-                required: ["name", "price"],
+                required: ["name", "price", "quantity"],
               },
             },
           },
@@ -296,78 +296,6 @@ const swaggerDoc = {
         },
       },
     },
-    //     "/contact/{id}": {
-    //       delete: {
-    //         summary: "Delete contact query",
-    //         description: "Delete a contact query by ID",
-    //         parameters: [
-    //           {
-    //             in: "path",
-    //             name: "id",
-    //             schema: {
-    //               type: "string",
-    //             },
-    //             required: true,
-    //             description: "ID of the contact query to be deleted.",
-    //           },
-    //         ],
-    //         responses: {
-    //           200: {
-    //             description: "Contact query deleted successfully.",
-    //           },
-    //           404: {
-    //             description: "Contact query not found.",
-    //           },
-    //           500: {
-    //             description: "Internal server error during contact query deletion.",
-    //           },
-    //         },
-    //       },
-    //     },
-    //     "/contact/{id}/reply": {
-    //       post: {
-    //         summary: "Reply to contact query",
-    //         description: "Reply to a contact query by ID",
-    //         parameters: [
-    //           {
-    //             in: "path",
-    //             name: "id",
-    //             schema: {
-    //               type: "string",
-    //             },
-    //             required: true,
-    //             description: "ID of the contact query to be replied to.",
-    //           },
-    //         ],
-    //         requestBody: {
-    //           required: true,
-    //           content: {
-    //             "application/json": {
-    //               schema: {
-    //                 type: "object",
-    //                 properties: {
-    //                   reply: {
-    //                     type: "string",
-    //                   },
-    //                 },
-    //                 required: ["reply"],
-    //               },
-    //             },
-    //           },
-    //         },
-    //         responses: {
-    //           200: {
-    //             description: "Reply sent successfully.",
-    //           },
-    //           404: {
-    //             description: "Contact query not found.",
-    //           },
-    //           500: {
-    //             description: "Internal server error during reply to contact query.",
-    //           },
-    //         },
-    //       },
-    //     },
   },
 };
 
