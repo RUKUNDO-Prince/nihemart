@@ -1,8 +1,8 @@
 const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
-const Product = require("../models/Product");
-const AdminPanel=require("../models/adminPanel")
+const Product = require("../models/product");
+const AdminPanel = require("../models/adminPanel");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -17,18 +17,17 @@ const upload = multer({ storage: storage });
 
 const addProduct = async (req, res) => {
   try {
-    if (!req.user.isAdmin) {
-      return res.status(403).json({ message: "Only admin can add products" });
-    }
-
-    const { name, description, price, quantity } = req.body;
-    const photos = req.files.map((file) => file.path);
+    const { name, description, price, quantity, category } = req.body;
+    const photos = Array.isArray(req.files)
+      ? req.files.map((file) => file.path)
+      : [];
 
     const product = new Product({
       name,
       description,
       price,
       quantity,
+      category,
       photos,
     });
 
@@ -86,7 +85,6 @@ const likeProduct = async (req, res) => {
   }
 };
 
-
 const adminPanelDisplay = async (userInfo) => {
   try {
     let adminPanel = await AdminPanel.findOne({ email: userInfo.email });
@@ -102,14 +100,14 @@ const adminPanelDisplay = async (userInfo) => {
     console.error("Error displaying user information to admin panel:", error);
   }
 };
+
 const redirectToWhatsApp = (req, res) => {
   try {
-    const sellerNumber = "+250788515608"; // Seller's WhatsApp number
-    const message =
-      "Hello, I'm interested in your product. Can you provide more information?"; // Message to the seller
-    const whatsappLink = `https://wa.me/${sellerNumber}?text=${encodeURIComponent(
-      message
-    )}`;
+    const sellerNumber = "+250788515608";
+    const message = "Hello, I've liked this product.";
+    const whatsappLink = `https://api.whatsapp.com/send?phone=${encodeURIComponent(
+      sellerNumber
+    )}&text=${encodeURIComponent(message)}`;
 
     return res.redirect(whatsappLink);
   } catch (error) {
@@ -118,4 +116,32 @@ const redirectToWhatsApp = (req, res) => {
   }
 };
 
-module.exports = { addProduct, likeProduct, adminPanelDisplay, upload, redirectToWhatsApp };
+const getProducts = async (req, res) => {
+  try {
+    const { category } = req.params;
+    const products = await Product.find({ category });
+
+    if (!products) {
+      return res.status(404).json({ message: "No products found" });
+    }
+
+    const productsWithPhotos = products.map((product) => ({
+      ...product.toObject(),
+      photo: product.photos.length > 0 ? product.photos[0] : null,
+    }));
+
+    res.status(200).json({ products: productsWithPhotos });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+module.exports = {
+  addProduct,
+  likeProduct,
+  adminPanelDisplay,
+  upload,
+  redirectToWhatsApp,
+  getProducts,
+};

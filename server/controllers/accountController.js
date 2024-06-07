@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
-const Account = require("../models/user");
+const Account = require("../models/admin");
+const userSchema = require("../models/user");
 // const chalk = require("chalk");
 
 const { compare, genSalt, hash } = bcrypt;
@@ -30,6 +31,69 @@ const createAccount = async (req, res) => {
   }
 };
 
+const signup = async (req, res) => {
+  try {
+    const { name, email, password, phone } = req.body;
+    if (!(name && email && password)) {
+      return res.status(400).send("All fields are compulsory");
+    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await usersSchema.create({
+      name,
+      email,
+      password: hashedPassword,
+      phone,
+    });
+    const token = jwt.sign({ id: user._id, email }, process.env.JWT_SECRET, {
+      expiresIn: "2h",
+    });
+    user.token = token;
+    await user.save();
+
+    return res.status(201).json({
+      message: "Signup successful.",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await userSchema.findOne({ email });
+    if (!user) {
+      return res.status(404).send("Email or password incorrect");
+    }
+    if (!user.password) {
+      return res.status(404).send("User password not found");
+    }
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      return res.status(404).send("Incorrect email or password");
+    }
+    const token = jwt.sign(
+      {
+        id: user._id,
+        name: user.name,
+      },
+      process.env.JWT_SECRET
+    );
+    return res.status(200).json({
+      success: true,
+      token,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal server error");
+  }
+};
+
 module.exports = {
   createAccount,
+  signup,
+  login,
 };

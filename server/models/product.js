@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-
 const userSchema = new Schema({
   name: String,
   email: String,
@@ -34,16 +33,18 @@ const productSchema = new Schema({
     {
       type: String,
     },
-    ],
-    likes: [{
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
+  ],
+  likes: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+      userInfo: {
+        type: userSchema,
+      },
     },
-    userInfo: {
-      type: userSchema,
-    }
-  }],
+  ],
   ratings: [
     {
       user: {
@@ -57,8 +58,11 @@ const productSchema = new Schema({
       },
     },
   ],
+  category: {
+    type: String,
+    required: true,
+  },
 });
-
 
 productSchema.virtual("averageRating").get(function () {
   if (this.ratings.length === 0) return 0;
@@ -67,5 +71,7 @@ productSchema.virtual("averageRating").get(function () {
   return sum / this.ratings.length;
 });
 
+const Product = mongoose.model("Product", productSchema);
 
-module.exports = mongoose.model("Product", productSchema);
+module.exports = Product;
+// export default Product
