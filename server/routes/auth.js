@@ -9,3 +9,4 @@ authRouter.post("/login", login);
 authRouter.post("/logout", logout);
 
 module.exports = authRouter;
+    

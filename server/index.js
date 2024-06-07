@@ -21,24 +21,6 @@ const app = express();
 dbConn();
 
 app.use(bodyParser.json());
-const options = {
-  definition: {
-    coolnerds: "3.0.0",
-    info: {
-      title: "Backend API",
-      description: "API documentation for the backend services",
-      version: "1.0.0",
-    },
-    servers: [
-      {
-        url: "http://localhost:3000/api",
-      },
-    ],
-  },
-  apis: ["./config/swagger.yaml"], 
-};
-
-const specs = swaggerJsdoc(options);
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(express.urlencoded({ extended: true }));

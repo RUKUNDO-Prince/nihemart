@@ -14,7 +14,7 @@ const swaggerDoc = {
     "/account": {
       post: {
         summary: "Admin registration",
-        description: "Register a new admin user with email confirmation",
+        description: "Register a new admin user",
         requestBody: {
           required: true,
           content: {
@@ -109,7 +109,50 @@ const swaggerDoc = {
         },
       },
     },
-    "/auth/signup": {
+    // "/auth/signup": {
+    //   post: {
+    //     summary: "User signup",
+    //     description: "Register a new user",
+    //     requestBody: {
+    //       required: true,
+    //       content: {
+    //         "application/json": {
+    //           schema: {
+    //             type: "object",
+    //             properties: {
+    //               name: {
+    //                 type: "string",
+    //               },
+    //               email: {
+    //                 type: "string",
+    //                 format: "email",
+    //               },
+    //               password: {
+    //                 type: "string",
+    //               },
+    //               phone: {
+    //                 type: "string",
+    //               },
+    //             },
+    //             required: ["name", "email", "password"],
+    //           },
+    //         },
+    //       },
+    //     },
+    //     responses: {
+    //       201: {
+    //         description: "Signup successful.",
+    //       },
+    //       400: {
+    //         description: "All fields are compulsory.",
+    //       },
+    //       500: {
+    //         description: "Internal Server Error",
+    //       },
+    //     },
+    //   },
+    // },
+    "/user/signup": {
       post: {
         summary: "User signup",
         description: "Register a new user",
@@ -146,8 +189,48 @@ const swaggerDoc = {
           400: {
             description: "All fields are compulsory.",
           },
+          409: {
+            description: "Email is already in use",
+          },
           500: {
             description: "Internal Server Error",
+          },
+        },
+      },
+    },
+    "/user/login": {
+      post: {
+        summary: "User login",
+        description: "Log in an existing user and get JWT token",
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                properties: {
+                  email: {
+                    type: "string",
+                    format: "email",
+                  },
+                  password: {
+                    type: "string",
+                  },
+                },
+                required: ["email", "password"],
+              },
+            },
+          },
+        },
+        responses: {
+          200: {
+            description: "Login successful, JWT token generated",
+          },
+          401: {
+            description: "Invalid email or password",
+          },
+          500: {
+            description: "Internal server error",
           },
         },
       },
@@ -498,5 +581,4 @@ const swaggerDoc = {
   ],
 };
 
-
-module.exports={swaggerDoc}
+module.exports = { swaggerDoc };
