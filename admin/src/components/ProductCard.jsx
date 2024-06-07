@@ -46,7 +46,8 @@ const ProductCard = ({ product }) => {
               )}
             </div>
             <Link
-              to={`/product/${product.id}`}
+              // to={`/product/${product.id}`}
+              to="/product"
               className="p-2 rounded-full bg-white"
             >
               <Icon
