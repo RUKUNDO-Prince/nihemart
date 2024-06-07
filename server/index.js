@@ -12,6 +12,7 @@ const cartRoute = require("./routes/cart");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsdoc = require("swagger-jsdoc")
 const { swaggerDoc } = require("./swagger");
+const userRouter=require("./routes/user")
 require("dotenv").config();
 
 dotenv.config();
@@ -48,6 +49,7 @@ app.use("/account", accountRouter);
 app.use("/product", productRouter);
 app.use("/contact", contactRouter);
 app.use("/cart", cartRoute);
+app.use("/user", userRouter)
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
