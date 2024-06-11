@@ -11,6 +11,23 @@ const Product = () => {
           <button className='bg-blue2 text-white px-5 h-12 rounded-lg flex items-center hover:bg-blue3 gap-3'><img src={tick} alt="tick" />Add Product</button>
         </div>
       </div>
+      <div>
+        <div>
+          <h1>General Information</h1>
+          <div>
+            <form action="">
+              <div>
+                <label htmlFor="">Product Name</label>
+                <input type="text" placeholder='Havic HV G-92 Gamepad' />
+              </div>
+              <div>
+                <label htmlFor="">Product Description</label>
+                <input type="text" placeholder='Havic HV G-92 Gamepad' />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
