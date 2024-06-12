@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import useAuthStore from "../store/authStore";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -12,8 +13,11 @@ const loginSchema = Yup.object().shape({
 });
 
 const LoginForm = () => {
-  const handleLoginFormSubmit = (values) => {
+  const login = useAuthStore((state) => state.login);
+
+  const handleLoginFormSubmit = async (values) => {
     const { email, password } = values;
+    await login(email, password);
   };
   return (
     <div>
@@ -22,7 +26,7 @@ const LoginForm = () => {
         validationSchema={loginSchema}
         onSubmit={(values) => handleLoginFormSubmit(values)}
       >
-        {({ isSubmitting,handleSubmit,handleChange }) => (
+        {({ isSubmitting, handleSubmit, handleChange }) => (
           <Form>
             <div className="mb-4">
               <label className="block text-gray-700">Email</label>
@@ -32,7 +36,6 @@ const LoginForm = () => {
                 className="w-full p-2 border rounded focus:outline-blueGradient"
                 placeholder="Enter your Email"
                 onChange={handleChange("email")}
-
               />
               <ErrorMessage
                 name="email"

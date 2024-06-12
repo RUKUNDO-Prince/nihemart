@@ -49,9 +49,11 @@ const useAuthStore = create((set) => ({
       const { message, token } = response.data; // Assuming the response contains a token and user data
       localStorage.setItem("authToken", token); // Store token in localStorage
       set({ isAuthenticated: true, token });
+      toast.success(message)
     } catch (error) {
       console.error("Error logging in:", error);
       // Handle error as needed
+      toast.error(error.message)
     }
   },
 
