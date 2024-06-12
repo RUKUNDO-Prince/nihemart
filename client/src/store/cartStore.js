@@ -1,5 +1,5 @@
-import {create} from 'zustand';
-import axios from 'axios';
+import { create } from "zustand";
+import axios from "axios";
 
 const useCartStore = create((set) => ({
   cartItems: [],
@@ -7,7 +7,8 @@ const useCartStore = create((set) => ({
   error: null,
 
   // Fetch cart items for the user
-  fetchCartItems: async (userId) => { // You might need a user ID to fetch the user's cart
+  fetchCartItems: async (userId) => {
+    // You might need a user ID to fetch the user's cart
     set({ isLoading: true, error: null });
     try {
       const response = await axios.get(`/api/cart/${userId}`); // Replace with your actual API endpoint
@@ -21,10 +22,10 @@ const useCartStore = create((set) => ({
   addToCart: async (product) => {
     set({ isLoading: true, error: null });
     try {
-      const response = await axios.post('/api/cart', { productId: product.id }); // Replace with your actual API endpoint
+      const response = await axios.post("/api/cart", { productId: product.id }); // Replace with your actual API endpoint
       set((state) => ({
         cartItems: [...state.cartItems, response.data], // Assuming response returns the added item
-        isLoading: false
+        isLoading: false,
       }));
     } catch (error) {
       set({ error: error.message, isLoading: false });
@@ -38,7 +39,7 @@ const useCartStore = create((set) => ({
       await axios.delete(`/api/cart/${productId}`); // Replace with your actual API endpoint
       set((state) => ({
         cartItems: state.cartItems.filter((item) => item.id !== productId),
-        isLoading: false
+        isLoading: false,
       }));
     } catch (error) {
       set({ error: error.message, isLoading: false });
@@ -49,7 +50,7 @@ const useCartStore = create((set) => ({
   clearCart: async () => {
     set({ isLoading: true, error: null });
     try {
-      await axios.delete('/api/cart'); // Assuming this endpoint clears the entire cart
+      await axios.delete("/api/cart"); // Assuming this endpoint clears the entire cart
       set({ cartItems: [], isLoading: false });
     } catch (error) {
       set({ error: error.message, isLoading: false });

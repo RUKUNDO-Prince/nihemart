@@ -17,7 +17,6 @@ const userSchema = new mongoose.Schema({
     phone: {
         type: Number,
         min: 10,
-        max:13,
     }
 })
 
