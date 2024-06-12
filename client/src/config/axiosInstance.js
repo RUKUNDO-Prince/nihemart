@@ -1,13 +1,13 @@
-// axiosConfig.ts
+// axiosConfig.js
 import axios from "axios";
 
-const api = "http://192.168.215.77:8000";
+const api = "http://127.0.0.1:3000";
 
-const axiosInstance = axios.create({
+const publicApi = axios.create({
   baseURL: api,
 });
 
-export default axiosInstance;
+export default publicApi;
 
 export const authorizedApi = axios.create({
   baseURL: api,
@@ -19,7 +19,7 @@ export const authorizedApi = axios.create({
 
 authorizedApi.interceptors.request.use(
   async (config) => {
-    const token = await AuthStorage.getAccessToken();
+    const token = localStorage.getItem("authToken");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

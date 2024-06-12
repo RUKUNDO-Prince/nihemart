@@ -15,7 +15,7 @@ const Search = ({ search = true }) => {
         <input
           type="text"
           name="searchQuery"
-          id="searchQuery"
+          
           placeholder="search"
           className="bg-transparent outline-none w-full"
         />

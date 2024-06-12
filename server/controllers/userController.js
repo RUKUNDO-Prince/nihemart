@@ -14,6 +14,8 @@ const signup = async (req, res) => {
   try {
     const { name, email, password, phone } = req.body;
 
+    console.log({name, email, password, phone});
+
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(409).json({ message: "Email already in use" });

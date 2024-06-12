@@ -1,5 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
+import publicApi from "../config/axiosInstance";
+import { toast } from "react-toastify";
 
 // Helper function to get token from localStorage
 const getTokenFromLocalStorage = () => {
@@ -7,37 +9,46 @@ const getTokenFromLocalStorage = () => {
 };
 
 const useAuthStore = create((set) => ({
+  isLoading: false,
   isAuthenticated: !!getTokenFromLocalStorage(),
   user: null,
   token: getTokenFromLocalStorage(),
 
   // Register new user
-  register: async (email, password, phoneNumber) => {
+  register: async (name, email, password, phone) => {
+    set({ isLoading: true });
     try {
-      const response = await axios.post("/api/register", {
+      const response = await publicApi.post("/user/signup", {
+        name,
         email,
         password,
-        phoneNumber,
+        phone,
       });
-      const { token, user } = response.data; // Assuming the response contains a token and user data
+      const { message, token } = response.data; // Assuming the response contains a token and user data
       localStorage.setItem("authToken", token); // Store token in localStorage
-      set({ isAuthenticated: true, user, token });
+      set({ isAuthenticated: true, token,isLoading: false,message:message });
+      toast.success(message);
     } catch (error) {
       console.error("Error registering user:", error);
       // Handle error as needed
+      set({error:error.message})
+      toast.error(error.message);
+    }finally{
+      set({isLoading:false})
     }
   },
 
   // Login existing user
   login: async (email, password) => {
     try {
-      const response = await axios.post("/api/login", {
+      const response = await publicApi.post("/user/login", {
         email,
         password,
       });
-      const { token, user } = response.data; // Assuming the response contains a token and user data
+
+      const { message, token } = response.data; // Assuming the response contains a token and user data
       localStorage.setItem("authToken", token); // Store token in localStorage
-      set({ isAuthenticated: true, user, token });
+      set({ isAuthenticated: true, token });
     } catch (error) {
       console.error("Error logging in:", error);
       // Handle error as needed
