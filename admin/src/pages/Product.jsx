@@ -58,7 +58,7 @@ const Product = () => {
                   </label>
                   <textarea
                     type="text"
-                    className="font-poppins font-medium text-[15px] p-2 bg-gray-90 bg-opacity-[40%] h-[250px] outline-none"
+                    className="font-poppins font-medium text-[15px] p-2 bg-gray-90 bg-opacity-[40%] h-[250px] outline-none rounded-lg"
                     placeholder="PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive."
                   ></textarea>
                 </div>
@@ -134,45 +134,77 @@ const Product = () => {
           </div>
         </div>
       </div>
-      <div>
-        <div>
-          <h1>Pricing and Stock</h1>
-          <div>
-            <label htmlFor="">Base Pricing</label>
-            <input type="text" placeholder="195,000 frw" />
+      <div className="flex justify-between gap-5">
+        <div className="bg-gray-90 bg-opacity-[20%] w-[60%] p-5 rounded-lg">
+          <h1 className="font-lato font-bold text-[20px]">Pricing and Stock</h1>
+          <div className="flex gap-5 my-2">
+            <div className="flex flex-col gap-1">
+              <label htmlFor="">Base Pricing</label>
+              <input
+                className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
+                type="text"
+                placeholder="195,000 frw"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label htmlFor="">Stock</label>
+              <input
+                className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
+                type="number"
+                placeholder="44"
+              />
+            </div>
           </div>
-          <div>
-            <label htmlFor="">Discount</label>
-            <input type="text" placeholder="10%" />
-          </div>
-          <div>
-            <label htmlFor="">Stock</label>
-            <input type="number" placeholder="44" />
-          </div>
-          <div>
-            <label htmlFor="">Discount Type</label>
-            <select name="" id="">
-              <option value="">Percentage</option>
-              <option value="">Amount</option>
-            </select>
+          <div className="flex gap-5 my-2">
+            <div className="flex flex-col gap-1">
+              <label htmlFor="">Discount</label>
+              <input
+                className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
+                type="text"
+                placeholder="10%"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label htmlFor="">Discount Type</label>
+              <select
+                name=""
+                className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-1 h-8 rounded-md outline-none"
+                id=""
+              >
+                <option value="">Percentage</option>
+                <option value="">Amount</option>
+              </select>
+            </div>
           </div>
         </div>
-        <div>
-          <h1>Category</h1>
-          <p>Product category</p>
-          <select name="" id="">
-            <option value="">Home & Lifestyle</option>
-            <option value="">others</option>
-            <option value="">others</option>
-            <option value="">others</option>
-          </select>
-          <p>Browse category</p>
-          <select name="" id="">
-            <option value="">Jacket</option>
-            <option value="">others</option>
-            <option value="">others</option>
-            <option value="">others</option>
-          </select>
+        <div className="bg-gray-90 bg-opacity-[20%] w-[40%] p-5 rounded-lg">
+          <h1 className="font-lato font-bold text-[20px]">Category</h1>
+          <div className="my-2">
+            <p>Product category</p>
+            <select
+              name=""
+              className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-10 rounded-md outline-none w-[50%]"
+              id=""
+            >
+              <option value="">Home & Lifestyle</option>
+              <option value="">others</option>
+              <option value="">others</option>
+              <option value="">others</option>
+            </select>
+          </div>
+          <div className="my-2">
+            <p>Browse category</p>
+            <select
+              name=""
+              className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-10 rounded-md outline-none w-[50%]"
+              id=""
+            >
+              <option value="">Jacket</option>
+              <option value="">others</option>
+              <option value="">others</option>
+              <option value="">others</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
