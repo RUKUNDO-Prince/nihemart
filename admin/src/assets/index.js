@@ -63,6 +63,7 @@ import profile2 from './profile.jpg'
 import anonymous from './anonymous.svg'
 import draft from './draft.svg'
 import tick from './tick.svg'
+import plusBg from './plus-bg.svg'
 
 export {
     logo,
@@ -129,5 +130,6 @@ export {
     profile2,
     anonymous,
     draft,
-    tick
+    tick,
+    plusBg
 }
