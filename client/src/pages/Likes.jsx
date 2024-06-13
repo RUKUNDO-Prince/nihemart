@@ -13,7 +13,9 @@ const Likes = () => {
           {likesData.map((item, index) => (
             <div key={index} className="flex flex-col">
               <div className="bg-gray-70 bg-opacity-[30%] flex flex-col  rounded-md justify-between flex-1">
-                <img src={item.img} className="w-full object-contain" alt="img" />
+                <div className="w-full flex items-center justify-center overflow-hidden">
+                <img src={item.img} className=" object-contain" alt="img" />
+                </div>
                 <Link
                   to="/order"
                   className="bg-[#808080] flex w-full rounded-b-md p-[10px] justify-center items-center"
