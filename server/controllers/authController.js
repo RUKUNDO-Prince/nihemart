@@ -29,7 +29,14 @@ const login = async (req, res) => {
     const token = generateToken(user);
     res.cookie("token", token, { httpOnly: true });
     console.log(res.cookie);
-    res.status(200).json({ message: "Logged in Successfully", account: user });
+    res.status(200).json({
+      message: "Logged in Successfully",
+      account: {
+        name: user.name,
+        email: user.email,
+        emailVerified: user.emailVerified,
+      },
+    });
   } catch (error) {
     console.log("Login Error");
     console.error(error);

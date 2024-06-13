@@ -4,7 +4,7 @@ const { authenticate } = require("../middleware/authMiddleware");
 
 const accountRouter = express.Router();
 
-accountRouter.post("/", authenticate, createAccount);
+accountRouter.post("/", createAccount);
 // accountRouter.use(authenticate);
 
 

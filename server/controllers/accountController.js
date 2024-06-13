@@ -21,9 +21,15 @@ const createAccount = async (req, res) => {
       email: data.email,
     });
     await account.save();
-    return res
-      .status(201)
-      .json({ message: "Account Created Successfully", account });
+
+    return res.status(201).json({
+      message: "Account Created Successfully",
+      account: {
+        name: account.name,
+        email: account.email,
+        emailVerified: account.emailVerified,
+      },
+    });
   } catch (error) {
     console.log("Creating Account Error");
     console.error(error);
