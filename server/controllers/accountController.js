@@ -11,7 +11,7 @@ const createAccount = async (req, res) => {
     const data = req.body;
     const checkUniqueEmail = await Account.findOne({ email: data.email });
     if (checkUniqueEmail) {
-      return res.status(409).json({ data: "Email is already in use" });
+      return res.status(409).json({ message: "Email is already in use" });
     }
     const salt = await genSalt(10);
     const hashedPassword = await hash(data.password, salt);

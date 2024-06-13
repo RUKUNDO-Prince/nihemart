@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SubHeading from "../components/SubHeading";
 import { ordersList } from "../constants/data";
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "../store/authStore";
 
 const getStatusStyles = (status) => {
   switch (status) {
@@ -16,6 +18,16 @@ const getStatusStyles = (status) => {
 };
 
 const Orders = () => {
+  const navigate = useNavigate();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const handleAuth = () => {
+    if (!isAuthenticated) {
+      navigate("/signup");
+    }
+  };
+  useEffect(() => {
+    handleAuth();
+  }, [navigate, isAuthenticated]);
   return (
     <div className="m-[30px]">
       <SubHeading title="Orders" />
