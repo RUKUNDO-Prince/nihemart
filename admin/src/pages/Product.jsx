@@ -22,9 +22,27 @@ const Product = () => {
               </div>
               <div>
                 <label htmlFor="">Product Description</label>
-                <input type="text" placeholder='Havic HV G-92 Gamepad' />
+                <textarea type="text" placeholder='PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.'></textarea>
               </div>
             </form>
+            <div>
+              <h1>Size</h1>
+              <p>Pick available sizes</p>
+              <ul>
+                <li>XS</li>
+                <li>M</li>
+                <li>S</li>
+                <li>L</li>
+                <li>XL</li>
+              </ul>
+            </div>
+            <div>
+              <h1>Gender</h1>
+              <p>Pick available gender</p>
+              <input type="checkbox" name="Men" id="" /><label htmlFor="">Men</label>
+              <input type="checkbox" name="Women" id="" /><label htmlFor="">Women</label>
+              <input type="checkbox" name="Unisex" id="" /><label htmlFor="">Unisex</label>
+            </div>
           </div>
         </div>
       </div>
