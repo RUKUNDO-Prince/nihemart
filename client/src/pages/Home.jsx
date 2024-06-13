@@ -2,20 +2,18 @@ import React, { useEffect } from "react";
 import {
   Hero,
   Sidebar,
-  Categories,
   Products,
   Arrivals,
   Cta,
 } from "../components";
 import { categories } from "../constants/data";
-import { FaAngleRight } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import useAuthStore from "../store/authStore";
+import useProductStore from "../store/productStore";
 
 const Home = () => {
-  // useEffect(()=>{
-  //   localStorage.removeItem("authToken");
-  // },[])
+  const {fetchProducts} = useProductStore();
+  useEffect(() => {
+    fetchProducts();
+  }, []);
   return (
     <div>
       <div className=" block lg:hidden">

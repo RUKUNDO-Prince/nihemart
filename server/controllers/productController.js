@@ -116,7 +116,7 @@ const redirectToWhatsApp = (req, res) => {
   }
 };
 
-const getProducts = async (req, res) => {
+const getProductsByCategory = async (req, res) => {
   try {
     const { category } = req.params;
     const products = await Product.find({ category });
@@ -137,11 +137,30 @@ const getProducts = async (req, res) => {
   }
 };
 
+const getAllProducts = async (req, res) => {
+  try {
+    const Products = await Product.find({});
+    if (!Products) {
+      return res.status(404).json({ message: "No products found" });
+    }
+    const productsWithPhotos = Products.map((product) => ({
+      ...product.toObject(),
+      photo: product.photos.length > 0 ? product.photos[0] : null,
+    }));
+
+    res.status(200).json({ products: productsWithPhotos });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports = {
   addProduct,
   likeProduct,
   adminPanelDisplay,
   upload,
   redirectToWhatsApp,
-  getProducts,
+  getProductsByCategory,
+  getAllProducts
 };
