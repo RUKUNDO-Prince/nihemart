@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   anonymous,
   draft,
@@ -9,8 +9,20 @@ import {
   plusBg,
   tick,
 } from "../assets";
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "../store/authStore";
 
 const Product = () => {
+  const navigate = useNavigate();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const handleAuth = () => {
+    if (!isAuthenticated) {
+      navigate("/signup");
+    }
+  };
+  useEffect(() => {
+    handleAuth();
+  }, [navigate, isAuthenticated]);
   return (
     <div className="flex-1 m-[30px] flex-col">
       <div>

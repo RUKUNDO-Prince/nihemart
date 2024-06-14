@@ -1,37 +1,91 @@
-import React from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import { AddProduct, Analytics, Login, NotFound, Notifications, Orders, Product, Products, Profile, Signup } from './pages';
-import { Footer, Navbar } from './components';
-import './App.css'
+import React, { useEffect } from "react";
+import {
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import {
+  AddProduct,
+  Analytics,
+  Login,
+  NotFound,
+  Notifications,
+  Orders,
+  Product,
+  Products,
+  Profile,
+  Signup,
+} from "./pages";
+import { Footer, Navbar } from "./components";
+import "./App.css";
+import useAuthStore from "./store/authStore";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
-  const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
+  useEffect(() => {
+    localStorage.removeItem("user");
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated]);
+
+  // Check if the current page is an authentication page
+  const isAuthPage = ["/login", "/signup"].includes(location.pathname);
 
   return (
-    <div className='flex flex-col min-h-screen'>
+    <div className="flex flex-col min-h-screen">
       {!isAuthPage && <Navbar />}
       <Routes>
-        <Route path={"/login"} element={<Login />} />
-        <Route path={"/signup"} element={<Signup />} />
+        {/* Public Routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+
+        {/* Protected Routes */}
+        <Route
+          path="/"
+          element={isAuthenticated ? <Analytics /> : <Navigate to="/signup" />}
+        />
+        <Route
+          path="/addProduct"
+          element={isAuthenticated ? <AddProduct /> : <Navigate to="/signup" />}
+        />
+        <Route
+          path="/notifications"
+          element={
+            isAuthenticated ? <Notifications /> : <Navigate to="/signup" />
+          }
+        />
+        <Route
+          path="/orders"
+          element={isAuthenticated ? <Orders /> : <Navigate to="/signup" />}
+        />
+        <Route
+          path="/products"
+          element={isAuthenticated ? <Products /> : <Navigate to="/signup" />}
+        />
+        <Route
+          path="/product"
+          element={isAuthenticated ? <Product /> : <Navigate to="/signup" />}
+        />
+        {/* <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/signup" />} /> */}
+
+        {/* Fallback route */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
-      {!isAuthPage && (
-        <>
-          <Routes>
-            
-            <Route path={"/"} element={<Analytics />} />
-            <Route path={"/addProduct"} element={<AddProduct />} />
-            <Route path={"/notifications"} element={<Notifications />} />
-            <Route path={"/orders"} element={<Orders />} />
-            <Route path={"/products"} element={<Products />} />
-            {/* <Route path={"/profile"} element={<Profile />} /> */}
-            <Route path={"/product"} element={<Product />} />
-            <Route path={"*"} element={<NotFound />} />
-          </Routes>
-          <Footer />
-        </>
-      )}
+      {!isAuthPage && <Footer />}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        closeOnClick
+      />
     </div>
   );
 };

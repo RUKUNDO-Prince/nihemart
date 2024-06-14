@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SubHeading from "../components/SubHeading";
 import { ProductsList } from "../components";
 import { plus } from "../assets";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuthStore from "../store/authStore";
 
 const Products = () => {
+  const navigate = useNavigate();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const handleAuth = () => {
+    if (!isAuthenticated) {
+      navigate("/signup");
+    }
+  };
+  useEffect(() => {
+    handleAuth();
+  }, [navigate, isAuthenticated]);
   return (
     <div className="m-[50px] flex-1">
       <div className="flex justify-between py-0">
