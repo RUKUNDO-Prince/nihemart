@@ -19,10 +19,11 @@ import {
   Signup,
 } from "./pages";
 import { Footer, Navbar } from "./components";
-import "./App.css";
 import useAuthStore from "./store/authStore";
-import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import "./App.css";
 
 const App = () => {
   const location = useLocation();
@@ -30,7 +31,6 @@ const App = () => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   useEffect(() => {
-    localStorage.removeItem("user");
     if (isAuthenticated) {
       navigate("/");
     }
