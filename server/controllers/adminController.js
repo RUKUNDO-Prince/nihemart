@@ -81,8 +81,8 @@ const adminLogin = async (req, res) => {
       message: " Admin logged in successfully",
       adminAccount:{
         name: admin.name,
-        email: adminAccount.email,
-        emailVerified: adminAccount.emailVerified,
+        email: admin.email,
+        emailVerified: admin.emailVerified,
       },
       token,
     });
