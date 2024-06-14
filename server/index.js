@@ -2,7 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
-const accountRouter = require("./routes/account");
+const AdminRouter = require("./routes/adminAccount");
 const dbConn = require("./config/db");
 const authRouter = require("./routes/auth");
 const cookieParser = require("cookie-parser");
@@ -35,11 +35,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.use("/auth", authRouter);
-app.use("/account", accountRouter);
+app.use("/admin", AdminRouter);
 app.use("/product", productRouter);
 app.use("/contact", contactRouter);
 app.use("/cart", cartRoute);
-app.use("/user", userRouter)
+app.use("/user", userRouter);
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
