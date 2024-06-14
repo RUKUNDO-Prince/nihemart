@@ -8,9 +8,13 @@ const getUserFromLocalStorage = () => {
   return localStorage.getItem("user");
 };
 
+const getTokenfromLocalStorage = () => {
+  return localStorage.getItem("adminToken");
+};
+
 const useAuthStore = create((set) => ({
   isLoading: false,
-  isAuthenticated: !!getUserFromLocalStorage(),
+  isAuthenticated: !!getTokenfromLocalStorage(),
   user: getUserFromLocalStorage() || null,
 
   // Register new user
@@ -18,18 +22,19 @@ const useAuthStore = create((set) => ({
   register: async (name, email, password) => {
     set({ isLoading: true });
     try {
-      const response = await publicApi.post("/account", {
+      const response = await publicApi.post("/admin/register", {
         name,
         email,
         password,
       });
-      const { message, account } = response.data;
+      const { message, adminAccount,token } = response.data;
       set({
         isAuthenticated: true,
         isLoading: false,
-        user: account,
+        user: adminAccount,
       });
-      localStorage.setItem("user", account);
+      localStorage.setItem("user", adminAccount);
+      localStorage.setItem("adminToken", token);
       toast.success(message);
     } catch (error) {
       console.error("Error registering Admin:", error);
@@ -45,14 +50,15 @@ const useAuthStore = create((set) => ({
 
   login: async (email, password) => {
     try {
-      const response = await publicApi.post("/auth/login", {
+      const response = await publicApi.post("/admin/login", {
         email,
         password,
       });
 
-      const { message, account } = response.data;
-      set({ isAuthenticated: true, isLoading: false, user: account });
-      localStorage.setItem("user", account);
+      const { message, adminAccount,token } = response.data;
+      set({ isAuthenticated: true, isLoading: false, user: adminAccount });
+      localStorage.setItem("user", adminAccount);
+      localStorage.setItem("adminToken", token);
       toast.success(message);
     } catch (error) {
       console.error("Error logging in:", error);
@@ -64,12 +70,9 @@ const useAuthStore = create((set) => ({
   // Logout user
   logout: async () => {
     try {
-      const response = await publicApi.post(
-        "/auth/logout",{},{withCredentials: true}
-      );
-      const { message } = response.data;
-      set({ isAuthenticated: false, user: null, token: null });
       localStorage.removeItem("user");
+      localStorage.removeItem("adminToken");
+      set({ isAuthenticated: false, user: null, token: null });
       toast.success(message);
     } catch (error) {
       toast.error(error.response.data.message);

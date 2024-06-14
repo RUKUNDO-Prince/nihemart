@@ -19,7 +19,7 @@ export const authorizedApi = axios.create({
 
 authorizedApi.interceptors.request.use(
   async (config) => {
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem("adminToken");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
