@@ -1,5 +1,11 @@
-import React from "react";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import {
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import {
   AddProduct,
   Analytics,
@@ -15,12 +21,20 @@ import {
 import { Footer, Navbar } from "./components";
 import "./App.css";
 import useAuthStore from "./store/authStore";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+  useEffect(() => {
+    localStorage.removeItem("user");
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated]);
 
   // Check if the current page is an authentication page
   const isAuthPage = ["/login", "/signup"].includes(location.pathname);
@@ -66,7 +80,12 @@ const App = () => {
         <Route path="*" element={<NotFound />} />
       </Routes>
       {!isAuthPage && <Footer />}
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} closeOnClick />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        closeOnClick
+      />
     </div>
   );
 };

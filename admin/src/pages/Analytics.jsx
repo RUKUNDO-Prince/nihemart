@@ -6,7 +6,7 @@ import useAuthStore from "../store/authStore";
 
 const Analytics = () => {
   const navigate = useNavigate();
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const { isAuthenticated, logout } = useAuthStore();
   const handleAuth = () => {
     if (!isAuthenticated) {
       navigate("/signup");
@@ -55,7 +55,10 @@ const Analytics = () => {
           <p className="font-lato font-semibold text-[48px]">9</p>
         </div>
       </div>
-      <button className="flex items-center bg-blue3 py-3 px-8 rounded-lg outline-none text-white m-8 float-end hover:bg-blue2">
+      <button
+        onClick={() => logout()}
+        className="flex items-center bg-blue3 py-3 px-8 rounded-lg outline-none text-white m-8 float-end hover:bg-blue2"
+      >
         Log out
         <AiOutlineSwapRight />
       </button>

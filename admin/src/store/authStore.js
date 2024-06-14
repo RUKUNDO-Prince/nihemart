@@ -10,7 +10,7 @@ const getUserFromLocalStorage = () => {
 
 const useAuthStore = create((set) => ({
   isLoading: false,
-  isAuthenticated: false,
+  isAuthenticated: !!getUserFromLocalStorage(),
   user: getUserFromLocalStorage() || null,
 
   // Register new user
@@ -31,12 +31,11 @@ const useAuthStore = create((set) => ({
       });
       localStorage.setItem("user", account);
       toast.success(message);
-
     } catch (error) {
       console.error("Error registering Admin:", error);
       // Handle error as needed
       set({ error: error });
-      toast.error(error.response.data.message);
+      toast.error(error.response.data.message || error.response.data.error);
     } finally {
       set({ isLoading: false });
     }
@@ -53,7 +52,7 @@ const useAuthStore = create((set) => ({
 
       const { message, account } = response.data;
       set({ isAuthenticated: true, isLoading: false, user: account });
-      localStorage.setItem("user",account);
+      localStorage.setItem("user", account);
       toast.success(message);
     } catch (error) {
       console.error("Error logging in:", error);
@@ -65,11 +64,16 @@ const useAuthStore = create((set) => ({
   // Logout user
   logout: async () => {
     try {
-      await publicApi.post("/auth/logout");
-
+      const response = await publicApi.post(
+        "/auth/logout",{},{withCredentials: true}
+      );
+      const { message } = response.data;
       set({ isAuthenticated: false, user: null, token: null });
       localStorage.removeItem("user");
-    } catch (error) {}
+      toast.success(message);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   },
 }));
 
