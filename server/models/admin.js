@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const schema = new mongoose.Schema({
+const AdminSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
@@ -17,6 +17,10 @@ const schema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  isAdmin:{
+    type: Boolean,
+    default: true,
+  },
   password: {
     type: String,
     required: true,
@@ -25,6 +29,6 @@ const schema = new mongoose.Schema({
   },
 });
 
-const Account = mongoose.model("User", schema);
+const Admin = mongoose.model("Admin", AdminSchema);
 
-module.exports = Account;
+module.exports = Admin;

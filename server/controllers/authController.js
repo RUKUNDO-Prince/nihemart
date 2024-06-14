@@ -8,7 +8,7 @@ const generateToken = (user) => {
     {
       id: user._id,
     },
-    "secret"
+    process.env.JWT_SECRET
   );
 };
 
@@ -27,8 +27,7 @@ const login = async (req, res) => {
       return res.status(401).json({ message: "Incorrect password" });
     }
     const token = generateToken(user);
-    res.cookie("token", token, { httpOnly: true });
-    console.log(res.cookie);
+    res.cookie("token", token, { httpOnly: true ,sameSite: 'None'});
     res.status(200).json({
       message: "Logged in Successfully",
       account: {
