@@ -29,6 +29,23 @@ const productSchema = new Schema({
     type: Number,
     required: true,
   },
+  size: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
+  gender: [
+    {
+      type: String,
+    },
+  ],
+  discount: {
+    type: Number,
+  },
+  discountType: {
+    type: String,
+  },
   photos: [
     {
       type: String,
