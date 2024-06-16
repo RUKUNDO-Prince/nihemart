@@ -2,11 +2,30 @@ import React, { useEffect, useRef, useState } from "react";
 import { anonymous, draft, tick } from "../assets";
 import { useNavigate } from "react-router-dom";
 import { FaPlusCircle } from "react-icons/fa";
-import { FaX } from "react-icons/fa6";
 import useAuthStore from "../store/authStore";
-import { Form, Formik } from "formik";
+import { ErrorMessage, Form, Formik } from "formik";
 import { toast } from "react-toastify";
 import useProductStore from "../store/productStore";
+import * as Yup from "yup";
+
+const productSchema = Yup.object({
+  productName: Yup.string().required("please Enter the product name"),
+  productDesc: Yup.string().required("please Enter the product description"),
+  productSize: Yup.array()
+    .of(Yup.string().required("Size is required"))
+    .min(1, "At least one size must be selected")
+    .required("Please enter the product size"),
+  gender: Yup.array()
+    .of(Yup.string().required("please enter the product gender"))
+    .min(1, "select one gender"),
+  productPrice: Yup.string().required("please enter the product price"),
+  ProductInStock: Yup.string().required(
+    "please enter the number of product in stock"
+  ),
+  ProductCategory: Yup.string().required("please enter the product category"),
+  discountType: Yup.string().required("please enter discount type"),
+  discount: Yup.string().required("please enter the discount"),
+});
 
 const Product = () => {
   const { addProduct, isLoading } = useProductStore();
@@ -103,6 +122,7 @@ const Product = () => {
           discount: "",
         }}
         onSubmit={(values) => handleProductSubmit(values)}
+        validationSchema={productSchema}
       >
         {({ handleSubmit, handleChange, setFieldValue, values }) => (
           <Form encType="multipart/form-data">
@@ -148,6 +168,11 @@ const Product = () => {
                             placeholder="Enter Product name"
                             onChange={handleChange("productName")}
                           />
+                          <ErrorMessage
+                            name="productName"
+                            component="div"
+                            className="text-red-500 text-sm"
+                          />
                         </div>
                         <div className="flex flex-col ">
                           <label
@@ -163,6 +188,11 @@ const Product = () => {
                             className="font-poppins font-medium text-[15px] p-2 bg-gray-90 bg-opacity-[40%] h-[250px] outline-none rounded-lg"
                             placeholder="PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive."
                           ></textarea>
+                          <ErrorMessage
+                            name="productDesc"
+                            component={"div"}
+                            className="text-red-500 text-sm"
+                          />
                         </div>
                       </div>
                       <div className="flex justify-between my-5 items-start">
@@ -306,6 +336,11 @@ const Product = () => {
                               XL
                             </button>
                           </ul>
+                          <ErrorMessage
+                            name="productSize"
+                            component={"div"}
+                            className="text-red-500 text-sm"
+                          />
                         </div>
                         <div className="w-[40%]">
                           <h1 className="font-semibold text-[20px]">Gender</h1>
@@ -357,9 +392,14 @@ const Product = () => {
                                   }
                                 }}
                               />
-                              <label>Unigender</label>
+                              <label>Unisex</label>
                             </div>
                           </div>
+                          <ErrorMessage
+                            name="gender"
+                            component={"div"}
+                            className="text-red-500 text-sm"
+                          />
                         </div>
                       </div>
                     </div>
@@ -369,7 +409,11 @@ const Product = () => {
                         {images && images.length !== 0 && (
                           <div className="w-full">
                             <img
-                              src={images ? images[selectedImage]?.url : ""}
+                              src={
+                                images[selectedImage]?.url
+                                  ? images[selectedImage]?.url
+                                  : images[0]?.url
+                              }
                               alt="selectedImage"
                               className="max-h-[336px] w-full object-contain"
                             />
@@ -380,7 +424,11 @@ const Product = () => {
                             images.map((image, idx) => (
                               <div
                                 key={idx}
-                                className="h-full relative"
+                                className={`h-full relative rounded-md  ${
+                                  images[selectedImage]?.url === image.url 
+                                    ? "border-2 border-primary"
+                                    : " border-2 border-gray-60"
+                                }`}
                                 onClick={() => handleSelectedImage(idx)}
                                 ref={selectedRef}
                               >
@@ -391,7 +439,7 @@ const Product = () => {
                                   &times;
                                 </span>
                                 <img
-                                  className="w-[100px] h-[100px] object-cover"
+                                  className={`w-[100px] h-[100px] object-contain`}
                                   src={image.url}
                                   alt={image.name}
                                 />
@@ -436,6 +484,11 @@ const Product = () => {
                         placeholder="Enter the base price"
                         onChange={handleChange("productPrice")}
                       />
+                      <ErrorMessage
+                        name="productPrice"
+                        component={"div"}
+                        className="text-red-500 text-sm"
+                      />
                     </div>
                     <div className="flex flex-col gap-1">
                       <label>Stock</label>
@@ -444,6 +497,11 @@ const Product = () => {
                         type="number"
                         placeholder="Product In Stock"
                         onChange={handleChange("ProductInStock")}
+                      />
+                      <ErrorMessage
+                        name="ProductInStock"
+                        component={"div"}
+                        className="text-red-500 text-sm"
                       />
                     </div>
                   </div>
@@ -455,6 +513,11 @@ const Product = () => {
                         type="text"
                         placeholder={`${discountType}`}
                         onChange={handleChange("discount")}
+                      />
+                      <ErrorMessage
+                        name="discount"
+                        component={"div"}
+                        className="text-red-500 text-sm"
                       />
                     </div>
                     <div className="flex flex-col gap-1">
@@ -472,6 +535,11 @@ const Product = () => {
                         <option value="percentage">Percentage</option>
                         <option value="amount">Amount</option>
                       </select>
+                      <ErrorMessage
+                        name="discountType"
+                        component={"div"}
+                        className="text-red-500 text-sm"
+                      />
                     </div>
                   </div>
                 </div>
@@ -490,6 +558,11 @@ const Product = () => {
                       <option value="others">others</option>
                       <option value="others">others</option>
                     </select>
+                    <ErrorMessage
+                      name="ProductCategory"
+                      component={"div"}
+                      className="text-red-500 text-sm"
+                    />
                   </div>
                   <div className="my-2">
                     <p>Browse category</p>
