@@ -159,6 +159,18 @@ const getAllProducts = async (req, res) => {
   }
 };
 
+const getProductById = async (req, res) => {
+  try {
+    const { productId } = req.params;
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    res.status(200).json({ product: product.toObject({ virtuals: true }) });
+  } catch (error) {}
+};
+
 module.exports = {
   addProduct,
   likeProduct,
@@ -166,4 +178,5 @@ module.exports = {
   redirectToWhatsApp,
   getProductsByCategory,
   getAllProducts,
+  getProductById
 };

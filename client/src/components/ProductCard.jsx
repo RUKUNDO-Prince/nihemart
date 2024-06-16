@@ -7,7 +7,7 @@ import useAuthStore from "../store/authStore";
 import AuthForm from "./AuthForm";
 import { api } from "../config/axiosInstance";
 
-const StarRating = ({ starCount }) => {
+export const StarRating = ({ starCount }) => {
   const fullStars = Math.floor(starCount);
   const hasHalfStar = starCount % 1 !== 0;
 

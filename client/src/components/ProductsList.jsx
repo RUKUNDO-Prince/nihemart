@@ -1,25 +1,6 @@
 import React from "react";
-import { productsList } from "../constants/data";
-import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import ProductCard from "./ProductCard";
 import useProductStore from "../store/productStore";
-
-const StarRating = ({ starCount }) => {
-
-  const fullStars = Math.floor(starCount);
-  const hasHalfStar = starCount % 1 !== 0;
-
-  const stars = [];
-  for (let i = 0; i < fullStars; i++) {
-    stars.push(<FaStar color="#FE8900" key={i} />);
-  }
-
-  if (hasHalfStar) {
-    stars.push(<FaStarHalfAlt color="#FE8900" key="half-star" />);
-  }
-
-  return <>{stars}</>;
-};
 
 
 const ProductsList = ({ maxProducts = Infinity }) => {
