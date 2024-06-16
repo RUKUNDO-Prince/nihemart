@@ -9,10 +9,10 @@ const productRouter = require("./routes/product");
 const contactRouter = require("./routes/contact");
 const cartRoute = require("./routes/cart");
 const swaggerUi = require("swagger-ui-express");
-const swaggerJsdoc = require("swagger-jsdoc")
+const swaggerJsdoc = require("swagger-jsdoc");
 const { swaggerDoc } = require("./swagger");
-const userRouter=require("./routes/user")
-const cors =require("cors");
+const userRouter = require("./routes/user");
+const cors = require("cors");
 require("dotenv").config();
 
 dotenv.config();
@@ -21,11 +21,13 @@ const app = express();
 dbConn();
 
 // added cors middleware
-app.use(cors({
-  origin: 'http://localhost:5173',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 app.use(bodyParser.json());
 app.use(express.json());

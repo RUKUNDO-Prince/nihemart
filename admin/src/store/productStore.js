@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import axios from "axios";
 import { authorizedApi } from "../config/axiosInstance";
 import { toast } from "react-toastify";
 
@@ -22,22 +21,38 @@ const useProductStore = create((set) => ({
   }) => {
     set({ isLoading: true });
     try {
-      const response = await authorizedApi.post("/product/addProduct", {
-        name: productName,
-        description: productDesc,
-        price: productPrice,
-        quantity: ProductInStock,
-        category: ProductCategory,
-        size: productSize,
-        gender,
-        discountType,
-        discount,
-        photos: files,
-      });
+      const formdata = new FormData();
+
+      formdata.append("name", productName);
+      formdata.append("description", productDesc);
+      formdata.append("price", productPrice);
+      formdata.append("quantity", ProductInStock);
+      formdata.append("category", ProductCategory);
+      formdata.append("size", productSize);
+      formdata.append("gender", gender);
+      formdata.append("discountType", discountType);
+      formdata.append("discount", discount);
+
+      if (files && files.length > 0) {
+        files.forEach((file) => {
+          formdata.append("files", file);
+        });
+      }
+
+      const response = await authorizedApi.post(
+        "/product/addProduct",
+        formdata,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       const { message } = response.data;
       toast.success(message);
     } catch (error) {
+      console.log(error);
       toast.error(error.response.data.message);
     } finally {
       set({ isLoading: false });

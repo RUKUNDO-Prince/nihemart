@@ -3,18 +3,6 @@ const fs = require("fs");
 const path = require("path");
 const Product = require("../models/product");
 const AdminPanel = require("../models/adminPanel");
-const { log } = require("console");
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/images");
-  },
-  filename: function (req, file, cb) {
-    cb(null, new Date().toISOString() + "-" + file.originalname);
-  },
-});
-
-const upload = multer({ storage: storage });
 
 const addProduct = async (req, res) => {
   try {
@@ -29,10 +17,10 @@ const addProduct = async (req, res) => {
       discountType,
       discount,
     } = req.body;
-
-
-    const photos = Array.isArray(req.photos)
-      ? req.photos.map((file) => file.path)
+    
+    console.log(req.files);
+    const photos = Array.isArray(req.files)
+      ? req.files.map((file) => file.path)
       : [];
 
     const product = new Product({
@@ -176,7 +164,6 @@ module.exports = {
   addProduct,
   likeProduct,
   adminPanelDisplay,
-  upload,
   redirectToWhatsApp,
   getProductsByCategory,
   getAllProducts,

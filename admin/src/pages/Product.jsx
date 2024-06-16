@@ -47,8 +47,6 @@ const Product = () => {
     }
   };
 
-  console.log(filess);
-
   // removing images
 
   const removeImage = (name) => {
@@ -107,7 +105,7 @@ const Product = () => {
         onSubmit={(values) => handleProductSubmit(values)}
       >
         {({ handleSubmit, handleChange, setFieldValue, values }) => (
-          <Form>
+          <Form encType="multipart/form-data">
             <div className="flex-1 m-[30px] flex-col">
               <div>
                 <div className="flex justify-between">
@@ -464,7 +462,7 @@ const Product = () => {
                       <select
                         onChange={(e) => {
                           setDiscountType(e.target.value);
-                          console.log("here ", e.target.value);
+
                           setFieldValue("discountType", e.target.value);
                         }}
                         name="discountType"
