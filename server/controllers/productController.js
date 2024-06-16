@@ -17,10 +17,9 @@ const addProduct = async (req, res) => {
       discountType,
       discount,
     } = req.body;
-    
-    console.log(req.files);
+
     const photos = Array.isArray(req.files)
-      ? req.files.map((file) => file.path)
+      ? req.files.map((file) => "images/" + file.filename)
       : [];
 
     const product = new Product({
@@ -149,7 +148,7 @@ const getAllProducts = async (req, res) => {
       return res.status(404).json({ message: "No products found" });
     }
     const productsWithPhotos = Products.map((product) => ({
-      ...product.toObject(),
+      ...product.toObject({ virtuals: true }),
       photo: product.photos.length > 0 ? product.photos[0] : null,
     }));
 

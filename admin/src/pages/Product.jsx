@@ -425,7 +425,7 @@ const Product = () => {
                               <div
                                 key={idx}
                                 className={`h-full relative rounded-md  ${
-                                  images[selectedImage]?.url === image.url 
+                                  images[selectedImage]?.url === image.url
                                     ? "border-2 border-primary"
                                     : " border-2 border-gray-60"
                                 }`}

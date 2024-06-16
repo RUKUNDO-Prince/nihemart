@@ -5,6 +5,7 @@ import ProductCard from "./ProductCard";
 import useProductStore from "../store/productStore";
 
 const StarRating = ({ starCount }) => {
+
   const fullStars = Math.floor(starCount);
   const hasHalfStar = starCount % 1 !== 0;
 
@@ -20,13 +21,14 @@ const StarRating = ({ starCount }) => {
   return <>{stars}</>;
 };
 
+
 const ProductsList = ({ maxProducts = Infinity }) => {
   const { products, isLoading, error } = useProductStore();
 
   const limitedProducts =
     maxProducts !== Infinity
-      ? productsList?.slice(0, maxProducts)
-      : productsList;
+      ? products?.slice(0, maxProducts)
+      : products;
 
   return (
     <>

@@ -11,7 +11,8 @@ const useProductStore = create((set) => ({
     set({ isLoading: true, error: null });
     try {
       const response = await publicApi.get("/product/allProducts"); // Replace with your actual API endpoint
-      set({ products: response.data, isLoading: false });
+      const { products } = response.data;
+      set({ products: products, isLoading: false });
     } catch (error) {
       set({ error: error.message, isLoading: false });
     }

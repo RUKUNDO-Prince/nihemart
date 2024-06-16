@@ -5,10 +5,20 @@ import { Link } from "react-router-dom";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import useAuthStore from "../store/authStore";
 import AuthForm from "./AuthForm";
+import { api } from "../config/axiosInstance";
 
 const StarRating = ({ starCount }) => {
   const fullStars = Math.floor(starCount);
   const hasHalfStar = starCount % 1 !== 0;
+
+  if(starCount === 0){
+    return <>
+    <FaStar color="grey"/>
+    <FaStar color="grey"/>
+    <FaStar color="grey"/>
+    <FaStar color="grey"/>
+    </>
+  }
 
   const stars = [];
   for (let i = 0; i < fullStars; i++) {
@@ -31,12 +41,17 @@ const ProductCard = ({ product }) => {
   const handleClose = (e) => {
     if (e.target.id === "modal") setIsLoginModalOpen(false);
   };
+
   return (
     <>
       <div className="h-full">
         <div className="h-full flex flex-col justify-between">
           <div className="flex bg-blue2 bg-opacity-[20%] p-[20px] justify-between items-start  mb-[10px] flex-1 relative">
-            <img src={product.img} className="m-auto" alt="img" />
+            <img
+              src={`${api + "/" + product?.photo}`}
+              className="m-auto"
+              alt="img"
+            />
             <div className="absolute right-0 top-0  flex flex-col p-4 gap-2">
               {isAuthenticated ? (
                 <div className="p-2 rounded-full bg-white">
@@ -65,7 +80,7 @@ const ProductCard = ({ product }) => {
                 </div>
               )}
               <Link
-                to={`/product/${product.id}`}
+                to={`/product/${product._id}`}
                 className="p-2 rounded-full bg-white"
               >
                 <Icon
@@ -75,15 +90,15 @@ const ProductCard = ({ product }) => {
               </Link>
             </div>
           </div>
-          <Link to={`/product/${product.id}`}>
+          <Link to={`/product/${product._id}`}>
             <h1 className="font-semibold">{product.name}</h1>
             <div className="flex gap-2">
-              <p className="text-primary">{product.updatedPrice}frw</p>
+              <p className="text-primary">{product.priceAfterDiscount}frw</p>
               <p className="text-gray-80 line-through">{product.price}frw</p>
             </div>
             <div className="flex gap-2 items-center">
-              <StarRating starCount={product.starCount} />
-              <p className="text-gray-30">({product.reviewCount})</p>
+              <StarRating starCount={product.averageRating} />
+              <p className="text-gray-30">({product.ratings.length})</p>
             </div>
           </Link>
         </div>
