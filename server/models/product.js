@@ -42,6 +42,7 @@ const productSchema = new Schema({
   ],
   discount: {
     type: Number,
+    default: 0,
   },
   discountType: {
     type: String,
@@ -86,6 +87,19 @@ productSchema.virtual("averageRating").get(function () {
 
   const sum = this.ratings.reduce((total, rating) => total + rating.rating, 0);
   return sum / this.ratings.length;
+});
+
+productSchema.virtual("priceAfterDiscount").get(function () {
+  if (this.discount === 0) return this.price;
+
+  if (this.discountType === "percentage") {
+    const discountAmount = (this.price * this.discount) / 100;
+    return this.price - discountAmount;
+  }
+  
+  if (this.discountType === "Amount") {
+    return this.price - this.discount;
+  }
 });
 
 const Product = mongoose.model("Product", productSchema);

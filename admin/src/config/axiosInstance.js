@@ -12,9 +12,6 @@ export default publicApi;
 export const authorizedApi = axios.create({
   baseURL: api,
   timeout: 30000,
-  headers: {
-    "Content-Type": "application/json",
-  },
 });
 
 authorizedApi.interceptors.request.use(

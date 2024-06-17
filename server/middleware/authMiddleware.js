@@ -1,4 +1,6 @@
 const jwt = require("jsonwebtoken");
+const multer = require("multer");
+const path = require("path");
 
 const authenticate = (req, res, next) => {
   const token = req.header("Authorization")?.split(" ")[1];
@@ -15,5 +17,16 @@ const authenticate = (req, res, next) => {
   }
 };
 
-module.exports = { authenticate };
+// uploading the image
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/images");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+  },
+});
 
+const upload = multer({ storage: storage });
+
+module.exports = { authenticate, upload };

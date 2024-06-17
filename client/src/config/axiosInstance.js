@@ -1,7 +1,7 @@
 // axiosConfig.js
 import axios from "axios";
 
-const api = "http://127.0.0.1:3000";
+ export const api = "http://127.0.0.1:3000";
 
 const publicApi = axios.create({
   baseURL: api,

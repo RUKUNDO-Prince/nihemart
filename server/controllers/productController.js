@@ -3,18 +3,6 @@ const fs = require("fs");
 const path = require("path");
 const Product = require("../models/product");
 const AdminPanel = require("../models/adminPanel");
-const { log } = require("console");
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/images");
-  },
-  filename: function (req, file, cb) {
-    cb(null, new Date().toISOString() + "-" + file.originalname);
-  },
-});
-
-const upload = multer({ storage: storage });
 
 const addProduct = async (req, res) => {
   try {
@@ -30,9 +18,8 @@ const addProduct = async (req, res) => {
       discount,
     } = req.body;
 
-
-    const photos = Array.isArray(req.photos)
-      ? req.photos.map((file) => file.path)
+    const photos = Array.isArray(req.files)
+      ? req.files.map((file) => "images/" + file.filename)
       : [];
 
     const product = new Product({
@@ -161,7 +148,7 @@ const getAllProducts = async (req, res) => {
       return res.status(404).json({ message: "No products found" });
     }
     const productsWithPhotos = Products.map((product) => ({
-      ...product.toObject(),
+      ...product.toObject({ virtuals: true }),
       photo: product.photos.length > 0 ? product.photos[0] : null,
     }));
 
@@ -172,12 +159,24 @@ const getAllProducts = async (req, res) => {
   }
 };
 
+const getProductById = async (req, res) => {
+  try {
+    const { productId } = req.params;
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    res.status(200).json({ product: product.toObject({ virtuals: true }) });
+  } catch (error) {}
+};
+
 module.exports = {
   addProduct,
   likeProduct,
   adminPanelDisplay,
-  upload,
   redirectToWhatsApp,
   getProductsByCategory,
   getAllProducts,
+  getProductById
 };

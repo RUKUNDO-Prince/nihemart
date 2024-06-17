@@ -3,6 +3,7 @@ import publicApi from "../config/axiosInstance";
 
 const useProductStore = create((set) => ({
   products: [],
+  product: null,
   isLoading: false,
   error: null,
 
@@ -10,10 +11,26 @@ const useProductStore = create((set) => ({
   fetchProducts: async () => {
     set({ isLoading: true, error: null });
     try {
-      const response = await publicApi.get("/product/allProducts"); // Replace with your actual API endpoint
-      set({ products: response.data, isLoading: false });
+      const response = await publicApi.get("/product/allProducts");
+      const { products } = response.data;
+      set({ products: products, isLoading: false });
     } catch (error) {
       set({ error: error.message, isLoading: false });
+    }
+  },
+
+  getProductById: async (productId) => {
+    set({ isLoading: true, error: null });
+    try {
+      const response = await publicApi.get(
+        `/product/singleProduct/${productId}`
+      );
+      const { product } = response.data;
+      return product;
+    } catch (error) {
+      set({ error: error.message, isLoading: false });
+    } finally {
+      set({ isLoading: false });
     }
   },
 
