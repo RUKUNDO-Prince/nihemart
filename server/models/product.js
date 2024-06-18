@@ -97,7 +97,7 @@ productSchema.virtual("priceAfterDiscount").get(function () {
     return this.price - discountAmount;
   }
   
-  if (this.discountType === "Amount") {
+  if (this.discountType === "amount") {
     return this.price - this.discount;
   }
 });

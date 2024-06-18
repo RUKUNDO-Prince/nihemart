@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { authorizedApi } from "../config/axiosInstance";
+import publicApi, { authorizedApi } from "../config/axiosInstance";
 import { toast } from "react-toastify";
 
 const useProductStore = create((set) => ({
@@ -56,6 +56,17 @@ const useProductStore = create((set) => ({
       toast.error(error.response.data.message);
     } finally {
       set({ isLoading: false });
+    }
+  },
+   // Fetch all products
+   fetchProducts: async () => {
+    set({ isLoading: true });
+    try {
+      const response = await publicApi.get("/product/allProducts");
+      const { products } = response.data;
+      set({ products: products, isLoading: false });
+    } catch (error) {
+      set({ error: error.message, isLoading: false });
     }
   },
 }));
