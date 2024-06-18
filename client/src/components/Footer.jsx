@@ -8,7 +8,7 @@ import { logo } from "../assets";
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-b from-blue to-dark">
-      <Newsletter />
+      {/* <Newsletter /> */}
       <div className="w-full h-[1.5px] bg-white"></div>
       {/* MAIN FOOTER */}
       <div>
