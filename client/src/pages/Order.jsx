@@ -48,14 +48,21 @@ const Order = () => {
             className="bg-[#3B7EF8] bg-opacity-[5%] p-[20px] rounded-md"
           >
             <h1 className="font-bold font-lato text-[16px] mb-[20px]">
-              Personal information
+              Location
             </h1>
             <div className="flex flex-col gap-3">
               <label htmlFor="">City</label>
-              <input
+              {/* <input
                 type="text"
                 className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
-              />
+              /> */}
+              <select name="" id="" className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md">
+                <option htmlFor="" className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md">Kigali</option>
+                <option htmlFor="" className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md">Amajyepfo</option>
+                <option htmlFor="" className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md">Amajyaruguru</option>
+                <option htmlFor="" className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md">Iburasirazuba</option>
+                <option htmlFor="" className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md">Iburengerazuba</option>
+              </select>
             </div>
             <div className="flex flex-col gap-3">
               <label htmlFor="">Destination</label>
