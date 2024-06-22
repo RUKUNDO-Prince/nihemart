@@ -104,12 +104,12 @@ const Product = () => {
                   <div className="m-[20px]">
                     <div className="flex items-center gap-3">
                       <img src={delivery} alt="delivery-icon" />
-                      <p>Order</p>
+                      <p>Place Order</p>
                     </div>
-                    <div className="flex items-center gap-3 bg-[#00FF38] rounded-lg w-fit px-[10px] py-[10px]">
+                    {/* <div className="flex items-center gap-3 bg-[#00FF38] rounded-lg w-fit px-[10px] py-[10px]">
                       <img src={whatsapp} alt="" />
                       <button className="text-white">Whatsapp</button>
-                    </div>
+                    </div> */}
                   </div>
                   <hr className="bg-gray-90 h-[2px]" />
                   <div className="m-[20px]">
