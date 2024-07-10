@@ -2,11 +2,19 @@ import React, { useState } from "react";
 import { OrderModal } from "../components";
 
 const Order = () => {
-    const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [city, setCity] = useState("Kigali");
+  const [deliveryFee, setDeliveryFee] = useState(1000);
+
+  const handleCityChange = (event) => {
+    const selectedCity = event.target.value;
+    setCity(selectedCity);
+    setDeliveryFee(selectedCity === "Kigali" ? 1000 : 2000);
+  };
 
   return (
     <>
-      <div className=" px-5 md:px-10 py-5">
+      <div className="px-5 md:px-10 py-5">
         <p className="text-gray-90 font-regular text-[14px] font-poppins">
           / Gaming / Order / <span className="text-black">Info</span>
         </p>
@@ -52,16 +60,18 @@ const Order = () => {
             </h1>
             <div className="flex flex-col gap-3">
               <label htmlFor="">City</label>
-              {/* <input
-                type="text"
+              <select
+                name=""
+                id=""
                 className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
-              /> */}
-              <select name="" id="" className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md">
-                <option htmlFor="" className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md">Kigali</option>
-                <option htmlFor="" className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md">Amajyepfo</option>
-                <option htmlFor="" className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md">Amajyaruguru</option>
-                <option htmlFor="" className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md">Iburasirazuba</option>
-                <option htmlFor="" className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md">Iburengerazuba</option>
+                value={city}
+                onChange={handleCityChange}
+              >
+                <option value="Kigali">Kigali</option>
+                <option value="Amajyepfo">Amajyepfo</option>
+                <option value="Amajyaruguru">Amajyaruguru</option>
+                <option value="Iburasirazuba">Iburasirazuba</option>
+                <option value="Iburengerazuba">Iburengerazuba</option>
               </select>
             </div>
             <div className="flex flex-col gap-3">
@@ -76,6 +86,8 @@ const Order = () => {
               <input
                 type="text"
                 className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
+                value={deliveryFee}
+                readOnly
               />
             </div>
           </form>
@@ -87,7 +99,10 @@ const Order = () => {
           <button className="py-[10px] px-[50px] border-blue2 border-[1px] rounded-lg">
             Leave
           </button>
-          <button className="py-[10px] px-[50px] bg-blue2 text-white rounded-lg hover:bg-blue3 transition-all duration-3000" onClick={() => setShowModal(true)}>
+          <button
+            className="py-[10px] px-[50px] bg-blue2 text-white rounded-lg hover:bg-blue3 transition-all duration-3000"
+            onClick={() => setShowModal(true)}
+          >
             Buy
           </button>
         </div>
