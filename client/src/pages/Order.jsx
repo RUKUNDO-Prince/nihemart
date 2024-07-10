@@ -74,15 +74,17 @@ const Order = () => {
                 <option value="Iburengerazuba">Iburengerazuba</option>
               </select>
             </div>
+            {city !== "Kigali" && (
+              <div className="flex flex-col gap-3">
+                <label htmlFor="">Destination</label>
+                <input
+                  type="text"
+                  className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
+                />
+              </div>
+            )}
             <div className="flex flex-col gap-3">
-              <label htmlFor="">Destination</label>
-              <input
-                type="text"
-                className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
-              />
-            </div>
-            <div className="flex flex-col gap-3">
-              <label htmlFor="">Delivery Fee</label>
+              <label htmlFor="">Delivery Fee (frw)</label>
               <input
                 type="text"
                 className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
