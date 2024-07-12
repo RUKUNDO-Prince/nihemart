@@ -1,23 +1,56 @@
-import React, { useState } from "react";
-import { OrderModal } from "../components";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { OrderModal1, OrderModal2 } from "../components";
 
 const Order = () => {
   const [showModal, setShowModal] = useState(false);
-  const [city, setCity] = useState("Kigali");
-  const [deliveryFee, setDeliveryFee] = useState(1000);
+  const [city, setCity] = useState("");
+  const [deliveryFee, setDeliveryFee] = useState(null);
   const [destination, setDestination] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const navigate = useNavigate();
 
   const handleCityChange = (event) => {
     const selectedCity = event.target.value;
     setCity(selectedCity);
-    setDeliveryFee(selectedCity === "Kigali" ? 1000 : 2000);
-    if (selectedCity !== "Kigali") {
-      setDestination("");
+    setDestination("");
+    if (selectedCity === "Kigali") {
+      setDeliveryFee(null);
+    } else if (selectedCity) {
+      setDeliveryFee(2000);
+    } else {
+      setDeliveryFee(null);
     }
   };
 
   const handleDestinationChange = (event) => {
     setDestination(event.target.value);
+    if (event.target.value) {
+      setDeliveryFee(1000);
+    } else {
+      setDeliveryFee(null);
+    }
+  };
+
+  const handleLeaveClick = () => {
+    navigate("/");
+  };
+
+  const handleBuyClick = () => {
+    setShowModal(true);
+  };
+
+  const isFormComplete = () => {
+    return (
+      name.trim() !== "" &&
+      email.trim() !== "" &&
+      phone.trim() !== "" &&
+      city.trim() !== "" &&
+      (city !== "Kigali" || destination.trim() !== "")
+    );
   };
 
   return (
@@ -42,6 +75,8 @@ const Order = () => {
               <input
                 type="text"
                 className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div className="flex flex-col gap-3">
@@ -49,6 +84,8 @@ const Order = () => {
               <input
                 type="text"
                 className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="flex flex-col gap-3">
@@ -56,6 +93,8 @@ const Order = () => {
               <input
                 type="text"
                 className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
               />
             </div>
           </form>
@@ -75,6 +114,7 @@ const Order = () => {
                 value={city}
                 onChange={handleCityChange}
               >
+                <option value="">Select city</option>
                 <option value="Kigali">Kigali</option>
                 <option value="Amajyepfo">Amajyepfo</option>
                 <option value="Amajyaruguru">Amajyaruguru</option>
@@ -92,39 +132,54 @@ const Order = () => {
                   value={destination}
                   onChange={handleDestinationChange}
                 >
+                  <option value="">Select destination</option>
                   <option value="Nyarugenge">Nyarugenge</option>
                   <option value="Gasabo">Gasabo</option>
                   <option value="Kicukiro">Kicukiro</option>
                 </select>
               </div>
             )}
-            <div className="flex flex-col gap-3">
-              <label htmlFor="">Delivery Fee (frw)</label>
-              <input
-                type="text"
-                className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
-                value={deliveryFee}
-                readOnly
-              />
-            </div>
+            {deliveryFee !== null && (
+              <div className="flex flex-col gap-3">
+                <label htmlFor="">Delivery Fee (frw)</label>
+                <input
+                  type="text"
+                  className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
+                  value={deliveryFee}
+                  readOnly
+                />
+              </div>
+            )}
           </form>
         </div>
         <h1 className="text-primary font-bold font-poppins text-[24px] my-[20px] text-center md:text-start">
           🔔You pay after getting the product
         </h1>
         <div className="flex gap-3 justify-center md:justify-end">
-          <button className="py-[10px] px-[50px] border-blue2 border-[1px] rounded-lg">
+          <button
+            className="py-[10px] px-[50px] border-blue2 border-[1px] rounded-lg"
+            onClick={handleLeaveClick}
+          >
             Leave
           </button>
           <button
-            className="py-[10px] px-[50px] bg-blue2 text-white rounded-lg hover:bg-blue3 transition-all duration-3000"
-            onClick={() => setShowModal(true)}
+            className={`py-[10px] px-[50px] rounded-lg ${
+              isFormComplete()
+                ? "bg-blue2 text-white hover:bg-blue3 transition-all duration-3000"
+                : "bg-gray-400 cursor-not-allowed"
+            }`}
+            onClick={isFormComplete() ? handleBuyClick : null}
+            disabled={!isFormComplete()}
           >
             Buy
           </button>
         </div>
       </div>
-      <OrderModal isOpen={showModal} onClose={() => setShowModal(false)} />
+      {city === "Kigali" ? (
+        <OrderModal2 isOpen={showModal} onClose={() => setShowModal(false)} />
+      ) : (
+        <OrderModal1 isOpen={showModal} onClose={() => setShowModal(false)} />
+      )}
     </>
   );
 };
