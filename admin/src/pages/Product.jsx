@@ -7,6 +7,7 @@ import { ErrorMessage, Form, Formik } from "formik";
 import { toast } from "react-toastify";
 import useProductStore from "../store/productStore";
 import * as Yup from "yup";
+import { categories } from "../constants/data";
 
 const productSchema = Yup.object({
   productName: Yup.string().required("please Enter the product name"),
@@ -28,6 +29,8 @@ const productSchema = Yup.object({
 });
 
 const Product = () => {
+  const [subcategories, setSubcategories] = useState([]); // State for subcategories
+
   const { addProduct, isLoading } = useProductStore();
 
   // image selection functionality
@@ -120,6 +123,8 @@ const Product = () => {
           ProductCategory: "",
           discountType: "",
           discount: "",
+          ProductCategory: "",
+          ProductSubcategory: "",
         }}
         onSubmit={(values) => handleProductSubmit(values)}
         validationSchema={productSchema}
@@ -549,14 +554,30 @@ const Product = () => {
                     <p>Product category</p>
                     <select
                       name="ProductCategory"
-                      onChange={handleChange("ProductCategory")}
+                      value={values.ProductCategory}
+                      onChange={(e) => {
+                        const selectedCategory = e.target.value;
+                        setFieldValue("ProductCategory", selectedCategory);
+                        const selectedCategoryObject = categories.find(
+                          (cat) => cat.category === selectedCategory
+                        );
+                        if (selectedCategoryObject) {
+                          setSubcategories(
+                            selectedCategoryObject.subcategories
+                          );
+                          setFieldValue("ProductSubcategory", ""); // Reset subcategory when category changes
+                        } else {
+                          setSubcategories([]);
+                        }
+                      }}
                       className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-10 rounded-md outline-none w-[50%]"
                     >
-                      <option value="">choose the category</option>
-                      <option value="home&lifestyle">Home & Lifestyle</option>
-                      <option value="others">others</option>
-                      <option value="others">others</option>
-                      <option value="others">others</option>
+                      <option value="">Choose the category</option>
+                      {categories.map((category, index) => (
+                        <option key={index} value={category.category}>
+                          {category.category}
+                        </option>
+                      ))}
                     </select>
                     <ErrorMessage
                       name="ProductCategory"
@@ -565,17 +586,25 @@ const Product = () => {
                     />
                   </div>
                   <div className="my-2">
-                    <p>Browse category</p>
+                    <p>Product subcategory</p>
                     <select
-                      name=""
+                      name="ProductSubcategory"
+                      value={values.ProductSubcategory}
+                      onChange={handleChange}
                       className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-10 rounded-md outline-none w-[50%]"
-                      id=""
                     >
-                      <option value="">Jacket</option>
-                      <option value="">others</option>
-                      <option value="">others</option>
-                      <option value="">others</option>
+                      <option value="">Choose the subcategory</option>
+                      {subcategories.map((subcategory, index) => (
+                        <option key={index} value={subcategory}>
+                          {subcategory}
+                        </option>
+                      ))}
                     </select>
+                    <ErrorMessage
+                      name="ProductSubcategory"
+                      component={"div"}
+                      className="text-red-500 text-sm"
+                    />
                   </div>
                 </div>
               </div>
