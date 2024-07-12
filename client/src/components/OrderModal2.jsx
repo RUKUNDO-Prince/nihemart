@@ -1,7 +1,7 @@
 import React from "react";
 import { delivery, whatsapp } from "../assets";
 
-const OrderModal1 = ({ isOpen, onClose }) => {
+const OrderModal2 = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const handleClose = (e) => {
@@ -39,14 +39,14 @@ const OrderModal1 = ({ isOpen, onClose }) => {
             If You want To Continue click below to Give Order Through Our
             Whatsapp
           </p>
-          <div className="flex items-center gap-3 bg-[#00FF38] rounded-lg px-[50px] py-[10px] m-auto">
+          {/* <div className="flex items-center gap-3 bg-[#00FF38] rounded-lg px-[50px] py-[10px] m-auto">
             <img src={whatsapp} alt="" />
             <button className="text-white">Whatsapp</button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
   );
 };
 
-export default OrderModal1;
+export default OrderModal2;
