@@ -2,35 +2,51 @@ import { usa, spain, france, rwanda, korea, apple, nike, iphone, shoes, computer
 
 export const categories = [
     {
-        name: "Fashion",
+        name: "Imiringa",
         icon: ""
     },
     {
-        name: "Electronics",
+        name: "Amasaha",
         icon: ""
     },
     {
-        name: "Home & Lifestyle",
+        name: "Ibikoresho byo mu rugo",
         icon: ""
     },
     {
-        name: "Medicine",
+        name: "Abana",
         icon: ""
     },
     {
-        name: "Sports & Outdoors",
+        name: "Ibikoresho bya siporo",
         icon: ""
     },
     {
-        name: "Babies' Toys",
+        name: "Ibikoresho by'ibinyabiziga",
         icon: ""
     },
     {
-        name: "Groceries & Pets",
+        name: "Ibikapu",
         icon: ""
     },
     {
-        name: "Health & Beauties",
+        name: "Ubwiza",
+        icon: ""
+    },
+    {
+        name: "Imisatsi",
+        icon: ""
+    },
+    {
+        name: "Ikoranabuhanga",
+        icon: ""
+    },
+    {
+        name: "Ubuzima",
+        icon: ""
+    },
+    {
+        name: "Ibindi",
         icon: ""
     },
 ];
