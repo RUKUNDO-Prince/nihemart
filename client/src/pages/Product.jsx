@@ -1,31 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import { delivery, whatsapp, circle } from "../assets";
-import {  SubHeading } from "../components";
-import { useParams } from "react-router-dom";
+import { SubHeading } from "../components";
+import { useParams, useNavigate } from "react-router-dom";
 import useProductStore from "../store/productStore";
 import { api } from "../config/axiosInstance";
 import { StarRating } from "../components/ProductCard";
 import ProductListComp from "../components/ProductListComp";
+import { deliver } from "../assets";
 
 const Product = () => {
   const [product, setProduct] = useState({});
   const [selectedImage, setSelectedImage] = useState(null);
-  const { getProductById,  fetchProducts} = useProductStore();
+  const { getProductById, fetchProducts } = useProductStore();
 
   const params = useParams();
   const selectedProductId = params.id;
+  const navigate = useNavigate();
 
   const returnSelectedProduct = async () => {
     const productData = await getProductById(selectedProductId);
     setProduct(productData);
     setSelectedImage(productData.photos[0]);
   };
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     returnSelectedProduct();
     fetchProducts();
   }, [selectedProductId]);
+
+  const handleOrderNowClick = () => {
+    navigate(`/order/${selectedProductId}`);
+  };
 
   return (
     <div className=" px-5 md:px-10">
@@ -101,15 +108,24 @@ const Product = () => {
                   </button>
                 </div>
                 <div className="border-[2px] border-gray-80 rounded-lg ">
-                  <div className="m-[20px]">
-                    <div className="flex items-center gap-3">
-                      <img src={delivery} alt="delivery-icon" />
-                      <p>Place Order</p>
+                  <div className="m-[20px] flex justify-between">
+                    <div className="">
+                      <img src={delivery} alt="icon" />
+                      <div>
+                        <h1>Place order</h1>
+                        <p>
+                          In order to get your product asap, place your order
+                          now
+                        </p>
+                      </div>
                     </div>
-                    {/* <div className="flex items-center gap-3 bg-[#00FF38] rounded-lg w-fit px-[10px] py-[10px]">
-                      <img src={whatsapp} alt="" />
-                      <button className="text-white">Whatsapp</button>
-                    </div> */}
+                    <div
+                      className="flex items-center gap-3 bg-blue3 rounded-lg px-[10px] h-fit py-[5px] my-auto hover:bg-opacity-[70%] cursor-pointer"
+                      onClick={handleOrderNowClick}
+                    >
+                      <img src={deliver} alt="" />
+                      <button className="text-white">Order now</button>
+                    </div>
                   </div>
                   <hr className="bg-gray-90 h-[2px]" />
                   <div className="m-[20px]">
