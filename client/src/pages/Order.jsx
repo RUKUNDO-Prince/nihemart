@@ -5,11 +5,19 @@ const Order = () => {
   const [showModal, setShowModal] = useState(false);
   const [city, setCity] = useState("Kigali");
   const [deliveryFee, setDeliveryFee] = useState(1000);
+  const [destination, setDestination] = useState("");
 
   const handleCityChange = (event) => {
     const selectedCity = event.target.value;
     setCity(selectedCity);
     setDeliveryFee(selectedCity === "Kigali" ? 1000 : 2000);
+    if (selectedCity !== "Kigali") {
+      setDestination("");
+    }
+  };
+
+  const handleDestinationChange = (event) => {
+    setDestination(event.target.value);
   };
 
   return (
@@ -74,13 +82,20 @@ const Order = () => {
                 <option value="Iburengerazuba">Iburengerazuba</option>
               </select>
             </div>
-            {city !== "Kigali" && (
+            {city === "Kigali" && (
               <div className="flex flex-col gap-3">
                 <label htmlFor="">Destination</label>
-                <input
-                  type="text"
+                <select
+                  name=""
+                  id=""
                   className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
-                />
+                  value={destination}
+                  onChange={handleDestinationChange}
+                >
+                  <option value="Nyarugenge">Nyarugenge</option>
+                  <option value="Gasabo">Gasabo</option>
+                  <option value="Kicukiro">Kicukiro</option>
+                </select>
               </div>
             )}
             <div className="flex flex-col gap-3">
