@@ -41,7 +41,7 @@ const OrderModal1 = ({ isOpen, onClose }) => {
           </p>
           <div className="flex items-center gap-3 bg-[#00FF38] rounded-lg px-[50px] py-[10px] m-auto">
             <img src={whatsapp} alt="" />
-            <button className="text-white">Whatsapp</button>
+            <a href="https://wa.me/250789310017" target="_blank"><button className="text-white">Whatsapp</button></a>
           </div>
         </div>
       </div>
