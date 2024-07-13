@@ -123,7 +123,7 @@ const Order = () => {
               </select>
             </div>
             {city === "Kigali" && (
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-2">
                 <label htmlFor="">Destination</label>
                 <select
                   name=""
@@ -140,8 +140,8 @@ const Order = () => {
               </div>
             )}
             {deliveryFee !== null && (
-              <div className="flex flex-col gap-3">
-                <label htmlFor="">Delivery Fee (frw)</label>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="" className="mt-2">Delivery Fee (frw)</label>
                 <input
                   type="text"
                   className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
