@@ -1,11 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { delivery, whatsapp } from "../assets";
 
 const OrderModal2 = ({ isOpen, onClose }) => {
+  const navigate = useNavigate();
+
   if (!isOpen) return null;
 
   const handleClose = (e) => {
     if (e.target.id === "wrapper") onClose();
+  };
+
+  const handleViewProducts = () => {
+    navigate("/products");
   };
 
   return (
@@ -36,13 +43,14 @@ const OrderModal2 = ({ isOpen, onClose }) => {
             Delivery Fee.
           </p>
           <p className="m-auto font-semibold">
-            If You want To Continue click below to Give Order Through Our
-            Whatsapp
+            Your order have been well received, you may check out our other products
           </p>
-          {/* <div className="flex items-center gap-3 bg-[#00FF38] rounded-lg px-[50px] py-[10px] m-auto">
-            <img src={whatsapp} alt="" />
-            <button className="text-white">Whatsapp</button>
-          </div> */}
+          <div
+            className="flex items-center gap-3 bg-blue3 hover:bg-blue2 rounded-lg px-[50px] py-[10px] m-auto cursor-pointer"
+            onClick={handleViewProducts}
+          >
+            <button className="text-white">View our products</button>
+          </div>
         </div>
       </div>
     </div>
