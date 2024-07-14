@@ -11,14 +11,14 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path={"/"} element={<Home />} />
-        <Route path={"/about"} element={<About />} />
-        <Route path={"/contact"} element={<Contact />} />
-        <Route path={"/help"} element={<Help />} />
-        <Route path={"/product/:id"} element={<Product />} />
-        <Route path={"/products"} element={<Products />} />
-        <Route path={"/cart"} element={<Cart />} />
-        <Route path={"/likes"} element={<Likes />} />
-        <Route path={"/order/:id"} element={<Order />} />
+        <Route path={"/tumenye"} element={<About />} />
+        <Route path={"/tuvugishe"} element={<Contact />} />
+        <Route path={"/ubufasha"} element={<Help />} />
+        <Route path={"/igicuruzwa/:id"} element={<Product />} />
+        <Route path={"/ibicuruzwa-byose"} element={<Products />} />
+        <Route path={"/agatebo"} element={<Cart />} />
+        <Route path={"/ibyo-wakunze"} element={<Likes />} />
+        <Route path={"/tumiza/:id"} element={<Order />} />
         <Route path={"*"} element={<NotFound />} />
       </Routes>
       <Footer />

@@ -26,7 +26,7 @@ const Search = ({ search = true }) => {
           className="flex items-center justify-between w-full px-2 duration-300 active:text-gray-60 gap-1"
           onClick={() => setIsOpen((prev) => !prev)}
         >
-          categories{" "}
+          ibyiciro{" "}
           <PiCaretUpBold
             className={`${
               isOpen ? "rotate-180" : "rotate-0"
