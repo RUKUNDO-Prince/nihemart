@@ -10,7 +10,7 @@ const Products = () => {
       <SubHeading title="Ibicuruzwa byacu" />
       <div className="flex justify-between items-center">
         <Heading title="Ibyasohotse uku kwezi" />
-        <Link to="/ibicrizwa-byose" className="bg-blue3 px-5 py-2 md:px-[30px] md:py-[10px] rounded-md text-white hover:bg-blue2">Reba byose</Link>
+        <Link to="/ibicuruzwa-byose" className="bg-blue3 px-5 py-2 md:px-[30px] md:py-[10px] rounded-md text-white hover:bg-blue2">Reba byose</Link>
       </div>
       <ProductsList maxProducts={12}/>
     </div>
