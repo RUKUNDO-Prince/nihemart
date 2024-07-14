@@ -16,7 +16,7 @@ const Search = ({ search = true }) => {
           type="text"
           name="searchQuery"
           
-          placeholder="search"
+          placeholder="shakisha ibicuruzwa"
           className="bg-transparent outline-none w-full"
         />
       </form>

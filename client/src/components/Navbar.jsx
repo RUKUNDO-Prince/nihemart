@@ -34,28 +34,28 @@ const Navbar = () => {
           className="hover:text-primary transition-colors"
         >
           
-          Home
+          Ahabanza
         </NavLink>
         <NavLink
           to={"/about"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          About
+          Tumenye
         </NavLink>
         <NavLink
           to={"/contact"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          Contact
+          Tuvugishe
         </NavLink>
         <NavLink
           to={"/help"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          Help
+          Ubufasha
         </NavLink>
       </ul>
 
