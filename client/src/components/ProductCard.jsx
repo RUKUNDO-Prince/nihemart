@@ -80,7 +80,7 @@ const ProductCard = ({ product }) => {
                 </div>
               )}
               <Link
-                to={`/product/${product._id}`}
+                to={`/igicuruzwa/${product._id}`}
                 className="p-2 rounded-full bg-white"
               >
                 <Icon

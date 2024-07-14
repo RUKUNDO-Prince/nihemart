@@ -34,28 +34,28 @@ const Navbar = () => {
           className="hover:text-primary transition-colors"
         >
           
-          Home
+          Ahabanza
         </NavLink>
         <NavLink
-          to={"/about"}
+          to={"/tumenye"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          About
+          Tumenye
         </NavLink>
         <NavLink
-          to={"/contact"}
+          to={"/tuvugishe"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          Contact
+          Tuvugishe
         </NavLink>
         <NavLink
-          to={"/help"}
+          to={"/ubufasha"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          Help
+          Ubufasha
         </NavLink>
       </ul>
 
@@ -73,7 +73,7 @@ const Navbar = () => {
         <Languages />
         </div>
         <Link
-          to={"/likes"}
+          to={"/ibyo-wakunze"}
           className="w-10 h-10 flex items-center justify-center"
         >
           <Icon
@@ -82,7 +82,7 @@ const Navbar = () => {
           />
         </Link>
         <Link
-          to={"/cart"}
+          to={"/agatebo"}
           className="w-10 h-10 flex items-center justify-center bg-[#3B9DF8] rounded-full"
         >
           <Icon

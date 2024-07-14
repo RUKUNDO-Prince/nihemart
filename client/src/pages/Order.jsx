@@ -60,7 +60,7 @@ const Order = () => {
           / Gaming / Order / <span className="text-black">Info</span>
         </p>
         <p className="text-primary font-poppins font-semibold text-[16px] my-[20px]">
-          Fill the following 🖋️
+          Uzuza form ikurikira 🖋️
         </p>
         <div className="grid gap-5 grid-cols-1 md:grid-cols-2">
           <form
@@ -68,10 +68,10 @@ const Order = () => {
             className="bg-[#3B7EF8] bg-opacity-[5%] p-[20px] rounded-md"
           >
             <h1 className="font-bold text-[16px] font-lato mb-[20px]">
-              Personal information
+              Imyirondoro
             </h1>
-            <div className="flex flex-col gap-3">
-              <label htmlFor="">Name</label>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="">Amazina</label>
               <input
                 type="text"
                 className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
@@ -79,7 +79,7 @@ const Order = () => {
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2 mt-2">
               <label htmlFor="">Email</label>
               <input
                 type="text"
@@ -88,8 +88,8 @@ const Order = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="flex flex-col gap-3">
-              <label htmlFor="">Phone Number</label>
+            <div className="flex flex-col gap-2 mt-2">
+              <label htmlFor="">Numero ya telephone</label>
               <input
                 type="text"
                 className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
@@ -103,10 +103,10 @@ const Order = () => {
             className="bg-[#3B7EF8] bg-opacity-[5%] p-[20px] rounded-md"
           >
             <h1 className="font-bold font-lato text-[16px] mb-[20px]">
-              Location
+              Aho muherereye
             </h1>
             <div className="flex flex-col gap-3">
-              <label htmlFor="">City</label>
+              <label htmlFor="">Umujyi</label>
               <select
                 name=""
                 id=""
@@ -114,7 +114,7 @@ const Order = () => {
                 value={city}
                 onChange={handleCityChange}
               >
-                <option value="">Select city</option>
+                <option value="">Hitamo umujyi</option>
                 <option value="Kigali">Kigali</option>
                 <option value="Amajyepfo">Amajyepfo</option>
                 <option value="Amajyaruguru">Amajyaruguru</option>
@@ -124,7 +124,7 @@ const Order = () => {
             </div>
             {city === "Kigali" && (
               <div className="flex flex-col gap-2">
-                <label htmlFor="">Destination</label>
+                <label htmlFor="">Agace</label>
                 <select
                   name=""
                   id=""
@@ -132,7 +132,7 @@ const Order = () => {
                   value={destination}
                   onChange={handleDestinationChange}
                 >
-                  <option value="">Select destination</option>
+                  <option value="">Hitamo agace</option>
                   <option value="Nyarugenge">Nyarugenge</option>
                   <option value="Gasabo">Gasabo</option>
                   <option value="Kicukiro">Kicukiro</option>
@@ -141,7 +141,7 @@ const Order = () => {
             )}
             {deliveryFee !== null && (
               <div className="flex flex-col gap-2">
-                <label htmlFor="" className="mt-2">Delivery Fee (frw)</label>
+                <label htmlFor="" className="mt-2">Amafaranga yo kubikugezaho (frw)</label>
                 <input
                   type="text"
                   className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
@@ -153,14 +153,14 @@ const Order = () => {
           </form>
         </div>
         <h1 className="text-primary font-bold font-poppins text-[24px] my-[20px] text-center md:text-start">
-          🔔You pay after getting the product
+          🔔Wishyura umaze kubona ibyo watumije
         </h1>
         <div className="flex gap-3 justify-center md:justify-end">
           <button
             className="py-[10px] px-[50px] border-blue2 border-[1px] rounded-lg"
             onClick={handleLeaveClick}
           >
-            Leave
+            Subira inyuma
           </button>
           <button
             className={`py-[10px] px-[50px] rounded-lg ${
@@ -171,7 +171,7 @@ const Order = () => {
             onClick={isFormComplete() ? handleBuyClick : null}
             disabled={!isFormComplete()}
           >
-            Buy
+            Gura
           </button>
         </div>
       </div>
