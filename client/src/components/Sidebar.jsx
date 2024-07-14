@@ -18,10 +18,10 @@ const Sidebar = () => {
         ))}
       </ul>
       <Link
-        to="/products"
+        to="/ibicuruzwa-byose"
         className="bg-blue3  py-[10px] items-center rounded-md text-white hover:bg-blue2 text-nowrap"
       >
-        <span className="flex items-center justify-center">View All Products</span>
+        <span className="flex items-center justify-center">Reba ibicuruzwa byose</span>
       </Link>
     </div>
   );

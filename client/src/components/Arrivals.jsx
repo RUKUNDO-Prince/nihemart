@@ -6,8 +6,8 @@ import ArrivalsGrid from './ArrivalsGrid'
 const Arrivals = () => {
   return (
     <div className=' p-5 md:p-[50px]'>
-      <SubHeading title="Featured" />
-        <Heading title="New Arrival" />
+      <SubHeading title="Bigishyushye" />
+        <Heading title="Ibisohotse Vuba" />
         <ArrivalsGrid />
     </div>
   )

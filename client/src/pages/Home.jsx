@@ -5,6 +5,7 @@ import {
   Products,
   Arrivals,
   Cta,
+  Categories,
 } from "../components";
 import { categories } from "../constants/data";
 import useProductStore from "../store/productStore";
