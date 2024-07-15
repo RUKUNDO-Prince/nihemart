@@ -1,4 +1,4 @@
-import { usa, spain, france, rwanda, korea, apple, nike, iphone, shoes, computer, headphones, camera, phone, airpods, material, bag, caseB, computer2, coat, gamepad, kit, phone2, woman, perfume, ps, speakers, main, other1, other2, other3, other4, team1, team2, team3, team4, likes1, likes2, likes3, likes4 } from "../assets";
+import { usa, spain, france, rwanda, korea, apple, nike, iphone, shoes, computer, headphones, camera, phone, airpods, material, bag, caseB, computer2, coat, gamepad, kit, phone2, woman, perfume, ps, speakers, main, other1, other2, other3, other4, team1, team2, team3, team4, likes1, likes2, likes3, likes4, img1, img2, img3, img4, img5 } from "../assets";
 
 export const categories = [
     {
@@ -57,20 +57,8 @@ export const languages = [
         icon: usa
     },
     {
-        name: "Sp",
-        icon: spain
-    },
-    {
-        name: "Fr",
-        icon: france
-    },
-    {
-        name: "Ki",
+        name: "Kinya",
         icon: rwanda
-    },
-    {
-        name: "Ko",
-        icon: korea
     },
 ];
 
@@ -125,25 +113,25 @@ export const homeSlider = [
         icon: apple,
         name: "iPhone 14 series",
         heading: "Up to 10% off voucher",
-        image: iphone
+        image: img1
     },
     {
         icon: apple,
         name: "iPhone 14 series test1",
         heading: "Up to 10% off voucher",
-        image: iphone
+        image: img2
     },
     {
         icon: apple,
         name: "iPhone 14 series test2",
         heading: "Up to 10% off voucher",
-        image: iphone
+        image: img3
     },
     {
         icon: apple,
         name: "iPhone 14 series test3",
         heading: "Up to 10% off voucher",
-        image: iphone
+        image: img5
     }
 ];
 
