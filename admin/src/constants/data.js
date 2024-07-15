@@ -109,7 +109,11 @@ export const categories = [
   },
   {
     category: "UBUZIMA",
-    subcategories: ["kubyubuha & kunanuka", "uruhu", "amaso", "ibindi"],
+    subcategories: ["kubyibuha & kunanuka", "uruhu", "amaso", "ibindi"],
+  },
+  {
+    category: "Imyambaro",
+    subcategories: ["Amarinete", "Amashati", "Iby'abana", "inkweto", "ibindi"],
   },
   {
     category: "IBINDI",

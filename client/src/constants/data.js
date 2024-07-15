@@ -46,6 +46,10 @@ export const categories = [
         icon: ""
     },
     {
+        name: "Imyambaro",
+        icon: ""
+    },
+    {
         name: "Ibindi",
         icon: ""
     },

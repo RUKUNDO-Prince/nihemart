@@ -64,7 +64,8 @@ import amasaha from './imgs/amasaha.png'
 import imiringa from './imgs/imiringa.png'
 import electronic from './imgs/electronic.png'
 import siporo from './imgs/siporo.png'
-import shop from './imgs/shop.jpg'
+import shop from './imgs/shop.png'
+import help2 from './imgs/help.png'
 
 export {
     logo,
@@ -133,5 +134,6 @@ export {
     imiringa,
     siporo,
     electronic,
-    shop
+    shop,
+    help2
 }

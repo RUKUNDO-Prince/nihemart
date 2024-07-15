@@ -1,5 +1,5 @@
 import React from "react";
-import { help, search } from "../assets";
+import { help, help2, search } from "../assets";
 import { helpData } from "../constants/data";
 
 const Help = () => {
@@ -11,7 +11,7 @@ const Help = () => {
             Help Center
           </h1>
           <p className="text-[20px] font-poppins font-regular text-white">
-            Find answers instantly
+            Bona ibisubizo byose ukeneye
           </p>
           <form
             action=""
@@ -28,13 +28,13 @@ const Help = () => {
           </form>
         </div>
         <div className="justify-self-end md:w-[50%] flex justify-center md:justify-end">
-        <img src={help} alt="img" />
+        {/* <img src={help} className="md:w-[300px] mt-4" alt="img" /> */}
+        <img src={help2} className="md:w-[300px]" alt="img" />
         </div>
       </div>
       <div className="p-[20px] flex flex-col items-center gap-5">
         <p className="text-gray-10 mt-[20px]">
-          Search above or browse through the topics below to find answers to
-          your question
+          Shakisha ruguru cyangwa urebe mu ngingo zikurikira kugirango ubone ibisubizo by'ibibazo wibaza
         </p>
         <div className=" my-[50px] grid xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {helpData.map((item, index) => (
