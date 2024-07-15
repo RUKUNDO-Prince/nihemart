@@ -10,7 +10,7 @@ const Sidebar = () => {
         {categories.map((category, index) => (
           <li
             key={index}
-            className="group flex items-center justify-between gap-5 py-2 hover:text-black"
+            className="group flex items-center justify-between gap-5 py-[6.5px] hover:text-black"
           >
             {category.name}
             <FaAngleRight className="icon hidden group-hover:block" />

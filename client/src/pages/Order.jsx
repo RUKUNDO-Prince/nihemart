@@ -52,12 +52,11 @@ const Order = () => {
       (city !== "Kigali" || destination.trim() !== "")
     );
   };
-
   return (
     <>
       <div className="px-5 md:px-10 py-5">
         <p className="text-gray-90 font-regular text-[14px] font-poppins">
-          / Gaming / Order / <span className="text-black">Info</span>
+          / Gaming / Tumiza / <span className="text-black">Info</span>
         </p>
         <p className="text-primary font-poppins font-semibold text-[16px] my-[20px]">
           Uzuza form ikurikira 🖋️

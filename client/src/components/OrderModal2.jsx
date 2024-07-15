@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { delivery, whatsapp } from "../assets";
+import toast, { Toaster } from "react-hot-toast";
 
 const OrderModal2 = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
@@ -12,15 +13,15 @@ const OrderModal2 = ({ isOpen, onClose }) => {
   };
 
   const handleViewProducts = () => {
-    navigate("/products");
+    navigate("/ibicuruzwa-byose");
   };
-
   return (
     <div
       className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center"
       id="wrapper"
       onClick={handleClose}
     >
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="flex flex-col">
         <button
           className="text-white text-2xl place-self-end mr-[65px]"
@@ -43,13 +44,14 @@ const OrderModal2 = ({ isOpen, onClose }) => {
             Delivery Fee.
           </p>
           <p className="m-auto font-semibold">
-            Your order have been well received, you may check out our other products
+            Kanda button ikurikira niba koko ushaka kugura iki gicuruzwa ubundi utegerezeho gato
           </p>
           <div
             className="flex items-center gap-3 bg-blue3 hover:bg-blue2 rounded-lg px-[50px] py-[10px] m-auto cursor-pointer"
-            onClick={handleViewProducts}
+            // onClick={handleViewProducts}
+            onClick={() => onClose()}
           >
-            <button className="text-white">View our products</button>
+            <button className="text-white" >Gura</button>
           </div>
         </div>
       </div>

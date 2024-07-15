@@ -19,7 +19,7 @@ const Footer = () => {
           <div className="flex">
           <div>
             <h1 className="text-white font-bold text-[1.2em]">Nihe Mart</h1>
-            <p className="text-white">Buy Goods and order on our commercial website</p>
+            <p className="text-white">Gura unatumize ibicuruzwa kuri murandasi ukoresheje urubuga rwacu</p>
           </div>
           </div>
           {footerLinks.map((item, index) => (
@@ -39,7 +39,7 @@ const Footer = () => {
             </div>
           ))}
           <div>
-            <h1 className="text-white font-bold mb-3">Find Us Online</h1>
+            <h1 className="text-white font-bold mb-3">Imbuga nkoranyambaga zacu</h1>
             <div className="flex gap-5">
               <Link target="_blank" to={"https://instagram.com"}><FaInstagram color="white" size={30} /></Link>
               <FaWhatsapp color="white" size={30} />

@@ -46,6 +46,10 @@ export const categories = [
         icon: ""
     },
     {
+        name: "Imyambaro",
+        icon: ""
+    },
+    {
         name: "Ibindi",
         icon: ""
     },
@@ -66,23 +70,23 @@ export const footerEndData = ["Privacy Policy", "Terms and Conditions", "User Ag
 
 export const footerLinks = [
     {
-        title: "Useful Links",
+        title: "Links z'ingenzi",
         links: [
             {
-                text: "Home",
+                text: "Ahabanza",
                 link: '/'
             },
             {
-                text: "About",
-                link: '/about'
+                text: "Tumenye",
+                link: '/tumenye'
             },
             {
-                text: "Contact",
-                link: '/contact'
+                text: "Tuvugishe",
+                link: '/tuvugishe'
             },
             {
-                text: "Help",
-                link: '/help'
+                text: "Ubufasha",
+                link: '/ubufasha'
             },
         ],
     },
@@ -90,19 +94,19 @@ export const footerLinks = [
 
 export const footerActions = [
     {
-        title: "Quick Actions",
+        title: "Ibikorwa byihuse",
         links: [
             {
-                text: "Likes",
-                link: '/likes'
+                text: "Ibyo wakunze",
+                link: '/ibyo-wakunze'
             },
             {
-                text: "Cart",
-                link: '/cart'
+                text: "Agatebo",
+                link: '/agatebo'
             },
             {
-                text: "Order",
-                link: '/order'
+                text: "Tumiza",
+                link: '/tumiza'
             },
         ],
     },
