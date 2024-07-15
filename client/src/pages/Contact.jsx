@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Accordion } from "../components";
 import { call, write } from "../assets";
 import emailjs from '@emailjs/browser'
+import toast, { Toaster } from 'react-hot-toast'
 
 const Contact = () => {
   const form = useRef();
@@ -15,9 +16,11 @@ const Contact = () => {
       })
       .then(
         () => {
+          toast.success("Message sent successfully, wait for the reply!");
           console.log('SUCCESS!');
         },
         (error) => {
+          toast.error("Message failed to send, try again later!");
           console.log('FAILED...', error.text);
         },
       );
@@ -25,6 +28,7 @@ const Contact = () => {
 
   return (
     <div className=" p-[25px] lg:p-[50px]">
+      <Toaster position="top-center" reverseOrder={false} />
       <p className="text-gray-90 mb-[20px]">
         Ahabanza / <span className="text-black">Tuvugishe</span>
       </p>
