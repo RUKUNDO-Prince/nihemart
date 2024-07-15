@@ -54,6 +54,11 @@ import likes1 from './likes/likes1.png'
 import likes2 from './likes/likes2.png'
 import likes3 from './likes/likes3.png'
 import likes4 from './likes/likes4.png'
+import img1 from './imgs/img1.png'
+import img2 from './imgs/img2.png'
+import img3 from './imgs/img3.png'
+import img4 from './imgs/img4.png'
+import img5 from './imgs/img5.png'
 
 export {
     logo,
@@ -111,5 +116,10 @@ export {
     likes1,
     likes2,
     likes3,
-    likes4
+    likes4,
+    img1,
+    img2,
+    img3,
+    img4,
+    img5
 }
