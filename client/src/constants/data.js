@@ -113,25 +113,29 @@ export const homeSlider = [
         icon: apple,
         name: "iPhone 14 series",
         heading: "Up to 10% off voucher",
-        image: img1
+        image: img1,
+        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
     },
     {
         icon: apple,
         name: "iPhone 14 series test1",
         heading: "Up to 10% off voucher",
-        image: img2
+        image: img2,
+        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
     },
     {
         icon: apple,
         name: "iPhone 14 series test2",
         heading: "Up to 10% off voucher",
-        image: img3
+        image: img3,
+        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
     },
     {
         icon: apple,
         name: "iPhone 14 series test3",
         heading: "Up to 10% off voucher",
-        image: img5
+        image: img5,
+        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
     }
 ];
 

@@ -59,6 +59,12 @@ import img2 from './imgs/img2.png'
 import img3 from './imgs/img3.png'
 import img4 from './imgs/img4.png'
 import img5 from './imgs/img5.png'
+import img6 from './imgs/img6.jpg'
+import amasaha from './imgs/amasaha.png'
+import imiringa from './imgs/imiringa.png'
+import electronic from './imgs/electronic.png'
+import siporo from './imgs/siporo.png'
+import shop from './imgs/shop.jpg'
 
 export {
     logo,
@@ -121,5 +127,11 @@ export {
     img2,
     img3,
     img4,
-    img5
+    img5,
+    img6,
+    amasaha,
+    imiringa,
+    siporo,
+    electronic,
+    shop
 }
