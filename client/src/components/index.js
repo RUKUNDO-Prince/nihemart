@@ -14,6 +14,7 @@ import Accordion from "./Accordion";
 import OrderModal1 from "./OrderModal";
 import OrderModal2 from "./OrderModal2";
 import CategoriesCard from "./CategoriesCard";
+import Profile from "./Profile";
 
 export {
     Navbar,
@@ -31,5 +32,6 @@ export {
     Accordion,
     OrderModal1,
     OrderModal2,
-    CategoriesCard
+    CategoriesCard,
+    Profile
 }
