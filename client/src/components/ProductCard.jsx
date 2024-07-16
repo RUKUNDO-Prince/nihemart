@@ -44,7 +44,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <>
-      <div className="h-full">
+      <div className="h-[37vh]">
         <div className="h-full flex flex-col justify-between">
           <div className="flex bg-blue2 bg-opacity-[20%] p-[20px] justify-between items-start  mb-[10px] flex-1 relative">
             <Link className="m-auto" to={`/igicuruzwa/${product._id}`}>
@@ -99,10 +99,10 @@ const ProductCard = ({ product }) => {
               <p className="text-primary">{product.priceAfterDiscount}frw</p>
               <p className="text-gray-80 line-through">{product.price}frw</p>
             </div>
-            <div className="flex gap-2 items-center">
+            {/* <div className="flex gap-2 items-center">
               <StarRating starCount={product.averageRating} />
               <p className="text-gray-30">({product.ratings.length})</p>
-            </div>
+            </div> */}
           </Link>
         </div>
       </div>

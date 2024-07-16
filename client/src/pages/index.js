@@ -9,6 +9,7 @@ import Cart from './Cart'
 import Likes from "./Likes";
 import Order from "./Order";
 import Categories from "./Categories";
+import OrderKigali from "./OrderKigali";
 
 export {
     Home,
@@ -21,5 +22,6 @@ export {
     Cart,
     Likes,
     Order,
-    Categories
+    Categories,
+    OrderKigali
 }

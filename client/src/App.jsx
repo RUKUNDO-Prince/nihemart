@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { Navbar, Footer } from './components'
-import { Home,  About, Contact, Help, Product, Products, NotFound, Cart, Likes, Order, Categories } from './pages'
+import { Home,  About, Contact, Help, Product, Products, NotFound, Cart, Likes, Order, Categories, OrderKigali } from './pages'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -20,6 +20,7 @@ const App = () => {
         <Route path={"/agatebo"} element={<Cart />} />
         <Route path={"/ibyo-wakunze"} element={<Likes />} />
         <Route path={"/tumiza/:id"} element={<Order />} />
+        <Route path={"/tumiza/:id/kigali"} element={<OrderKigali />} />
         <Route path={"*"} element={<NotFound />} />
       </Routes>
       <Footer />

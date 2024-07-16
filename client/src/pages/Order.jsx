@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { OrderModal1, OrderModal2 } from "../components";
+import { useNavigate, useParams } from "react-router-dom";
+import { OrderModal1 } from "../components";
 
 const Order = () => {
   const [showModal, setShowModal] = useState(false);
@@ -36,17 +36,21 @@ const Order = () => {
   };
 
   const handleLeaveClick = () => {
-    navigate("/");
+    navigate("/ibicuruzwa-byose");
   };
 
+  const { id } = useParams();
+
   const handleBuyClick = () => {
-    setShowModal(true);
+    {
+      city == "Kigali" ? navigate(`/tumiza/${id}/kigali`) : setShowModal(true);
+     }
   };
 
   const isFormComplete = () => {
     return (
       name.trim() !== "" &&
-      email.trim() !== "" &&
+      // email.trim() !== "" &&
       phone.trim() !== "" &&
       city.trim() !== "" &&
       (city !== "Kigali" || destination.trim() !== "")
@@ -70,26 +74,29 @@ const Order = () => {
               Imyirondoro
             </h1>
             <div className="flex flex-col gap-2">
-              <label htmlFor="">Amazina</label>
+              <label htmlFor="">Amazina *</label>
               <input
+                required
                 type="text"
                 className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
-            <div className="flex flex-col gap-2 mt-2">
+            {/* <div className="flex flex-col gap-2 mt-2">
               <label htmlFor="">Email</label>
               <input
-                type="text"
+                type="email"
                 className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-            </div>
+            </div> */}
             <div className="flex flex-col gap-2 mt-2">
-              <label htmlFor="">Numero ya telephone</label>
+              <label htmlFor="">Numero ya telephone *</label>
               <input
+                required
+                maxLength={10}
                 type="text"
                 className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
                 value={phone}
@@ -174,11 +181,7 @@ const Order = () => {
           </button>
         </div>
       </div>
-      {city === "Kigali" ? (
-        <OrderModal2 isOpen={showModal} onClose={() => setShowModal(false)} />
-      ) : (
-        <OrderModal1 isOpen={showModal} onClose={() => setShowModal(false)} />
-      )}
+      <OrderModal1 isOpen={showModal} onClose={() => setShowModal(false)} />
     </>
   );
 };
