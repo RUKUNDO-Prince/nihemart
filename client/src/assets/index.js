@@ -76,6 +76,7 @@ import rugo from './categories/mu-rugo.png'
 import ubuzima from './categories/ubuzima.png'
 import ubwiza from './categories/ubwiza.png'
 import ibindi from './categories/ibindi.png'
+import profile from './profile.png'
 
 export {
     logo,
@@ -155,5 +156,6 @@ export {
     ubuzima,
     ubwiza,
     ikoranabuhanga,
-    ibindi
+    ibindi,
+    profile
 }

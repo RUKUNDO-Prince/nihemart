@@ -6,6 +6,7 @@ import Languages from "./Languages";
 import { Icon } from "@iconify/react";
 import { FaX } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
+import Profile from "./Profile";
 
 const Navbar = () => {
   const [search, setSearch] = useState(false);
@@ -70,7 +71,8 @@ const Navbar = () => {
           <Icon icon={"material-symbols-light:search"} className="w-6 h-6" />
         </div>
         <div className="hidden md:block">
-        <Languages />
+        {/* <Languages /> */}
+        <Profile />
         </div>
         <Link
           to={"/ibyo-wakunze"}
@@ -133,7 +135,8 @@ const Navbar = () => {
           <Link to={"/"}>
             <img src="/logo.svg" alt="logo" className="w-[50px]"/>
           </Link>
-          <Languages />
+          {/* <Languages /> */}
+          <Profile />
           <div
             onClick={() => setSidebarOpen(false)}
             className="flex items-center justify-center border border-primary rounded-full p-2 hover:bg-primary hover:text-white"

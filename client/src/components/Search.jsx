@@ -45,7 +45,7 @@ const Search = ({ search = true }) => {
                 key={index}
               >
                 <p>{category.name}</p>
-                <p>{category.icon}</p>
+                <img src={category.icon} className="w-[25px] h-[25px]" />
               </div>
             ))}
           </div>

@@ -58,11 +58,11 @@ export const categories = [
 export const languages = [
     {
         name: "En - US",
-        icon: usa
+        icon: usa,
     },
     {
         name: "Kinya",
-        icon: rwanda
+        icon: rwanda,
     },
 ];
 
