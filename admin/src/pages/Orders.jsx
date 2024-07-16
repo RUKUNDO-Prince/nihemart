@@ -45,6 +45,12 @@ const Orders = () => {
                 Phone Number
               </th>
               <th scope="col" className="px-6 py-3">
+                Products Ordered
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Order Quantity
+              </th>
+              <th scope="col" className="px-6 py-3">
                 Price ↑
               </th>
               <th scope="col" className="px-6 py-3">
@@ -66,10 +72,12 @@ const Orders = () => {
                 </th>
                 <td className="px-6 py-4">{item.name}</td>
                 <td className="px-6 py-4">{item.phone}</td>
+                <td className="px-6 py-4">{item.productsOrdered}</td>
+                <td className="px-6 py-4">{item.orderedQuantity}</td>
                 <td className="px-6 py-4">{item.price}</td>
                 <td className="px-6 py-4">{item.date}</td>
                 <td className="px-6 py-4">
-                  <div className="p-2 rounded-2xl w-[50%] flex justify-center" style={getStatusStyles(item.status)}>{item.status}</div>
+                  <div className="p-2 rounded-2xl w-[80%] flex justify-center" style={getStatusStyles(item.status)}>{item.status}</div>
                 </td>
               </tr>
             ))}
