@@ -1,57 +1,57 @@
-import { usa, spain, france, rwanda, korea, apple, nike, iphone, shoes, computer, headphones, camera, phone, airpods, material, bag, caseB, computer2, coat, gamepad, kit, phone2, woman, perfume, ps, speakers, main, other1, other2, other3, other4, team1, team2, team3, team4, likes1, likes2, likes3, likes4, img1, img2, img3, img4, img5 } from "../assets";
+import { usa, spain, france, rwanda, korea, apple, nike, iphone, shoes, computer, headphones, camera, phone, airpods, material, bag, caseB, computer2, coat, gamepad, kit, phone2, woman, perfume, ps, speakers, main, other1, other2, other3, other4, team1, team2, team3, team4, likes1, likes2, likes3, likes4, img1, img2, img3, img4, img5, imiringa, amasaha, rugo, abana, siporo, ibinyabiziga, ibikapu, ubwiza, imisatsi, ikoranabuhanga, ubuzima, imyambaro, ibindi } from "../assets";
 
 export const categories = [
     {
         name: "Imiringa",
-        icon: ""
+        icon: imiringa
     },
     {
         name: "Amasaha",
-        icon: ""
+        icon: amasaha
     },
     {
         name: "Ibikoresho byo mu rugo",
-        icon: ""
+        icon: rugo
     },
     {
         name: "Abana",
-        icon: ""
+        icon: abana
     },
     {
         name: "Ibikoresho bya siporo",
-        icon: ""
+        icon: siporo
     },
     {
         name: "Ibikoresho by'ibinyabiziga",
-        icon: ""
+        icon: ibinyabiziga
     },
     {
         name: "Ibikapu",
-        icon: ""
+        icon: ibikapu
     },
     {
         name: "Ubwiza",
-        icon: ""
+        icon: ubwiza
     },
     {
         name: "Imisatsi",
-        icon: ""
+        icon: imisatsi
     },
     {
         name: "Ikoranabuhanga",
-        icon: ""
+        icon: ikoranabuhanga
     },
     {
         name: "Ubuzima",
-        icon: ""
+        icon: ubuzima
     },
     {
         name: "Imyambaro",
-        icon: ""
+        icon: imyambaro
     },
     {
         name: "Ibindi",
-        icon: ""
+        icon: ibindi
     },
 ];
 

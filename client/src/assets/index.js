@@ -66,6 +66,16 @@ import electronic from './imgs/electronic.png'
 import siporo from './imgs/siporo.png'
 import shop from './imgs/shop.png'
 import help2 from './imgs/help.png'
+import abana from './categories/abana.png'
+import ibikapu from './categories/ibikapu.png'
+import ibinyabiziga from './categories/ibinyabiziga.png'
+import ikoranabuhanga from './categories/ikoranabuhanga.png'
+import imisatsi from './categories/imisatsi.png'
+import imyambaro from './categories/imyambaro.png'
+import rugo from './categories/mu-rugo.png'
+import ubuzima from './categories/ubuzima.png'
+import ubwiza from './categories/ubwiza.png'
+import ibindi from './categories/ibindi.png'
 
 export {
     logo,
@@ -135,5 +145,15 @@ export {
     siporo,
     electronic,
     shop,
-    help2
+    help2,
+    abana,
+    ibikapu,
+    ibinyabiziga,
+    imisatsi,
+    imyambaro,
+    rugo,
+    ubuzima,
+    ubwiza,
+    ikoranabuhanga,
+    ibindi
 }

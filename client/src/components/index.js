@@ -13,6 +13,7 @@ import Team from "./Team";
 import Accordion from "./Accordion";
 import OrderModal1 from "./OrderModal";
 import OrderModal2 from "./OrderModal2";
+import CategoriesCard from "./CategoriesCard";
 
 export {
     Navbar,
@@ -29,5 +30,6 @@ export {
     Team,
     Accordion,
     OrderModal1,
-    OrderModal2
+    OrderModal2,
+    CategoriesCard
 }
