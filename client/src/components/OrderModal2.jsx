@@ -21,7 +21,6 @@ const OrderModal2 = ({ isOpen, onClose }) => {
       id="wrapper"
       onClick={handleClose}
     >
-      <Toaster position="top-center" reverseOrder={false} />
       <div className="flex flex-col">
         <button
           className="text-white text-2xl place-self-end mr-[65px]"
