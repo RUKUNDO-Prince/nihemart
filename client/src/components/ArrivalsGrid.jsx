@@ -15,21 +15,21 @@ const ArrivalsGrid = () => {
           </p>
         </div>
       </div>
-      <div className="sm:col-span-2 row-span-1 bg-blue3 bg-opacity-[50%] relative flex justify-end">
+      <div className="sm:col-span-2 row-span-1 bg-primary bg-opacity-[80%] relative flex justify-end">
         <img src={imiringa} className="md:w-[400px] md:h-[300px] w-[200px]" alt="img" />
         <div className="absolute bottom-3 left-3 text-white">
           <h1 className="text-lg md:text-[1.5em] font-bold">Imiringa</h1>
           <p className="md:text-[1.2em]">Gura imiringa myiza ku mafaranga make.</p>
         </div>
       </div>
-      <div className="sm:col-span-1 row-span-1 bg-blue3 bg-opacity-[50%] relative flex justify-center p-[20px]">
+      <div className="sm:col-span-1 row-span-1 bg-blue3 bg-opacity-[100%] relative flex justify-center p-[20px]">
         <img src={electronic} alt="img" />
         <div className="absolute bottom-3 left-3 text-white">
           <h1 className="text-lg md:text-[1.5em] font-bold">Ibikoresho bya electronic</h1>
           <p className="md:text-[1.2em]">Amazon wireless speakers</p>
         </div>
       </div>
-      <div className="sm:col-span-1 row-span-1 bg-blue3 bg-opacity-[50%] relative flex justify-center p-[20px]">
+      <div className="sm:col-span-1 row-span-1 bg-blue3 bg-opacity-[100%] relative flex justify-center p-[20px]">
         <img src={siporo} alt="img" />
         <div className="absolute bottom-3 left-3 text-white">
           <h1 className="text-lg md:text-[1.5em] font-bold">Ibikoresho bya siporo</h1>
