@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa6";
-import { delivery, whatsapp, circle } from "../assets";
+import { delivery, whatsapp, circle, cart } from "../assets";
 import { SubHeading } from "../components";
 import { useParams, useNavigate } from "react-router-dom";
 import useProductStore from "../store/productStore";
 import { api } from "../config/axiosInstance";
 import { StarRating } from "../components/ProductCard";
 import ProductListComp from "../components/ProductListComp";
-import { deliver } from "../assets";
-
+import { IoBagCheckOutline } from "react-icons/io5";
 const Product = () => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
@@ -85,11 +84,11 @@ const Product = () => {
               <div className="flex flex-col gap-3 lg:w-1/2 px-5">
                 <h1 className="text-[24px] font-semibold">{product.name}</h1>
                 <div className="flex gap-3 items-center">
-                  <StarRating starCount={product.averageRating} />
-                  <p className="text-gray-90">({product.ratings?.length})</p> |
+                  {/* <StarRating starCount={product.averageRating} />
+                  <p className="text-gray-90">({product.ratings?.length})</p> | */}
                   <p className="text-[#00FF66]">
                     {product.quantity
-                      ? ` ${product.quantity} muri stocke`
+                      ? ` ${product.quantity} muri stock`
                       : "dutegereje ibindi"}
                   </p>
                 </div>
@@ -99,12 +98,11 @@ const Product = () => {
                     {product.price} frw
                   </span>
                 </p>
-                <p className="text-black text-[16px]">{product.description}</p>
                 <hr />
                 <p className="font-semibold text-[24px] flex items-center gap-3">
                   Ingano:
                   {product?.size?.map((size, idx) => (
-                    <span key={idx} className="text-sm font-normal">
+                    <span key={idx} className="text-md font-normal">
                       {size}
                     </span>
                   ))}
@@ -127,7 +125,8 @@ const Product = () => {
                       <FaPlus className="cursor-pointer" />
                     </div>
                   </div>
-                  <button className="bg-primary px-[30px] py-[10px] rounded-md hover:bg-opacity-[90%] text-white">
+                  <button className="bg-primary w-[27%] px-2 py-[10px] rounded-md hover:bg-opacity-[60%] transition-all duration-600 text-white flex justify-between items-start">
+                    <img src={cart} alt="" />
                     Shyira mu gatebo
                   </button>
                 </div>
@@ -136,29 +135,26 @@ const Product = () => {
                     <div className="">
                       <img src={delivery} alt="icon" />
                       <div>
-                        <h1>Tumiza igicuruzwa</h1>
                         <p>
-                          Kugirango ubone igicuruzwa cyawe vuba byihuse,
-                          gitumize ubungubu
+                          Niba ukunze iki gicuruzwa ukaba ushaka kugitumiza kanda aha →
                         </p>
                       </div>
                     </div>
                     <div
-                      className="flex items-center gap-3 bg-blue3 rounded-lg px-[10px] h-fit py-[5px] my-auto hover:bg-opacity-[70%] cursor-pointer"
+                      className="flex items-center gap-3 bg-blue3 rounded-lg px-[20px] h-fit py-[10px] my-auto hover:bg-opacity-[70%] cursor-pointer"
                       onClick={handleOrderNowClick}
                     >
-                      <img src={deliver} alt="" />
-                      <button className="text-white">Tumiza</button>
+                      <IoBagCheckOutline className="text-white" size={30} />
+                      <button className="text-white">Gura</button>
                     </div>
                   </div>
                   <hr className="bg-gray-90 h-[2px]" />
                   <div className="m-[20px]">
                     <img src={circle} alt="icon" />
                     <div>
-                      <h1>Gusubizwa amafaranga</h1>
+                      <h1>Igihe wasubizwa amafaranga</h1>
                       <p className="flex flex-col">
-                        Uba wasubizwa amafaranga yawe mu gihe hagize ikibazo mu
-                        masaha 24.{" "}
+                        Iyo ugize ikibazo kuri order yawe utubwira mbere y'amasaha 24 tukayagusubiza ukishyura transport.{" "}
                         <span
                           className="hover:underline text-gray-60"
                           onClick={handleNavigateToHelp}
@@ -178,6 +174,10 @@ const Product = () => {
           <h2>Loading...</h2>
         </div>
       )}
+      <div className="my-2">
+        <h1 className="font-semibold font-poppins text-2xl">Ubusobanuro bw'igicuruzwa</h1>
+        <p className="text-black text-[16px]">{product.description}</p>
+      </div>
       <div className="my-[20px]">
         <SubHeading title="Ibindi byerekeranye" />
         <ProductListComp maxProducts={4} selectedId={selectedProductId} />
