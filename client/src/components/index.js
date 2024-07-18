@@ -15,6 +15,7 @@ import OrderModal1 from "./OrderModal";
 import OrderModal2 from "./OrderModal2";
 import CategoriesCard from "./CategoriesCard";
 import Profile from "./Profile";
+import ProfileDropdown from "./ProfileDropdown";
 
 export {
     Navbar,
@@ -33,5 +34,6 @@ export {
     OrderModal1,
     OrderModal2,
     CategoriesCard,
-    Profile
+    Profile,
+    ProfileDropdown
 }
