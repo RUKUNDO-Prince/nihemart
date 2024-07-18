@@ -60,6 +60,7 @@ const useAuthStore = create((set) => ({
   // Logout user
   logout: () => {
     localStorage.removeItem("authToken"); // Remove token from localStorage
+    toast.success("Logged out!");
     set({ isAuthenticated: false, user: null, token: null });
   },
 
@@ -79,6 +80,7 @@ const useAuthStore = create((set) => ({
         localStorage.removeItem("authToken");
       }
     }
+    return user;
   },
 }));
 
