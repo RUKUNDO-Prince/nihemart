@@ -1,12 +1,19 @@
-import React from 'react'
-import { profile } from '../assets'
+import React, { useState } from "react";
+import { profile } from "../assets";
+import ProfileDropdown from "./ProfileDropdown";
 
 const Profile = () => {
-  return (
-    <div>
-        <img src={profile} alt="icon" className='w-[50px]' />
-    </div>
-  )
-}
+  const [openProfile, setOpenProfile] = useState(false);
 
-export default Profile
+  return (
+    <div
+      className="cursor-pointer"
+      onClick={() => setOpenProfile((prev) => !prev)}
+    >
+      <img src={profile} alt="icon" className="w-[50px]" />
+      {openProfile && <ProfileDropdown />}
+    </div>
+  );
+};
+
+export default Profile;
