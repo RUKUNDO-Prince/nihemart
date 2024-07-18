@@ -8,7 +8,7 @@ const About = () => {
       <div className="bg-gradient-to-r from-blue2 to-deepBlue flex flex-col md:flex-row justify-around px-[40px] gap-3">
         <div className="content-center md:w-[50%] px-5">
           <h1 className="text-white text-[28px] md:text-[48px] lg:text-[60px] font-bold text-center md:text-start">
-            About Us
+            Ibyerekeye Twe
           </h1>
           <p className="text-white text-base md:text-[22px] text-center md:text-start md:w-[70%]">
             Explore a world of possibilities and join thousands of satisfied
@@ -24,16 +24,10 @@ const About = () => {
         <div className="flex flex-col md:w-[50%] gap-5">
           <div>
             <h1 className="text-black font-bold text-[30px] text-center md:text-start">
-              Who are we
+              Turi bande?
             </h1>
             <p className="text-[16px] font-poppins text-center md:text-start">
-              Launced in 2015, Exclusive is South Asia’s premier online shopping
-              makterplace with an active presense in Bangladesh. Supported by
-              wide range of tailored marketing, data and service solutions,
-              Exclusive has 10,500 sallers and 300 brands and serves 3 millioons
-              customers across the region. Exclusive has more than 1 Million
-              products to offer, growing at a very fast. Exclusive offers a
-              diverse assotment in categories ranging from consumer.
+            NIHE-MART ni ikigo gikorera kuri murandasi gishyira imbere ibyifuzo byumukiriya no kunyurwa kwe. Turangura ibicuruzwa byacu hanze, ibicuruzwa bidasanzwe byujuje ubuziranenge kandi bitaboneka mu Rwanda tukabigurisha dufite intego yo kubigurisha make ashoboka kuri serivisi yihuse kandi yizewe.
             </p>
           </div>
           <div>
