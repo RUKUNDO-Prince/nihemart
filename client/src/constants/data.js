@@ -168,23 +168,23 @@ export const team = [
 
 export const faqs = [
     {
-        question: "What is Nihe Mart ?",
+        question: "Nihemart ni iki?",
         answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
     },
     {
-        question: "What can Nihe Mart help you with ? ",
+        question: "Nihemart idufasha iki? ",
         answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
     },
     {
-        question: "How can i shop from Nihe Mart ?",
+        question: "Ni gute nagurira kuri Nihemart?",
         answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
     },
     {
-        question: "How many products sold on Nihe Mart ?",
+        question: "Ni ibicuruzwa bingana iki bigurishirizwa kuri Nihemart?",
         answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
     },
     {
-        question: "Can you make money on Nihe Mart ?",
+        question: "Ese wakorera amafaranga kuri Nihemart?",
         answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
     },
 ];
