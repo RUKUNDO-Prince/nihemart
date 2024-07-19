@@ -8,7 +8,7 @@ const Help = () => {
       <div className="bg-gradient-to-r from-blueGradient to-orangeGradient w-full flex items-center flex-col md:flex-row">
         <div className="flex flex-col items-center md:w-[50%]">
           <h1 className="text-[60px] font-poppins font-bold text-white">
-            Help Center
+            Aho Tubafashiriza
           </h1>
           <p className="text-[20px] font-poppins font-regular text-white">
             Bona ibisubizo byose ukeneye
