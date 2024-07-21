@@ -6,6 +6,7 @@ import Languages from "./Languages";
 import { Icon } from "@iconify/react";
 import { FaX } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
+import Profile from "./Profile";
 
 const Navbar = () => {
   const [search, setSearch] = useState(false);
@@ -34,28 +35,28 @@ const Navbar = () => {
           className="hover:text-primary transition-colors"
         >
           
-          Home
+          Ahabanza
         </NavLink>
         <NavLink
-          to={"/about"}
+          to={"/tumenye"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          About
+          Tumenye
         </NavLink>
         <NavLink
-          to={"/contact"}
+          to={"/tuvugishe"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          Contact
+          Tuvugishe
         </NavLink>
         <NavLink
-          to={"/help"}
+          to={"/ubufasha"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          Help
+          Ubufasha
         </NavLink>
       </ul>
 
@@ -70,10 +71,11 @@ const Navbar = () => {
           <Icon icon={"material-symbols-light:search"} className="w-6 h-6" />
         </div>
         <div className="hidden md:block">
-        <Languages />
+        {/* <Languages /> */}
+        <Profile />
         </div>
         <Link
-          to={"/likes"}
+          to={"/ibyo-wakunze"}
           className="w-10 h-10 flex items-center justify-center"
         >
           <Icon
@@ -82,7 +84,7 @@ const Navbar = () => {
           />
         </Link>
         <Link
-          to={"/cart"}
+          to={"/agatebo"}
           className="w-10 h-10 flex items-center justify-center bg-[#3B9DF8] rounded-full"
         >
           <Icon
@@ -133,7 +135,8 @@ const Navbar = () => {
           <Link to={"/"}>
             <img src="/logo.svg" alt="logo" className="w-[50px]"/>
           </Link>
-          <Languages />
+          {/* <Languages /> */}
+          <Profile />
           <div
             onClick={() => setSidebarOpen(false)}
             className="flex items-center justify-center border border-primary rounded-full p-2 hover:bg-primary hover:text-white"

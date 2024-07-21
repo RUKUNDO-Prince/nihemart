@@ -60,3 +60,31 @@
         @apply bg-gray-100/10 border border-gray-800;
       }
 }
+
+.profileDropdown {
+    position: absolute;
+    top: 5.5rem;
+    right: 8.5rem;
+    width: 120px;
+    border-radius: 10px;
+    background: white;
+    border: 1px solid gray;
+}
+
+.profileDropdown::before {
+    content: "";
+    position: absolute;
+    top: -0.5rem;
+    right: 1rem;
+    width: 15px;
+    height: 15px;
+    transform: rotate(45deg);
+    background-color: white;
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
+}
+
+.class-border {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import { delivery, whatsapp } from "../assets";
 
-const OrderModal = ({ isOpen, onClose }) => {
+const OrderModal1 = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const handleClose = (e) => {
@@ -16,32 +16,28 @@ const OrderModal = ({ isOpen, onClose }) => {
     >
       <div className="flex flex-col">
         <button
-          className="text-white text-2xl place-self-end mr-[65px]"
+          className="text-white text-2xl place-self-end md:mr-[50px] mr-[20px]"
           onClick={() => onClose()}
         >
           x
         </button>
-        <div className="bg-white p-10 rounded-lg h-[50vh] w-[90%] m-auto flex flex-col gap-5">
+        <div className="bg-white p-10 rounded-lg md:h-[50vh] h-[60vh] w-[90%] m-auto flex flex-col gap-5 overflow-scroll">
           <p className="">
-            👏🏿Thanks for making this decision, your order will take time to
-            reach you
+            👏🏿Murakoze guhitamo kugura iki gicuruzwa, ibyo mwatumije biratwara amasaha 2 kugirango bibagereho
           </p>
           <p>
-            📞We Will Call You Using The Phone Number You Provided Stay Alerted{" "}
+            📞Turabahamagara kuri telephone mwaduhaye, mube mwiteguye{" "}
           </p>
           <p>
             <span className="text-primary text-xl m-2">NB:</span>
-            If You Have Problem On your Order Please Notify Us Before 24 hrs, So
-            As We Return your Money And Get The order But You Will Pay For The
-            Delivery Fee.
+            Iyo ugize ikibazo kuri order yawe utubwira mbere yamasaha 24 tukagusubiza amafaranga yawe ukishyura transport
           </p>
           <p className="m-auto font-semibold">
-            If You want To Continue click below to Give Order Through Our
-            Whatsapp
+            Niba mushaka gukomeza, mwakanda button ikurikira ubundi mugatumiza kuri whatsapp
           </p>
           <div className="flex items-center gap-3 bg-[#00FF38] rounded-lg px-[50px] py-[10px] m-auto">
             <img src={whatsapp} alt="" />
-            <button className="text-white">Whatsapp</button>
+            <a href="https://wa.me/250792412177?text=Ndashaka%20kugura%20igicuruzwa%20kuri%20nihemart" target="_blank"><button className="text-white">Whatsapp</button></a>
           </div>
         </div>
       </div>
@@ -49,4 +45,4 @@ const OrderModal = ({ isOpen, onClose }) => {
   );
 };
 
-export default OrderModal;
+export default OrderModal1;

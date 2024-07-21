@@ -32,8 +32,9 @@ const EmblaCarousel = (props) => {
                 priductIcon={item.icon}
                 productImage={item.image}
                 ProductName={item.name}
-                desc={item.heading}
+                heading={item.heading}
                 link={"#"}
+                desc={item.desc}
               />
             </div>
           ))}

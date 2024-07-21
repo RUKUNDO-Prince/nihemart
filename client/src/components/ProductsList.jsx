@@ -25,14 +25,14 @@ const ProductsList = ({ maxProducts = Infinity }) => {
       ) : (
         <>
           {limitedProducts.length > 0 ? (
-            <div className="mt-[40px] grid xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            <div className="mt-[40px] grid xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7">
               {limitedProducts.map((product, index) => (
                 <ProductCard product={product} key={index} />
               ))}
             </div>
           ) : (
             <div className="flex items-center justify-center mt-[40px]">
-              <h4>currently there are no products added</h4>
+              <h4>Nta bicuruzwa byari byongerwamo, mukomeze kwihangana😟!</h4>
             </div>
           )}
         </>

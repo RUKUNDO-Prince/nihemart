@@ -74,7 +74,7 @@ const App = () => {
           path="/product"
           element={isAuthenticated ? <Product /> : <Navigate to="/signup" />}
         />
-        {/* <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/signup" />} /> */}
+        <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/signup" />} />
 
         {/* Fallback route */}
         <Route path="*" element={<NotFound />} />

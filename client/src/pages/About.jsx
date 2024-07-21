@@ -1,45 +1,48 @@
 import React from "react";
-import { about } from "../assets";
+import { about, shop } from "../assets";
 import { Cta, Team } from "../components";
 
 const About = () => {
   return (
-    <div className="flex flex-col font-poppins">
-      <div className="bg-gradient-to-r from-blue2 to-deepBlue flex flex-col md:flex-row justify-around p-7 gap-5">
-        <div className="content-center md:w-[50%]">
-          <h1 className="text-white text-[28px] md:text-[48px] lg:text-[60px] font-bold text-center md:text-start">About Us</h1>
+    <div className="flex flex-col font-poppins m-0">
+      <div className="bg-gradient-to-r from-blue2 to-deepBlue flex flex-col md:flex-row justify-around px-[40px] gap-3">
+        <div className="content-center md:w-[50%] px-5">
+          <h1 className="text-white text-[28px] md:text-[48px] lg:text-[60px] font-bold text-center md:text-start">
+            Ibyerekeye Twe
+          </h1>
           <p className="text-white text-base md:text-[22px] text-center md:text-start md:w-[70%]">
             Explore a world of possibilities and join thousands of satisfied
             customers{" "}
           </p>
         </div>
         <div className="md:w-[50%]">
-        <img src={about} alt="img" />
+          {/* <img src={about} alt="img" /> */}
+          <img src={shop} alt="img" className="w-full h-[500px]" />
         </div>
       </div>
       <div className="flex flex-col md:flex-row p-[50px] gap-5">
         <div className="flex flex-col md:w-[50%] gap-5">
           <div>
-            <h1 className="text-black font-bold text-[30px] text-center md:text-start">Who are we</h1>
+            <h1 className="text-black font-bold text-[30px] text-center md:text-start">
+              Turi bande?
+            </h1>
             <p className="text-[16px] font-poppins text-center md:text-start">
-              Launced in 2015, Exclusive is South Asia’s premier online shopping
-              makterplace with an active presense in Bangladesh. Supported by
-              wide range of tailored marketing, data and service solutions,
-              Exclusive has 10,500 sallers and 300 brands and serves 3 millioons
-              customers across the region. Exclusive has more than 1 Million
-              products to offer, growing at a very fast. Exclusive offers a
-              diverse assotment in categories ranging from consumer.
+            NIHE-MART ni ikigo gikorera kuri murandasi gishyira imbere ibyifuzo byumukiriya no kunyurwa kwe. Turangura ibicuruzwa byacu hanze, ibicuruzwa bidasanzwe byujuje ubuziranenge kandi bitaboneka mu Rwanda tukabigurisha dufite intego yo kubigurisha make ashoboka kuri serivisi yihuse kandi yizewe.
             </p>
           </div>
           <div>
-            <h1 className="text-black font-bold text-[30px] text-center md:text-start">Our mission</h1>
+            <h1 className="text-black font-bold text-[30px] text-center md:text-start">
+              Our mission
+            </h1>
             <p className="text-[16px] font-poppins text-center md:text-start">
               To satisfy our customers through the provision of our goods by
               delivering them to any location fast and secure
             </p>
           </div>
           <div>
-            <h1 className="text-black font-bold text-[30px] text-center md:text-start">Delivery fee</h1>
+            <h1 className="text-black font-bold text-[30px] text-center md:text-start">
+              Delivery fee
+            </h1>
             <ul className="flex flex-col items-center md:items-start">
               <li>Kigali: 1k</li>
               <li>Other provinces: 2k</li>

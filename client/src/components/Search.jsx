@@ -16,7 +16,7 @@ const Search = ({ search = true }) => {
           type="text"
           name="searchQuery"
           
-          placeholder="search"
+          placeholder="shakisha ibicuruzwa"
           className="bg-transparent outline-none w-full"
         />
       </form>
@@ -26,7 +26,7 @@ const Search = ({ search = true }) => {
           className="flex items-center justify-between w-full px-2 duration-300 active:text-gray-60 gap-1"
           onClick={() => setIsOpen((prev) => !prev)}
         >
-          categories{" "}
+          ibyiciro{" "}
           <PiCaretUpBold
             className={`${
               isOpen ? "rotate-180" : "rotate-0"
@@ -45,7 +45,7 @@ const Search = ({ search = true }) => {
                 key={index}
               >
                 <p>{category.name}</p>
-                <p>{category.icon}</p>
+                <img src={category.icon} className="w-[25px] h-[25px]" />
               </div>
             ))}
           </div>

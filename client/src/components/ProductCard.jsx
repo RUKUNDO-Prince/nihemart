@@ -44,14 +44,17 @@ const ProductCard = ({ product }) => {
 
   return (
     <>
-      <div className="h-full">
+      <div className="h-[37vh]">
         <div className="h-full flex flex-col justify-between">
           <div className="flex bg-blue2 bg-opacity-[20%] p-[20px] justify-between items-start  mb-[10px] flex-1 relative">
+            <Link className="m-auto" to={`/igicuruzwa/${product._id}`}>
             <img
               src={`${api + "/" + product?.photo}`}
-              className="m-auto"
+              className=""
               alt="img"
             />
+            </Link>
+            
             <div className="absolute right-0 top-0  flex flex-col p-4 gap-2">
               {isAuthenticated ? (
                 <div className="p-2 rounded-full bg-white">
@@ -80,7 +83,7 @@ const ProductCard = ({ product }) => {
                 </div>
               )}
               <Link
-                to={`/product/${product._id}`}
+                to={`/igicuruzwa/${product._id}`}
                 className="p-2 rounded-full bg-white"
               >
                 <Icon
@@ -90,16 +93,16 @@ const ProductCard = ({ product }) => {
               </Link>
             </div>
           </div>
-          <Link to={`/product/${product._id}`}>
+          <Link to={`/igicuruzwa/${product._id}`}>
             <h1 className="font-semibold">{product.name}</h1>
             <div className="flex gap-2">
               <p className="text-primary">{product.priceAfterDiscount}frw</p>
               <p className="text-gray-80 line-through">{product.price}frw</p>
             </div>
-            <div className="flex gap-2 items-center">
+            {/* <div className="flex gap-2 items-center">
               <StarRating starCount={product.averageRating} />
               <p className="text-gray-30">({product.ratings.length})</p>
-            </div>
+            </div> */}
           </Link>
         </div>
       </div>

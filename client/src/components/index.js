@@ -11,7 +11,11 @@ import Heading from "./Heading";
 import ProductsList from "./ProductsList";
 import Team from "./Team";
 import Accordion from "./Accordion";
-import OrderModal from "./OrderModal";
+import OrderModal1 from "./OrderModal";
+import OrderModal2 from "./OrderModal2";
+import CategoriesCard from "./CategoriesCard";
+import Profile from "./Profile";
+import ProfileDropdown from "./ProfileDropdown";
 
 export {
     Navbar,
@@ -27,5 +31,9 @@ export {
     ProductsList,
     Team,
     Accordion,
-    OrderModal
+    OrderModal1,
+    OrderModal2,
+    CategoriesCard,
+    Profile,
+    ProfileDropdown
 }

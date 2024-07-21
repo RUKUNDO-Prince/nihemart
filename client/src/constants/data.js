@@ -1,60 +1,68 @@
-import { usa, spain, france, rwanda, korea, apple, nike, iphone, shoes, computer, headphones, camera, phone, airpods, material, bag, caseB, computer2, coat, gamepad, kit, phone2, woman, perfume, ps, speakers, main, other1, other2, other3, other4, team1, team2, team3, team4, likes1, likes2, likes3, likes4 } from "../assets";
+import { usa, rwanda, apple, team1, team2, team3, team4, likes1, likes2, likes3, likes4, img1, img2, img3, img5, imiringa, amasaha, rugo, abana, siporo, ibinyabiziga, ibikapu, ubwiza, imisatsi, ikoranabuhanga, ubuzima, imyambaro, ibindi } from "../assets";
 
 export const categories = [
     {
-        name: "Fashion",
-        icon: ""
+        name: "Imiringa",
+        icon: imiringa
     },
     {
-        name: "Electronics",
-        icon: ""
+        name: "Amasaha",
+        icon: amasaha
     },
     {
-        name: "Home & Lifestyle",
-        icon: ""
+        name: "Ibikoresho byo mu rugo",
+        icon: rugo
     },
     {
-        name: "Medicine",
-        icon: ""
+        name: "Abana",
+        icon: abana
     },
     {
-        name: "Sports & Outdoors",
-        icon: ""
+        name: "Ibikoresho bya siporo",
+        icon: siporo
     },
     {
-        name: "Babies' Toys",
-        icon: ""
+        name: "Ibikoresho by'ibinyabiziga",
+        icon: ibinyabiziga
     },
     {
-        name: "Groceries & Pets",
-        icon: ""
+        name: "Ibikapu",
+        icon: ibikapu
     },
     {
-        name: "Health & Beauties",
-        icon: ""
+        name: "Ubwiza",
+        icon: ubwiza
+    },
+    {
+        name: "Imisatsi",
+        icon: imisatsi
+    },
+    {
+        name: "Ikoranabuhanga",
+        icon: ikoranabuhanga
+    },
+    {
+        name: "Ubuzima",
+        icon: ubuzima
+    },
+    {
+        name: "Imyambaro",
+        icon: imyambaro
+    },
+    {
+        name: "Ibindi",
+        icon: ibindi
     },
 ];
 
 export const languages = [
     {
         name: "En - US",
-        icon: usa
+        icon: usa,
     },
     {
-        name: "Sp",
-        icon: spain
-    },
-    {
-        name: "Fr",
-        icon: france
-    },
-    {
-        name: "Ki",
-        icon: rwanda
-    },
-    {
-        name: "Ko",
-        icon: korea
+        name: "Kinya",
+        icon: rwanda,
     },
 ];
 
@@ -62,23 +70,23 @@ export const footerEndData = ["Privacy Policy", "Terms and Conditions", "User Ag
 
 export const footerLinks = [
     {
-        title: "Useful Links",
+        title: "Links z'ingenzi",
         links: [
             {
-                text: "Home",
+                text: "Ahabanza",
                 link: '/'
             },
             {
-                text: "About",
-                link: '/about'
+                text: "Tumenye",
+                link: '/tumenye'
             },
             {
-                text: "Contact",
-                link: '/contact'
+                text: "Tuvugishe",
+                link: '/tuvugishe'
             },
             {
-                text: "Help",
-                link: '/help'
+                text: "Ubufasha",
+                link: '/ubufasha'
             },
         ],
     },
@@ -86,19 +94,19 @@ export const footerLinks = [
 
 export const footerActions = [
     {
-        title: "Quick Actions",
+        title: "Ibikorwa byihuse",
         links: [
             {
-                text: "Likes",
-                link: '/likes'
+                text: "Ibyo wakunze",
+                link: '/ibyo-wakunze'
             },
             {
-                text: "Cart",
-                link: '/cart'
+                text: "Agatebo",
+                link: '/agatebo'
             },
             {
-                text: "Order",
-                link: '/order'
+                text: "Tumiza",
+                link: '/tumiza'
             },
         ],
     },
@@ -109,373 +117,30 @@ export const homeSlider = [
         icon: apple,
         name: "iPhone 14 series",
         heading: "Up to 10% off voucher",
-        image: iphone
+        image: img1,
+        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
     },
     {
         icon: apple,
         name: "iPhone 14 series test1",
         heading: "Up to 10% off voucher",
-        image: iphone
+        image: img2,
+        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
     },
     {
         icon: apple,
         name: "iPhone 14 series test2",
         heading: "Up to 10% off voucher",
-        image: iphone
+        image: img3,
+        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
     },
     {
         icon: apple,
         name: "iPhone 14 series test3",
         heading: "Up to 10% off voucher",
-        image: iphone
+        image: img5,
+        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
     }
-];
-
-export const categoriesList = [
-    {
-        icon: headphones,
-        name: "Headphones"
-    },
-    {
-        icon: phone,
-        name: "Smartphone"
-    },
-    {
-        icon: camera,
-        name: "Camera"
-    },
-    {
-        icon: computer,
-        name: "Computers"
-    },
-    {
-        icon: airpods,
-        name: "Air-pods"
-    },
-    {
-        icon: material,
-        name: "Home materials"
-    },
-];
-
-export const productsList = [
-    {
-        id: 1,
-        img: coat,
-        name: "The north coat",
-        price: 3600,
-        updatedPrice: 2600,
-        starCount: 5,
-        reviewCount: 65,
-        category: "Fashion",
-        isNew: false
-    },
-    {
-        id: 2,
-        img: bag,
-        name: "Women bags",
-        price: 8389,
-        updatedPrice: 3292,
-        starCount: 4,
-        reviewCount: 89,
-        category: "Fashion",
-        isNew: false
-    },
-    {
-        id: 3,
-        img: kit,
-        name: "Sports wear",
-        price: 4985,
-        updatedPrice: 2234,
-        starCount: 5,
-        reviewCount: 49,
-        category: "Sports",
-        isNew: false
-    },
-    {
-        id: 4,
-        img: coat,
-        name: "The north coat",
-        price: 3984,
-        updatedPrice: 2294,
-        starCount: 5,
-        reviewCount: 84,
-        category: "Fashion",
-        isNew: false
-    },
-    {
-        id: 5,
-        img: phone2,
-        name: "iPhone",
-        price: 8939,
-        updatedPrice: 3323,
-        starCount: 4.3,
-        reviewCount: 44,
-        category: "Smartphones",
-        isNew: true
-    },
-    {
-        id: 6,
-        img: computer2,
-        name: "Lenovo Thinkbook",
-        price: 9499,
-        updatedPrice: 3388,
-        starCount: 2.5,
-        reviewCount: 848,
-        category: "Computers"
-    },
-    {
-        id: 7,
-        img: caseB,
-        name: "Multi-case",
-        price: 1122,
-        updatedPrice: 3939,
-        starCount: 1.7,
-        reviewCount: 33,
-        category: "Materials"
-    },
-    {
-        id: 8,
-        img: gamepad,
-        name: "Gamepad",
-        price: 8485,
-        updatedPrice: 4744,
-        starCount: 3,
-        reviewCount: 854,
-        category: "Gaming"
-    }, 
-    {
-        id: 9,
-        img: coat,
-        name: "The north coat",
-        price: 3600,
-        updatedPrice: 2600,
-        starCount: 5,
-        reviewCount: 65,
-        category: "Fashion",
-        isNew: false
-    },
-    {
-        id: 10,
-        img: bag,
-        name: "Women bags",
-        price: 8389,
-        updatedPrice: 3292,
-        starCount: 4,
-        reviewCount: 89,
-        category: "Fashion",
-        isNew: false
-    },
-    {
-        id: 11,
-        img: kit,
-        name: "Sports wear",
-        price: 4985,
-        updatedPrice: 2234,
-        starCount: 5,
-        reviewCount: 49,
-        category: "Sports",
-        isNew: false
-    },
-    {
-        id: 12,
-        img: coat,
-        name: "The north coat",
-        price: 3984,
-        updatedPrice: 2294,
-        starCount: 5,
-        reviewCount: 84,
-        category: "Fashion",
-        isNew: false
-    },
-    {
-        id: 13,
-        img: phone2,
-        name: "iPhone",
-        price: 8939,
-        updatedPrice: 3323,
-        starCount: 4.3,
-        reviewCount: 44,
-        category: "Smartphones",
-        isNew: true
-    },
-    {
-        id: 14,
-        img: computer2,
-        name: "Lenovo Thinkbook",
-        price: 9499,
-        updatedPrice: 3388,
-        starCount: 2.5,
-        reviewCount: 848,
-        category: "Computers"
-    },
-    {
-        id: 15,
-        img: caseB,
-        name: "Multi-case",
-        price: 1122,
-        updatedPrice: 3939,
-        starCount: 1.7,
-        reviewCount: 33,
-        category: "Materials"
-    },
-    {
-        id: 16,
-        img: gamepad,
-        name: "Gamepad",
-        price: 8485,
-        updatedPrice: 4744,
-        starCount: 3,
-        reviewCount: 854,
-        category: "Gaming"
-    }, 
-    {
-        id: 17,
-        img: coat,
-        name: "The north coat",
-        price: 3600,
-        updatedPrice: 2600,
-        starCount: 5,
-        reviewCount: 65,
-        category: "Fashion",
-        isNew: false
-    },
-    {
-        id: 18,
-        img: bag,
-        name: "Women bags",
-        price: 8389,
-        updatedPrice: 3292,
-        starCount: 4,
-        reviewCount: 89,
-        category: "Fashion",
-        isNew: false
-    },
-    {
-        id: 19,
-        img: kit,
-        name: "Sports wear",
-        price: 4985,
-        updatedPrice: 2234,
-        starCount: 5,
-        reviewCount: 49,
-        category: "Sports",
-        isNew: false
-    },
-    {
-        id: 20,
-        img: coat,
-        name: "The north coat",
-        price: 3984,
-        updatedPrice: 2294,
-        starCount: 5,
-        reviewCount: 84,
-        category: "Fashion",
-        isNew: false
-    },
-    {
-        id: 21,
-        img: phone2,
-        name: "iPhone",
-        price: 8939,
-        updatedPrice: 3323,
-        starCount: 4.3,
-        reviewCount: 44,
-        category: "Smartphones",
-        isNew: true
-    },
-    {
-        id: 22,
-        img: computer2,
-        name: "Lenovo Thinkbook",
-        price: 9499,
-        updatedPrice: 3388,
-        starCount: 2.5,
-        reviewCount: 848,
-        category: "Computers"
-    },
-    {
-        id: 23,
-        img: caseB,
-        name: "Multi-case",
-        price: 1122,
-        updatedPrice: 3939,
-        starCount: 1.7,
-        reviewCount: 33,
-        category: "Materials"
-    },
-    {
-        id: 24,
-        img: gamepad,
-        name: "Gamepad",
-        price: 8485,
-        updatedPrice: 4744,
-        starCount: 3,
-        reviewCount: 854,
-        category: "Gaming"
-    }, 
-];
-
-export const singleProduct = [
-    {
-        id: 1,
-        name: "Havic HV G-92 Gamepad",
-        desc: "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
-        imgs: [main, other2, other3, other4],
-        price: 1122344,
-        updatedPrice: 84849495,
-        starCount: 4.5,
-        reviewCount: 8485,
-        isAvailable: true,
-        category: "Gaming",
-    },
-    {
-        id: 2,
-        name: "Havic HV G-92 Gamepad",
-        desc: "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
-        imgs: [main, other2, other3, other4],
-        price: 1122344,
-        updatedPrice: 84849495,
-        starCount: 4.5,
-        reviewCount: 8485,
-        isAvailable: true,
-        category: "Gaming",
-    },
-    {
-        id: 3,
-        name: "Havic HV G-92 Gamepad",
-        desc: "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
-        imgs: [main, other2, other3, other4],
-        price: 1122344,
-        updatedPrice: 84849495,
-        starCount: 4.5,
-        reviewCount: 8485,
-        isAvailable: true,
-        category: "Gaming",
-    }
-];
-
-export const arrivals = [
-    {
-        img: ps,
-        name: "PlayStation 5",
-        text: "Black and White version of the PS5 coming out on sale."
-    },
-    {
-        img: woman,
-        name: "Women’s Collections",
-        text: "Featured woman collections that give you another vibe."
-    },
-    {
-        img: speakers,
-        name: "Speakers",
-        text: "Amazon wireless speakers"
-    },
-    {
-        img: perfume,
-        name: "Perfume",
-        text: "GUCCI INTENSE OUD EDP"
-    },
 ];
 
 export const team = [
@@ -503,23 +168,23 @@ export const team = [
 
 export const faqs = [
     {
-        question: "What is Nihe Mart ?",
+        question: "Nihemart ni iki?",
         answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
     },
     {
-        question: "What can Nihe Mart help you with ? ",
+        question: "Nihemart idufasha iki? ",
         answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
     },
     {
-        question: "How can i shop from Nihe Mart ?",
+        question: "Ni gute nagurira kuri Nihemart?",
         answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
     },
     {
-        question: "How many products sold on Nihe Mart ?",
+        question: "Ni ibicuruzwa bingana iki bigurishirizwa kuri Nihemart?",
         answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
     },
     {
-        question: "Can you make money on Nihe Mart ?",
+        question: "Ese wakorera amafaranga kuri Nihemart?",
         answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
     },
 ];

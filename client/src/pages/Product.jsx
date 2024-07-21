@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa6";
-import { delivery, whatsapp, circle } from "../assets";
+import { delivery, whatsapp, circle, cart } from "../assets";
 import { SubHeading } from "../components";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import useProductStore from "../store/productStore";
 import { api } from "../config/axiosInstance";
 import { StarRating } from "../components/ProductCard";
 import ProductListComp from "../components/ProductListComp";
-
+import { IoBagCheckOutline } from "react-icons/io5";
 const Product = () => {
   const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(null);
   const { getProductById, fetchProducts } = useProductStore();
   const [currentPrice,setCurrentPrice] = useState(0)
 
   const params = useParams();
   const selectedProductId = params.id;
+  const navigate = useNavigate();
 
   const returnSelectedProduct = async () => {
     const productData = await getProductById(selectedProductId);
@@ -23,12 +25,28 @@ const Product = () => {
     setCurrentPrice(product?.priceAfterDiscount);
     setSelectedImage(productData.photos[0]);
   };
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     returnSelectedProduct();
     fetchProducts();
   }, [selectedProductId]);
 
+  const handleOrderNowClick = () => {
+    navigate(`/tumiza/${selectedProductId}`);
+  };
+
+  const handleNavigateToHelp = () => {
+    navigate("/ubufasha");
+  };
+
+  const incrementQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  const decrementQuantity = () => {
+    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  };
   return (
     <div className=" px-5 md:px-10">
       {product ? (
@@ -68,12 +86,12 @@ const Product = () => {
               <div className="flex flex-col gap-3 lg:w-1/2 px-5">
                 <h1 className="text-[24px] font-semibold">{product.name}</h1>
                 <div className="flex gap-3 items-center">
-                  <StarRating starCount={product.averageRating} />
-                  <p className="text-gray-90">({product.ratings?.length})</p> |
+                  {/* <StarRating starCount={product.averageRating} />
+                  <p className="text-gray-90">({product.ratings?.length})</p> | */}
                   <p className="text-[#00FF66]">
                     {product.quantity
-                      ? ` ${product.quantity} In Stock`
-                      : "Waiting for more"}
+                      ? ` ${product.quantity} muri stock`
+                      : "dutegereje ibindi"}
                   </p>
                 </div>
                 <p className="text-primary font-semibold text-[24px] flex items-center gap-3">
@@ -82,12 +100,10 @@ const Product = () => {
                     {product.price} frw
                   </span>
                 </p>
-                <p className="text-black text-[16px]">{product.description}</p>
                 <hr />
-                
                 <div className="flex gap-2">
                   <p className="font-semibold text-[24px] flex items-center gap-3">
-                    Size:
+                    Ingano:
                   </p>
                   {product?.size?.map((size, idx) => (
                     <button onClick={()=>setCurrentPrice(size.price)} key={idx} className={`text-sm font-normal px-2 outline-none bg-gray-200 rounded-xl border ${currentPrice === size.price ?"border-primary":"border-transparent"}`}>
@@ -98,32 +114,58 @@ const Product = () => {
 
                 <div className="flex gap-5">
                   <div className="w-[100px] md:min-w-[150px] px-[10px] border-[1px] border-gray-90 rounded-md flex justify-between items-center">
-                    <FaMinus className="" />
-                    <p>2</p>
-                    <FaPlus />
+                    <div
+                      className="flex items-center gap-2 justify-between"
+                      onClick={decrementQuantity}
+                    >
+                      <FaMinus className="cursor-pointer" />
+                      <div className="h-[40px] w-[0.5px] bg-black"></div>
+                    </div>
+                    <p>{quantity}</p>
+                    <div
+                      className="flex items-center gap-2 justify-between"
+                      onClick={incrementQuantity}
+                    >
+                      <div className="h-[40px] w-[0.5px] bg-black"></div>
+                      <FaPlus className="cursor-pointer" />
+                    </div>
                   </div>
-                  <button className="bg-primary px-[30px] py-[10px] rounded-md hover:bg-opacity-[90%] text-white">
-                    Add To Cart
+                  <button className="bg-primary w-[27%] px-2 py-[10px] rounded-md hover:bg-opacity-[60%] transition-all duration-600 text-white flex justify-between items-start">
+                    <img src={cart} alt="" />
+                    Shyira mu gatebo
                   </button>
                 </div>
                 <div className="border-[2px] border-gray-80 rounded-lg ">
-                  <div className="m-[20px]">
-                    <div className="flex items-center gap-3">
-                      <img src={delivery} alt="delivery-icon" />
-                      <p>Order</p>
+                  <div className="m-[20px] flex justify-between">
+                    <div className="">
+                      <img src={delivery} alt="icon" />
+                      <div>
+                        <p>
+                          Niba ukunze iki gicuruzwa ukaba ushaka kugitumiza kanda aha →
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-3 bg-[#00FF38] rounded-lg w-fit px-[10px] py-[10px]">
-                      <img src={whatsapp} alt="" />
-                      <button className="text-white">Whatsapp</button>
+                    <div
+                      className="flex items-center gap-3 bg-blue3 rounded-lg px-[20px] h-fit py-[10px] my-auto hover:bg-opacity-[70%] cursor-pointer"
+                      onClick={handleOrderNowClick}
+                    >
+                      <IoBagCheckOutline className="text-white" size={30} />
+                      <button className="text-white">Gura</button>
                     </div>
                   </div>
                   <hr className="bg-gray-90 h-[2px]" />
                   <div className="m-[20px]">
                     <img src={circle} alt="icon" />
                     <div>
-                      <h1>Return Delivery</h1>
-                      <p>
-                        Free 24 hours Delivery Returns. <span>Details</span>
+                      <h1>Igihe wasubizwa amafaranga</h1>
+                      <p className="flex flex-col">
+                        Iyo ugize ikibazo kuri order yawe utubwira mbere y'amasaha 24 tukayagusubiza ukishyura transport.{" "}
+                        <span
+                          className="hover:underline text-gray-60"
+                          onClick={handleNavigateToHelp}
+                        >
+                          Kumenya byinshi
+                        </span>
                       </p>
                     </div>
                   </div>
@@ -137,9 +179,13 @@ const Product = () => {
           <h2>Loading...</h2>
         </div>
       )}
+      <div className="my-2">
+        <h1 className="font-semibold font-poppins text-2xl">Ubusobanuro bw'igicuruzwa</h1>
+        <p className="text-black text-[16px]">{product.description}</p>
+      </div>
       <div className="my-[20px]">
-        <SubHeading title="Relate Items" />
-        <ProductListComp maxProducts={5} selectedId={selectedProductId} />
+        <SubHeading title="Ibindi byerekeranye" />
+        <ProductListComp maxProducts={4} selectedId={selectedProductId} />
       </div>
     </div>
   );
