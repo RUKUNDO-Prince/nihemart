@@ -5,7 +5,13 @@ const addToCart = async (req, res) => {
   try {
     const { productId } = req.params;
     const { _id: userId } = req.user;
+
+    console.log(userId);
+    if (!userId) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
     const product = await Product.findById(productId);
+    console.log(product);
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
@@ -15,6 +21,7 @@ const addToCart = async (req, res) => {
         user: userId,
         items: [],
       });
+    } else {
     }
     const cartItem = cart.items.find((item) => item.product.equals(productId));
     if (cartItem) {
@@ -26,7 +33,7 @@ const addToCart = async (req, res) => {
         name: product.name,
         price: product.price,
         quantity: 1,
-        photo: product.photo,
+        photos: product.photos[0],
         subtotal: product.price,
       });
     }
