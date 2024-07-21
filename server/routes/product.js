@@ -14,7 +14,7 @@ const { adminMiddleware } = require("../middleware/adminMiddleware");
 productRouter.post(
   "/addProduct",
   adminMiddleware,
-  upload.array("files", 5),
+  upload.array("files", 10),
   addProduct
 );
 productRouter.post("/:productId/like", authenticate, likeProduct);
