@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const cartSchema = new mongoose.Schema({
+const itemSchema = new mongoose.Schema({
   photos: [
     {
       type: String,
@@ -18,14 +18,27 @@ const cartSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  product: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product',
+    required: true,
+  },
 });
 
-cartSchema.virtual("subtotal").get(function () {
+itemSchema.virtual("subtotal").get(function () {
   return this.price * this.quantity;
 });
 
-cartSchema.virtual("photo").get(function () {
+itemSchema.virtual("photo").get(function () {
   return this.photos && this.photos.length > 0 ? this.photos[0] : null;
+});
+
+const cartSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  items: [itemSchema],
 });
 
 module.exports = mongoose.model("Cart", cartSchema);

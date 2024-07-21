@@ -1,17 +1,18 @@
 import { create } from "zustand";
 import axios from "axios";
+import { authorizedApi } from "../config/axiosInstance";
+import { toast } from "react-toastify";
 
 const useCartStore = create((set) => ({
   cartItems: [],
   isLoading: false,
   error: null,
 
-  // Fetch cart items for the user
-  fetchCartItems: async (userId) => {
+  fetchCartItems: async () => {
     // You might need a user ID to fetch the user's cart
     set({ isLoading: true, error: null });
     try {
-      const response = await axios.get(`/api/cart/${userId}`); // Replace with your actual API endpoint
+      const response = await authorizedApi.get("/cart/cart");
       set({ cartItems: response.data, isLoading: false });
     } catch (error) {
       set({ error: error.message, isLoading: false });
@@ -19,16 +20,18 @@ const useCartStore = create((set) => ({
   },
 
   // Add item to the cart
-  addToCart: async (product) => {
+  addToCart: async (productId) => {
     set({ isLoading: true, error: null });
     try {
-      const response = await axios.post("/api/cart", { productId: product.id }); // Replace with your actual API endpoint
+      const response = await authorizedApi.post(`/cart/cart/${productId}`); // Replace with your actual API endpoint
       set((state) => ({
-        cartItems: [...state.cartItems, response.data], // Assuming response returns the added item
+        cartItems: [...state.cartItems, response.data],
         isLoading: false,
       }));
+      toast.success("added to cart successfully");
     } catch (error) {
       set({ error: error.message, isLoading: false });
+      toast.error(error.message);
     }
   },
 
@@ -36,7 +39,7 @@ const useCartStore = create((set) => ({
   removeFromCart: async (productId) => {
     set({ isLoading: true, error: null });
     try {
-      await axios.delete(`/api/cart/${productId}`); // Replace with your actual API endpoint
+      await authorizedApi.delete(`/cart/delete/${productId}`); // Replace with your actual API endpoint
       set((state) => ({
         cartItems: state.cartItems.filter((item) => item.id !== productId),
         isLoading: false,

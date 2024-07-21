@@ -9,7 +9,7 @@ const authenticate = (req, res, next) => {
   }
   try {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decodedToken.id;
+    req.user = decodedToken;
     next();
   } catch (error) {
     console.error("Authenticate middleware error:", error);

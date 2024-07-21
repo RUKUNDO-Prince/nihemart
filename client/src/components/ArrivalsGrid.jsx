@@ -1,5 +1,5 @@
 import React from "react";
-import { arrivals } from "../constants/data";
+// import { arrivals } from "../constants/data";
 import { woman, ps, speakers, perfume, img6, img4, amasaha, imiringa, siporo, electronic } from "../assets";
 
 const ArrivalsGrid = () => {

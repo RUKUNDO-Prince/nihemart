@@ -8,12 +8,14 @@ import { api } from "../config/axiosInstance";
 import { StarRating } from "../components/ProductCard";
 import ProductListComp from "../components/ProductListComp";
 import { IoBagCheckOutline } from "react-icons/io5";
+import useCartStore from "../store/cartStore";
 const Product = () => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(null);
   const { getProductById, fetchProducts } = useProductStore();
-  const [currentPrice,setCurrentPrice] = useState(0)
+  const [currentPrice,setCurrentPrice] = useState(0);
+  const addToCart = useCartStore((state)=>state.addToCart)
 
   const params = useParams();
   const selectedProductId = params.id;
@@ -22,7 +24,7 @@ const Product = () => {
   const returnSelectedProduct = async () => {
     const productData = await getProductById(selectedProductId);
     setProduct(productData);
-    setCurrentPrice(product?.priceAfterDiscount);
+    setCurrentPrice(productData.priceAfterDiscount)
     setSelectedImage(productData.photos[0]);
   };
 
@@ -47,6 +49,10 @@ const Product = () => {
   const decrementQuantity = () => {
     setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
   };
+
+  const handleAddToCart = (productId)=>{
+    addToCart(productId)
+  }
   return (
     <div className=" px-5 md:px-10">
       {product ? (
@@ -130,7 +136,7 @@ const Product = () => {
                       <FaPlus className="cursor-pointer" />
                     </div>
                   </div>
-                  <button className="bg-primary w-[27%] px-2 py-[10px] rounded-md hover:bg-opacity-[60%] transition-all duration-600 text-white flex justify-between items-start">
+                  <button onClick={()=>handleAddToCart(product._id)} className="bg-primary w-[27%] px-2 py-[10px] rounded-md hover:bg-opacity-[60%] transition-all duration-600 text-white flex justify-between items-start">
                     <img src={cart} alt="" />
                     Shyira mu gatebo
                   </button>
