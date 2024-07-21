@@ -1,4 +1,4 @@
-import { usa, spain, france, rwanda, korea, apple, nike, iphone, shoes, computer, headphones, camera, phone, airpods, material, bag, caseB, computer2, coat, gamepad, kit, phone2, woman, perfume, ps, speakers, main, other1, other2, other3, other4, team1, team2, team3, team4, likes1, likes2, likes3, likes4, img1, img2, img3, img4, img5, imiringa, amasaha, rugo, abana, siporo, ibinyabiziga, ibikapu, ubwiza, imisatsi, ikoranabuhanga, ubuzima, imyambaro, ibindi } from "../assets";
+import { usa, rwanda, apple, team1, team2, team3, team4, likes1, likes2, likes3, likes4, img1, img2, img3, img5, imiringa, amasaha, rugo, abana, siporo, ibinyabiziga, ibikapu, ubwiza, imisatsi, ikoranabuhanga, ubuzima, imyambaro, ibindi } from "../assets";
 
 export const categories = [
     {
