@@ -84,6 +84,7 @@ const Product = () => {
                 </p>
                 <p className="text-black text-[16px]">{product.description}</p>
                 <hr />
+                
                 <div className="flex gap-2">
                   <p className="font-semibold text-[24px] flex items-center gap-3">
                     Size:
