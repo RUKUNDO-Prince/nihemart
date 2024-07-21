@@ -13,6 +13,7 @@ const Product = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(null);
   const { getProductById, fetchProducts } = useProductStore();
+  const [currentPrice,setCurrentPrice] = useState(0)
 
   const params = useParams();
   const selectedProductId = params.id;
@@ -21,6 +22,7 @@ const Product = () => {
   const returnSelectedProduct = async () => {
     const productData = await getProductById(selectedProductId);
     setProduct(productData);
+    setCurrentPrice(product?.priceAfterDiscount);
     setSelectedImage(productData.photos[0]);
   };
 
@@ -57,7 +59,7 @@ const Product = () => {
             <div className="flex flex-col lg:flex-row justify-between md:gap-5">
               {/* images container */}
               <div className="flex lg:w-1/2 flex-col md:flex-row">
-                <div className=" md:min-w-[100px] w-full md:w-[15%] min-h-full flex gap-5 flex-row md:flex-col justify-between md:justify-start my-[10px] overflow-x-auto no-scrollbar ">
+                <div className=" md:min-w-[100px] w-full md:w-[15%] md:h-[560px] flex gap-5 flex-row md:flex-col justify-between md:justify-start my-[10px] overflow-x-auto no-scrollbar ">
                   {product?.photos?.map((img, index) => (
                     <img
                       className={`bg-gray-90 bg-opacity-[30%] p-[20px] hover:bg-opacity-[20%] w-[150px] md:w-full ${
@@ -93,20 +95,23 @@ const Product = () => {
                   </p>
                 </div>
                 <p className="text-primary font-semibold text-[24px] flex items-center gap-3">
-                  {product.priceAfterDiscount} frw{" "}
+                  {currentPrice} frw{" "}
                   <span className="text-gray-90 line-through text-lg">
                     {product.price} frw
                   </span>
                 </p>
                 <hr />
-                <p className="font-semibold text-[24px] flex items-center gap-3">
-                  Ingano:
+                <div className="flex gap-2">
+                  <p className="font-semibold text-[24px] flex items-center gap-3">
+                    Ingano:
+                  </p>
                   {product?.size?.map((size, idx) => (
-                    <span key={idx} className="text-md font-normal">
-                      {size}
-                    </span>
+                    <button onClick={()=>setCurrentPrice(size.price)} key={idx} className={`text-sm font-normal px-2 outline-none bg-gray-200 rounded-xl border ${currentPrice === size.price ?"border-primary":"border-transparent"}`}>
+                      {size.size}
+                    </button> 
                   ))}
-                </p>
+                </div>
+
                 <div className="flex gap-5">
                   <div className="w-[100px] md:min-w-[150px] px-[10px] border-[1px] border-gray-90 rounded-md flex justify-between items-center">
                     <div

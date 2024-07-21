@@ -9,13 +9,15 @@ import useProductStore from "../store/productStore";
 import * as Yup from "yup";
 import { categories } from "../constants/data";
 
+const productSizeSchema = Yup.object().shape({
+  size: Yup.string().required("Size is required"),
+  price: Yup.number().positive("Price must be a positive number"),
+});
+
 const productSchema = Yup.object({
   productName: Yup.string().required("please Enter the product name"),
   productDesc: Yup.string().required("please Enter the product description"),
-  productSize: Yup.array()
-    .of(Yup.string().required("Size is required"))
-    .min(1, "At least one size must be selected")
-    .required("Please enter the product size"),
+  productSize: Yup.array().of(productSizeSchema),
   gender: Yup.array()
     .of(Yup.string().required("please enter the product gender"))
     .min(1, "select one gender"),
@@ -35,6 +37,7 @@ const Product = () => {
 
   // image selection functionality
   const [images, setImages] = useState([]);
+  const [allowVariations, setAllowVariations] = useState(true);
   const [selectedImage, setSelectedImage] = useState(0);
   const [filess, setFiles] = useState([]);
   const [discountType, setDiscountType] = useState("percentage");
@@ -79,6 +82,35 @@ const Product = () => {
   const navigate = useNavigate();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
+  // adding size
+  const setSize = (values, setFieldValue, sizeToAdd) => {
+    const index = values.productSize.findIndex(
+      (item) => item.size === sizeToAdd
+    );
+
+    if (index !== -1) {
+      // Size exists, remove it
+      setFieldValue(
+        "productSize",
+        values.productSize.filter((_, i) => i !== index)
+      );
+    } else {
+      // Size does not exist, add it
+      setFieldValue("productSize", [
+        ...values.productSize,
+        { size: sizeToAdd, price: "" },
+      ]);
+    }
+  };
+
+  // adding price to the size
+  const setPrice = (values, setFieldValue, sizeToUpdate, newPrice) => {
+    const updatedProductSize = values.productSize.map((item) =>
+      item.size === sizeToUpdate ? { ...item, price: newPrice } : item
+    );
+    setFieldValue("productSize", updatedProductSize);
+  };
+
   const handleProductSubmit = async (values) => {
     const {
       productName,
@@ -92,8 +124,10 @@ const Product = () => {
       discount,
     } = values;
 
+    console.log(values);
+
     // checking if the files have been selected
-    if (filess.length > 0 && filess.length < 6) {
+    if (filess.length > 0 && filess.length <= 10) {
       await addProduct({
         productName,
         productDesc,
@@ -126,7 +160,10 @@ const Product = () => {
           ProductCategory: "",
           ProductSubcategory: "",
         }}
-        onSubmit={(values) => handleProductSubmit(values)}
+        onSubmit={(values) => {
+          console.log(values);
+          handleProductSubmit(values);
+        }}
         validationSchema={productSchema}
       >
         {({ handleSubmit, handleChange, setFieldValue, values }) => (
@@ -153,6 +190,15 @@ const Product = () => {
                   </div>
                 </div>
                 <div>
+                  <div className="flex gap-2">
+                    <input
+                      type="checkbox"
+                      name="noVariation"
+                      onChange={() => setAllowVariations((prev) => !prev)}
+                      checked={allowVariations}
+                    />
+                    <label>Allow Variation</label>
+                  </div>
                   <div className="flex justify-between gap-5 my-4">
                     <div className="bg-gray-90 bg-opacity-[20%] w-[60%] p-5 rounded-lg">
                       <h1 className="font-lato font-bold text-[20px]">
@@ -201,31 +247,19 @@ const Product = () => {
                         </div>
                       </div>
                       <div className="flex justify-between my-5 items-start">
-                        <div className="w-[40%]">
+                        <div className="w-1/2">
                           <h1 className="font-semibold text-[20px]">Size</h1>
                           <p className="text-gray-50">Pick available sizes</p>
                           <ul className="relative flex gap-3">
                             <button
                               type="button"
-                              onClick={() => {
-                                const isSelected =
-                                  values.productSize.includes("extra-small");
-                                if (isSelected) {
-                                  setFieldValue(
-                                    "productSize",
-                                    values.productSize.filter(
-                                      (value) => value !== "extra-small"
-                                    )
-                                  );
-                                } else {
-                                  setFieldValue("productSize", [
-                                    ...values.productSize,
-                                    "extra-small",
-                                  ]);
-                                }
-                              }}
+                              onClick={() =>
+                                setSize(values, setFieldValue, "extra-small")
+                              }
                               className={` ${
-                                values.productSize.includes("extra-small")
+                                values.productSize.findIndex(
+                                  (item) => item.size === "extra-small"
+                                ) !== -1
                                   ? "border-2 border-primary"
                                   : "border-2 border-transparent"
                               } relative w-[40px] h-[40px] flex justify-center items-center hover:bg-opacity-[70%] bg-gray-90 rounded-lg`}
@@ -234,25 +268,13 @@ const Product = () => {
                             </button>
                             <button
                               type="button"
-                              onClick={() => {
-                                const isSelected =
-                                  values.productSize.includes("medium");
-                                if (isSelected) {
-                                  setFieldValue(
-                                    "productSize",
-                                    values.productSize.filter(
-                                      (value) => value !== "medium"
-                                    )
-                                  );
-                                } else {
-                                  setFieldValue("productSize", [
-                                    ...values.productSize,
-                                    "medium",
-                                  ]);
-                                }
-                              }}
+                              onClick={() =>
+                                setSize(values, setFieldValue, "medium")
+                              }
                               className={` ${
-                                values.productSize.includes("medium")
+                                values.productSize.findIndex(
+                                  (item) => item.size === "medium"
+                                ) !== -1
                                   ? "border-2 border-primary"
                                   : "border-2 border-transparent"
                               } w-[40px] h-[40px] flex justify-center items-center hover:bg-opacity-[70%] bg-gray-90 rounded-lg`}
@@ -261,25 +283,13 @@ const Product = () => {
                             </button>
                             <button
                               type="button"
-                              onClick={() => {
-                                const isSelected =
-                                  values.productSize.includes("small");
-                                if (isSelected) {
-                                  setFieldValue(
-                                    "productSize",
-                                    values.productSize.filter(
-                                      (value) => value !== "small"
-                                    )
-                                  );
-                                } else {
-                                  setFieldValue("productSize", [
-                                    ...values.productSize,
-                                    "small",
-                                  ]);
-                                }
-                              }}
+                              onClick={() =>
+                                setSize(values, setFieldValue, "small")
+                              }
                               className={` ${
-                                values.productSize.includes("small")
+                                values.productSize.findIndex(
+                                  (item) => item.size === "small"
+                                ) !== -1
                                   ? "border-2 border-primary"
                                   : "border-2 border-transparent"
                               } w-[40px] h-[40px] flex justify-center items-center hover:bg-opacity-[70%] bg-gray-90 rounded-lg`}
@@ -288,25 +298,13 @@ const Product = () => {
                             </button>
                             <button
                               type="button"
-                              onClick={() => {
-                                const isSelected =
-                                  values.productSize.includes("large");
-                                if (isSelected) {
-                                  setFieldValue(
-                                    "productSize",
-                                    values.productSize.filter(
-                                      (value) => value !== "large"
-                                    )
-                                  );
-                                } else {
-                                  setFieldValue("productSize", [
-                                    ...values.productSize,
-                                    "large",
-                                  ]);
-                                }
-                              }}
+                              onClick={() =>
+                                setSize(values, setFieldValue, "large")
+                              }
                               className={` ${
-                                values.productSize.includes("large")
+                                values.productSize.findIndex(
+                                  (item) => item.size === "large"
+                                ) !== -1
                                   ? "border-2 border-primary"
                                   : "border-2 border-transparent"
                               } w-[40px] h-[40px] flex justify-center items-center hover:bg-opacity-[70%] bg-gray-90 rounded-lg`}
@@ -315,25 +313,13 @@ const Product = () => {
                             </button>
                             <button
                               type="button"
-                              onClick={() => {
-                                const isSelected =
-                                  values.productSize.includes("extra-large");
-                                if (isSelected) {
-                                  setFieldValue(
-                                    "productSize",
-                                    values.productSize.filter(
-                                      (value) => value !== "extra-large"
-                                    )
-                                  );
-                                } else {
-                                  setFieldValue("productSize", [
-                                    ...values.productSize,
-                                    "extra-large",
-                                  ]);
-                                }
-                              }}
+                              onClick={() =>
+                                setSize(values, setFieldValue, "extra-large")
+                              }
                               className={` ${
-                                values.productSize.includes("extra-large")
+                                values.productSize.findIndex(
+                                  (item) => item.size === "extra-large"
+                                ) !== -1
                                   ? "border-2 border-primary"
                                   : "border-2 border-transparent"
                               } w-[40px] h-[40px] flex justify-center items-center hover:bg-opacity-[70%] bg-gray-90 rounded-lg`}
@@ -346,6 +332,116 @@ const Product = () => {
                             component={"div"}
                             className="text-red-500 text-sm"
                           />
+                          <div className="flex flex-col gap-2">
+                            {allowVariations && (
+                              <>
+                                <div className="flex gap-2">
+                                  {values.productSize.findIndex(
+                                    (item) => item.size === "extra-small"
+                                  ) !== -1 && (
+                                    <div className="flex flex-col gap-2 w-1/2">
+                                      <label>extra-small price:</label>
+                                      <input
+                                        type="text"
+                                        placeholder="Enter male's price"
+                                        className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
+                                        onChange={(e) =>
+                                          setPrice(
+                                            values,
+                                            setFieldValue,
+                                            "extra-small",
+                                            e.target.value
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                  )}
+                                  {values.productSize.findIndex(
+                                    (item) => item.size === "medium"
+                                  ) !== -1 && (
+                                    <div className="flex flex-col gap-2 w-1/2">
+                                      <label>medium price:</label>
+                                      <input
+                                        type="text"
+                                        placeholder="Enter male's price"
+                                        className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
+                                        onChange={(e) =>
+                                          setPrice(
+                                            values,
+                                            setFieldValue,
+                                            "medium",
+                                            e.target.value
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                  )}
+                                </div>
+                                <div className="flex gap-2">
+                                  {values.productSize.findIndex(
+                                    (item) => item.size === "small"
+                                  ) !== -1 && (
+                                    <div className="flex flex-col gap-2 w-1/2">
+                                      <label>small price:</label>
+                                      <input
+                                        type="text"
+                                        placeholder="Enter male's price"
+                                        className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
+                                        onChange={(e) =>
+                                          setPrice(
+                                            values,
+                                            setFieldValue,
+                                            "small",
+                                            e.target.value
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                  )}
+                                  {values.productSize.findIndex(
+                                    (item) => item.size === "large"
+                                  ) !== -1 && (
+                                    <div className="flex flex-col gap-2 w-1/2">
+                                      <label>large price:</label>
+                                      <input
+                                        type="text"
+                                        placeholder="Enter male's price"
+                                        className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
+                                        onChange={(e) =>
+                                          setPrice(
+                                            values,
+                                            setFieldValue,
+                                            "large",
+                                            e.target.value
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                  )}
+                                </div>
+                                {values.productSize.findIndex(
+                                  (item) => item.size === "extra-large"
+                                ) !== -1 && (
+                                  <div className="flex flex-col gap-2 w-1/2">
+                                    <label>extra-large price:</label>
+                                    <input
+                                      type="text"
+                                      placeholder="Enter male's price"
+                                      className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
+                                      onChange={(e) =>
+                                        setPrice(
+                                          values,
+                                          setFieldValue,
+                                          "extra-large",
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                )}
+                              </>
+                            )}
+                          </div>
                         </div>
                         <div className="w-[40%]">
                           <h1 className="font-semibold text-[20px]">Gender</h1>
@@ -405,6 +501,30 @@ const Product = () => {
                             component={"div"}
                             className="text-red-500 text-sm"
                           />
+                          <div className="flex flex-col gap-2">
+                            {/* {allowVariations && (
+                              <>
+                                <div className="flex gap-2">
+                                  <label>Male price:</label>
+                                  <input
+                                    type="text"
+                                    placeholder="Enter male's price"
+                                    className="font-poppins ml-3 font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
+                                    onChange={handleChange("malePrice")}
+                                  />
+                                </div>
+                                <div className="flex gap-2">
+                                  <label>female price:</label>
+                                  <input
+                                    type="text"
+                                    placeholder="Enter female's price"
+                                    className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
+                                    onChange={handleChange("femalePrice")}
+                                  />
+                                </div>
+                              </>
+                            )} */}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -458,7 +578,7 @@ const Product = () => {
                             className="hidden"
                             multiple
                           />
-                          {images.length <= 4 ? (
+                          {images.length <= 9 ? (
                             <div
                               onClick={selectFiles}
                               className="border-4 border-dashed border-primary rounded-xl flex items-center justify-center bg-white w-[100px] h-[100px]"

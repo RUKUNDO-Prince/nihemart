@@ -12,11 +12,13 @@ const addProduct = async (req, res) => {
       price,
       quantity,
       category,
-      size,
       gender,
       discountType,
       discount,
     } = req.body;
+
+    const size= JSON.parse(req.body.size);
+    console.log(size);
 
     const photos = Array.isArray(req.files)
       ? req.files.map((file) => "images/" + file.filename)
@@ -34,7 +36,6 @@ const addProduct = async (req, res) => {
       gender,
       discount,
     });
-
     await product.save();
 
     res.status(201).json({ message: "Product added successfully", product });

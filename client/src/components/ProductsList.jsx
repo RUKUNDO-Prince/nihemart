@@ -6,6 +6,7 @@ import useProductStore from "../store/productStore";
 const ProductsList = ({ maxProducts = Infinity }) => {
   const { products, isLoading, error } = useProductStore();
 
+  console.log(products);
   const limitedProducts =
     maxProducts !== Infinity
       ? products?.slice(0, maxProducts)

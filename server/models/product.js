@@ -31,8 +31,14 @@ const productSchema = new Schema({
   },
   size: [
     {
-      type: String,
-      required: true,
+      size: {
+        type: String,
+        required: true,
+      },
+      price: {
+        type: Number,
+        default: 0,
+      },
     },
   ],
   gender: [
@@ -80,6 +86,14 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
+  malePrice: {
+    type: Number,
+    default: 0,
+  },
+  femalePrice: {
+    type: Number,
+    default: 0,
+  },
 });
 
 productSchema.virtual("averageRating").get(function () {
@@ -96,8 +110,8 @@ productSchema.virtual("priceAfterDiscount").get(function () {
     const discountAmount = (this.price * this.discount) / 100;
     return this.price - discountAmount;
   }
-  
-  if (this.discountType === "amount") {
+
+  if (this.discountType === "Amount") {
     return this.price - this.discount;
   }
 });

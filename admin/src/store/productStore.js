@@ -19,6 +19,8 @@ const useProductStore = create((set) => ({
     discount,
     files,
   }) => {
+    
+    console.log(productSize);
     set({ isLoading: true });
     try {
       const formdata = new FormData();
@@ -28,7 +30,7 @@ const useProductStore = create((set) => ({
       formdata.append("price", productPrice);
       formdata.append("quantity", ProductInStock);
       formdata.append("category", ProductCategory);
-      formdata.append("size", productSize);
+      formdata.append("size", JSON.stringify(productSize));
       formdata.append("gender", gender);
       formdata.append("discountType", discountType);
       formdata.append("discount", discount);
