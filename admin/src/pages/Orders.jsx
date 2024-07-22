@@ -73,7 +73,7 @@ const Orders = () => {
                 <td className="px-6 py-4">{item.name}</td>
                 <td className="px-6 py-4">{item.phone}</td>
                 <td className="px-6 py-4">{item.productsOrdered}</td>
-                <td className="px-6 py-4">{item.orderedQuantity}</td>
+                <td className="px-9 py-4">{item.orderedQuantity}</td>
                 <td className="px-6 py-4">{item.price}</td>
                 <td className="px-6 py-4">{item.date}</td>
                 <td className="px-6 py-4">
