@@ -77,6 +77,9 @@ import ubuzima from './categories/ubuzima.png'
 import ubwiza from './categories/ubwiza.png'
 import ibindi from './categories/ibindi.png'
 import profile from './profile.png'
+import product from './products.png'
+import payment from './payment.png'
+import categoriesImg from './categories.png'
 
 export {
     logo,
@@ -157,5 +160,8 @@ export {
     ubwiza,
     ikoranabuhanga,
     ibindi,
-    profile
+    profile,
+    product,
+    payment,
+    categoriesImg
 }

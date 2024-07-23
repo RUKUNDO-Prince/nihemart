@@ -26,7 +26,7 @@ const CarouselCard = ({
             {ProductName}
           </h2>
         </div>
-        <h2 className="text-[28px] md:text-[48px] font-semibold text-[#fafafa] text-center md:text-start">
+        <h2 className="text-[26px] md:text-[44px] font-semibold text-[#fafafa] text-center md:text-start">
           {heading}
         </h2>
         <p className="text-white text-[16px] md:text-[20px] my-5">{desc}</p>
