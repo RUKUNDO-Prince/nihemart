@@ -36,10 +36,10 @@ const Help = () => {
         <p className="text-gray-10 mt-[20px]">
           Shakisha ruguru cyangwa urebe mu ngingo zikurikira kugirango ubone ibisubizo by'ibibazo wibaza
         </p>
-        <div className=" my-[50px] grid xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+        <div className=" my-[50px] grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {helpData.map((item, index) => (
             <div key={index} className=" border-[1px] border-gray-90 rounded-md p-[30px] hover:bg-gray-300 transition-all">
-              <h1 className="font-poppins font-medium text-[22px] m-[20px]">{item.title}</h1>
+              <h1 className="font-poppins font-medium text-[18px] my-[20px]">{item.title}</h1>
               <p className="font-poppins text-[14px] text-gray-30">{item.desc}</p>
             </div>
           ))}

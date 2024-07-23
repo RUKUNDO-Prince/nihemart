@@ -169,58 +169,50 @@ export const team = [
 export const faqs = [
     {
         question: "Nihemart ni iki?",
-        answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
+        answer: "Ni company ikorera online, igurisha ibintu bitandukanye bitaboneka mu Rwanda. Ibi bintu ibigeza kuwabiguze atarinze ava aho ari."
     },
     {
         question: "Nihemart idufasha iki? ",
-        answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
+        answer: "Nihe-mart irakenewe mu buzima bwa buri munsi bw'umunyarwanda wese, kuko idufasha kubona ibicuruzwa twabuze mu Rwanda, tukabibona vuba kandi kuri make."
     },
     {
         question: "Ni gute nagurira kuri Nihemart?",
-        answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
+        answer: "1.Jya ahanditse ibicuruzwa  Jya ahanditse ibicuruzwa byose , cyagwa category, niba bidahagije ukoreshe ishakiro riri hejuru maze ushakishe igicuruzwa ushaka. \n 2. KANDA KURI NAGIKUNZE CYAGWA AGATEBO \n iyo ukanze kuri shyira mugatebo gihita cyijya hejuru ahari ishusho yagatebo, maze niba wakunze nibindi ushaka kubigurira rimwe ukomeza ukanda kuri shyira mugatebo maze bigakomeza kujya hamwe. ARIKO iyo ushaka kugura kimwe gusa, uhita ukanda kukamenyetso ka nagikunze maze ukahita ugura ako kanya utiriwe ubishyira hamwe nibindi."
     },
     {
         question: "Ni ibicuruzwa bingana iki bigurishirizwa kuri Nihemart?",
-        answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
+        answer: ""
     },
     {
-        question: "Ese wakorera amafaranga kuri Nihemart?",
-        answer: "a software that enables the commercial process of buying and selling over the internet,a software that enables the commercial process of buying and selling over the internet"
+        question: "Ni gute nakorana na Nihe-Mart?",
+        answer: "Ufite ibicuruzwa ushaka ko tugucururiza cyangwa ushaka gushora muri nihemart, watwandikira kuri email: nihemart@gmail.com / number: 0792412177"
     },
 ];
 
 export const helpData = [
     {
-        title: "Product help",
-        desc: "if you have any problem with our product like an expired or not working product"
+        title: "TUGIRA IBICURUZWA UTASANGA MU RWANDA",
+        desc: "Ibi bicuruzwa biba biri ku mafaranga make kandi bifite ubuziranenge, iyo unafite icyo ushaka ariko tudafite, uratwandikira tukakubwira niba twazakikubonera kandi iyo tuba twanakibona, dukora ibishoboka byose kikaboneka mugihe gito kandi ku mafaranga make"
     },
     {
-        title: "Order status",
-        desc: "if you have any problem with our product like an expired or not working product"
+        title: "IBYO UGUZE TUBIKUZANIRA AHO URI HOSE MU RWANDA",
+        desc: "Mugukomeza korohereza abakiriya bacu, dufite serivisi ya delivery aho ibyo uguze byose tubikuzanira yaba mu ntara cyangwa se muri kigali. Ibi tubikora muburyo bwihuse kuko nko muri kigali ntiturenza isaha tutarakugezaho ibyo watumye naho mu ntara ho biterwa naho uri."
     },
     {
-        title: "Delivery",
-        desc: "if you have any problem with our product like an expired or not working product"
+        title: "URAGURA UKISHYURA NYUMA UMAZE KUBONA IBYO WATUMYE",
+        desc: "Ntakibazo gihari iyo umaze kugura, tukuzanira ibyo watumye maze ukishyura nyuma umaze kubibona kandi iyo ubibonye ukabona utabikunze, urabidusubiza ukishyura delivery fee gusa"
     },
     {
-        title: "Return",
-        desc: "if you have any problem with our product like an expired or not working product"
+        title: "DUFITE CATEGORY ZOSE ZIBICURUZWA",
+        desc: "Iby'abana, amasaha, imikufe, ubwiza, imitako, ikoranabuhanga, imisatsi, ibikoresho by'imodoka n'ibindi byinshi…"
     },
     {
-        title: "Product help",
-        desc: "if you have any problem with our product like an expired or not working product"
+        title: "Return funds",
+        desc: ""
     },
     {
-        title: "Order status",
-        desc: "if you have any problem with our product like an expired or not working product"
-    },
-    {
-        title: "Delivery",
-        desc: "if you have any problem with our product like an expired or not working product"
-    },
-    {
-        title: "Return",
-        desc: "if you have any problem with our product like an expired or not working product"
+        title: "Products quality",
+        desc: ""
     },
 ];
 
