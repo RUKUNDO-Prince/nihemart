@@ -11,7 +11,7 @@ const CarouselCard = ({
   desc
 }) => {
   return (
-    <div className="flex flex-col md:flex-row h-full px-5 gap-5 md:justify-between">
+    <div className="flex flex-col md:flex-row h-full px-5 gap-5 md:justify-between mx-9">
       <div className="flex flex-col gap-3 items-center md:items-start py-[50px]">
         {/* product info */}
         <div className="flex items-center gap-5">
