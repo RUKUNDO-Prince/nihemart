@@ -11,7 +11,7 @@ const CarouselCard = ({
   desc
 }) => {
   return (
-    <div className="flex flex-col md:flex-row h-full px-5 gap-5 md:justify-between">
+    <div className="flex flex-col md:flex-row h-full px-5 gap-5 md:justify-between mx-9">
       <div className="flex flex-col gap-3 items-center md:items-start py-[50px]">
         {/* product info */}
         <div className="flex items-center gap-5">
@@ -26,7 +26,7 @@ const CarouselCard = ({
             {ProductName}
           </h2>
         </div>
-        <h2 className="text-[28px] md:text-[48px] font-semibold text-[#fafafa] text-center md:text-start">
+        <h2 className="text-[26px] md:text-[44px] font-semibold text-[#fafafa] text-center md:text-start">
           {heading}
         </h2>
         <p className="text-white text-[16px] md:text-[20px] my-5">{desc}</p>

@@ -1,4 +1,4 @@
-import { usa, rwanda, apple, team1, team2, team3, team4, likes1, likes2, likes3, likes4, img1, img2, img3, img5, imiringa, amasaha, rugo, abana, siporo, ibinyabiziga, ibikapu, ubwiza, imisatsi, ikoranabuhanga, ubuzima, imyambaro, ibindi } from "../assets";
+import { usa, rwanda, apple, team1, team2, team3, team4, likes1, likes2, likes3, likes4, img1, img2, img3, img5, imiringa, amasaha, rugo, abana, siporo, ibinyabiziga, ibikapu, ubwiza, imisatsi, ikoranabuhanga, ubuzima, imyambaro, ibindi, product, deliver, payment, categoriesImg } from "../assets";
 
 export const categories = [
     {
@@ -114,32 +114,32 @@ export const footerActions = [
 
 export const homeSlider = [
     {
-        icon: apple,
-        name: "iPhone 14 series",
-        heading: "Up to 10% off voucher",
+        icon: product,
+        name: "Umukiriya ni UMWAMI",
+        heading: "TUGIRA IBICURUZWA UTASANGA MU RWANDA",
         image: img1,
-        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
+        desc: "Ibi bicuruzwa biba biri ku mafaranga make kandi bifite ubuziranenge, iyo unafite icyo ushaka ariko tudafite, uratwandikira tukakubwira niba twazakikubonera kandi iyo tuba twanakibona."
     },
     {
-        icon: apple,
-        name: "iPhone 14 series test1",
-        heading: "Up to 10% off voucher",
+        icon: deliver,
+        name: "Umukiriya ni UMWAMI",
+        heading: "TUBIKUZANIRA AHO URI HOSE MU RWANDA",
         image: img2,
-        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
+        desc: "Mugukomeza korohereza abakiriya bacu, dufite serivisi ya delivery aho tukugezaho ibyo waguze byose haba mu ntara cyangwa muri kigali. Ibi tubikora byihuse kuko nko muri kigali ntiturenza isaha tutarakugezaho ibyo watumye naho mu ntara ho biterwa naho uri."
     },
     {
-        icon: apple,
-        name: "iPhone 14 series test2",
-        heading: "Up to 10% off voucher",
+        icon: payment,
+        name: "Umukiriya ni UMWAMI",
+        heading: "WISHYURA UMAZE KUBONA IBYO WATUMYE",
         image: img3,
-        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
+        desc: "Ntakibazo gihari iyo umaze kugura, tukuzanira ibyo watumye maze ukishyura nyuma umaze kubibona kandi iyo ubibonye ukabona utabikunze, urabidusubiza ukishyura delivery fee gusa."
     },
     {
-        icon: apple,
-        name: "iPhone 14 series test3",
-        heading: "Up to 10% off voucher",
+        icon: categoriesImg,
+        name: "Umukiriya ni UMWAMI",
+        heading: "DUFITE CATEGORY ZOSE ZIBICURUZWA",
         image: img5,
-        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
+        desc: "Iby'abana, amasaha, imikufe, ubwiza, imitako, ikoranabuhanga, imisatsi, ibikoresho by'imodoka n'ibindi byinshi…"
     }
 ];
 
