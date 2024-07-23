@@ -32,11 +32,10 @@ const About = () => {
           </div>
           <div>
             <h1 className="text-black font-bold text-[30px] text-center md:text-start">
-              Our mission
+              Intego yavu
             </h1>
             <p className="text-[16px] font-poppins text-center md:text-start">
-              To satisfy our customers through the provision of our goods by
-              delivering them to any location fast and secure
+            NIHE-MART ifite intego yo kuba igisubizo cy'ikibaza ngo NIHE nakura igikoresho runaka. Vuba cyane twifuza kuba twaba dufite ibikoresho bigera kuri 70% y'ibiba kw'isi yose, bityo ntihagire umunyarwanda wongera kwifuza ikintu ngo agitumize hanze cyagwa ngo akibure.
             </p>
           </div>
           <div>
