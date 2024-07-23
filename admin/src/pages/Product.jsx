@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import useProductStore from "../store/productStore";
 import * as Yup from "yup";
 import { categories } from "../constants/data";
+import { generateVariations } from "../utils/generateVariations";
 
 const productSizeSchema = Yup.object().shape({
   size: Yup.string().required("Size is required"),
@@ -150,8 +151,13 @@ const Product = () => {
   // Handle adding new attribute
   const addAttribute = () => {
     if (attributeName && attributeValues) {
-      const valuesArray = attributeValues.split(",").map(value => value.trim());
-      setAttributes([...attributes, { name: attributeName, values: valuesArray }]);
+      const valuesArray = attributeValues
+        .split(",")
+        .map((value) => value.trim());
+      setAttributes([
+        ...attributes,
+        { name: attributeName, values: valuesArray },
+      ]);
       setAttributeName("");
       setAttributeValues("");
     } else {
@@ -263,7 +269,9 @@ const Product = () => {
                       </div>
                       <div className="flex justify-between my-5 items-start">
                         <div className="w-full">
-                          <h1 className="font-semibold text-[20px]">Attributes</h1>
+                          <h1 className="font-semibold text-[20px]">
+                            Attributes
+                          </h1>
                           <p className="text-gray-50">Enter attributes</p>
                           <div className="flex justify-between my-2 gap-9">
                             <div className="flex flex-col gap-2 w-[25%]">
@@ -272,7 +280,9 @@ const Product = () => {
                                 type="text"
                                 placeholder="Attribute's name"
                                 value={attributeName}
-                                onChange={(e) => setAttributeName(e.target.value)}
+                                onChange={(e) =>
+                                  setAttributeName(e.target.value)
+                                }
                                 className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-10 rounded-md outline-none"
                               />
                             </div>
@@ -282,7 +292,9 @@ const Product = () => {
                                 type="text"
                                 placeholder="Attribute's values, they should be separated by comma (,)"
                                 value={attributeValues}
-                                onChange={(e) => setAttributeValues(e.target.value)}
+                                onChange={(e) =>
+                                  setAttributeValues(e.target.value)
+                                }
                                 className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-10 rounded-md outline-none"
                               />
                             </div>
@@ -297,7 +309,8 @@ const Product = () => {
                           <div className="mt-4">
                             {attributes.map((attr, idx) => (
                               <div key={idx} className="mb-2">
-                                <strong>{attr.name}:</strong> {attr.values.join(", ")}
+                                <strong>{attr.name}:</strong>{" "}
+                                {attr.values.join(", ")}
                               </div>
                             ))}
                           </div>
@@ -373,74 +386,90 @@ const Product = () => {
               </div>
               <div className="flex justify-between gap-5">
                 <div className="bg-gray-90 bg-opacity-[20%] w-[60%] p-5 rounded-lg">
-                  <h1 className="font-lato font-bold text-[20px]">
-                    Pricing and Stock
-                  </h1>
-                  <div className="flex gap-5 my-2">
-                    <div className="flex flex-col gap-1">
-                      <label>Base Pricing</label>
-                      <input
-                        className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
-                        type="text"
-                        placeholder="Enter the base price"
-                        onChange={handleChange("productPrice")}
-                      />
-                      <ErrorMessage
-                        name="productPrice"
-                        component={"div"}
-                        className="text-red-500 text-sm"
-                      />
-                    </div>
-                    <div className="flex flex-col gap-1">
-                      <label>Stock</label>
-                      <input
-                        className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
-                        type="number"
-                        placeholder="Product In Stock"
-                        onChange={handleChange("ProductInStock")}
-                      />
-                      <ErrorMessage
-                        name="ProductInStock"
-                        component={"div"}
-                        className="text-red-500 text-sm"
-                      />
-                    </div>
+                  <div>
+                    <h1 className="font-lato font-bold text-[20px]">
+                      Pricing and Stock
+                    </h1>
                   </div>
-                  <div className="flex gap-5 my-2">
-                    <div className="flex flex-col gap-1">
-                      <label>Discount</label>
-                      <input
-                        className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
-                        type="text"
-                        placeholder={`${discountType}`}
-                        onChange={handleChange("discount")}
-                      />
-                      <ErrorMessage
-                        name="discount"
-                        component={"div"}
-                        className="text-red-500 text-sm"
-                      />
-                    </div>
-                    <div className="flex flex-col gap-1">
-                      <label>Discount Type</label>
-                      <select
-                        onChange={(e) => {
-                          setDiscountType(e.target.value);
+                  <div className=" flex justify-between">
+                    <div>
+                      <div className="flex gap-5 my-2">
+                        <div className="flex flex-col gap-1">
+                          <label>Base Pricing</label>
+                          <input
+                            className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
+                            type="text"
+                            placeholder="Enter the base price"
+                            onChange={handleChange("productPrice")}
+                          />
+                          <ErrorMessage
+                            name="productPrice"
+                            component={"div"}
+                            className="text-red-500 text-sm"
+                          />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <label>Stock</label>
+                          <input
+                            className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
+                            type="number"
+                            placeholder="Product In Stock"
+                            onChange={handleChange("ProductInStock")}
+                          />
+                          <ErrorMessage
+                            name="ProductInStock"
+                            component={"div"}
+                            className="text-red-500 text-sm"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex gap-5 my-2">
+                        <div className="flex flex-col gap-1">
+                          <label>Discount</label>
+                          <input
+                            className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
+                            type="text"
+                            placeholder={`${discountType}`}
+                            onChange={handleChange("discount")}
+                          />
+                          <ErrorMessage
+                            name="discount"
+                            component={"div"}
+                            className="text-red-500 text-sm"
+                          />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <label>Discount Type</label>
+                          <select
+                            onChange={(e) => {
+                              setDiscountType(e.target.value);
 
-                          setFieldValue("discountType", e.target.value);
-                        }}
-                        name="discountType"
-                        className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-1 h-8 rounded-md outline-none"
-                      >
-                        <option value="">discount Type</option>
-                        <option value="percentage">Percentage</option>
-                        <option value="amount">Amount</option>
-                      </select>
-                      <ErrorMessage
-                        name="discountType"
-                        component={"div"}
-                        className="text-red-500 text-sm"
-                      />
+                              setFieldValue("discountType", e.target.value);
+                            }}
+                            name="discountType"
+                            className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-1 h-8 rounded-md outline-none"
+                          >
+                            <option value="">discount Type</option>
+                            <option value="percentage">Percentage</option>
+                            <option value="amount">Amount</option>
+                          </select>
+                          <ErrorMessage
+                            name="discountType"
+                            component={"div"}
+                            className="text-red-500 text-sm"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="w-[40%]">
+                      <h1>Variations</h1>
+                      <div>
+                        {generateVariations(attributes).map(
+                          (variation, index) => (
+                            <p key={index}>{variation}</p>
+                          )
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>

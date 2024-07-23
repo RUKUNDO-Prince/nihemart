@@ -25,10 +25,10 @@ const OrderKigali = () => {
         </div>
         <div className="my-[20px] flex flex-col gap-3">
           <p className="">
-            👏🏿Murakoze guhitamo kugura iki gicuruzwa, ibyo mwatumije biratwara
-            amasaha 2 kugirango bibagereho
+            👏🏿Ibyo mwatumije biratwara
+            isaha 1 kugirango bibagereho
           </p>
-          <p>📞Turabahamagara kuri telephone mwaduhaye, mube mwiteguye </p>
+          <p>📞Turabahamagara kuri telephone mwaduhaye!</p>
           <p>
             <span className="text-primary text-xl m-2">NB:</span>
             Iyo ugize ikibazo kuri order yawe utubwira mbere yamasaha 24
