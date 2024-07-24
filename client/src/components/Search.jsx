@@ -9,18 +9,22 @@ const Search = ({ search = true }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex items-center justify-between bg-gray-default rounded-md border-gray-10 p-[10px] gap-2 relative">
-      <form action="" className="flex md:gap-5">
-        <Icon icon={"material-symbols-light:search"} className="w-6 h-6" />
+    <div className="flex items-center justify-between bg-gray-default rounded-full border-gray-10 p-1 gap-2 relative">
+      <form action="" className="flex md:gap-5 px-5">
         <input
           type="text"
           name="searchQuery"
-          
           placeholder="shakisha ibicuruzwa"
-          className="bg-transparent outline-none w-full"
+          className="bg-transparent outline-none w-full text-gray-10 text-[18px]"
         />
       </form>
-      <div className="h-[30px] w-[2px] bg-black"></div>
+      <Icon
+        icon={"material-symbols-light:search"}
+        className="bg-primary rounded-full p-2"
+        color="white"
+        fontSize={40}
+      />
+      {/* <div className="h-[30px] w-[2px] bg-black"></div>
       <div className="flex flex-col items-center rounded-lg">
         <button
           className="flex items-center justify-between w-full px-2 duration-300 active:text-gray-60 gap-1"
@@ -50,7 +54,7 @@ const Search = ({ search = true }) => {
             ))}
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
