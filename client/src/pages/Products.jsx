@@ -3,8 +3,8 @@ import { ProductsList, SubHeading } from '../components';
 import { categories } from '../constants/data';
 
 const Products = () => {
-  const [categoryFilter, setCategoryFilter] = useState(''); // Category filter state
-  const [priceRangeFilter, setPriceRangeFilter] = useState([0, Infinity]); // Price range filter state
+  const [categoryFilter, setCategoryFilter] = useState('');
+  const [priceRangeFilter, setPriceRangeFilter] = useState([0, Infinity]);
 
   const handleMinPriceChange = (e) => {
     const minPrice = Number(e.target.value) || 0;
@@ -18,7 +18,6 @@ const Products = () => {
 
   return (
     <div className='p-[50px] flex-1'>
-      {/* Flex container for SubHeading and Filters */}
       <div className="flex justify-between items-center mb-4">
         <SubHeading title="Ibicuruzwa byose" />
         <div className="flex gap-4">
@@ -33,9 +32,7 @@ const Products = () => {
                 <option value={category.name} key={index}>{category.name}</option>
               ))
             }
-            {/* Add more categories as needed */}
           </select>
-
           <input
             type="number"
             placeholder="Min Price"

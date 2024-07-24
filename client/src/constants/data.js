@@ -191,54 +191,59 @@ export const faqs = [
 
 export const helpData = [
     {
-        title: "TUGIRA IBICURUZWA UTASANGA MU RWANDA",
-        desc: "Ibi bicuruzwa biba biri ku mafaranga make kandi bifite ubuziranenge, iyo unafite icyo ushaka ariko tudafite, uratwandikira tukakubwira niba twazakikubonera kandi iyo tuba twanakibona, dukora ibishoboka byose kikaboneka mugihe gito kandi ku mafaranga make"
+        title: "Exclusive Products",
+        desc: "Discover a range of exclusive products that are not available anywhere else. Our curated selection offers unique items at affordable prices, ensuring quality and value. If you can't find what you're looking for, let us know, and we'll do our best to source it for you at competitive prices."
     },
     {
-        title: "IBYO UGUZE TUBIKUZANIRA AHO URI HOSE MU RWANDA",
-        desc: "Mugukomeza korohereza abakiriya bacu, dufite serivisi ya delivery aho ibyo uguze byose tubikuzanira yaba mu ntara cyangwa se muri kigali. Ibi tubikora muburyo bwihuse kuko nko muri kigali ntiturenza isaha tutarakugezaho ibyo watumye naho mu ntara ho biterwa naho uri."
+        title: "Nationwide Delivery",
+        desc: "Enjoy the convenience of our nationwide delivery service. Whether you're in the city or a remote area, we bring your purchases right to your doorstep. We offer fast delivery times, with most orders in Kigali delivered within an hour, and delivery times to other regions depending on location."
     },
     {
-        title: "URAGURA UKISHYURA NYUMA UMAZE KUBONA IBYO WATUMYE",
-        desc: "Ntakibazo gihari iyo umaze kugura, tukuzanira ibyo watumye maze ukishyura nyuma umaze kubibona kandi iyo ubibonye ukabona utabikunze, urabidusubiza ukishyura delivery fee gusa"
+        title: "Pay on Delivery",
+        desc: "Shop with confidence using our pay-on-delivery option. Receive your items, inspect them, and pay only if you're satisfied. If the product doesn't meet your expectations, you can return it at no additional cost, paying only the delivery fee."
     },
     {
-        title: "DUFITE CATEGORY ZOSE ZIBICURUZWA",
-        desc: "Iby'abana, amasaha, imikufe, ubwiza, imitako, ikoranabuhanga, imisatsi, ibikoresho by'imodoka n'ibindi byinshi…"
+        title: "Wide Product Categories",
+        desc: "Explore our extensive range of product categories, including electronics, fashion, beauty, home decor, children's products, and more. Whatever you're looking for, we have a category that covers it, ensuring a one-stop shopping experience."
     },
     {
-        title: "Return funds",
-        desc: ""
+        title: "Easy Returns",
+        desc: "Our easy returns policy ensures that you can shop without worry. If you're not completely satisfied with your purchase, return it within 30 days for a full refund. We make the process simple and hassle-free, so you can shop with peace of mind."
     },
     {
-        title: "Products quality",
-        desc: ""
+        title: "Quality Assurance",
+        desc: "We are committed to providing high-quality products. Our team carefully selects each item, ensuring it meets our strict standards for quality and safety. Shop with confidence knowing that all our products are vetted for quality."
     },
 ];
+
 
 export const likesData = [
     {
         img: likes1,
         name: "Car",
         price: 84845,
-        updatedPrice: 8485883
+        updatedPrice: 8485883,
+        quantity: 6
     },
     {
         img: likes2,
         name: "Camera",
         price: 9844,
-        updatedPrice: 98475
+        updatedPrice: 98475,
+        quantity: 2
     },
     {
         img: likes3,
         name: "Sports Boots",
         price: 8943,
-        updatedPrice: 88432
+        updatedPrice: 88432,
+        quantity: 9
     },
     {
         img: likes4,
         name: "PlayStation",
         price: 2944,
-        updatedPrice: 88445
+        updatedPrice: 88445,
+        quantity: 9
     },
 ];
