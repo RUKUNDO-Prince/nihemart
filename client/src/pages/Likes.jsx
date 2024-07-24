@@ -17,7 +17,7 @@ const Likes = () => {
                 <img src={item.img} className=" object-contain" alt="img" />
                 </div>
                 <Link
-                  to="/order"
+                  to="/tumiza/:id"
                   className="bg-[#808080] flex w-full rounded-b-md p-[10px] justify-center items-center"
                 >
                   <img src={deliver} alt="" />
@@ -40,7 +40,7 @@ const Likes = () => {
           <SubHeading title="Just For You" />
           <Link
             className="bg-blue2 text-white py-[15px] px-[40px] rounded-md hover:bg-opacity-[80%] transition-all"
-            to="/products"
+            to="/ibicuruzwa-byose"
           >
             See All
           </Link>
