@@ -466,7 +466,10 @@ const Product = () => {
                       <div>
                         {generateVariations(attributes).map(
                           (variation, index) => (
-                            <p key={index}>{variation}</p>
+                            <div className="flex justify-between gap-5 my-2">
+                              <p key={index}>{variation}</p>
+                              <input type="text" placeholder="Price" className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none" />
+                            </div>
                           )
                         )}
                       </div>
@@ -490,7 +493,7 @@ const Product = () => {
                           setSubcategories(
                             selectedCategoryObject.subcategories
                           );
-                          setFieldValue("ProductSubcategory", ""); // Reset subcategory when category changes
+                          setFieldValue("ProductSubcategory", "");
                         } else {
                           setSubcategories([]);
                         }
