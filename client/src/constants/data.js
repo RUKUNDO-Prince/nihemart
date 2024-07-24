@@ -3,55 +3,68 @@ import { usa, rwanda, apple, team1, team2, team3, team4, likes1, likes2, likes3,
 export const categories = [
     {
         name: "Imiringa",
-        icon: imiringa
+        icon: imiringa,
+        link: "ibicuruzwa-byose"
     },
     {
         name: "Amasaha",
-        icon: amasaha
+        icon: amasaha,
+        link: "ibicuruzwa-byose"
     },
     {
         name: "Ibikoresho byo mu rugo",
-        icon: rugo
+        icon: rugo,
+        link: "ibicuruzwa-byose"
     },
     {
         name: "Abana",
-        icon: abana
+        icon: abana,
+        link: "ibicuruzwa-byose"
     },
     {
         name: "Ibikoresho bya siporo",
-        icon: siporo
+        icon: siporo,
+        link: "ibicuruzwa-byose"
     },
     {
         name: "Ibikoresho by'ibinyabiziga",
-        icon: ibinyabiziga
+        icon: ibinyabiziga,
+        link: "ibicuruzwa-byose"
     },
     {
         name: "Ibikapu",
-        icon: ibikapu
+        icon: ibikapu,
+        link: "ibicuruzwa-byose"
     },
     {
         name: "Ubwiza",
-        icon: ubwiza
+        icon: ubwiza,
+        link: "ibicuruzwa-byose"
     },
     {
         name: "Imisatsi",
-        icon: imisatsi
+        icon: imisatsi,
+        link: "ibicuruzwa-byose"
     },
     {
         name: "Ikoranabuhanga",
-        icon: ikoranabuhanga
+        icon: ikoranabuhanga,
+        link: "ibicuruzwa-byose"
     },
     {
         name: "Ubuzima",
-        icon: ubuzima
+        icon: ubuzima,
+        link: "ibicuruzwa-byose"
     },
     {
         name: "Imyambaro",
-        icon: imyambaro
+        icon: imyambaro,
+        link: "ibicuruzwa-byose"
     },
     {
         name: "Ibindi",
-        icon: ibindi
+        icon: ibindi,
+        link: "ibicuruzwa-byose"
     },
 ];
 
