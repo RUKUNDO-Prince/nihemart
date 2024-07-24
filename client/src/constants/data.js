@@ -115,28 +115,28 @@ export const footerActions = [
 export const homeSlider = [
     {
         icon: product,
-        name: "Umukiriya ni UMWAMI",
+        name: "Happy Clients, Happy Us",
         heading: "TUGIRA IBICURUZWA UTASANGA MU RWANDA",
         image: img1,
         desc: "Ibi bicuruzwa biba biri ku mafaranga make kandi bifite ubuziranenge, iyo unafite icyo ushaka ariko tudafite, uratwandikira tukakubwira niba twazakikubonera kandi iyo tuba twanakibona."
     },
     {
         icon: deliver,
-        name: "Umukiriya ni UMWAMI",
+        name: "Happy Clients, Happy Us",
         heading: "TUBIKUZANIRA AHO URI HOSE MU RWANDA",
         image: img2,
         desc: "Mugukomeza korohereza abakiriya bacu, dufite serivisi ya delivery aho tukugezaho ibyo waguze byose haba mu ntara cyangwa muri kigali. Ibi tubikora byihuse kuko nko muri kigali ntiturenza isaha tutarakugezaho ibyo watumye naho mu ntara ho biterwa naho uri."
     },
     {
         icon: payment,
-        name: "Umukiriya ni UMWAMI",
+        name: "Happy Clients, Happy Us",
         heading: "WISHYURA UMAZE KUBONA IBYO WATUMYE",
         image: img3,
         desc: "Ntakibazo gihari iyo umaze kugura, tukuzanira ibyo watumye maze ukishyura nyuma umaze kubibona kandi iyo ubibonye ukabona utabikunze, urabidusubiza ukishyura delivery fee gusa."
     },
     {
         icon: categoriesImg,
-        name: "Umukiriya ni UMWAMI",
+        name: "Happy Clients, Happy Us",
         heading: "DUFITE CATEGORY ZOSE ZIBICURUZWA",
         image: img5,
         desc: "Iby'abana, amasaha, imikufe, ubwiza, imitako, ikoranabuhanga, imisatsi, ibikoresho by'imodoka n'ibindi byinshi…"
