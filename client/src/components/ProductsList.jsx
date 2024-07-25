@@ -2,15 +2,19 @@ import React from "react";
 import ProductCard from "./ProductCard";
 import useProductStore from "../store/productStore";
 
-
-const ProductsList = ({ maxProducts = Infinity }) => {
+const ProductsList = ({ visibleProductsCount = Infinity, categoryFilter = '', priceRangeFilter = [0, Infinity] }) => {
   const { products, isLoading, error } = useProductStore();
 
-  console.log(products);
+  const filteredProducts = products
+    ?.filter((product) => 
+      (!categoryFilter || product.category === categoryFilter) &&
+      (product.price >= priceRangeFilter[0] && product.price <= priceRangeFilter[1])
+    );
+
   const limitedProducts =
-    maxProducts !== Infinity
-      ? products?.slice(0, maxProducts)
-      : products;
+    visibleProductsCount !== Infinity
+      ? filteredProducts?.slice(0, visibleProductsCount)
+      : filteredProducts;
 
   return (
     <>

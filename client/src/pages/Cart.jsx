@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { likesData } from "../constants/data";
 import useCartStore from "../store/cartStore";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { cartItems, addToCart, fetchCartItems, removeFromCart } =
@@ -42,23 +43,13 @@ const Cart = () => {
                 <p className="text-[16px]">{item.name}</p>
               </th>
               <td className="px-6 py-4">{item.price}</td>
-              <td className="px-6 py-4">
-                <input
-                  type="number"
-                  className="border-[2px] border-gray-90 w-[15%] rounded-md p-[10px] placeholder:text-black"
-                  placeholder="1"
-                  name=""
-                  id=""
-                />
-              </td>
+              <td className="px-6 py-4">{item.quantity}</td>
               <td className="px-6 py-4">{item.updatedPrice}</td>
             </tr>
           ))}
         </tbody>
       </table>
-      <p className="text-gray-80 m-[20px] flex justify-center">
-        Order through our whatapp to uptade you to our products
-      </p>
+      <Link to="/tumiza" className="bg-blue3 px-5 py-2 md:px-[30px] md:py-[10px] rounded-md text-white hover:bg-blue2 my-5 float-end">Tumiza Ibi Bicuruzwa</Link>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState, useRef } from "react";
 import { anonymous, draft, tick } from "../assets";
 import { useNavigate } from "react-router-dom";
 import { FaPlusCircle } from "react-icons/fa";
@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import useProductStore from "../store/productStore";
 import * as Yup from "yup";
 import { categories } from "../constants/data";
+import { generateVariations } from "../utils/generateVariations";
 
 const productSizeSchema = Yup.object().shape({
   size: Yup.string().required("Size is required"),
@@ -31,7 +32,10 @@ const productSchema = Yup.object({
 });
 
 const Product = () => {
-  const [subcategories, setSubcategories] = useState([]); // State for subcategories
+  const [subcategories, setSubcategories] = useState([]);
+  const [attributes, setAttributes] = useState([]);
+  const [attributeName, setAttributeName] = useState("");
+  const [attributeValues, setAttributeValues] = useState("");
 
   const { addProduct, isLoading } = useProductStore();
 
@@ -53,13 +57,12 @@ const Product = () => {
   };
 
   // selecting files
-
   const onFileSelect = (e) => {
     const files = e.target.files;
     if (files.length === 0) return;
     for (let i = 0; i < files.length; i++) {
       if (files[i].type.split("/")[0] !== "image") continue;
-      if (!images.some((e) => e.name == files[i].name)) {
+      if (!images.some((e) => e.name === files[i].name)) {
         setImages((prevImages) => [
           ...prevImages,
           {
@@ -73,7 +76,6 @@ const Product = () => {
   };
 
   // removing images
-
   const removeImage = (name) => {
     setImages(images.filter((e) => e.name !== name));
     setFiles(filess.filter((e) => e.name !== name));
@@ -139,11 +141,30 @@ const Product = () => {
         discountType,
         discount,
         files: filess,
+        attributes, // Include attributes in the payload
       });
     } else {
       toast.error("missing product images");
     }
   };
+
+  // Handle adding new attribute
+  const addAttribute = () => {
+    if (attributeName && attributeValues) {
+      const valuesArray = attributeValues
+        .split(",")
+        .map((value) => value.trim());
+      setAttributes([
+        ...attributes,
+        { name: attributeName, values: valuesArray },
+      ]);
+      setAttributeName("");
+      setAttributeValues("");
+    } else {
+      toast.error("Please enter both name and values for the attribute.");
+    }
+  };
+
   return (
     <div>
       <Formik
@@ -168,21 +189,21 @@ const Product = () => {
       >
         {({ handleSubmit, handleChange, setFieldValue, values }) => (
           <Form encType="multipart/form-data">
-            <div className="flex-1 m-[30px] flex-col">
+            <div className="flex-1 mx-[10px] my-[20px] md:m-[30px] flex-col">
               <div>
                 <div className="flex justify-between">
-                  <button className="font-poppins font-semibold text-[16px] text-primary flex items-center gap-3">
+                  <button className="font-poppins font-semibold text-[14px] md:text-[16px] text-primary flex items-center gap-1 md:gap-3 w-[40%]">
                     <img src={anonymous} alt="icon" /> Add New Product
                   </button>
-                  <div className="flex gap-5">
-                    <button className="border-2 border-gray-90 text-black p-4 rounded-lg flex items-center hover:bg-gray-90 gap-3 h-12">
+                  <div className="flex gap-2 lg:gap-5 w-[60%] justify-end">
+                    <button className="border-2 border-gray-90 text-black text-[14px] lg:text-[16px] p-2 md:p-4 rounded-lg flex items-center hover:bg-gray-90 gap-1 lg:gap-3 h-12 w-[50%] lg:w-[20%]">
                       <img src={draft} alt="draft" />
                       Save Draft
                     </button>
                     <button
                       type="button"
                       onClick={handleSubmit}
-                      className="bg-blue2 text-white px-5 h-12 rounded-lg flex items-center hover:bg-blue3 gap-3"
+                      className="bg-blue2 text-white px-2 lg:px-4 h-12 rounded-lg flex items-center hover:bg-blue3 gap-1 md:gap-3 text-[14px] lg:text-[16px] w-[60%] lg:w-[25%]"
                     >
                       <img src={tick} alt="tick" />
                       Add Product
@@ -199,8 +220,8 @@ const Product = () => {
                     />
                     <label>Allow Variation</label>
                   </div>
-                  <div className="flex justify-between gap-5 my-4">
-                    <div className="bg-gray-90 bg-opacity-[20%] w-[60%] p-5 rounded-lg">
+                  <div className="flex justify-between gap-5 my-4 flex-col lg:flex-row">
+                    <div className="bg-gray-90 bg-opacity-[20%] lg:w-[60%] w-full p-5 rounded-lg">
                       <h1 className="font-lato font-bold text-[20px]">
                         General Information
                       </h1>
@@ -247,288 +268,56 @@ const Product = () => {
                         </div>
                       </div>
                       <div className="flex justify-between my-5 items-start">
-                        <div className="w-1/2">
-                          <h1 className="font-semibold text-[20px]">Size</h1>
-                          <p className="text-gray-50">Pick available sizes</p>
-                          <ul className="relative flex gap-3">
-                            <button
-                              type="button"
-                              onClick={() =>
-                                setSize(values, setFieldValue, "extra-small")
-                              }
-                              className={` ${
-                                values.productSize.findIndex(
-                                  (item) => item.size === "extra-small"
-                                ) !== -1
-                                  ? "border-2 border-primary"
-                                  : "border-2 border-transparent"
-                              } relative w-[40px] h-[40px] flex justify-center items-center hover:bg-opacity-[70%] bg-gray-90 rounded-lg`}
-                            >
-                              XS
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() =>
-                                setSize(values, setFieldValue, "medium")
-                              }
-                              className={` ${
-                                values.productSize.findIndex(
-                                  (item) => item.size === "medium"
-                                ) !== -1
-                                  ? "border-2 border-primary"
-                                  : "border-2 border-transparent"
-                              } w-[40px] h-[40px] flex justify-center items-center hover:bg-opacity-[70%] bg-gray-90 rounded-lg`}
-                            >
-                              M
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() =>
-                                setSize(values, setFieldValue, "small")
-                              }
-                              className={` ${
-                                values.productSize.findIndex(
-                                  (item) => item.size === "small"
-                                ) !== -1
-                                  ? "border-2 border-primary"
-                                  : "border-2 border-transparent"
-                              } w-[40px] h-[40px] flex justify-center items-center hover:bg-opacity-[70%] bg-gray-90 rounded-lg`}
-                            >
-                              S
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() =>
-                                setSize(values, setFieldValue, "large")
-                              }
-                              className={` ${
-                                values.productSize.findIndex(
-                                  (item) => item.size === "large"
-                                ) !== -1
-                                  ? "border-2 border-primary"
-                                  : "border-2 border-transparent"
-                              } w-[40px] h-[40px] flex justify-center items-center hover:bg-opacity-[70%] bg-gray-90 rounded-lg`}
-                            >
-                              L
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() =>
-                                setSize(values, setFieldValue, "extra-large")
-                              }
-                              className={` ${
-                                values.productSize.findIndex(
-                                  (item) => item.size === "extra-large"
-                                ) !== -1
-                                  ? "border-2 border-primary"
-                                  : "border-2 border-transparent"
-                              } w-[40px] h-[40px] flex justify-center items-center hover:bg-opacity-[70%] bg-gray-90 rounded-lg`}
-                            >
-                              XL
-                            </button>
-                          </ul>
-                          <ErrorMessage
-                            name="productSize"
-                            component={"div"}
-                            className="text-red-500 text-sm"
-                          />
-                          <div className="flex flex-col gap-2">
-                            {allowVariations && (
-                              <>
-                                <div className="flex gap-2">
-                                  {values.productSize.findIndex(
-                                    (item) => item.size === "extra-small"
-                                  ) !== -1 && (
-                                    <div className="flex flex-col gap-2 w-1/2">
-                                      <label>extra-small price:</label>
-                                      <input
-                                        type="text"
-                                        placeholder="Enter male's price"
-                                        className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
-                                        onChange={(e) =>
-                                          setPrice(
-                                            values,
-                                            setFieldValue,
-                                            "extra-small",
-                                            e.target.value
-                                          )
-                                        }
-                                      />
-                                    </div>
-                                  )}
-                                  {values.productSize.findIndex(
-                                    (item) => item.size === "medium"
-                                  ) !== -1 && (
-                                    <div className="flex flex-col gap-2 w-1/2">
-                                      <label>medium price:</label>
-                                      <input
-                                        type="text"
-                                        placeholder="Enter male's price"
-                                        className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
-                                        onChange={(e) =>
-                                          setPrice(
-                                            values,
-                                            setFieldValue,
-                                            "medium",
-                                            e.target.value
-                                          )
-                                        }
-                                      />
-                                    </div>
-                                  )}
-                                </div>
-                                <div className="flex gap-2">
-                                  {values.productSize.findIndex(
-                                    (item) => item.size === "small"
-                                  ) !== -1 && (
-                                    <div className="flex flex-col gap-2 w-1/2">
-                                      <label>small price:</label>
-                                      <input
-                                        type="text"
-                                        placeholder="Enter male's price"
-                                        className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
-                                        onChange={(e) =>
-                                          setPrice(
-                                            values,
-                                            setFieldValue,
-                                            "small",
-                                            e.target.value
-                                          )
-                                        }
-                                      />
-                                    </div>
-                                  )}
-                                  {values.productSize.findIndex(
-                                    (item) => item.size === "large"
-                                  ) !== -1 && (
-                                    <div className="flex flex-col gap-2 w-1/2">
-                                      <label>large price:</label>
-                                      <input
-                                        type="text"
-                                        placeholder="Enter male's price"
-                                        className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
-                                        onChange={(e) =>
-                                          setPrice(
-                                            values,
-                                            setFieldValue,
-                                            "large",
-                                            e.target.value
-                                          )
-                                        }
-                                      />
-                                    </div>
-                                  )}
-                                </div>
-                                {values.productSize.findIndex(
-                                  (item) => item.size === "extra-large"
-                                ) !== -1 && (
-                                  <div className="flex flex-col gap-2 w-1/2">
-                                    <label>extra-large price:</label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter male's price"
-                                      className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
-                                      onChange={(e) =>
-                                        setPrice(
-                                          values,
-                                          setFieldValue,
-                                          "extra-large",
-                                          e.target.value
-                                        )
-                                      }
-                                    />
-                                  </div>
-                                )}
-                              </>
-                            )}
-                          </div>
-                        </div>
-                        <div className="w-[40%]">
-                          <h1 className="font-semibold text-[20px]">Gender</h1>
-                          <p className="text-gray-50">Pick available gender</p>
-                          <div className="flex my-2 gap-9">
-                            <div className="flex gap-2">
+                        <div className="w-full">
+                          <h1 className="font-semibold text-[20px]">
+                            Attributes
+                          </h1>
+                          <p className="text-gray-50">Enter attributes</p>
+                          <div className="flex justify-between my-2 gap-9">
+                            <div className="flex flex-col gap-2 w-[25%]">
+                              <label>Name</label>
                               <input
-                                type="checkbox"
-                                name="Men"
-                                onChange={() => {
-                                  const isSelected =
-                                    values.gender.includes("Men");
-                                  if (isSelected) {
-                                    setFieldValue("gender", []);
-                                  } else {
-                                    setFieldValue("gender", ["Men"]);
-                                  }
-                                }}
+                                type="text"
+                                placeholder="Attribute's name"
+                                value={attributeName}
+                                onChange={(e) =>
+                                  setAttributeName(e.target.value)
+                                }
+                                className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-10 rounded-md outline-none"
                               />
-                              <label>Men</label>
                             </div>
-                            <div className="flex gap-2">
+                            <div className="flex flex-col gap-2 w-[70%]">
+                              <label>Values</label>
                               <input
-                                type="checkbox"
-                                name="Women"
-                                onChange={() => {
-                                  const isSelected =
-                                    values.gender.includes("Women");
-                                  if (isSelected) {
-                                    setFieldValue("gender", []);
-                                  } else {
-                                    setFieldValue("gender", ["Women"]);
-                                  }
-                                }}
+                                type="text"
+                                placeholder="Attribute's values, they should be separated by comma (,)"
+                                value={attributeValues}
+                                onChange={(e) =>
+                                  setAttributeValues(e.target.value)
+                                }
+                                className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-10 rounded-md outline-none"
                               />
-                              <label>Women</label>
-                            </div>
-                            <div className="flex gap-2">
-                              <input
-                                type="checkbox"
-                                name="Unisex"
-                                onChange={() => {
-                                  const isSelected =
-                                    values.gender.includes("unisex");
-                                  if (isSelected) {
-                                    setFieldValue("gender", []);
-                                  } else {
-                                    setFieldValue("gender", ["unisex"]);
-                                  }
-                                }}
-                              />
-                              <label>Unisex</label>
                             </div>
                           </div>
-                          <ErrorMessage
-                            name="gender"
-                            component={"div"}
-                            className="text-red-500 text-sm"
-                          />
-                          <div className="flex flex-col gap-2">
-                            {/* {allowVariations && (
-                              <>
-                                <div className="flex gap-2">
-                                  <label>Male price:</label>
-                                  <input
-                                    type="text"
-                                    placeholder="Enter male's price"
-                                    className="font-poppins ml-3 font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
-                                    onChange={handleChange("malePrice")}
-                                  />
-                                </div>
-                                <div className="flex gap-2">
-                                  <label>female price:</label>
-                                  <input
-                                    type="text"
-                                    placeholder="Enter female's price"
-                                    className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
-                                    onChange={handleChange("femalePrice")}
-                                  />
-                                </div>
-                              </>
-                            )} */}
+                          <button
+                            type="button"
+                            onClick={addAttribute}
+                            className="bg-blue3 p-2 rounded-lg text-white hover:bg-blue2 mt-2 transition-all duration-200"
+                          >
+                            Add Attribute
+                          </button>
+                          <div className="mt-4">
+                            {attributes.map((attr, idx) => (
+                              <div key={idx} className="mb-2">
+                                <strong>{attr.name}:</strong>{" "}
+                                {attr.values.join(", ")}
+                              </div>
+                            ))}
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div className="bg-gray-90 bg-opacity-[20%] w-[40%] p-5 rounded-lg">
+                    <div className="bg-gray-90 bg-opacity-[20%] w-full lg:w-[40%] p-5 rounded-lg">
                       <h1>Upload image</h1>
                       <div className="flex flex-col justify-center items-center">
                         {images && images.length !== 0 && (
@@ -595,80 +384,103 @@ const Product = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex justify-between gap-5">
-                <div className="bg-gray-90 bg-opacity-[20%] w-[60%] p-5 rounded-lg">
-                  <h1 className="font-lato font-bold text-[20px]">
-                    Pricing and Stock
-                  </h1>
-                  <div className="flex gap-5 my-2">
-                    <div className="flex flex-col gap-1">
-                      <label>Base Pricing</label>
-                      <input
-                        className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
-                        type="text"
-                        placeholder="Enter the base price"
-                        onChange={handleChange("productPrice")}
-                      />
-                      <ErrorMessage
-                        name="productPrice"
-                        component={"div"}
-                        className="text-red-500 text-sm"
-                      />
-                    </div>
-                    <div className="flex flex-col gap-1">
-                      <label>Stock</label>
-                      <input
-                        className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
-                        type="number"
-                        placeholder="Product In Stock"
-                        onChange={handleChange("ProductInStock")}
-                      />
-                      <ErrorMessage
-                        name="ProductInStock"
-                        component={"div"}
-                        className="text-red-500 text-sm"
-                      />
-                    </div>
+              <div className="flex justify-between gap-5 flex-col lg:flex-row">
+                <div className="bg-gray-90 bg-opacity-[20%] w-full lg:w-[60%] p-5 rounded-lg">
+                  <div>
+                    <h1 className="font-lato font-bold text-[20px]">
+                      Pricing and Stock
+                    </h1>
                   </div>
-                  <div className="flex gap-5 my-2">
-                    <div className="flex flex-col gap-1">
-                      <label>Discount</label>
-                      <input
-                        className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
-                        type="text"
-                        placeholder={`${discountType}`}
-                        onChange={handleChange("discount")}
-                      />
-                      <ErrorMessage
-                        name="discount"
-                        component={"div"}
-                        className="text-red-500 text-sm"
-                      />
-                    </div>
-                    <div className="flex flex-col gap-1">
-                      <label>Discount Type</label>
-                      <select
-                        onChange={(e) => {
-                          setDiscountType(e.target.value);
+                  <div className=" flex justify-between">
+                    <div>
+                      <div className="flex gap-5 my-2">
+                        <div className="flex flex-col gap-1">
+                          <label>Base Pricing</label>
+                          <input
+                            className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
+                            type="text"
+                            placeholder="Enter the base price"
+                            onChange={handleChange("productPrice")}
+                          />
+                          <ErrorMessage
+                            name="productPrice"
+                            component={"div"}
+                            className="text-red-500 text-sm"
+                          />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <label>Stock</label>
+                          <input
+                            className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
+                            type="number"
+                            placeholder="Product In Stock"
+                            onChange={handleChange("ProductInStock")}
+                          />
+                          <ErrorMessage
+                            name="ProductInStock"
+                            component={"div"}
+                            className="text-red-500 text-sm"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex gap-5 my-2">
+                        <div className="flex flex-col gap-1">
+                          <label>Discount</label>
+                          <input
+                            className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
+                            type="text"
+                            placeholder={`${discountType}`}
+                            onChange={handleChange("discount")}
+                          />
+                          <ErrorMessage
+                            name="discount"
+                            component={"div"}
+                            className="text-red-500 text-sm"
+                          />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <label>Discount Type</label>
+                          <select
+                            onChange={(e) => {
+                              setDiscountType(e.target.value);
 
-                          setFieldValue("discountType", e.target.value);
-                        }}
-                        name="discountType"
-                        className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-1 h-8 rounded-md outline-none"
-                      >
-                        <option value="">discount Type</option>
-                        <option value="percentage">Percentage</option>
-                        <option value="amount">Amount</option>
-                      </select>
-                      <ErrorMessage
-                        name="discountType"
-                        component={"div"}
-                        className="text-red-500 text-sm"
-                      />
+                              setFieldValue("discountType", e.target.value);
+                            }}
+                            name="discountType"
+                            className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-1 h-8 rounded-md outline-none"
+                          >
+                            <option value="">discount Type</option>
+                            <option value="percentage">Percentage</option>
+                            <option value="amount">Amount</option>
+                          </select>
+                          <ErrorMessage
+                            name="discountType"
+                            component={"div"}
+                            className="text-red-500 text-sm"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="w-[40%]">
+                      <h1>Variations</h1>
+                      <div>
+                        {generateVariations(attributes).map(
+                          (variation, index) => (
+                            <div className="flex justify-between gap-5 my-2">
+                              <p key={index}>{variation}</p>
+                              <input
+                                type="text"
+                                placeholder="Price"
+                                className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
+                              />
+                            </div>
+                          )
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className="bg-gray-90 bg-opacity-[20%] w-[40%] p-5 rounded-lg">
+                <div className="bg-gray-90 bg-opacity-[20%] w-full lg:w-[40%] p-5 rounded-lg">
                   <h1 className="font-lato font-bold text-[20px]">Category</h1>
                   <div className="my-2">
                     <p>Product category</p>
@@ -685,7 +497,7 @@ const Product = () => {
                           setSubcategories(
                             selectedCategoryObject.subcategories
                           );
-                          setFieldValue("ProductSubcategory", ""); // Reset subcategory when category changes
+                          setFieldValue("ProductSubcategory", "");
                         } else {
                           setSubcategories([]);
                         }

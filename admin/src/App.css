@@ -16,8 +16,14 @@
   position: relative;
 }
 
-.footer-list-item:not(:last-child)::after {
-  content: "•";
-  margin-left: 8px;
-  margin-right: 8px;
+@media (min-width: 768px) {
+  .footer-list-item:not(:last-child)::after {
+    content: "•";
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+}
+
+body {
+  overflow-x: hidden;
 }

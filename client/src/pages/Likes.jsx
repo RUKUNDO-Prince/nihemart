@@ -14,23 +14,25 @@ const Likes = () => {
             <div key={index} className="flex flex-col">
               <div className="bg-gray-70 bg-opacity-[30%] flex flex-col  rounded-md justify-between flex-1">
                 <div className="w-full flex items-center justify-center overflow-hidden">
-                <img src={item.img} className=" object-contain" alt="img" />
+                  <img src={item.img} className="w-[40%] m-5" alt="img" />
                 </div>
                 <Link
-                  to="/order"
-                  className="bg-[#808080] flex w-full rounded-b-md p-[10px] justify-center items-center"
+                  to="/tumiza/:id"
+                  className="bg-[#808080] flex w-full rounded-b-md p-[10px] justify-center gap-3 items-center"
                 >
-                  <img src={deliver} alt="" />
-                  <p className="text-white m-0 text-lg">Order Now</p>
+                  <img src={deliver} alt=""  />
+                  <p className="text-white m-0 text-lg">Tumiza ubungubu</p>
                 </Link>
               </div>
-              <p className="font-semibold text-lg mx-[10px]">{item.name}</p>
-              <p className="text-primary mx-[10px]">
-                {item.updatedPrice} frw{" "}
-                <span className="text-gray-50 line-through">
-                  {item.price} frw
-                </span>
-              </p>
+              <div className="flex justify-between my-2">
+                <p className="font-semibold text-lg mx-[10px]">{item.name}</p>
+                <p className="text-primary mx-[10px]">
+                  {item.updatedPrice} frw{" "}
+                  <span className="text-gray-50 line-through">
+                    {item.price} frw
+                  </span>
+                </p>
+              </div>
             </div>
           ))}
         </div>
@@ -39,13 +41,13 @@ const Likes = () => {
         <div className="flex justify-between">
           <SubHeading title="Just For You" />
           <Link
-            className="bg-blue2 text-white py-[15px] px-[40px] rounded-md hover:bg-opacity-[80%] transition-all"
-            to="/products"
+            className="bg-blue2 text-white py-[10px] px-[40px] rounded-md hover:bg-opacity-[80%] transition-all"
+            to="/ibicuruzwa-byose"
           >
-            See All
+            Reba Byose
           </Link>
         </div>
-        <ProductsList maxProducts={4} />
+        <ProductsList visibleProductsCount={4} />
       </div>
     </div>
   );
