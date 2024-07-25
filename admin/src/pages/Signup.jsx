@@ -8,7 +8,6 @@ import useAuthStore from "../store/authStore";
 const Signup = () => {
   const { register, isLoading } = useAuthStore();
 
-  // Validation schemas
   const registrationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     email: Yup.string()
@@ -23,25 +22,24 @@ const Signup = () => {
     const { name, email, password } = values;
     await register(name, email, password);
   };
+
   return (
-    <div className="flex min-h-[100vh]">
-      <div className="bg-primary w-[40%]">
-        <img src={figure} className="w-[75%]" alt="" />
+    <div className="flex flex-col md:flex-row min-h-screen">
+      <div className="hidden md:flex bg-primary w-full md:w-1/2 justify-center items-center">
+        <img src={figure} className="w-3/4" alt="figure" />
       </div>
-      <div className="flex items-center justify-center w-[50%] m-auto">
-        <div className="flex flex-col shadow-lg p-[50px] w-[70%] m-[20px]">
-          <div className="flex items-center mb-[20px]">
-            <img src={logo} alt="logo" />
-            <p className="text-primary font-poppins font-semibold text-[26px]">
+      <div className="flex items-center justify-center w-full md:w-1/2 m-auto p-6">
+        <div className="flex flex-col shadow-lg p-6 w-full md:w-3/4 lg:w-1/2">
+          <div className="flex items-center mb-6">
+            <img src={logo} alt="logo" className="mr-2" />
+            <p className="text-primary font-poppins font-semibold text-2xl md:text-3xl">
               Nihe <span className="text-blue2">Mart</span>
             </p>
           </div>
 
-          <h1 className="font-lato font-regular text-[40px] my-[5px]">
-            Sign Up
-          </h1>
-          <p className="font-lato font-regular text-[16px] text-[#224957] my-[5px]">
-            Create your account !
+          <h1 className="font-lato text-2xl md:text-3xl mb-2">Sign Up</h1>
+          <p className="font-lato text-base text-[#224957] mb-4">
+            Create your account!
           </p>
           <div>
             <Formik
@@ -106,7 +104,7 @@ const Signup = () => {
                 </Form>
               )}
             </Formik>
-            <p className="text-[#224957]">
+            <p className="text-[#224957] mt-4">
               Already have an account?{" "}
               <Link to="/login" className="text-blue2 hover:underline">
                 Log in
