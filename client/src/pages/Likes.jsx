@@ -47,7 +47,7 @@ const Likes = () => {
             Reba Byose
           </Link>
         </div>
-        <ProductsList maxProducts={4} />
+        <ProductsList visibleProductsCount={4} />
       </div>
     </div>
   );

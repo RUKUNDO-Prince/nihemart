@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa6";
-import { delivery, whatsapp, circle, cart } from "../assets";
-import { SubHeading } from "../components";
+import { delivery, circle, cart } from "../assets";
+import { ProductsList, SubHeading } from "../components";
 import { useParams, useNavigate } from "react-router-dom";
 import useProductStore from "../store/productStore";
 import { api } from "../config/axiosInstance";
 import { StarRating } from "../components/ProductCard";
-import ProductListComp from "../components/ProductListComp";
 import { IoBagCheckOutline } from "react-icons/io5";
 import useCartStore from "../store/cartStore";
 const Product = () => {
@@ -112,8 +111,8 @@ const Product = () => {
                     Ingano:
                   </p>
                   {product?.size?.map((size, idx) => (
-                    <button onClick={()=>setCurrentPrice(size.price)} key={idx} className={`text-sm font-normal px-2 outline-none bg-gray-200 rounded-xl border ${currentPrice === size.price ?"border-primary":"border-transparent"}`}>
-                      {size.size}
+                    <button onClick={()=>setCurrentPrice(size.price)} key={idx} className={`text-sm font-normal px-2 outline-none bg-gray-200 rounded-xl border ${currentPrice === size.price ?"border-primary":"bg-transparent border-none"}`}>
+                      {currentPrice === size.price ? size.size : "Ntayo!"}
                     </button> 
                   ))}
                 </div>
@@ -191,7 +190,7 @@ const Product = () => {
       </div>
       <div className="my-[20px]">
         <SubHeading title="Ibindi byerekeranye" />
-        <ProductListComp maxProducts={4} selectedId={selectedProductId} />
+        <ProductsList visibleProductsCount={4} selectedId={selectedProductId} />
       </div>
     </div>
   );
