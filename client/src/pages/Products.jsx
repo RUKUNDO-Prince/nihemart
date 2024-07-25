@@ -5,6 +5,7 @@ import { categories } from '../constants/data';
 const Products = () => {
   const [categoryFilter, setCategoryFilter] = useState('');
   const [priceRangeFilter, setPriceRangeFilter] = useState([0, Infinity]);
+  const [visibleProductsCount, setVisibleProductsCount] = useState(12); // Initial count of products to display
 
   const handleMinPriceChange = (e) => {
     const minPrice = Number(e.target.value) || 0;
@@ -14,6 +15,10 @@ const Products = () => {
   const handleMaxPriceChange = (e) => {
     const maxPrice = Number(e.target.value) || Infinity;
     setPriceRangeFilter([priceRangeFilter[0], maxPrice]);
+  };
+
+  const showMoreProducts = () => {
+    setVisibleProductsCount(prevCount => prevCount + 12); // Show 10 more products
   };
 
   return (
@@ -48,9 +53,9 @@ const Products = () => {
         </div>
       </div>
 
-      <ProductsList categoryFilter={categoryFilter} priceRangeFilter={priceRangeFilter} />
+      <ProductsList categoryFilter={categoryFilter} priceRangeFilter={priceRangeFilter} visibleProductsCount={visibleProductsCount} />
       <div className='my-9 mx-auto'>
-        <button className="bg-blue3 px-5 py-2 md:px-[30px] md:py-[10px] rounded-md text-white hover:bg-blue2">Reba Ibindi</button>
+        <button onClick={showMoreProducts} className="bg-blue3 px-5 py-2 md:px-[30px] md:py-[10px] rounded-md text-white hover:bg-blue2">Reba Ibindi</button>
       </div>
     </div>
   );
