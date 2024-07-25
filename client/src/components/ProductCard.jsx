@@ -42,15 +42,16 @@ const ProductCard = ({ product }) => {
     if (e.target.id === "modal") setIsLoginModalOpen(false);
   };
 
+  console.log(isAuthenticated);
   return (
     <>
       <div className="h-[37vh]">
         <div className="h-full flex flex-col justify-between">
-          <div className="flex bg-blue2 bg-opacity-[20%] p-[20px] justify-between items-start  mb-[10px] flex-1 relative">
+          <div className="flex bg-blue2 bg-opacity-[20%] p-[20px] justify-between items-start max-h-[269.38px]  mb-[10px] flex-1 relative">
             <Link className="m-auto" to={`/igicuruzwa/${product._id}`}>
             <img
               src={`${api + "/" + product?.photo}`}
-              className=""
+              className="max-h-[229.38px] object-cover"
               alt="img"
             />
             </Link>

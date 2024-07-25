@@ -171,14 +171,12 @@ const Product = () => {
         initialValues={{
           productName: "",
           productDesc: "",
-          productSize: [],
-          gender: [],
+          attribute:[],
           productPrice: "",
           ProductInStock: "",
           ProductCategory: "",
           discountType: "",
           discount: "",
-          ProductCategory: "",
           ProductSubcategory: "",
         }}
         onSubmit={(values) => {
@@ -192,7 +190,7 @@ const Product = () => {
             <div className="flex-1 mx-[10px] my-[20px] md:m-[30px] flex-col">
               <div>
                 <div className="flex justify-between">
-                  <button className="font-poppins font-semibold text-[14px] md:text-[16px] text-primary flex items-center gap-1 md:gap-3 w-[40%]">
+                  <button onClick={handleSubmit} className="font-poppins font-semibold text-[14px] md:text-[16px] text-primary flex items-center gap-1 md:gap-3 w-[40%]">
                     <img src={anonymous} alt="icon" /> Add New Product
                   </button>
                   <div className="flex gap-2 lg:gap-5 w-[60%] justify-end">
@@ -319,7 +317,7 @@ const Product = () => {
                     </div>
                     <div className="bg-gray-90 bg-opacity-[20%] w-full lg:w-[40%] p-5 rounded-lg">
                       <h1>Upload image</h1>
-                      <div className="flex flex-col justify-center items-center">
+                      <div className="flex flex-col items-center">
                         {images && images.length !== 0 && (
                           <div className="w-full">
                             <img

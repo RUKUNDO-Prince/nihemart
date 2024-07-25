@@ -61,9 +61,8 @@ const getCart = async (req, res) => {
       return res.status(404).json({ message: "Cart not found" });
     }
 
-
     return res.status(200).json({
-      cart
+      cart: cart.toObject({ virtuals: true }),
     });
   } catch (error) {
     console.error(error);

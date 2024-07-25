@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import axios from "axios";
 import publicApi from "../config/axiosInstance";
 import { toast } from "react-toastify";
 
@@ -13,10 +12,11 @@ const useAuthStore = create((set) => ({
   isAuthenticated: !!getTokenFromLocalStorage(),
   user: null,
   token: getTokenFromLocalStorage(),
+  error: null,
 
   // Register new user
   register: async (name, email, password, phone) => {
-    set({ isLoading: true });
+    set({ isLoading: true, error: null });
     try {
       const response = await publicApi.post("/user/signup", {
         name,
@@ -26,34 +26,31 @@ const useAuthStore = create((set) => ({
       });
       const { message, token } = response.data;
       localStorage.setItem("authToken", token);
-      set({ isAuthenticated: true, token,isLoading: false,message:message });
+      set({ isAuthenticated: true, token, isLoading: false });
       toast.success(message);
     } catch (error) {
       console.error("Error registering user:", error);
-      // Handle error as needed
-      set({error:error.message})
-      toast.error(error.message);
-    }finally{
-      set({isLoading:false})
+      set({ error: error.response?.data?.message || error.message, isLoading: false });
+      toast.error(error.response?.data?.message || error.message);
     }
   },
 
   // Login existing user
   login: async (email, password) => {
+    set({ isLoading: true, error: null });
     try {
       const response = await publicApi.post("/user/login", {
         email,
         password,
       });
-
       const { message, token } = response.data;
       localStorage.setItem("authToken", token);
-      set({ isAuthenticated: true, token });
-      toast.success(message)
+      set({ isAuthenticated: true, token, isLoading: false });
+      toast.success(message);
     } catch (error) {
       console.error("Error logging in:", error);
-      // Handle error as needed
-      toast.error(error.message)
+      set({ error: error.response?.data?.message || error.message, isLoading: false });
+      toast.error(error.response?.data?.message || error.message);
     }
   },
 
@@ -68,19 +65,20 @@ const useAuthStore = create((set) => ({
   fetchUser: async () => {
     const token = getTokenFromLocalStorage();
     if (token) {
+      set({ isLoading: true, error: null });
       try {
-        const response = await axios.get("/api/user", {
+        const response = await publicApi.get("/api/user", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const user = response.data;
-        set({ isAuthenticated: true, user, token });
+        set({ isAuthenticated: true, user, token, isLoading: false });
       } catch (error) {
         console.error("Error fetching user data:", error);
-        set({ isAuthenticated: false, user: null, token: null });
+        set({ isAuthenticated: false, user: null, token: null, isLoading: false });
         localStorage.removeItem("authToken");
+        toast.error(error.response?.data?.message || error.message);
       }
     }
-    return user;
   },
 }));
 
