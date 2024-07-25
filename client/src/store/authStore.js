@@ -24,8 +24,8 @@ const useAuthStore = create((set) => ({
         password,
         phone,
       });
-      const { message, token } = response.data; // Assuming the response contains a token and user data
-      localStorage.setItem("authToken", token); // Store token in localStorage
+      const { message, token } = response.data;
+      localStorage.setItem("authToken", token);
       set({ isAuthenticated: true, token,isLoading: false,message:message });
       toast.success(message);
     } catch (error) {
@@ -46,8 +46,8 @@ const useAuthStore = create((set) => ({
         password,
       });
 
-      const { message, token } = response.data; // Assuming the response contains a token and user data
-      localStorage.setItem("authToken", token); // Store token in localStorage
+      const { message, token } = response.data;
+      localStorage.setItem("authToken", token);
       set({ isAuthenticated: true, token });
       toast.success(message)
     } catch (error) {
@@ -59,7 +59,7 @@ const useAuthStore = create((set) => ({
 
   // Logout user
   logout: () => {
-    localStorage.removeItem("authToken"); // Remove token from localStorage
+    localStorage.removeItem("authToken");
     toast.success("Logged out!");
     set({ isAuthenticated: false, user: null, token: null });
   },
