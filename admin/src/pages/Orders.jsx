@@ -31,11 +31,11 @@ const Orders = () => {
   return (
     <div className="m-[30px]">
       <SubHeading title="Orders" />
-      <div className="my-5">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 min-w-[1012px]">
+      <div className="my-5 overflow-x-auto">
+        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 min-w-[600px] md:min-w-[1012px]">
           <thead className="text-[16px] text-black font-poppins drop-shadow-lg my-[20px]">
             <tr className="shadow-md">
-              <th scope="col" className="px-6 py-8">
+              <th scope="col" className="px-6 py-3">
                 Orders No ↓
               </th>
               <th scope="col" className="px-6 py-3">
@@ -73,23 +73,30 @@ const Orders = () => {
                 <td className="px-6 py-4">{item.name}</td>
                 <td className="px-6 py-4">{item.phone}</td>
                 <td className="px-6 py-4">{item.productsOrdered}</td>
-                <td className="px-9 py-4">{item.orderedQuantity}</td>
+                <td className="px-6 py-4">{item.orderedQuantity}</td>
                 <td className="px-6 py-4">{item.price}</td>
                 <td className="px-6 py-4">{item.date}</td>
                 <td className="px-6 py-4">
-                  <div className="p-2 rounded-2xl w-[80%] flex justify-center" style={getStatusStyles(item.status)}>{item.status}</div>
+                  <div
+                    className="p-2 rounded-2xl w-[80%] flex justify-center"
+                    style={getStatusStyles(item.status)}
+                  >
+                    {item.status}
+                  </div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <button className="flex justify-center items-center bg-blue3 py-3 w-[120px] rounded-lg outline-none text-white my-0 float-right hover:bg-blue2">
-        Next
-      </button>
-      <button className="flex justify-center items-center py-3 w-[120px] rounded-lg outline-none my-0 float-right border-2 border-gray-20 mx-5">
-        Previous
-      </button>
+      <div className="flex justify-end space-x-5 mt-5">
+        <button className="bg-blue3 py-3 w-[120px] rounded-lg text-white hover:bg-blue2">
+          Next
+        </button>
+        <button className="py-3 w-[120px] rounded-lg border-2 border-gray-20">
+          Previous
+        </button>
+      </div>
     </div>
   );
 };

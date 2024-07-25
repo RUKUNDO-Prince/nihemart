@@ -189,21 +189,21 @@ const Product = () => {
       >
         {({ handleSubmit, handleChange, setFieldValue, values }) => (
           <Form encType="multipart/form-data">
-            <div className="flex-1 m-[30px] flex-col">
+            <div className="flex-1 mx-[10px] my-[20px] md:m-[30px] flex-col">
               <div>
                 <div className="flex justify-between">
-                  <button className="font-poppins font-semibold text-[16px] text-primary flex items-center gap-3">
+                  <button className="font-poppins font-semibold text-[14px] md:text-[16px] text-primary flex items-center gap-1 md:gap-3 w-[40%]">
                     <img src={anonymous} alt="icon" /> Add New Product
                   </button>
-                  <div className="flex gap-5">
-                    <button className="border-2 border-gray-90 text-black p-4 rounded-lg flex items-center hover:bg-gray-90 gap-3 h-12">
+                  <div className="flex gap-2 lg:gap-5 w-[60%] justify-end">
+                    <button className="border-2 border-gray-90 text-black text-[14px] lg:text-[16px] p-2 md:p-4 rounded-lg flex items-center hover:bg-gray-90 gap-1 lg:gap-3 h-12 w-[50%] lg:w-[20%]">
                       <img src={draft} alt="draft" />
                       Save Draft
                     </button>
                     <button
                       type="button"
                       onClick={handleSubmit}
-                      className="bg-blue2 text-white px-5 h-12 rounded-lg flex items-center hover:bg-blue3 gap-3"
+                      className="bg-blue2 text-white px-2 lg:px-4 h-12 rounded-lg flex items-center hover:bg-blue3 gap-1 md:gap-3 text-[14px] lg:text-[16px] w-[60%] lg:w-[25%]"
                     >
                       <img src={tick} alt="tick" />
                       Add Product
@@ -220,8 +220,8 @@ const Product = () => {
                     />
                     <label>Allow Variation</label>
                   </div>
-                  <div className="flex justify-between gap-5 my-4">
-                    <div className="bg-gray-90 bg-opacity-[20%] w-[60%] p-5 rounded-lg">
+                  <div className="flex justify-between gap-5 my-4 flex-col lg:flex-row">
+                    <div className="bg-gray-90 bg-opacity-[20%] lg:w-[60%] w-full p-5 rounded-lg">
                       <h1 className="font-lato font-bold text-[20px]">
                         General Information
                       </h1>
@@ -317,7 +317,7 @@ const Product = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="bg-gray-90 bg-opacity-[20%] w-[40%] p-5 rounded-lg">
+                    <div className="bg-gray-90 bg-opacity-[20%] w-full lg:w-[40%] p-5 rounded-lg">
                       <h1>Upload image</h1>
                       <div className="flex flex-col justify-center items-center">
                         {images && images.length !== 0 && (
@@ -384,8 +384,8 @@ const Product = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex justify-between gap-5">
-                <div className="bg-gray-90 bg-opacity-[20%] w-[60%] p-5 rounded-lg">
+              <div className="flex justify-between gap-5 flex-col lg:flex-row">
+                <div className="bg-gray-90 bg-opacity-[20%] w-full lg:w-[60%] p-5 rounded-lg">
                   <div>
                     <h1 className="font-lato font-bold text-[20px]">
                       Pricing and Stock
@@ -468,7 +468,11 @@ const Product = () => {
                           (variation, index) => (
                             <div className="flex justify-between gap-5 my-2">
                               <p key={index}>{variation}</p>
-                              <input type="text" placeholder="Price" className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none" />
+                              <input
+                                type="text"
+                                placeholder="Price"
+                                className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
+                              />
                             </div>
                           )
                         )}
@@ -476,7 +480,7 @@ const Product = () => {
                     </div>
                   </div>
                 </div>
-                <div className="bg-gray-90 bg-opacity-[20%] w-[40%] p-5 rounded-lg">
+                <div className="bg-gray-90 bg-opacity-[20%] w-full lg:w-[40%] p-5 rounded-lg">
                   <h1 className="font-lato font-bold text-[20px]">Category</h1>
                   <div className="my-2">
                     <p>Product category</p>
