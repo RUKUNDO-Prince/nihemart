@@ -24,14 +24,15 @@ const useCartStore = create((set) => ({
     set({ isLoading: true, error: null });
     try {
       const response = await authorizedApi.post(`/cart/cart/${productId}`); // Replace with your actual API endpoint
+      if(response.data) toast.success("added to cart successfully");
       set((state) => ({
         cartItems: [...state.cartItems, response.data],
         isLoading: false,
       }));
-      toast.success("added to cart successfully");
+      
     } catch (error) {
       set({ error: error.message, isLoading: false });
-      toast.error(error.message);
+      toast.error(error.message)
     }
   },
 
