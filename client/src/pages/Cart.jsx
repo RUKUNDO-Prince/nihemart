@@ -12,6 +12,7 @@ const Cart = () => {
     },[])
 
     const cart = cartItems?.cart?.items;
+    console.log(cartItems);
   return (
     <div className="relative overflow-x-auto m-[10px] scrollbar">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 min-w-[1012px]">
