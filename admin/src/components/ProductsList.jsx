@@ -1,5 +1,5 @@
 import React from 'react';
-import { productsList } from '../constants/data';
+// import { productsList } from '../constants/data';
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 import ProductCard from './ProductCard';
 import useProductStore from '../store/productStore';
