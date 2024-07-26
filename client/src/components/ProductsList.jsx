@@ -5,9 +5,10 @@ import useProductStore from "../store/productStore";
 const ProductsList = ({ visibleProductsCount = Infinity, categoryFilter = '', priceRangeFilter = [0, Infinity] }) => {
   const { products, isLoading, error } = useProductStore();
 
+  console.log(products);
   const filteredProducts = products
     ?.filter((product) => 
-      (!categoryFilter || product.category === categoryFilter) &&
+      (!categoryFilter || product.category.toLowerCase() === categoryFilter.toLowerCase()) &&
       (product.price >= priceRangeFilter[0] && product.price <= priceRangeFilter[1])
     );
 

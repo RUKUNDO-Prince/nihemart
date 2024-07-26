@@ -29,21 +29,25 @@ const productSchema = new Schema({
     type: Number,
     required: true,
   },
-  size: [
+  attributes: [
     {
-      size: {
+      name: {
         type: String,
         required: true,
       },
-      price: {
-        type: Number,
-        default: 0,
-      },
+      values: [{ type: String, required: true }],
     },
   ],
-  gender: [
+  variations: [
     {
-      type: String,
+      variation:{
+        type:String,
+        required:true
+      },
+      price:{
+        type:String,
+        required:true
+      },
     },
   ],
   discount: {
@@ -86,13 +90,9 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
-  malePrice: {
-    type: Number,
-    default: 0,
-  },
-  femalePrice: {
-    type: Number,
-    default: 0,
+  subCategory: {
+    type: String,
+    required: true,
   },
 });
 

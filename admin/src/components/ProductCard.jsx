@@ -37,10 +37,10 @@ const ProductCard = ({ product }) => {
     <>
       <div className="h-full">
         <div className="h-full flex flex-col justify-between">
-          <div className="flex bg-blue2 bg-opacity-[20%] p-[20px] justify-between items-start  mb-[10px] flex-1 relative">
+          <div className="flex bg-blue2 bg-opacity-[20%] p-[20px] justify-between max-h-[206.38px] items-start  mb-[10px] flex-1 relative">
             <img
               src={`${api + "/" + product?.photo}`}
-              className="m-auto"
+              className="m-auto max-h-[150px]"
               alt="img"
             />
             <div className="absolute right-0 top-0  flex flex-col p-4 gap-2">

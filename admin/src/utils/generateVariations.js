@@ -5,7 +5,7 @@ export const generateVariations = (attributes) => {
 
   const combine = (currentCombination, index) => {
     if (index === attributes.length) {
-      result.push(currentCombination.join("; "));
+      result.push(currentCombination.join(" "));
       return;
     }
 

@@ -1,28 +1,43 @@
-import React, { useEffect } from 'react';
-import useAuthStore from '../store/authStore';
+import React, { useEffect, useState } from "react";
+import useAuthStore from "../store/authStore";
+import AuthModal from "./AuthModal";
 
 const ProfileDropdown = () => {
-  const { user, isAuthenticated, logout, fetchUser } = useAuthStore();
-
-  useEffect(() => {
-    if (!user && isAuthenticated) {
-      fetchUser(); // Fetch user data if not already available
-    }
-  }, [user, isAuthenticated, fetchUser]);
+  const { user, isAuthenticated, logout } = useAuthStore();
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const handleClose = (e) => {
+    if (e.target.id === "modal") setIsLoginModalOpen(false);
+  };
 
   return (
-    <div className='flex flex-col profileDropdown'>
-      <ul className='flex flex-col gap-3 p-2'>
-        <li>{isAuthenticated ? user?.name || "Fetching..." : "Not logged in"}</li>
-        <li 
-          className='hover:border-gray-10 border p-1 class-border' 
-          onClick={logout}
-        >
-          Logout
-        </li>
-      </ul>
-    </div>
+    <>
+      <div className="flex flex-col profileDropdown">
+        <ul className="flex flex-col gap-3 p-2">
+          {isAuthenticated ? (
+            <div>
+              <h2>{user}</h2>
+            </div>
+          ) : (
+            <div>
+              <button onClick={() => setIsLoginModalOpen(true)}>Log in</button>
+            </div>
+          )}
+          {isAuthenticated && (
+            <button
+              className="hover:border-gray-10 border p-1 class-border"
+              onClick={logout}
+            >
+              Logout
+            </button>
+          )}
+        </ul>
+      </div>
+      <AuthModal
+        isLoginModalOpen={isLoginModalOpen}
+        handleClose={handleClose}
+      />
+    </>
   );
-}
+};
 
 export default ProfileDropdown;

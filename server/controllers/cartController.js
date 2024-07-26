@@ -6,6 +6,8 @@ const addToCart = async (req, res) => {
     const { productId } = req.params;
     const { _id: userId } = req.user;
 
+    const quantity = req.query.quantity;
+
     if (!userId) {
       return res.status(400).json({ message: "User ID is required" });
     }
@@ -24,16 +26,16 @@ const addToCart = async (req, res) => {
     }
     const cartItem = cart.items.find((item) => item.product.equals(productId));
     if (cartItem) {
-      cartItem.quantity += 1;
+      cartItem.quantity += quantity;
       cartItem.subtotal = cartItem.quantity * product.price;
     } else {
       cart.items.push({
         product: productId,
         name: product.name,
         price: product.price,
-        quantity: 1,
+        quantity: quantity,
         photos: product.photos[0],
-        subtotal: product.price,
+        subtotal: product.price * quantity,
       });
     }
     product.quantity -= 1;
@@ -62,7 +64,7 @@ const getCart = async (req, res) => {
     }
 
     return res.status(200).json({
-      cart: cart.toObject({ virtuals: true }),
+      cart,
     });
   } catch (error) {
     console.error(error);

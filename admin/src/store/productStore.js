@@ -10,17 +10,16 @@ const useProductStore = create((set) => ({
   addProduct: async ({
     productName,
     productDesc,
-    productSize,
-    gender,
+    attributes,
+    variations,
     productPrice,
     ProductInStock,
     ProductCategory,
+    ProductSubCategory,
     discountType,
     discount,
     files,
   }) => {
-    
-    console.log(productSize);
     set({ isLoading: true });
     try {
       const formdata = new FormData();
@@ -30,8 +29,9 @@ const useProductStore = create((set) => ({
       formdata.append("price", productPrice);
       formdata.append("quantity", ProductInStock);
       formdata.append("category", ProductCategory);
-      formdata.append("size", JSON.stringify(productSize));
-      formdata.append("gender", gender);
+      formdata.append("subCategory", ProductSubCategory);
+      formdata.append("attributes", JSON.stringify(attributes));
+      formdata.append("variations", JSON.stringify(variations));
       formdata.append("discountType", discountType);
       formdata.append("discount", discount);
 
@@ -60,8 +60,8 @@ const useProductStore = create((set) => ({
       set({ isLoading: false });
     }
   },
-   // Fetch all products
-   fetchProducts: async () => {
+  // Fetch all products
+  fetchProducts: async () => {
     set({ isLoading: true });
     try {
       const response = await publicApi.get("/product/allProducts");

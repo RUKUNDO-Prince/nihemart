@@ -38,6 +38,7 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(req.body);
 
     const user = await User.findOne({ email });
     if (!user) {
@@ -51,7 +52,7 @@ const login = async (req, res) => {
 
     const token = generateToken(user);
 
-    res.status(200).json({ message: "Login successful", token });
+    res.status(200).json({ message: "Login successful", token ,user:user.name});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });

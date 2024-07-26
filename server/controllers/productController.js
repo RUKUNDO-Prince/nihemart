@@ -10,15 +10,17 @@ const addProduct = async (req, res) => {
       name,
       description,
       price,
+      subCategory,
       quantity,
       category,
-      gender,
       discountType,
       discount,
     } = req.body;
 
-    const size= JSON.parse(req.body.size);
-    console.log(size);
+    console.log(req.body);
+
+    const variations = JSON.parse(req.body.variations);
+    const attributes = JSON.parse(req.body.attributes);
 
     const photos = Array.isArray(req.files)
       ? req.files.map((file) => "images/" + file.filename)
@@ -29,11 +31,12 @@ const addProduct = async (req, res) => {
       description,
       price,
       quantity,
+      subCategory,
+      variations,
+      attributes,
       category,
       photos,
-      size,
       discountType,
-      gender,
       discount,
     });
     await product.save();
@@ -179,5 +182,5 @@ module.exports = {
   redirectToWhatsApp,
   getProductsByCategory,
   getAllProducts,
-  getProductById
+  getProductById,
 };

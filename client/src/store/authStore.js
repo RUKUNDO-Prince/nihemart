@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import publicApi from "../config/axiosInstance";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 // Helper function to get token from localStorage
 const getTokenFromLocalStorage = () => {
@@ -10,7 +10,7 @@ const getTokenFromLocalStorage = () => {
 const useAuthStore = create((set) => ({
   isLoading: false,
   isAuthenticated: !!getTokenFromLocalStorage(),
-  user: null,
+  user:localStorage.getItem("user") || null,
   token: getTokenFromLocalStorage(),
   error: null,
 
@@ -24,13 +24,17 @@ const useAuthStore = create((set) => ({
         password,
         phone,
       });
-      const { message, token } = response.data;
+      const { message, token, user } = response.data;
       localStorage.setItem("authToken", token);
-      set({ isAuthenticated: true, token, isLoading: false });
+      localStorage.setItem("user", user);
+      set({ isAuthenticated: true, token, isLoading: false ,user: user });
       toast.success(message);
     } catch (error) {
       console.error("Error registering user:", error);
-      set({ error: error.response?.data?.message || error.message, isLoading: false });
+      set({
+        error: error.response?.data?.message || error.message,
+        isLoading: false,
+      });
       toast.error(error.response?.data?.message || error.message);
     }
   },
@@ -39,18 +43,22 @@ const useAuthStore = create((set) => ({
   login: async (email, password) => {
     set({ isLoading: true, error: null });
     try {
-      const response = await publicApi.post("/user/login", {
+      const response = await publicApi.post("/user/signin", {
         email,
         password,
       });
-      const { message, token } = response.data;
+      const { message, token, user } = response.data;
       localStorage.setItem("authToken", token);
-      set({ isAuthenticated: true, token, isLoading: false });
+      localStorage.setItem("user", user);
+      set({ isAuthenticated: true, token, isLoading: false, user: user });
       toast.success(message);
     } catch (error) {
       console.error("Error logging in:", error);
-      set({ error: error.response?.data?.message || error.message, isLoading: false });
-      toast.error(error.response?.data?.message || error.message);
+      set({
+        error: error.response?.data?.message || error.message,
+        isLoading: false,
+      });
+      toast.error(error.response?.data?.message);
     }
   },
 
@@ -59,26 +67,6 @@ const useAuthStore = create((set) => ({
     localStorage.removeItem("authToken");
     toast.success("Logged out!");
     set({ isAuthenticated: false, user: null, token: null });
-  },
-
-  // Fetch user data (optionally implement this to refresh user data)
-  fetchUser: async () => {
-    const token = getTokenFromLocalStorage();
-    if (token) {
-      set({ isLoading: true, error: null });
-      try {
-        const response = await publicApi.get("/api/user", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        const user = response.data;
-        set({ isAuthenticated: true, user, token, isLoading: false });
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-        set({ isAuthenticated: false, user: null, token: null, isLoading: false });
-        localStorage.removeItem("authToken");
-        toast.error(error.response?.data?.message || error.message);
-      }
-    }
   },
 }));
 
