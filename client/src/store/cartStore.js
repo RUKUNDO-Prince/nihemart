@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 import { authorizedApi } from "../config/axiosInstance";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 const useCartStore = create((set) => ({
   cartItems: [],
@@ -20,11 +20,11 @@ const useCartStore = create((set) => ({
   },
 
   // Add item to the cart
-  addToCart: async (productId) => {
+  addToCart: async (productId,quantity) => {
     set({ isLoading: true, error: null });
     try {
-      const response = await authorizedApi.post(`/cart/cart/${productId}`); // Replace with your actual API endpoint
-      if(response.data) toast.success("added to cart successfully");
+      const response = await authorizedApi.post(`/cart/cart/${productId}?quantity=${quantity}`); // Replace with your actual API endpoint
+      if(response.data) toast.success("product added to cart");
       set((state) => ({
         cartItems: [...state.cartItems, response.data],
         isLoading: false,
@@ -32,7 +32,7 @@ const useCartStore = create((set) => ({
       
     } catch (error) {
       set({ error: error.message, isLoading: false });
-      toast.error(error.message)
+      toast.error(error.response.data.message)
     }
   },
 

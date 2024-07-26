@@ -2,8 +2,8 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { Navbar, Footer } from './components'
 import { Home,  About, Contact, Help, Product, Products, NotFound, Cart, Likes, Order, Categories, OrderKigali } from './pages'
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   return (
@@ -24,7 +24,7 @@ const App = () => {
         <Route path={"*"} element={<NotFound />} />
       </Routes>
       <Footer />
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} closeOnClick />
+      <Toaster position='top-center' toastOptions={{duration:3000}}/>
     </div>
   )
 }

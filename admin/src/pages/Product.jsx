@@ -27,8 +27,8 @@ const productSchema = Yup.object({
     "please enter the number of product in stock"
   ),
   ProductCategory: Yup.string().required("please enter the product category"),
-  discountType: Yup.string().required("please enter discount type"),
-  discount: Yup.string().required("please enter the discount"),
+  discountType: Yup.string(),
+  discount: Yup.string(),
 });
 
 const Product = () => {
@@ -36,6 +36,13 @@ const Product = () => {
   const [attributes, setAttributes] = useState([]);
   const [attributeName, setAttributeName] = useState("");
   const [attributeValues, setAttributeValues] = useState("");
+  const [attributePrices, setAttributePrices] = useState([]);
+  const [initialVariations, setInitialVariations] = useState(
+    generateVariations(attributes).map((variation) => ({
+      variation,
+      price: "",
+    }))
+  );
 
   const { addProduct, isLoading } = useProductStore();
 
@@ -84,64 +91,33 @@ const Product = () => {
   const navigate = useNavigate();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
-  // adding size
-  const setSize = (values, setFieldValue, sizeToAdd) => {
-    const index = values.productSize.findIndex(
-      (item) => item.size === sizeToAdd
-    );
-
-    if (index !== -1) {
-      // Size exists, remove it
-      setFieldValue(
-        "productSize",
-        values.productSize.filter((_, i) => i !== index)
-      );
-    } else {
-      // Size does not exist, add it
-      setFieldValue("productSize", [
-        ...values.productSize,
-        { size: sizeToAdd, price: "" },
-      ]);
-    }
-  };
-
-  // adding price to the size
-  const setPrice = (values, setFieldValue, sizeToUpdate, newPrice) => {
-    const updatedProductSize = values.productSize.map((item) =>
-      item.size === sizeToUpdate ? { ...item, price: newPrice } : item
-    );
-    setFieldValue("productSize", updatedProductSize);
-  };
-
   const handleProductSubmit = async (values) => {
     const {
       productName,
       productDesc,
-      productSize,
-      gender,
+      attributes,
+      variations,
       productPrice,
       ProductInStock,
       ProductCategory,
+      ProductSubCategory,
       discountType,
       discount,
     } = values;
-
-    console.log(values);
-
     // checking if the files have been selected
     if (filess.length > 0 && filess.length <= 10) {
       await addProduct({
         productName,
         productDesc,
-        productSize,
-        gender,
+        attributes,
+        variations,
         productPrice,
         ProductInStock,
         ProductCategory,
+        ProductSubCategory,
         discountType,
         discount,
         files: filess,
-        attributes, // Include attributes in the payload
       });
     } else {
       toast.error("missing product images");
@@ -149,12 +125,16 @@ const Product = () => {
   };
 
   // Handle adding new attribute
-  const addAttribute = () => {
+  const addAttribute = (setFieldValue) => {
     if (attributeName && attributeValues) {
       const valuesArray = attributeValues
         .split(",")
         .map((value) => value.trim());
       setAttributes([
+        ...attributes,
+        { name: attributeName, values: valuesArray },
+      ]);
+      setFieldValue("attributes", [
         ...attributes,
         { name: attributeName, values: valuesArray },
       ]);
@@ -164,22 +144,20 @@ const Product = () => {
       toast.error("Please enter both name and values for the attribute.");
     }
   };
-
   return (
     <div>
       <Formik
         initialValues={{
           productName: "",
           productDesc: "",
-          productSize: [],
-          gender: [],
           productPrice: "",
           ProductInStock: "",
+          attributes: [],
+          variations: initialVariations,
           ProductCategory: "",
           discountType: "",
           discount: "",
-          ProductCategory: "",
-          ProductSubcategory: "",
+          ProductSubCategory: "",
         }}
         onSubmit={(values) => {
           console.log(values);
@@ -192,7 +170,10 @@ const Product = () => {
             <div className="flex-1 mx-[10px] my-[20px] md:m-[30px] flex-col">
               <div>
                 <div className="flex justify-between">
-                  <button className="font-poppins font-semibold text-[14px] md:text-[16px] text-primary flex items-center gap-1 md:gap-3 w-[40%]">
+                  <button
+                    onClick={handleSubmit}
+                    className="font-poppins font-semibold text-[14px] md:text-[16px] text-primary flex items-center gap-1 md:gap-3 w-[40%]"
+                  >
                     <img src={anonymous} alt="icon" /> Add New Product
                   </button>
                   <div className="flex gap-2 lg:gap-5 w-[60%] justify-end">
@@ -301,7 +282,7 @@ const Product = () => {
                           </div>
                           <button
                             type="button"
-                            onClick={addAttribute}
+                            onClick={() => addAttribute(setFieldValue)}
                             className="bg-blue3 p-2 rounded-lg text-white hover:bg-blue2 mt-2 transition-all duration-200"
                           >
                             Add Attribute
@@ -319,7 +300,7 @@ const Product = () => {
                     </div>
                     <div className="bg-gray-90 bg-opacity-[20%] w-full lg:w-[40%] p-5 rounded-lg">
                       <h1>Upload image</h1>
-                      <div className="flex flex-col justify-center items-center">
+                      <div className="flex flex-col items-center">
                         {images && images.length !== 0 && (
                           <div className="w-full">
                             <img
@@ -464,13 +445,19 @@ const Product = () => {
                     <div className="w-[40%]">
                       <h1>Variations</h1>
                       <div>
-                        {generateVariations(attributes).map(
+                        {generateVariations(values.attributes).map(
                           (variation, index) => (
                             <div className="flex justify-between gap-5 my-2">
                               <p key={index}>{variation}</p>
                               <input
                                 type="text"
                                 placeholder="Price"
+                                onChange={(e) =>
+                                  setFieldValue(`variations[${index}]`, {
+                                    variation,
+                                    price: e.target.value,
+                                  })
+                                }
                                 className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
                               />
                             </div>
@@ -497,7 +484,7 @@ const Product = () => {
                           setSubcategories(
                             selectedCategoryObject.subcategories
                           );
-                          setFieldValue("ProductSubcategory", "");
+                          setFieldValue("ProductSubCategory", "");
                         } else {
                           setSubcategories([]);
                         }
@@ -521,8 +508,8 @@ const Product = () => {
                     <p>Product subcategory</p>
                     <select
                       name="ProductSubcategory"
-                      value={values.ProductSubcategory}
-                      onChange={handleChange}
+                      value={values.ProductSubCategory}
+                      onChange={handleChange("ProductSubCategory")}
                       className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-10 rounded-md outline-none w-[50%]"
                     >
                       <option value="">Choose the subcategory</option>

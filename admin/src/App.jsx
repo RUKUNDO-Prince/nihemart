@@ -31,8 +31,8 @@ const App = () => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/");
+    if (!isAuthenticated) {
+      navigate("/login");
     }
   }, [isAuthenticated]);
 

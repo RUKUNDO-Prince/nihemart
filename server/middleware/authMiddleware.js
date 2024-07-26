@@ -5,7 +5,7 @@ const path = require("path");
 const authenticate = (req, res, next) => {
   const token = req.header("Authorization")?.split(" ")[1];
   if (!token) {
-    return res.status(401).json({ message: "Unauthorised" });
+    return res.status(401).json({ message: "you're not logged in" });
   }
   try {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
@@ -13,7 +13,7 @@ const authenticate = (req, res, next) => {
     next();
   } catch (error) {
     console.error("Authenticate middleware error:", error);
-    return res.status(401).json({ message: "Unauthorised" });
+    return res.status(401).json({ message: "Unauthorized" });
   }
 };
 

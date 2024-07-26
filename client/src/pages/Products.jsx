@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { ProductsList, SubHeading } from '../components';
-import { categories } from '../constants/data';
+import React, { useEffect, useState } from "react";
+import { ProductsList, SubHeading } from "../components";
+import { categories } from "../constants/data";
+import useProductStore from "../store/productStore";
 
 const Products = () => {
-  const [categoryFilter, setCategoryFilter] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState("");
   const [priceRangeFilter, setPriceRangeFilter] = useState([0, Infinity]);
   const [visibleProductsCount, setVisibleProductsCount] = useState(12); // Initial count of products to display
+  const fetchProducts = useProductStore((state)=>state.fetchProducts);
 
   const handleMinPriceChange = (e) => {
     const minPrice = Number(e.target.value) || 0;
@@ -18,11 +20,15 @@ const Products = () => {
   };
 
   const showMoreProducts = () => {
-    setVisibleProductsCount(prevCount => prevCount + 12); // Show 10 more products
+    setVisibleProductsCount((prevCount) => prevCount + 12); // Show 10 more products
   };
 
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   return (
-    <div className='p-[50px] flex-1'>
+    <div className="p-[50px] flex-1">
       <div className="flex justify-between items-center mb-4">
         <SubHeading title="Ibicuruzwa byose" />
         <div className="flex gap-4">
@@ -32,11 +38,11 @@ const Products = () => {
             className="p-2 border rounded"
           >
             <option value="">All Categories</option>
-            {
-              categories.map((category, index) => (
-                <option value={category.name} key={index}>{category.name}</option>
-              ))
-            }
+            {categories.map((category, index) => (
+              <option value={category.name} key={index}>
+                {category.name}
+              </option>
+            ))}
           </select>
           <input
             type="number"
@@ -53,12 +59,21 @@ const Products = () => {
         </div>
       </div>
 
-      <ProductsList categoryFilter={categoryFilter} priceRangeFilter={priceRangeFilter} visibleProductsCount={visibleProductsCount} />
-      <div className='my-9 mx-auto'>
-        <button onClick={showMoreProducts} className="bg-blue3 px-5 py-2 md:px-[30px] md:py-[10px] rounded-md text-white hover:bg-blue2">Reba Ibindi</button>
+      <ProductsList
+        categoryFilter={categoryFilter}
+        priceRangeFilter={priceRangeFilter}
+        visibleProductsCount={visibleProductsCount}
+      />
+      <div className="my-9 mx-auto">
+        <button
+          onClick={showMoreProducts}
+          className="bg-blue3 px-5 py-2 md:px-[30px] md:py-[10px] rounded-md text-white hover:bg-blue2"
+        >
+          Reba Ibindi
+        </button>
       </div>
     </div>
   );
-}
+};
 
 export default Products;
