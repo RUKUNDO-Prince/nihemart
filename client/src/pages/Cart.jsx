@@ -19,7 +19,7 @@ const Cart = () => {
   const cart = cartItems?.cart?.items;
 
   return (
-    <div className="relative overflow-x-auto m-[10px] scrollbar">
+    <div className="relative overflow-x-auto m-[10px] scrollbar flex-1">
       {isLoading ? (
         <div className="h-screen flex items-center justify-center">
           Loading...
