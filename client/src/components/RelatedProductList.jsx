@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const RelatedProductList = ({ categoryFilter = "", productId }) => {
   const { products, isLoading, error } = useProductStore();
 
-  const [visibleProductsCount, setVisibleProductsCount] = useState(12); // Initial count of products to display
+  const [visibleProductsCount, setVisibleProductsCount] = useState(8); // Initial count of products to display
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -55,7 +55,7 @@ const RelatedProductList = ({ categoryFilter = "", productId }) => {
                 kwihangana😟!
               </h4>
             </div>
-            
+
           )}
         </>
       )}

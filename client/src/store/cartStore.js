@@ -54,7 +54,6 @@ const useCartStore = create((set) => ({
   clearCart: async () => {
     set({ isLoading: true, error: null });
     try {
-      await axios.delete("/api/cart"); // Assuming this endpoint clears the entire cart
       set({ cartItems: [], isLoading: false });
     } catch (error) {
       set({ error: error.message, isLoading: false });
