@@ -1,16 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import ProductCard from "./ProductCard";
 import useProductStore from "../store/productStore";
+import { useLocation } from "react-router-dom";
 
-const ProductsList = ({ visibleProductsCount = Infinity, categoryFilter = '', priceRangeFilter = [0, Infinity] }) => {
+const ProductsList = ({
+  categoryFilter = "",
+  priceRangeFilter = [0, Infinity],
+}) => {
   const { products, isLoading, error } = useProductStore();
 
+  const [visibleProductsCount, setVisibleProductsCount] = useState(12); // Initial count of products to display
+
+  const location = useLocation();
+
+  const showMoreProducts = () => {
+    setVisibleProductsCount((prevCount) => prevCount + 12); // Show 10 more products
+  };
+
   console.log(products);
-  const filteredProducts = products
-    ?.filter((product) => 
-      (!categoryFilter || product.category.toLowerCase() === categoryFilter.toLowerCase()) &&
-      (product.price >= priceRangeFilter[0] && product.price <= priceRangeFilter[1])
-    );
+  const filteredProducts = products?.filter(
+    (product) =>
+      (!categoryFilter ||
+        product.category.toLowerCase() === categoryFilter.toLowerCase()) &&
+      product.price >= priceRangeFilter[0] &&
+      product.price <= priceRangeFilter[1]
+  );
 
   const limitedProducts =
     visibleProductsCount !== Infinity
@@ -41,6 +55,16 @@ const ProductsList = ({ visibleProductsCount = Infinity, categoryFilter = '', pr
             </div>
           )}
         </>
+      )}
+      {(location.pathname !== "/") && (
+        <div className="my-9 mx-auto">
+          <button
+            onClick={showMoreProducts}
+            className="bg-blue3 px-5 py-2 md:px-[30px] md:py-[10px] rounded-md text-white hover:bg-blue2"
+          >
+            Reba Ibindi
+          </button>
+        </div>
       )}
     </>
   );

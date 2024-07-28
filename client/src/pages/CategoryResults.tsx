@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { ProductsList, SubHeading } from "../components";
-import { categories } from "../constants/data";
-import useProductStore from "../store/productStore";
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { ProductsList, SubHeading } from '../components';
+import useProductStore from '../store/productStore';
 
-const Products = () => {
-  const [categoryFilter, setCategoryFilter] = useState("");
-  const [priceRangeFilter, setPriceRangeFilter] = useState([0, Infinity]);
+const CategoryResults = () => {
+    const [priceRangeFilter, setPriceRangeFilter] = useState([0, Infinity]);
   const fetchProducts = useProductStore((state)=>state.fetchProducts);
+
+  const navigate = useNavigate();
 
   const handleMinPriceChange = (e) => {
     const minPrice = Number(e.target.value) || 0;
@@ -18,28 +19,17 @@ const Products = () => {
     setPriceRangeFilter([priceRangeFilter[0], maxPrice]);
   };
 
-
   useEffect(() => {
     fetchProducts();
   }, []);
-
+    const params = useParams();
+    const category = params.category;
   return (
-    <div className="p-[50px] flex-1">
+    <section className='flex-1'>
+        <div className="p-[50px] flex-1">
       <div className="flex justify-between items-center mb-4">
-        <SubHeading title="Ibicuruzwa byose" />
+        <SubHeading title={`${category?.toUpperCase()}`} />
         <div className="flex gap-4">
-          <select
-            value={categoryFilter}
-            onChange={(e) => setCategoryFilter(e.target.value)}
-            className="p-2 border rounded"
-          >
-            <option value="">All Categories</option>
-            {categories.map((category, index) => (
-              <option value={category.name} key={index}>
-                {category.name}
-              </option>
-            ))}
-          </select>
           <input
             type="number"
             placeholder="Min Price"
@@ -56,11 +46,12 @@ const Products = () => {
       </div>
 
       <ProductsList
-        categoryFilter={categoryFilter}
+        categoryFilter={category}
         priceRangeFilter={priceRangeFilter}
       />
     </div>
-  );
-};
+    </section>
+  )
+}
 
-export default Products;
+export default CategoryResults
