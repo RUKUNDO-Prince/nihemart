@@ -18,7 +18,8 @@ const Order = () => {
   const [nameError, setNameError] = useState("");
   const [phoneError, setPhoneError] = useState("");
 
-  const { setOrderDetail } = useOrderStore();
+  const { orderDetails, setOrderDetail, generateWhatsAppMessage } =
+    useOrderStore();
   const query = useQuery();
   const category = query.get("category");
 
@@ -28,11 +29,13 @@ const Order = () => {
   const handleCityChange = (event) => {
     const selectedCity = event.target.value;
     setCity(selectedCity);
+    setOrderDetail("province", event.target.value);
     setDestination("");
     if (selectedCity === "Kigali") {
       setDeliveryFee(null);
     } else if (selectedCity) {
       setDeliveryFee(2000);
+      setOrderDetail("deliveryFee", 2000);
     } else {
       setDeliveryFee(null);
     }
@@ -40,7 +43,7 @@ const Order = () => {
 
   const handleDestinationChange = (event) => {
     setDestination(event.target.value);
-    setOrderDetail("province", event.target.value);
+    setOrderDetail("city", event.target.value);
     if (event.target.value) {
       setDeliveryFee(1000);
       setOrderDetail("deliveryFee", 1000);
@@ -57,6 +60,7 @@ const Order = () => {
     if (city === "Kigali") {
       navigate(`/tumiza/${id}/kigali`);
     } else {
+      generateWhatsAppMessage();
       setShowModal(true);
     }
   };
@@ -110,6 +114,7 @@ const Order = () => {
     );
   };
 
+  console.log(orderDetails);
   return (
     <>
       <div className="px-5 md:px-10 py-5">

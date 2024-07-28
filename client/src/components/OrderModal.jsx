@@ -1,5 +1,6 @@
 import React from "react";
 import { delivery, whatsapp } from "../assets";
+import useOrderStore from "../store/OrderDetails";
 
 const OrderModal1 = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -7,6 +8,10 @@ const OrderModal1 = ({ isOpen, onClose }) => {
   const handleClose = (e) => {
     if (e.target.id === "wrapper") onClose();
   };
+
+  const { whatsappMessage} = useOrderStore();
+
+  const whatsappLink = `https://wa.me/250792412177?text=${whatsappMessage}`;
 
   return (
     <div
@@ -23,21 +28,27 @@ const OrderModal1 = ({ isOpen, onClose }) => {
         </button>
         <div className="bg-white p-10 rounded-lg md:h-[50vh] h-[60vh] w-[90%] m-auto flex flex-col gap-5 overflow-scroll">
           <p className="">
-            👏🏿Murakoze guhitamo kugura iki gicuruzwa, ibyo mwatumije biratwara amasaha 2 kugirango bibagereho
+            👏🏿Murakoze guhitamo kugura iki gicuruzwa, ibyo mwatumije biratwara
+            amasaha 2 kugirango bibagereho
           </p>
-          <p>
-            📞Turabahamagara kuri telephone mwaduhaye, mube mwiteguye{" "}
-          </p>
+          <p>📞Turabahamagara kuri telephone mwaduhaye, mube mwiteguye </p>
           <p>
             <span className="text-primary text-xl m-2">NB:</span>
-            Iyo ugize ikibazo kuri order yawe utubwira mbere yamasaha 24 tukagusubiza amafaranga yawe ukishyura transport
+            Iyo ugize ikibazo kuri order yawe utubwira mbere yamasaha 24
+            tukagusubiza amafaranga yawe ukishyura transport
           </p>
           <p className="m-auto font-semibold">
-            Niba mushaka gukomeza, mwakanda button ikurikira ubundi mugatumiza kuri whatsapp
+            Niba mushaka gukomeza, mwakanda button ikurikira ubundi mugatumiza
+            kuri whatsapp
           </p>
           <div className="flex items-center gap-3 bg-[#00FF38] rounded-lg px-[50px] py-[10px] m-auto">
             <img src={whatsapp} alt="" />
-            <a href="https://wa.me/250792412177?text=Ndashaka%20kugura%20igicuruzwa%20kuri%20nihemart" target="_blank"><button className="text-white">Whatsapp</button></a>
+            <a
+              href={whatsappLink}
+              target="_blank"
+            >
+              <button className="text-white">Whatsapp</button>
+            </a>
           </div>
         </div>
       </div>
