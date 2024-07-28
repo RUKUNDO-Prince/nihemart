@@ -175,6 +175,28 @@ const getProductById = async (req, res) => {
   } catch (error) {}
 };
 
+const getSearchResults = async (req, res) => {
+  const { searchQuery } = req.query; 
+
+  console.log(searchQuery);
+
+  const searchCriteria = {
+    $or: [
+      { name: { $regex: searchQuery, $options: "i" } }, // case-insensitive search
+      { description: { $regex: searchQuery, $options: "i" } },
+      { category: { $regex: searchQuery, $options: "i" } },
+      { subCategory: { $regex: searchQuery, $options: "i" } },
+    ],
+  };
+
+  try {
+    const products = await Product.find(searchCriteria);
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   addProduct,
   likeProduct,
@@ -183,4 +205,5 @@ module.exports = {
   getProductsByCategory,
   getAllProducts,
   getProductById,
+  getSearchResults,
 };

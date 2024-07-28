@@ -8,7 +8,7 @@ const Sidebar = () => {
     <div className="w-[15%] hidden lg:flex  flex-col justify-between">
       <ul className="mb-[20px]">
         {categories.map((category, index) => (
-          <Link to={category.link}>
+          <Link key={index} to={category.link}>
             <li
               key={index}
               className="group flex items-center justify-between gap-5 py-[6.5px] hover:text-black"

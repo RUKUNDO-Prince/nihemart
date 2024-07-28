@@ -7,6 +7,7 @@ import useProductStore from "../store/productStore";
 import { api } from "../config/axiosInstance";
 import { IoBagCheckOutline } from "react-icons/io5";
 import useCartStore from "../store/cartStore";
+import RelatedProductList from "../components/RelatedProductList";
 const Product = () => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
@@ -266,9 +267,9 @@ const Product = () => {
           </div>
           <div className="my-[20px]">
             <SubHeading title="Ibindi byerekeranye" />
-            <ProductsList
-              visibleProductsCount={4}
-              selectedId={selectedProductId}
+            <RelatedProductList
+            categoryFilter={product.category}
+            productId={product._id}
             />
           </div>
         </>
