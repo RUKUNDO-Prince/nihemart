@@ -1,23 +1,80 @@
-import React, { useState } from "react";
-import { categories } from "../constants/data";
-import { search } from "../assets";
-import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
-import { PiCaretDownBold, PiCaretUpBold } from "react-icons/pi";
+import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
+import { Oval } from "react-loader-spinner";
+import useProductStore from "../store/productStore";
+import { useQuery } from "react-query";
+import publicApi, { api } from "../config/axiosInstance";
+import { displayNumbers } from "../utils/usableFuncs";
+import { Link, useNavigate } from "react-router-dom";
 
 const Search = ({ search = true }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const navigate = useNavigate();
+
+  const [popoverOpen, setPopoverOpen] = useState(false);
+
+  useEffect(() => {
+    if (search === false) setPopoverOpen(false);
+  }, [search]);
+
+  const {
+    data: searchResults,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["search", searchQuery],
+    queryFn: async () => {
+      const response = await publicApi.get(
+        `/product/search?searchQuery=${searchQuery}`
+      );
+      const products = response.data;
+      return products;
+    },
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    enabled: searchQuery.length > 0,
+  });
+
+  useEffect(() => {
+    if (isLoading) {
+      setPopoverOpen(true);
+    } else if (searchResults?.length > 0) {
+      setPopoverOpen(true);
+    } else {
+      // setPopoverOpen(false);
+    }
+  }, [isLoading, searchResults]);
+
+  useEffect(() => {
+    if (searchQuery.length === 0) {
+      setTimeout(() => {
+        setPopoverOpen(false);
+      }, 1000);
+    }
+  }, [searchQuery]);
+
+  const handleNavigate = ()=>{
+    setTimeout(() => {
+      setPopoverOpen(false);
+    }, 200);
+  }
 
   return (
     <div className="flex items-center justify-between bg-gray-default rounded-full border-gray-10 p-1 gap-2 relative">
-      <form action="" className="flex md:gap-5 pl-5">
+      <div className="flex md:gap-5 pl-5 w-full">
         <input
           type="text"
           name="searchQuery"
           placeholder="shakisha ibicuruzwa"
-          className="bg-transparent outline-none w-full text-gray-10 text-[16px] font-medium"
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="bg-transparent outline-none w-full text-gray-10 text-[16px] font-medium flex-1"
         />
-        <button type="submit">
+        <button
+          onClick={() => {
+            setPopoverOpen((prev) => !prev);
+          }}
+        >
           <Icon
             icon={"material-symbols-light:search"}
             className="bg-primary rounded-full p-2"
@@ -25,38 +82,68 @@ const Search = ({ search = true }) => {
             fontSize={40}
           />
         </button>
-      </form>
-      {/* <div className="h-[30px] w-[2px] bg-black"></div>
-      <div className="flex flex-col items-center rounded-lg">
-        <button
-          className="flex items-center justify-between w-full px-2 duration-300 active:text-gray-60 gap-1"
-          onClick={() => setIsOpen((prev) => !prev)}
-        >
-          ibyiciro{" "}
-          <PiCaretUpBold
-            className={`${
-              isOpen ? "rotate-180" : "rotate-0"
-            } transition-all duration-300`}
-          />
-        </button>
-        {search && (
-          <div
-            className={`absolute top-20 bg-glass flex right-0 flex-col items-start rounded-lg p-2 w-[100%] z-30 ${
-              isOpen ? "scale-100" : "scale-0"
-            } origin-top transition-all duration-300 z-40`}
-          >
-            {categories.map((category, index) => (
-              <div
-                className="flex w-full justify-between p-2 border border-transparent hover:bg-glass3 cursor-pointer rounded-r-lg border-l-transparent"
-                key={index}
+      </div>
+      {/* search results */}
+      <div
+        className={`w-full xl:w-[600px] absolute xl:-right-36 top-10 mt-7 bg-gray-default border  max-h-[600px] overflow-y-scroll border-white/60 py-5 px-4 rounded-lg ${
+          popoverOpen
+            ? "-translate-y-0 opacity-100 scale-100"
+            : "-translate-y-10 opacity-0 scale-0"
+        } transition-all duration-150 z-10 origin-top`}
+      >
+        {isLoading ? (
+          <div className="w-full flex justify-center items-center">
+            <Oval
+              visible={true}
+              height="50"
+              width="50"
+              color="#FE8900"
+              secondaryColor="rgb(217, 217,217,0.3)"
+            />
+          </div>
+        ) : searchResults?.length > 0 ? (
+          <div>
+            {searchResults?.map((product, idx) => (
+              <Link onClick={()=>handleNavigate()}
+                to={`/igicuruzwa/${product._id}`}
+                key={idx}
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white flex flex-col sm:flex-row gap-3 sm:items-center justify-between hover:bg-gray-200 hover:shadow-lg rounded-lg"
               >
-                <p>{category.name}</p>
-                <img src={category.icon} className="w-[25px] h-[25px]" />
-              </div>
+                <div className="flex gap-5 items-center">
+                  <div className="flex items-center justify-center w-[60px] min-w-[60px] min-h-[60px] rounded-full border border-primary">
+                    <img
+                      src={`${api + "/" + product?.photos[0]}`}
+                      className=" w-full object-contain hover:scale-105 transition-all duration-75"
+                      alt="img"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="px-2 py-1 flex items-center justify-center bg-gray-20 rounded-xl">
+                      <h2 className="text-xs leading-3 font-medium text-gray-default">
+                        {product.category}
+                      </h2>
+                    </div>
+                    <div className="flex mt-1">
+                      <h2 className="text-sm text-black">{product.name}</h2>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col pl-20 sm:pl-0">
+                  {product.quantity > 0 ? <h2 className="text-black"><span className="text-blueGradient">instock: </span>{product.quantity} items</h2> : <h2 className="text-red-600/90">Not available</h2>}
+                  <h2 className="text-black">
+                    price:{displayNumbers(product.price)} frw
+                  </h2>
+                </div>
+              </Link>
             ))}
           </div>
+        ) : (
+          <div>
+            <div>no Results found</div>
+          </div>
         )}
-      </div> */}
+      </div>
     </div>
   );
 };

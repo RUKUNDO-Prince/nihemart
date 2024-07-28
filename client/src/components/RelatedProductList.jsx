@@ -1,27 +1,21 @@
 import React, { useState } from "react";
 import ProductCard from "./ProductCard";
 import useProductStore from "../store/productStore";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const ProductsList = ({
-  categoryFilter = "",
-  priceRangeFilter = [0, Infinity],
-}) => {
+const RelatedProductList = ({ categoryFilter = "", productId }) => {
   const { products, isLoading, error } = useProductStore();
 
-  const [visibleProductsCount, setVisibleProductsCount] = useState(12); // Initial count of products to display
+  const [visibleProductsCount, setVisibleProductsCount] = useState(8); // Initial count of products to display
 
   const location = useLocation();
+  const navigate = useNavigate();
 
-  const showMoreProducts = () => {
-    setVisibleProductsCount((prevCount) => prevCount + 12); // Show 10 more products
-  };
   const filteredProducts = products?.filter(
     (product) =>
       (!categoryFilter ||
         product.category.toLowerCase() === categoryFilter.toLowerCase()) &&
-      product.price >= priceRangeFilter[0] &&
-      product.price <= priceRangeFilter[1]
+      product._id !== productId
   );
 
   const limitedProducts =
@@ -29,6 +23,13 @@ const ProductsList = ({
       ? filteredProducts?.slice(0, visibleProductsCount)
       : filteredProducts;
 
+  const showMoreProducts = () => {
+    if (filteredProducts.length > 0) {
+      setVisibleProductsCount((prevCount) => prevCount + 12); // Show 10 more products
+    } else {
+      navigate("/ibicuruzwa-byose");
+    }
+  };
   return (
     <>
       {isLoading ? (
@@ -49,12 +50,16 @@ const ProductsList = ({
             </div>
           ) : (
             <div className="flex items-center justify-center mt-[40px]">
-              <h4>Nta bicuruzwa byari byongerwamo, mukomeze kwihangana😟!</h4>
+              <h4>
+                Nta bicuruzwa byari byongerwamo byerekeye iyi category, mukomeze
+                kwihangana😟!
+              </h4>
             </div>
+
           )}
         </>
       )}
-      {(location.pathname !== "/") && (
+      {location.pathname !== "/" && (
         <div className="my-9 mx-auto">
           <button
             onClick={showMoreProducts}
@@ -68,4 +73,4 @@ const ProductsList = ({
   );
 };
 
-export default ProductsList;
+export default RelatedProductList;

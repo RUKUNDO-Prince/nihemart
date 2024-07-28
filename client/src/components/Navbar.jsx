@@ -108,7 +108,7 @@ const Navbar = () => {
           search ? "top-0" : "-top-[100%]"
         } transition-all duration-100`}
       >
-        <div className=" border w-full md:w-[60%]">
+        <div className=" w-full md:w-[60%]">
           <Search search={search} />
         </div>
         <div

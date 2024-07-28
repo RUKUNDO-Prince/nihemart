@@ -1,6 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { OrderModal1 } from "../components";
+import useOrderStore from "../store/OrderDetails";
+
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
 
 const Order = () => {
   const [showModal, setShowModal] = useState(false);
@@ -13,17 +18,24 @@ const Order = () => {
   const [nameError, setNameError] = useState("");
   const [phoneError, setPhoneError] = useState("");
 
+  const { orderDetails, setOrderDetail, generateWhatsAppMessage } =
+    useOrderStore();
+  const query = useQuery();
+  const category = query.get("category");
+
   const navigate = useNavigate();
   const { id } = useParams();
 
   const handleCityChange = (event) => {
     const selectedCity = event.target.value;
     setCity(selectedCity);
+    setOrderDetail("province", event.target.value);
     setDestination("");
     if (selectedCity === "Kigali") {
       setDeliveryFee(null);
     } else if (selectedCity) {
       setDeliveryFee(2000);
+      setOrderDetail("deliveryFee", 2000);
     } else {
       setDeliveryFee(null);
     }
@@ -31,8 +43,10 @@ const Order = () => {
 
   const handleDestinationChange = (event) => {
     setDestination(event.target.value);
+    setOrderDetail("city", event.target.value);
     if (event.target.value) {
       setDeliveryFee(1000);
+      setOrderDetail("deliveryFee", 1000);
     } else {
       setDeliveryFee(null);
     }
@@ -46,6 +60,7 @@ const Order = () => {
     if (city === "Kigali") {
       navigate(`/tumiza/${id}/kigali`);
     } else {
+      generateWhatsAppMessage();
       setShowModal(true);
     }
   };
@@ -69,6 +84,7 @@ const Order = () => {
     if (!validatePhone(value)) {
       setPhoneError("Nimero igomba kuba imibare icumi.");
     } else {
+      setOrderDetail("phone", value);
       setPhoneError("");
     }
   };
@@ -78,8 +94,11 @@ const Order = () => {
     setName(value);
 
     if (!validateName(value)) {
-      setNameError("Izina rigomba kuba rigizwe n'inyuguti n'imyanya gusa, kandi ntago rigomba kuba ririmo ubusa.");
+      setNameError(
+        "Izina rigomba kuba rigizwe n'inyuguti n'imyanya gusa, kandi ntago rigomba kuba ririmo ubusa."
+      );
     } else {
+      setOrderDetail("name", value);
       setNameError("");
     }
   };
@@ -95,11 +114,12 @@ const Order = () => {
     );
   };
 
+  console.log(orderDetails);
   return (
     <>
       <div className="px-5 md:px-10 py-5">
         <p className="text-gray-90 font-regular text-[14px] font-poppins">
-          / Gaming / Tumiza / <span className="text-black">Info</span>
+          / {category} / Tumiza / <span className="text-black">Info</span>
         </p>
         <p className="text-primary font-poppins font-semibold text-[16px] my-[20px]">
           Uzuza form ikurikira 🖋️
@@ -121,7 +141,9 @@ const Order = () => {
                 value={name}
                 onChange={handleNameChange}
               />
-              {nameError && <div className="text-red-500 text-sm">{nameError}</div>}
+              {nameError && (
+                <div className="text-red-500 text-sm">{nameError}</div>
+              )}
             </div>
             {/* <div className="flex flex-col gap-2 mt-2">
               <label htmlFor="">Email</label>
@@ -142,7 +164,9 @@ const Order = () => {
                 value={phone}
                 onChange={handlePhoneChange}
               />
-              {phoneError && <div className="text-red-500 text-sm">{phoneError}</div>}
+              {phoneError && (
+                <div className="text-red-500 text-sm">{phoneError}</div>
+              )}
             </div>
           </form>
           <form
@@ -188,7 +212,9 @@ const Order = () => {
             )}
             {deliveryFee !== null && (
               <div className="flex flex-col gap-2">
-                <label htmlFor="" className="mt-2">Amafaranga yo kubikugezaho (frw)</label>
+                <label htmlFor="" className="mt-2">
+                  Amafaranga yo kubikugezaho (frw)
+                </label>
                 <input
                   type="text"
                   className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"

@@ -34,6 +34,22 @@ const useProductStore = create((set) => ({
     }
   },
 
+  getSearchResults: async (searchQuery) => {
+    set({ isLoading: true, error: null });
+      try {
+        const response = await publicApi.get(
+          `/product/search?searchQuery=${searchQuery}`
+        );
+
+        const products = response.data;
+        return products;
+      } catch (error) {
+        set({ error: error.message, isLoading: false });
+      } finally {
+        set({ isLoading: false });
+      }
+  },
+
   // Additional product store functionalities can go here
 }));
 

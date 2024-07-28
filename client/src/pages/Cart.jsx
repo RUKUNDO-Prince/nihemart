@@ -7,13 +7,23 @@ import useAuthStore from "../store/authStore";
 import { displayNumbers } from "../utils/usableFuncs";
 
 const Cart = () => {
-  const { cartItems, addToCart, fetchCartItems, removeFromCart, isLoading } =
-    useCartStore();
+  const {
+    cartItems,
+    addToCart,
+    fetchCartItems,
+    removeFromCart,
+    isLoading,
+    clearCart,
+  } = useCartStore();
 
-  const user = useAuthStore((state)=>state.user)
+  const user = useAuthStore((state) => state.user);
 
   useEffect(() => {
     fetchCartItems();
+  }, [user]);
+
+  useEffect(() => {
+    if (!user) clearCart();
   }, [user]);
 
   const cart = cartItems?.cart?.items;
@@ -24,7 +34,7 @@ const Cart = () => {
         <div className="h-screen flex items-center justify-center">
           Loading...
         </div>
-      ) : cartItems ? (
+      ) : cartItems?.length !== 0 ? (
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 min-w-[1012px]">
           <thead className="text-[16px] text-black font-poppins drop-shadow-lg my-[20px]">
             <tr className="shadow-md">
@@ -43,7 +53,7 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
-            {cartItems ? (
+            {cart.length !== 0 ? (
               cart?.map((item, index) => (
                 <tr key={index} className="bg-white border-b">
                   <th
@@ -57,9 +67,15 @@ const Cart = () => {
                     />{" "}
                     <p className="text-[16px] text-black">{item.name}</p>
                   </th>
-                  <td className="px-6 py-4">{displayNumbers(item.price)} Frw</td>
-                  <td className="px-6 py-4">{displayNumbers(item.quantity)} items</td>
-                  <td className="px-6 py-4">{displayNumbers(item.subtotal)} Frw</td>
+                  <td className="px-6 py-4">
+                    {displayNumbers(item.price)} Frw
+                  </td>
+                  <td className="px-6 py-4">
+                    {displayNumbers(item.quantity)} items
+                  </td>
+                  <td className="px-6 py-4">
+                    {displayNumbers(item.subtotal)} Frw
+                  </td>
                 </tr>
               ))
             ) : (

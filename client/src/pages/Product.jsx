@@ -7,6 +7,8 @@ import useProductStore from "../store/productStore";
 import { api } from "../config/axiosInstance";
 import { IoBagCheckOutline } from "react-icons/io5";
 import useCartStore from "../store/cartStore";
+import RelatedProductList from "../components/RelatedProductList";
+import useOrderStore from "../store/OrderDetails";
 const Product = () => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
@@ -15,6 +17,7 @@ const Product = () => {
   const [currentPrice, setCurrentPrice] = useState(0);
   const addToCart = useCartStore((state) => state.addToCart);
   const [selectedValues, setSelectedValues] = useState({});
+  const { addProduct } = useOrderStore();
 
   const params = useParams();
   const selectedProductId = params.id;
@@ -82,7 +85,14 @@ const Product = () => {
   };
 
   const handleOrderNowClick = () => {
-    navigate(`/tumiza/${selectedProductId}?quantity=${quantity}`);
+    const productDetails = {
+      name:product.name,
+      price: currentPrice,
+      quantity:quantity,
+      variation:Object.values(selectedValues),
+    }
+    addProduct(productDetails)
+    navigate(`/tumiza/${selectedProductId}?quantity=${quantity}&category=${product.category}`);
   };
 
   const handleNavigateToHelp = () => {
@@ -266,9 +276,9 @@ const Product = () => {
           </div>
           <div className="my-[20px]">
             <SubHeading title="Ibindi byerekeranye" />
-            <ProductsList
-              visibleProductsCount={4}
-              selectedId={selectedProductId}
+            <RelatedProductList
+              categoryFilter={product.category}
+              productId={product._id}
             />
           </div>
         </>

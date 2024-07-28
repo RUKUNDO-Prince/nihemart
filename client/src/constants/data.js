@@ -4,67 +4,67 @@ export const categories = [
     {
         name: "Imiringa",
         icon: imiringa,
-        link: "ibicuruzwa-byose"
+        link: "categories/imiringa"
     },
     {
         name: "Amasaha",
         icon: amasaha,
-        link: "ibicuruzwa-byose"
+        link: "categories/amasaha"
     },
     {
         name: "Ibikoresho byo mu rugo",
         icon: rugo,
-        link: "ibicuruzwa-byose"
+        link: "categories/ibikoresho-byo-mu-rugo"
     },
     {
         name: "Abana",
         icon: abana,
-        link: "ibicuruzwa-byose"
+        link: "categories/abana"
     },
     {
         name: "Ibikoresho bya siporo",
         icon: siporo,
-        link: "ibicuruzwa-byose"
+        link: "categories/siporp"
     },
     {
         name: "Ibikoresho by'ibinyabiziga",
         icon: ibinyabiziga,
-        link: "ibicuruzwa-byose"
+        link: "categories/ibinyabizinga"
     },
     {
         name: "Ibikapu",
         icon: ibikapu,
-        link: "ibicuruzwa-byose"
+        link: "categories/ibikapu"
     },
     {
         name: "Ubwiza",
         icon: ubwiza,
-        link: "ibicuruzwa-byose"
+        link: "categories/ubwiza"
     },
     {
         name: "Imisatsi",
         icon: imisatsi,
-        link: "ibicuruzwa-byose"
+        link: "categories/imisatsi"
     },
     {
         name: "Ikoranabuhanga",
         icon: ikoranabuhanga,
-        link: "ibicuruzwa-byose"
+        link: "categories/ikoranabuhanga"
     },
     {
         name: "Ubuzima",
         icon: ubuzima,
-        link: "ibicuruzwa-byose"
+        link: "categories/ubuzima"
     },
     {
         name: "Imyambaro",
         icon: imyambaro,
-        link: "ibicuruzwa-byose"
+        link: "categories/imyambaro"
     },
     {
         name: "Ibindi",
         icon: ibindi,
-        link: "ibicuruzwa-byose"
+        link: "/ibicuruzwa-byose"
     },
 ];
 

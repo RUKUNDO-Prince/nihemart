@@ -6,7 +6,6 @@ import useProductStore from "../store/productStore";
 const Products = () => {
   const [categoryFilter, setCategoryFilter] = useState("");
   const [priceRangeFilter, setPriceRangeFilter] = useState([0, Infinity]);
-  const [visibleProductsCount, setVisibleProductsCount] = useState(12); // Initial count of products to display
   const fetchProducts = useProductStore((state)=>state.fetchProducts);
 
   const handleMinPriceChange = (e) => {
@@ -19,9 +18,6 @@ const Products = () => {
     setPriceRangeFilter([priceRangeFilter[0], maxPrice]);
   };
 
-  const showMoreProducts = () => {
-    setVisibleProductsCount((prevCount) => prevCount + 12); // Show 10 more products
-  };
 
   useEffect(() => {
     fetchProducts();
@@ -62,16 +58,7 @@ const Products = () => {
       <ProductsList
         categoryFilter={categoryFilter}
         priceRangeFilter={priceRangeFilter}
-        visibleProductsCount={visibleProductsCount}
       />
-      <div className="my-9 mx-auto">
-        <button
-          onClick={showMoreProducts}
-          className="bg-blue3 px-5 py-2 md:px-[30px] md:py-[10px] rounded-md text-white hover:bg-blue2"
-        >
-          Reba Ibindi
-        </button>
-      </div>
     </div>
   );
 };

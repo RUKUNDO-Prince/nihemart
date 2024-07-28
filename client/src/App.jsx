@@ -4,6 +4,7 @@ import { Navbar, Footer } from './components'
 import { Home,  About, Contact, Help, Product, Products, NotFound, Cart, Likes, Order, Categories, OrderKigali } from './pages'
 import 'react-toastify/dist/ReactToastify.css';
 import { Toaster } from 'react-hot-toast';
+import CategoryResults from './pages/CategoryResults';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path={"/igicuruzwa/:id"} element={<Product />} />
         <Route path={"/ibicuruzwa-byose"} element={<Products />} />
         <Route path={"/categories"} element={<Categories />} />
+        <Route path={"/categories/:category"} element={<CategoryResults />} />
         <Route path={"/agatebo"} element={<Cart />} />
         <Route path={"/ibyo-wakunze"} element={<Likes />} />
         <Route path={"/tumiza/:id"} element={<Order />} />
