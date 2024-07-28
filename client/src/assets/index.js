@@ -10,7 +10,6 @@ import spain from './spain.svg'
 import france from './france.svg'
 import rwanda from './rwanda.svg'
 import korea from './korea.svg'
-import apple from './apple.svg'
 import nike from './nike.svg'
 import iphone from './iphone.png'
 import shoes from './shoes.png'
@@ -94,7 +93,6 @@ export {
     france,
     rwanda,
     korea,
-    apple,
     nike,
     iphone,
     shoes,
