@@ -1,5 +1,5 @@
 import React from "react";
-import { help, help2, search } from "../assets";
+import { help2, search } from "../assets";
 import { helpData } from "../constants/data";
 
 const Help = () => {
