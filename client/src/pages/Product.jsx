@@ -279,6 +279,7 @@ const Product = () => {
             <RelatedProductList
               categoryFilter={product.category}
               productId={product._id}
+              showProducts={4}
             />
           </div>
         </>
