@@ -3,6 +3,7 @@ import { Hero, Sidebar, Products, Arrivals, Cta, Categories } from "../component
 import { categories } from "../constants/data";
 import useProductStore from "../store/productStore";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const { fetchProducts } = useProductStore();
@@ -36,15 +37,17 @@ const Home = () => {
             className="mb-[20px] flex gap-5 overflow-x-scroll py-2 scrollbar-hide mx-5"
           >
             {categories.map((category, index) => (
-              <li
-                key={index}
-                className={`flex items-center justify-between gap-5 py-2 border border-transparent rounded-md px-3 text-nowrap hover:border hover:border-gray-80 transition-all delay-75 duration-75 ${
-                  currentCategory === index ? "bg-primary text-white" : ""
-                }`}
-                onClick={() => setCurrentCategory(index)}
-              >
-                {category.name}
-              </li>
+              <Link key={index} to={category.link}>
+                <li
+                  key={index}
+                  className={`flex items-center justify-between gap-5 py-2 border border-transparent rounded-md px-3 text-nowrap hover:border hover:border-gray-80 transition-all delay-75 duration-75 ${
+                    currentCategory === index ? "bg-primary text-white" : ""
+                  }`}
+                  onClick={() => setCurrentCategory(index)}
+                >
+                  {category.name}
+                </li>
+              </Link>
             ))}
           </ul>
           <button
