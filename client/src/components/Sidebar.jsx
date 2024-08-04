@@ -10,7 +10,6 @@ const Sidebar = () => {
         {categories.map((category, index) => (
           <Link key={index} to={category.link}>
             <li
-              key={index}
               className="group flex items-center justify-between gap-5 py-[6.5px] hover:text-black"
             >
               {category.name}
