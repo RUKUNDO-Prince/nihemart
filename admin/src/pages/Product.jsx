@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { FaPlus, FaMinus } from "react-icons/fa6";
 import { ProductsList, SubHeading } from "../components";
 import { useParams, useNavigate } from "react-router-dom";
 import useProductStore from "../store/productStore";
 import { api } from "../config/axiosInstance";
-import { IoBagCheckOutline } from "react-icons/io5";
 
 const Product = () => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(null);
-  const { getProductById, fetchProducts, isLoading } = useProductStore();
+  const {
+    getProductById,
+    fetchProducts,
+    deleteProduct,
+    isLoading,
+  } = useProductStore();
   const [currentPrice, setCurrentPrice] = useState(0);
   const [selectedValues, setSelectedValues] = useState({});
 
@@ -65,12 +68,10 @@ const Product = () => {
     );
   };
 
-  // setting the current price based on selected attribute values
   useEffect(() => {
     getPrice();
   }, [selectedValues]);
 
-  // Function to handle attribute value changes
   const handleValueChange = (attrName, value) => {
     setSelectedValues((prevValues) => ({
       ...prevValues,
@@ -78,22 +79,11 @@ const Product = () => {
     }));
   };
 
-  const handleNavigateToHelp = () => {
-    navigate("/ubufasha");
+  const handleDeleteProduct = async () => {
+    await deleteProduct(selectedProductId);
+    navigate("/products");
   };
 
-  const incrementQuantity = () => {
-    setQuantity((prev) => {
-      if (prev < product.quantity) {
-        return prev + 1;
-      }
-      return prev;
-    });
-  };
-
-  const decrementQuantity = () => {
-    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
-  };
   return (
     <div className=" px-5 md:px-10 font-poppins">
       {isLoading ? (
@@ -109,7 +99,6 @@ const Product = () => {
                 <span className="text-black">{product.name}</span>
               </p>
               <div className="flex flex-col lg:flex-row justify-between md:gap-5">
-                {/* images container */}
                 <div className="flex lg:w-1/2 flex-col md:flex-row">
                   <div className=" md:min-w-[100px] w-full md:w-[15%] md:h-[560px] flex gap-5 flex-row md:flex-col justify-between md:justify-start my-[10px] overflow-x-auto no-scrollbar ">
                     {product?.photos?.map((img, index) => (
@@ -154,8 +143,18 @@ const Product = () => {
                   </p>
                   <hr />
                   <div className="border-[2px] border-gray-80 rounded-lg p-4 flex items-start gap-5">
-                      <button className="bg-blue3 px-5 py-2 md:px-[30px] md:py-[10px] rounded-md text-white hover:bg-blue2 transition-all duration-600">Updadte Product</button>
-                      <button className="bg-primary hover:bg-opacity-[60%] transition-all duration-600 px-5 py-2 md:px-[30px] md:py-[10px] rounded-md text-white">Delete Product</button>
+                    <button
+                      className="bg-blue3 px-5 py-2 md:px-[30px] md:py-[10px] rounded-md text-white hover:bg-blue2 transition-all duration-600"
+                      onClick={() => navigate(`/updateProduct/${selectedProductId}`)}
+                    >
+                      Update Product
+                    </button>
+                    <button
+                      className="bg-primary hover:bg-opacity-[60%] transition-all duration-600 px-5 py-2 md:px-[30px] md:py-[10px] rounded-md text-white"
+                      onClick={handleDeleteProduct}
+                    >
+                      Delete Product
+                    </button>
                   </div>
                 </div>
               </div>

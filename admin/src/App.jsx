@@ -17,6 +17,7 @@ import {
   Products,
   Profile,
   Signup,
+  UpdateProduct,
 } from "./pages";
 import { Footer, Navbar } from "./components";
 import useAuthStore from "./store/authStore";
@@ -55,6 +56,10 @@ const App = () => {
         <Route
           path="/addProduct"
           element={isAuthenticated ? <AddProduct /> : <Navigate to="/signup" />}
+        />
+        <Route
+          path="/updateProduct/:id"
+          element={isAuthenticated ? <UpdateProduct /> : <Navigate to="/signup" />}
         />
         <Route
           path="/notifications"

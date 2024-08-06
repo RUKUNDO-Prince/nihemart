@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import SubHeading from "../components/SubHeading";
-import { ProductsList } from "../components";
+import { ProductsList, SubHeading } from "../components";
 import { plus } from "../assets";
 import { Link, useNavigate } from "react-router-dom";
 import useAuthStore from "../store/authStore";
@@ -29,9 +28,7 @@ const Products = () => {
         </Link>
       </div>
       <ProductsList />
-      {products?.length !==0 && <button className="flex items-center bg-blue3 py-3 px-8 rounded-lg outline-none text-white my-0 float-end hover:bg-blue2">
-        View More
-      </button>}
+      
     </div>
   );
 };
