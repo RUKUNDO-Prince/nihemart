@@ -50,6 +50,8 @@ const orderDetailsSchema = new mongoose.Schema({
     enum: ["processing", "completed", "cancelled"],
     default: "processing",
   },
+},{
+  timestamps: true,
 });
 
 // Create the model from the schema and export it
