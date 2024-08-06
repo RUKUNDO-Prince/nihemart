@@ -27,7 +27,7 @@ export const categories = [
     subcategories: ["ibikinisho", "ibipupe", "ibifasha kwiga", "ibindi"],
   },
   {
-    category: "IBIKORESHO BYOMURUGO",
+    category: "IBIKORESHO BYO MURUGO",
     subcategories: [
       "mugikoni",
       "muri saloon",
@@ -59,7 +59,7 @@ export const categories = [
     subcategories: ["imiti y’umusatsi", "ibikoresho by’umusatsi"],
   },
   {
-    category: "IKORANA BUHANGA",
+    category: "IKORANABUHANGA",
     subcategories: [
       "phones & accessories",
       "computer & accessories",
