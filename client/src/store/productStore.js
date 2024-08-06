@@ -1,5 +1,7 @@
 import { create } from "zustand";
-import publicApi from "../config/axiosInstance";
+import publicApi, { authorizedApi } from "../config/axiosInstance";
+import useAuthStore from "./authStore";
+import toast from "react-hot-toast";
 
 const useProductStore = create((set) => ({
   products: [],
@@ -36,19 +38,21 @@ const useProductStore = create((set) => ({
 
   getSearchResults: async (searchQuery) => {
     set({ isLoading: true, error: null });
-      try {
-        const response = await publicApi.get(
-          `/product/search?searchQuery=${searchQuery}`
-        );
+    try {
+      const response = await publicApi.get(
+        `/product/search?searchQuery=${searchQuery}`
+      );
 
-        const products = response.data;
-        return products;
-      } catch (error) {
-        set({ error: error.message, isLoading: false });
-      } finally {
-        set({ isLoading: false });
-      }
+      const products = response.data;
+      return products;
+    } catch (error) {
+      set({ error: error.message, isLoading: false });
+    } finally {
+      set({ isLoading: false });
+    }
   },
+
+  
 
   // Additional product store functionalities can go here
 }));

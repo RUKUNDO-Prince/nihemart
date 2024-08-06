@@ -53,7 +53,7 @@ const likeProduct = async (req, res) => {
     const { productId } = req.params;
     const userId = req.user._id;
 
-    const { name, email, phoneNumber, city, destination, fee } = req.body;
+    const { name, email, phone } = req.body;
 
     const product = await Product.findById(productId);
 
@@ -72,24 +72,14 @@ const likeProduct = async (req, res) => {
       userInfo: {
         name,
         email,
-        phoneNumber,
-        location: { city, destination, fee },
+        phone,
       },
     });
     await product.save();
-
-    const userInfo = {
-      name,
-      email,
-      phoneNumber,
-      location: { city, destination, fee },
-    };
-    adminPanelDisplay(userInfo);
-
     res.status(200).json({ message: "Product liked successfully", product });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "not liking the product" });
   }
 };
 

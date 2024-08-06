@@ -15,7 +15,7 @@ const ProfileDropdown = () => {
         <ul className="flex flex-col gap-3 p-2">
           {isAuthenticated ? (
             <div>
-              <h2>{user}</h2>
+              <h2>{user?.name}</h2>
             </div>
           ) : (
             <div>
