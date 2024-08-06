@@ -28,7 +28,7 @@ const Products = () => {
           Add Product <img src={plus} className="pl-2" alt="plus-icon" />
         </Link>
       </div>
-      <ProductsList maxProducts={4} />
+      <ProductsList />
       {products?.length !==0 && <button className="flex items-center bg-blue3 py-3 px-8 rounded-lg outline-none text-white my-0 float-end hover:bg-blue2">
         View More
       </button>}
