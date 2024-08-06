@@ -7,17 +7,17 @@ import { categories } from "../constants/data";
 
 const UpdateProduct = () => {
   const [product, setProduct] = useState({
-    name: '',
-    description: '',
+    name: "",
+    description: "",
     price: 0,
     quantity: 0,
-    category: '',
-    subCategory: '',
+    category: "",
+    subCategory: "",
     attributes: [],
     variations: [],
-    discountType: '',
+    discountType: "",
     discount: 0,
-    photos: []
+    photos: [],
   });
   const [selectedImage, setSelectedImage] = useState(null);
   const [subcategories, setSubcategories] = useState([]);
@@ -30,7 +30,9 @@ const UpdateProduct = () => {
     const productData = await getProductById(selectedProductId);
     setProduct(productData);
     setSelectedImage(productData.photos[0]);
-    const selectedCategoryObject = categories.find(cat => cat.category === productData.category);
+    const selectedCategoryObject = categories.find(
+      (cat) => cat.category === productData.category
+    );
     if (selectedCategoryObject) {
       setSubcategories(selectedCategoryObject.subcategories);
     }
@@ -58,9 +60,11 @@ const UpdateProduct = () => {
     setProduct((prevProduct) => ({
       ...prevProduct,
       category: selectedCategory,
-      subCategory: ''
+      subCategory: "",
     }));
-    const selectedCategoryObject = categories.find(cat => cat.category === selectedCategory);
+    const selectedCategoryObject = categories.find(
+      (cat) => cat.category === selectedCategory
+    );
     if (selectedCategoryObject) {
       setSubcategories(selectedCategoryObject.subcategories);
     } else {
@@ -142,38 +146,68 @@ const UpdateProduct = () => {
                   className="w-full px-2 py-1 border rounded"
                 />
               </label>
-              <div className="my-2">
-                <p>Product category</p>
-                <select
-                  name="category"
-                  value={product.category}
-                  onChange={handleCategoryChange}
-                  className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-10 rounded-md outline-none w-[50%]"
-                >
-                  <option value="">Choose the category</option>
-                  {categories.map((category, index) => (
-                    <option key={index} value={category.category}>
-                      {category.category}
-                    </option>
-                  ))}
-                </select>
+              <div className="flex gap-5">
+                <div className="flex flex-col w-1/2">
+                  <div className=" w-full flex flex-col">
+                    <p>Product category</p>
+                    <select
+                      name="category"
+                      value={product.category}
+                      onChange={handleCategoryChange}
+                      className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-10 rounded-md outline-none"
+                    >
+                      <option value="">Choose the category</option>
+                      {categories.map((category, index) => (
+                        <option key={index} value={category.category}>
+                          {category.category}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className=" w-full">
+                    <p>Product subcategory</p>
+                    <select
+                      name="subCategory"
+                      value={product.subCategory}
+                      onChange={handleInputChange}
+                      className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-10 rounded-md outline-none w-full"
+                    >
+                      <option value="">Choose the subcategory</option>
+                      {subcategories.map((subcategory, index) => (
+                        <option key={index} value={subcategory}>
+                          {subcategory}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <div className="flex flex-col w-1/2">
+                  <div className="flex flex-col">
+                    <label>Discount</label>
+                    <input
+                      className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-10 rounded-md outline-none"
+                      type="text"
+                      name="discount"
+                      placeholder={`${product.discount}`}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <label>Discount Type</label>
+                    <select
+                      onChange={handleInputChange}
+                      name="discountType"
+                      value={product.discountType}
+                      className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-10 rounded-md outline-none"
+                    >
+                      <option value="">discount Type</option>
+                      <option value="percentage">Percentage</option>
+                      <option value="amount">Amount</option>
+                    </select>
+                  </div>
+                </div>
               </div>
-              <div className="my-2">
-                <p>Product subcategory</p>
-                <select
-                  name="subCategory"
-                  value={product.subCategory}
-                  onChange={handleInputChange}
-                  className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-10 rounded-md outline-none w-[50%]"
-                >
-                  <option value="">Choose the subcategory</option>
-                  {subcategories.map((subcategory, index) => (
-                    <option key={index} value={subcategory}>
-                      {subcategory}
-                    </option>
-                  ))}
-                </select>
-              </div>
+
               <button
                 className="bg-blue3 px-5 py-2 rounded-md text-white hover:bg-blue2 transition-all duration-600 mt-4"
                 onClick={handleUpdateProduct}
