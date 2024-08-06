@@ -9,17 +9,16 @@ const OrderKigali = () => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
-  const { orderDetails } = useOrderStore();
+  const { orderDetails, kigaliOrder, clearOrderDetails } = useOrderStore();
 
   console.log("this is the order details: ", orderDetails);
 
-  const handleBuyClick = () => {
-    {
-      //   setShowModal(true);
-      toast.success(
-        "Murakoze kugura iki gicuruzwa, ibyo mwatumije birabageraho vuba!"
-      );
-    }
+  const handleBuyClick = async () => {
+    await kigaliOrder();
+
+    setTimeout(() => {
+      clearOrderDetails();
+    }, 2000);
   };
 
   const productDetails = orderDetails.productDetails;
@@ -33,11 +32,11 @@ const OrderKigali = () => {
       <div className="flex-1 m-[20px]">
         <div>
           <h1>Ibyo ugiye kugura:</h1>
-          <div className="grid grid-cols-3">
+          <div className="grid grid-cols-3 gap-3 mt-3">
             {productDetails?.length > 0 &&
               productDetails?.map((product, idx) => (
                 <div
-                  className=" border border-primary px-3 py-2 mt-2 w- rounded-lg"
+                  className=" border border-primary px-3 py-2 w- rounded-lg"
                   key={idx}
                 >
                   <h2 className="text-black font-bold flex items-center justify-between border-b pb-1">

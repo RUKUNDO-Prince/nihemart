@@ -36,7 +36,6 @@ const orderDetailsSchema = new mongoose.Schema({
   },
   city: {
     type: String,
-    required: true,
   },
   deliveryFee: {
     type: Number,

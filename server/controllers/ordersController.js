@@ -16,14 +16,14 @@ const addOrder = async (req, res) => {
     await order.save();
     res.status(201).json({ message: "Order added successfully" });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({ error: "failed to order, try again from home" });
   }
 };
 
 // Update the status of an order
 const updateOrderStatus = async (req, res) => {
-    const id = req.params.id;
-    const newStatus = req.body.status
+  const id = req.params.id;
+  const newStatus = req.body.status;
   try {
     const order = await OrderDetails.findByIdAndUpdate(
       id,
@@ -33,7 +33,7 @@ const updateOrderStatus = async (req, res) => {
     if (!order) {
       return res.status(404).json({ error: "Order not found" });
     }
-    res.status(201).json({message:"status updated successfully"});
+    res.status(201).json({ message: "status updated successfully" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -61,7 +61,7 @@ const getAllOrders = async (req, res) => {
 
 // Delete an order
 const deleteOrder = async (req, res) => {
-    const id = req.params.id
+  const id = req.params.id;
   try {
     const order = await OrderDetails.findByIdAndDelete(id);
     if (!order) {

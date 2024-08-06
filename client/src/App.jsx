@@ -22,6 +22,7 @@ const App = () => {
         <Route path={"/agatebo"} element={<Cart />} />
         <Route path={"/ibyo-wakunze"} element={<Likes />} />
         <Route path={"/tumiza/:id"} element={<Order />} />
+        <Route path={"/tumiza/agatebo"} element={<Order />} />
         <Route path={"/tumiza/:id/kigali"} element={<OrderKigali />} />
         <Route path={"*"} element={<NotFound />} />
       </Routes>

@@ -119,7 +119,8 @@ const Order = () => {
     <>
       <div className="px-5 md:px-10 py-5">
         <p className="text-gray-90 font-regular text-[14px] font-poppins">
-          / {category} / Tumiza / <span className="text-black">Info</span>
+          / {category ? category : "agatebo"} / Tumiza /{" "}
+          <span className="text-black">Info</span>
         </p>
         <p className="text-primary font-poppins font-semibold text-[16px] my-[20px]">
           Uzuza form ikurikira 🖋️
@@ -145,15 +146,6 @@ const Order = () => {
                 <div className="text-red-500 text-sm">{nameError}</div>
               )}
             </div>
-            {/* <div className="flex flex-col gap-2 mt-2">
-              <label htmlFor="">Email</label>
-              <input
-                type="email"
-                className="bg-[#D9D9D9] bg-opacity-[38%] outline-none w-full p-[10px] rounded-md"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div> */}
             <div className="flex flex-col gap-2 mt-2">
               <label htmlFor="">Numero ya telephone *</label>
               <input

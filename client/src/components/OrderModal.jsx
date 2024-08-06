@@ -9,10 +9,25 @@ const OrderModal1 = ({ isOpen, onClose }) => {
     if (e.target.id === "wrapper") onClose();
   };
 
-  const { whatsappMessage} = useOrderStore();
+  const {
+    whatsappMessage,
+    orderDetails,
+    kigaliOrder,
+    generalOrder,
+    clearOrderDetails,
+    success
+  } = useOrderStore();
 
   const whatsappLink = `https://wa.me/250792412177?text=${whatsappMessage}`;
 
+  const handleOrder = async () => {
+     await generalOrder();
+    if (success) {
+      setTimeout(() => {
+        window.open(whatsappLink, "_blank", "noopener,noreferrer");
+      }, 2000);
+    }
+  };
   return (
     <div
       className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center"
@@ -43,10 +58,7 @@ const OrderModal1 = ({ isOpen, onClose }) => {
           </p>
           <div className="flex items-center gap-3 bg-[#00FF38] rounded-lg px-[50px] py-[10px] m-auto">
             <img src={whatsapp} alt="" />
-            <a
-              href={whatsappLink}
-              target="_blank"
-            >
+            <a  onClick={handleOrder} target="_blank">
               <button className="text-white">Whatsapp</button>
             </a>
           </div>
