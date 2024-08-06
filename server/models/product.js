@@ -40,13 +40,13 @@ const productSchema = new Schema({
   ],
   variations: [
     {
-      variation:{
-        type:String,
-        required:true
+      variation: {
+        type: String,
+        required: true,
       },
-      price:{
-        type:String,
-        required:true
+      price: {
+        type: String,
+        required: true,
       },
     },
   ],
@@ -94,6 +94,10 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 productSchema.virtual("averageRating").get(function () {
@@ -119,4 +123,3 @@ productSchema.virtual("priceAfterDiscount").get(function () {
 const Product = mongoose.model("Product", productSchema);
 
 module.exports = Product;
-// export default Product

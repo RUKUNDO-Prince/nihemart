@@ -17,7 +17,9 @@ const ProductsList = ({
     setVisibleProductsCount((prevCount) => prevCount + 12);
   };
 
-  const filteredProducts = products?.filter(
+  const sortedProducts = products?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+  const filteredProducts = sortedProducts?.filter(
     (product) =>
       (!categoryFilter ||
         product.category.toLowerCase() === categoryFilter.toLowerCase()) &&
@@ -65,7 +67,7 @@ const ProductsList = ({
             onClick={showMoreProducts}
             className="bg-blue3 px-5 py-2 md:px-[30px] md:py-[10px] rounded-md text-white hover:bg-blue2"
           >
-            Reba Ibindi
+            View More
           </button>
         </div>
       )}
