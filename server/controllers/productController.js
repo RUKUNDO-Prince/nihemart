@@ -17,8 +17,6 @@ const addProduct = async (req, res) => {
       discount,
     } = req.body;
 
-    console.log(req.body);
-
     const variations = JSON.parse(req.body.variations);
     const attributes = JSON.parse(req.body.attributes);
 
@@ -38,10 +36,50 @@ const addProduct = async (req, res) => {
       photos,
       discountType,
       discount,
+      createdAt: Date.now(), // Ensure createdAt is set
     });
     await product.save();
 
     res.status(201).json({ message: "Product added successfully", product });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const editProduct = async (req, res) => {
+  try {
+    const { productId } = req.params;
+    const updates = req.body;
+
+    if (req.files && req.files.length > 0) {
+      updates.photos = req.files.map((file) => "images/" + file.filename);
+    }
+
+    const product = await Product.findByIdAndUpdate(productId, updates, { new: true });
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.status(200).json({ message: "Product updated successfully", product });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const deleteProduct = async (req, res) => {
+  try {
+    const { productId } = req.params;
+
+    const product = await Product.findByIdAndDelete(productId);
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.status(200).json({ message: "Product deleted successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
@@ -162,13 +200,14 @@ const getProductById = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
     res.status(200).json({ product: product.toObject({ virtuals: true }) });
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 const getSearchResults = async (req, res) => {
   const { searchQuery } = req.query; 
-
-  console.log(searchQuery);
 
   const searchCriteria = {
     $or: [
@@ -189,6 +228,8 @@ const getSearchResults = async (req, res) => {
 
 module.exports = {
   addProduct,
+  editProduct,
+  deleteProduct,
   likeProduct,
   adminPanelDisplay,
   redirectToWhatsApp,

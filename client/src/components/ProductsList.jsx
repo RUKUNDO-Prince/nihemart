@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import useProductStore from "../store/productStore";
 import { useLocation } from "react-router-dom";
@@ -6,17 +6,20 @@ import { useLocation } from "react-router-dom";
 const ProductsList = ({
   categoryFilter = "",
   priceRangeFilter = [0, Infinity],
+  showProducts = 12, // Default value is 12
 }) => {
   const { products, isLoading, error } = useProductStore();
-
-  const [visibleProductsCount, setVisibleProductsCount] = useState(12); // Initial count of products to display
+  const [visibleProductsCount, setVisibleProductsCount] = useState(showProducts);
 
   const location = useLocation();
 
   const showMoreProducts = () => {
-    setVisibleProductsCount((prevCount) => prevCount + 12); // Show 10 more products
+    setVisibleProductsCount((prevCount) => prevCount + 12);
   };
-  const filteredProducts = products?.filter(
+
+  const sortedProducts = products?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+  const filteredProducts = sortedProducts?.filter(
     (product) =>
       (!categoryFilter ||
         product.category.toLowerCase() === categoryFilter.toLowerCase()) &&
@@ -28,6 +31,10 @@ const ProductsList = ({
     visibleProductsCount !== Infinity
       ? filteredProducts?.slice(0, visibleProductsCount)
       : filteredProducts;
+
+  useEffect(() => {
+    setVisibleProductsCount(showProducts);
+  }, [showProducts]);
 
   return (
     <>
@@ -60,7 +67,7 @@ const ProductsList = ({
             onClick={showMoreProducts}
             className="bg-blue3 px-5 py-2 md:px-[30px] md:py-[10px] rounded-md text-white hover:bg-blue2"
           >
-            Reba Ibindi
+            View More
           </button>
         </div>
       )}

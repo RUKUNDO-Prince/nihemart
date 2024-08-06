@@ -147,7 +147,7 @@ const Product = () => {
                       />
                     ))}
                   </div>
-                  <div className="bg-gray-90 bg-opacity-[30%] flex items-center justify-center content-center px-[40px] my-[10px]  md:ml-[20px] hover:bg-opacity-[20%] w-full rounded-md overflow-hidden">
+                  <div className="bg-gray-90 bg-opacity-[30%] flex items-center justify-center px-[40px] my-[10px]  md:ml-[20px] hover:bg-opacity-[20%] w-full rounded-md overflow-hidden h-[92%]">
                     <img
                       src={`${api + "/" + selectedImage}`}
                       alt="item"
@@ -221,7 +221,7 @@ const Product = () => {
                     </div>
                     <button
                       onClick={() => handleAddToCart(product._id)}
-                      className="bg-primary w-[27%] px-2 py-[10px] rounded-md hover:bg-opacity-[60%] transition-all duration-600 text-white flex justify-between items-start"
+                      className="bg-primary w-[29%] px-2 py-[10px] rounded-md hover:bg-opacity-[60%] transition-all duration-600 text-white flex justify-between items-start"
                     >
                       <img src={cart} alt="" />
                       Shyira mu gatebo
@@ -279,6 +279,7 @@ const Product = () => {
             <RelatedProductList
               categoryFilter={product.category}
               productId={product._id}
+              showProducts={4}
             />
           </div>
         </>

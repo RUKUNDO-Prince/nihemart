@@ -2,26 +2,41 @@ const express = require("express");
 const productRouter = express.Router();
 const {
   addProduct,
+  editProduct,
+  deleteProduct,
   likeProduct,
   redirectToWhatsApp,
   getAllProducts,
   getProductById,
   getSearchResults,
 } = require("../controllers/productController");
-const { authenticate,upload } = require("../middleware/authMiddleware");
+const { authenticate, upload } = require("../middleware/authMiddleware");
 const { adminMiddleware } = require("../middleware/adminMiddleware");
-
 
 productRouter.post(
   "/addProduct",
   adminMiddleware,
-  upload.array("files", 10),
+  upload.array("files", 15),
   addProduct
 );
+
+productRouter.put(
+  "/editProduct/:productId",
+  adminMiddleware,
+  upload.array("files", 10),
+  editProduct
+);
+
+productRouter.delete(
+  "/deleteProduct/:productId",
+  adminMiddleware,
+  deleteProduct
+);
+
 productRouter.post("/:productId/like", authenticate, likeProduct);
 productRouter.post("/:productId/order", redirectToWhatsApp);
 productRouter.get("/allProducts", getAllProducts);
-productRouter.get("/singleProduct/:productId",getProductById);
-productRouter.get("/search",getSearchResults);
+productRouter.get("/singleProduct/:productId", getProductById);
+productRouter.get("/search", getSearchResults);
 
 module.exports = productRouter;

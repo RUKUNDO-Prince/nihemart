@@ -1,4 +1,4 @@
-import { usa, rwanda, apple, team1, team2, team3, team4, likes1, likes2, likes3, likes4, img1, img2, img3, img5, imiringa, amasaha, rugo, abana, siporo, ibinyabiziga, ibikapu, ubwiza, imisatsi, ikoranabuhanga, ubuzima, imyambaro, ibindi, product, deliver, payment, categoriesImg } from "../assets";
+import { usa, rwanda, team1, team2, team3, team4, img1, img2, img3, img5, imiringa, amasaha, rugo, abana, siporo, ibinyabiziga, ibikapu, ubwiza, imisatsi, ikoranabuhanga, ubuzima, imyambaro, ibindi, product, deliver, payment, categoriesImg, likes1, likes2, likes3, likes4 } from "../assets";
 
 export const categories = [
     {

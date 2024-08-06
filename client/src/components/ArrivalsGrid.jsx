@@ -1,12 +1,10 @@
 import React from "react";
-// import { arrivals } from "../constants/data";
-import { woman, ps, speakers, perfume, img6, img4, amasaha, imiringa, siporo, electronic } from "../assets";
+import { amasaha, imiringa, siporo, electronic } from "../assets";
 
 const ArrivalsGrid = () => {
   return (
     <div className="grid sm:grid-rows-2 sm:grid-cols-4 gap-5 w-[100%] my-[20px]">
       <div className="sm:col-span-2 sm:row-span-2 bg-blue3 bg-opacity-[50%] relative flex justify-center">
-        {/* <img src={img6} className="" alt="img" /> */}
         <img src={amasaha} className="w-[50%] m-auto" alt="img" />
         <div className="absolute bottom-3 left-3 text-white">
           <h1 className="text-lg md:text-[1.5em] font-bold">Amasaha</h1>

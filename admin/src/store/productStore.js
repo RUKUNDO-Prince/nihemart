@@ -60,6 +60,7 @@ const useProductStore = create((set) => ({
       set({ isLoading: false });
     }
   },
+
   // Fetch all products
   fetchProducts: async () => {
     set({ isLoading: true });
@@ -69,6 +70,78 @@ const useProductStore = create((set) => ({
       set({ products: products, isLoading: false });
     } catch (error) {
       set({ error: error.message, isLoading: false });
+    }
+  },
+
+  // fetch a single product
+  getProductById: async (productId) => {
+    set({ isLoading: true, error: null });
+    try {
+      const response = await publicApi.get(
+        `/product/singleProduct/${productId}`
+      );
+      const { product } = response.data;
+      return product;
+    } catch (error) {
+      set({ error: error.message, isLoading: false });
+    } finally {
+      set({ isLoading: false });
+    }
+  },
+
+  // search
+  getSearchResults: async (searchQuery) => {
+    set({ isLoading: true, error: null });
+    try {
+      const response = await publicApi.get(
+        `/product/search?searchQuery=${searchQuery}`
+      );
+
+      const products = response.data;
+      return products;
+    } catch (error) {
+      set({ error: error.message, isLoading: false });
+    } finally {
+      set({ isLoading: false });
+    }
+  },
+
+  // Update product
+  updateProduct: async (productId, updatedProductData) => {
+    set({ isLoading: true });
+    try {
+      const response = await authorizedApi.put(
+        `/product/editProduct/${productId}`,
+        updatedProductData
+      );
+      const { message } = response.data;
+      toast.success(message);
+      // Optionally refetch products to update the store
+      await useProductStore.getState().fetchProducts();
+    } catch (error) {
+      console.error("Error updating product:", error);
+      toast.error(error.response.data.message);
+    } finally {
+      set({ isLoading: false });
+    }
+  },
+
+  // Delete product
+  deleteProduct: async (productId) => {
+    set({ isLoading: true });
+    try {
+      const response = await authorizedApi.delete(
+        `/product/deleteProduct/${productId}`
+      );
+      const { message } = response.data;
+      toast.success(message);
+      // Optionally refetch products to update the store
+      await useProductStore.getState().fetchProducts();
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      toast.error(error.response.data.message);
+    } finally {
+      set({ isLoading: false });
     }
   },
 }));

@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import useProductStore from "../store/productStore";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const RelatedProductList = ({ categoryFilter = "", productId }) => {
+const RelatedProductList = ({
+  categoryFilter = "",
+  productId,
+  showProducts = 8, // Default value for initially visible products
+}) => {
   const { products, isLoading, error } = useProductStore();
-
-  const [visibleProductsCount, setVisibleProductsCount] = useState(8); // Initial count of products to display
+  const [visibleProductsCount, setVisibleProductsCount] = useState(showProducts);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -25,11 +28,16 @@ const RelatedProductList = ({ categoryFilter = "", productId }) => {
 
   const showMoreProducts = () => {
     if (filteredProducts.length > 0) {
-      setVisibleProductsCount((prevCount) => prevCount + 12); // Show 10 more products
+      setVisibleProductsCount((prevCount) => prevCount + showProducts); // Show more products based on the showProducts prop
     } else {
       navigate("/ibicuruzwa-byose");
     }
   };
+
+  useEffect(() => {
+    setVisibleProductsCount(showProducts);
+  }, [showProducts]);
+
   return (
     <>
       {isLoading ? (
@@ -55,7 +63,6 @@ const RelatedProductList = ({ categoryFilter = "", productId }) => {
                 kwihangana😟!
               </h4>
             </div>
-
           )}
         </>
       )}

@@ -31,36 +31,20 @@ const StarRating = ({ starCount }) => {
 };
 
 const ProductCard = ({ product }) => {
-  const [isLiked, setIsLiked] = useState(false);
 
   return (
     <>
       <div className="h-full">
         <div className="h-full flex flex-col justify-between">
           <div className="flex bg-blue2 bg-opacity-[20%] p-[20px] justify-between max-h-[206.38px] items-start  mb-[10px] flex-1 relative">
+            <Link to={`/product/${product._id}`} className="m-auto">
             <img
               src={`${api + "/" + product?.photo}`}
-              className="m-auto max-h-[150px]"
+              className="max-h-[150px]"
               alt="img"
             />
+            </Link>
             <div className="absolute right-0 top-0  flex flex-col p-4 gap-2">
-                <div className="p-2 rounded-full bg-white">
-                  {isLiked ? (
-                    <Icon
-                      onClick={() => setIsLiked(false)}
-                      icon={"ph:heart-fill"}
-                      className=" w-4 h-4 lg:w-6 lg:h-6"
-                      color="red"
-                    />
-                  ) : (
-                    <Icon
-                      onClick={() => setIsLiked(true)}
-                      icon={"solar:heart-linear"}
-                      className=" w-4 h-4 lg:w-6 lg:h-6"
-                    />
-                  )}
-                </div>
-              
               <Link
                 to={`/product/${product._id}`}
                 className="p-2 rounded-full bg-white"
