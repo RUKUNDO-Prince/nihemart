@@ -25,6 +25,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "./App.css";
+import OrderDetails from "./pages/OrderDetails";
 
 const App = () => {
   const location = useLocation();
@@ -59,7 +60,9 @@ const App = () => {
         />
         <Route
           path="/updateProduct/:id"
-          element={isAuthenticated ? <UpdateProduct /> : <Navigate to="/signup" />}
+          element={
+            isAuthenticated ? <UpdateProduct /> : <Navigate to="/signup" />
+          }
         />
         <Route
           path="/notifications"
@@ -79,16 +82,25 @@ const App = () => {
           path="/product/:id"
           element={isAuthenticated ? <Product /> : <Navigate to="/signup" />}
         />
-        <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/signup" />} />
+        <Route
+          path="/profile"
+          element={isAuthenticated ? <Profile /> : <Navigate to="/signup" />}
+        />
+        <Route
+          path="/orders/:id"
+          element={
+            isAuthenticated ? <OrderDetails /> : <Navigate to="/signup" />
+          }
+        />
 
         {/* Fallback route */}
         <Route path="*" element={<NotFound />} />
       </Routes>
       {!isAuthPage && <Footer />}
       <ToastContainer
-        position="top-right"
+        position="top-center"
         autoClose={3000}
-        hideProgressBar={false}
+        hideProgressBar={true}
         closeOnClick
       />
     </div>

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import publicApi from "../config/axiosInstance";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // Helper function to get token from localStorage
 

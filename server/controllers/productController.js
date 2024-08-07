@@ -56,7 +56,11 @@ const editProduct = async (req, res) => {
       updates.photos = req.files.map((file) => "images/" + file.filename);
     }
 
-    const product = await Product.findByIdAndUpdate(productId, updates, { new: true });
+    const product = await Product.findByIdAndUpdate(
+      productId,
+      { ...updates, updated: true },
+      { new: true }
+    );
 
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
@@ -91,7 +95,7 @@ const likeProduct = async (req, res) => {
     const { productId } = req.params;
     const userId = req.user._id;
 
-    const { name, email, phoneNumber, city, destination, fee } = req.body;
+    const { name, email, phone } = req.body;
 
     const product = await Product.findById(productId);
 
@@ -110,24 +114,14 @@ const likeProduct = async (req, res) => {
       userInfo: {
         name,
         email,
-        phoneNumber,
-        location: { city, destination, fee },
+        phone,
       },
     });
     await product.save();
-
-    const userInfo = {
-      name,
-      email,
-      phoneNumber,
-      location: { city, destination, fee },
-    };
-    adminPanelDisplay(userInfo);
-
     res.status(200).json({ message: "Product liked successfully", product });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "not liking the product" });
   }
 };
 
@@ -217,7 +211,7 @@ const getProductById = async (req, res) => {
 };
 
 const getSearchResults = async (req, res) => {
-  const { searchQuery } = req.query; 
+  const { searchQuery } = req.query;
 
   const searchCriteria = {
     $or: [

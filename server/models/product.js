@@ -4,12 +4,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   name: String,
   email: String,
-  phoneNumber: String,
-  location: {
-    city: String,
-    destination: String,
-    fee: Number,
-  },
+  phone: String,
 });
 
 const productSchema = new Schema({
@@ -98,6 +93,10 @@ const productSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  updated:{
+    type:Boolean,
+    default: false,
+  }
 });
 
 productSchema.virtual("averageRating").get(function () {

@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { likesData } from "../constants/data";
 import useCartStore from "../store/cartStore";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { api } from "../config/axiosInstance";
 import useAuthStore from "../store/authStore";
 import { displayNumbers } from "../utils/usableFuncs";
+import useOrderStore from "../store/OrderDetails";
 
 const Cart = () => {
   const {
@@ -16,7 +17,11 @@ const Cart = () => {
     clearCart,
   } = useCartStore();
 
+  const navigate = useNavigate();
+
   const user = useAuthStore((state) => state.user);
+
+  const setProductDetails = useOrderStore((state)=>state.setProductDetails)
 
   useEffect(() => {
     fetchCartItems();
@@ -27,6 +32,19 @@ const Cart = () => {
   }, [user]);
 
   const cart = cartItems?.cart?.items;
+
+  const handleCartOrder = ()=>{
+    if(user && cart){
+      const productDetails = cart.map(product => ({
+        name: product.name,
+        price: product.price,
+        quantity: product.quantity,
+      }));
+      setProductDetails(productDetails)
+
+      navigate("/tumiza/agatebo")
+    }
+  };
 
   return (
     <div className="relative overflow-x-auto m-[10px] scrollbar flex-1">
@@ -84,12 +102,12 @@ const Cart = () => {
               )}
             </tbody>
           </table>
-          <Link
-            to="/tumiza"
+          <button
+            onClick={handleCartOrder}
             className="bg-blue3 px-5 py-2 md:px-[30px] md:py-[10px] rounded-md text-white hover:bg-blue2 my-5 float-end"
           >
             Tumiza Ibi Bicuruzwa
-          </Link>
+          </button>
         </>
       ) : (
         <div className="h-[215px] flex items-center justify-center">

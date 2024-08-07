@@ -142,7 +142,7 @@ const Product = () => {
                     )}
                   </p>
                   <hr />
-                  <div className="border-[2px] border-gray-80 rounded-lg p-4 flex items-start gap-5">
+                  <div className="border-[2px] border-gray-80 rounded-lg p-4 flex items-start justify-end gap-5">
                     <button
                       className="bg-blue3 px-5 py-2 md:px-[30px] md:py-[10px] rounded-md text-white hover:bg-blue2 transition-all duration-600"
                       onClick={() => navigate(`/updateProduct/${selectedProductId}`)}

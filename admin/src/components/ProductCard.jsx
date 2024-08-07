@@ -4,18 +4,21 @@ import { Link } from "react-router-dom";
 
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { api } from "../config/axiosInstance";
+import { displayNumbers } from "../utils/usableFuncs";
 
 const StarRating = ({ starCount }) => {
   const fullStars = Math.floor(starCount);
   const hasHalfStar = starCount % 1 !== 0;
 
-  if(starCount === 0){
-    return <>
-    <FaStar color="grey"/>
-    <FaStar color="grey"/>
-    <FaStar color="grey"/>
-    <FaStar color="grey"/>
-    </>
+  if (starCount === 0) {
+    return (
+      <>
+        <FaStar color="grey" />
+        <FaStar color="grey" />
+        <FaStar color="grey" />
+        <FaStar color="grey" />
+      </>
+    );
   }
 
   const stars = [];
@@ -31,18 +34,17 @@ const StarRating = ({ starCount }) => {
 };
 
 const ProductCard = ({ product }) => {
-
   return (
     <>
       <div className="h-full">
         <div className="h-full flex flex-col justify-between">
           <div className="flex bg-blue2 bg-opacity-[20%] p-[20px] justify-between max-h-[206.38px] items-start  mb-[10px] flex-1 relative">
             <Link to={`/product/${product._id}`} className="m-auto">
-            <img
-              src={`${api + "/" + product?.photo}`}
-              className="max-h-[150px]"
-              alt="img"
-            />
+              <img
+                src={`${api + "/" + product?.photo}`}
+                className="max-h-[150px]"
+                alt="img"
+              />
             </Link>
             <div className="absolute right-0 top-0  flex flex-col p-4 gap-2">
               <Link
@@ -59,13 +61,24 @@ const ProductCard = ({ product }) => {
           <Link to={`/product/${product._id}`}>
             <h1 className="font-semibold">{product.name}</h1>
             <div className="flex gap-2">
-              <p className="text-primary">{product.priceAfterDiscount}frw</p>
-              <p className="text-gray-80 line-through">{product.price}frw</p>
+              <p className="text-primary">
+                {displayNumbers(
+                  product.priceAfterDiscount
+                    ? product.priceAfterDiscount
+                    : product.price
+                )}
+                frw
+              </p>
+              {product.priceAfterDiscount && (
+                <p className="text-gray-80 line-through">
+                  {displayNumbers(product.price)}frw
+                </p>
+              )}
             </div>
-            <div className="flex gap-2 items-center">
+            {/* <div className="flex gap-2 items-center">
               <StarRating starCount={product.averageRating} />
               <p className="text-gray-30">({product.ratings.length})</p>
-            </div>
+            </div> */}
           </Link>
         </div>
       </div>

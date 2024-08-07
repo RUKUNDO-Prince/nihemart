@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
-import { api } from "../config/axiosInstance";
+import { api, authorizedApi } from "../config/axiosInstance";
 import { displayNumbers } from "../utils/usableFuncs";
+import useAuthStore from "../store/authStore";
+import useProductStore from "../store/productStore";
+import useLikedProductsStore from "../store/likedProducts";
 
 export const StarRating = ({ starCount }) => {
   const fullStars = Math.floor(starCount);
@@ -34,6 +37,8 @@ export const StarRating = ({ starCount }) => {
 
 const ProductCard = ({ product }) => {
   const [isLiked, setIsLiked] = useState(false);
+  const likeProduct = useLikedProductsStore((state)=>state.likeProduct)
+  
   return (
     <>
       <div className="h-[37vh]">
@@ -59,7 +64,10 @@ const ProductCard = ({ product }) => {
                     />
                   ) : (
                     <Icon
-                      onClick={() => setIsLiked(true)}
+                      onClick={() => {
+                        setIsLiked(true)
+                        likeProduct(product._id)
+                      }}
                       icon={"solar:heart-linear"}
                       className=" w-4 h-4 lg:w-6 lg:h-6"
                     />
@@ -81,13 +89,17 @@ const ProductCard = ({ product }) => {
             <h1 className="font-semibold">{product.name}</h1>
             <div className="flex gap-2">
               <p className="text-primary">
-                {displayNumbers(product.priceAfterDiscount
-                  ? product.priceAfterDiscount
-                  : product.price)}
+                {displayNumbers(
+                  product.priceAfterDiscount
+                    ? product.priceAfterDiscount
+                    : product.price
+                )}
                 frw
               </p>
               {product.priceAfterDiscount && (
-                <p className="text-gray-80 line-through">{displayNumbers(product.price)}frw</p>
+                <p className="text-gray-80 line-through">
+                  {displayNumbers(product.price)}frw
+                </p>
               )}
             </div>
           </Link>

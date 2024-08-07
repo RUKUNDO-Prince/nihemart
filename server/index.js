@@ -12,7 +12,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerJsdoc = require("swagger-jsdoc");
 const { swaggerDoc } = require("./swagger");
 const userRouter = require("./routes/user");
-const orderRouter = require("./routes/orderRoutes");
+const OrderRouter = require("./routes/order");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -26,7 +26,7 @@ app.use(
   cors({
     // origin: ["http://localhost:5173","http://localhost:5174"],
     origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE","PATCH"],
     credentials: true,
   })
 );
@@ -43,7 +43,7 @@ app.use("/product", productRouter);
 app.use("/contact", contactRouter);
 app.use("/cart", cartRoute);
 app.use("/user", userRouter);
-app.use("/", orderRouter);
+app.use("/orders", OrderRouter);
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
