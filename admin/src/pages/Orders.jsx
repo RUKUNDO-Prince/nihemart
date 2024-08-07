@@ -1,28 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SubHeading from "../components/SubHeading";
 import { ordersList } from "../constants/data";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../store/authStore";
 import useOrderStore from "../store/orderStore";
 import { displayNumbers } from "../utils/usableFuncs";
+import DataTable from "../components/common/DataTable";
+import { columns } from "../components/column";
 
-const getStatusStyles = (status) => {
-  switch (status) {
-    case "completed":
-      return { color: "green", backgroundColor: "#e0f7e9" };
-    case "processing":
-      return { color: "orange", backgroundColor: "#fff5e6" };
-    case "canceled":
-      return { color: "red", backgroundColor: "#fdecea" };
-    default:
-      return { color: "black", backgroundColor: "#ffffff" }; // default styles if status doesn't match
-  }
-};
 
 const Orders = () => {
   const navigate = useNavigate();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const { orders, getOrders, isLoading } = useOrderStore();
+
+  const [page, setPage] = useState(0);
+  const [limit, setLimit] = useState(6);
   const handleAuth = () => {
     if (!isAuthenticated) {
       navigate("/signup");
@@ -44,75 +37,81 @@ const Orders = () => {
         </div>
       ) : orders.length > 0 ? (
         orders && (
-          <div className="my-5 overflow-x-auto">
-            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 min-w-[600px] md:min-w-[1012px]">
-              <thead className="text-[16px] text-black font-poppins drop-shadow-lg my-[20px]">
-                <tr className="shadow-md">
-                  <th scope="col" className="px-6 py-3">
-                    Orders No ↓
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Customer Name
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Phone Number
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Products Ordered
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Order Quantity
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Price ↑
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Date ↑
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders.map((order, index) => (
-                  <tr key={index} className="bg-white border-b">
-                    <td className="px-6 py-4">
-                      <p>{index + 1}</p>
-                    </td>
-                    <td className="px-6 py-4">{order.name}</td>
-                    <td className="px-6 py-4">{order.phone}</td>
-                    <td className="px-6 py-4 h-[73px]">
-                      {order.productDetails.map((product, idx) => (
-                        <p key={idx}>{product.name}</p>
-                      ))}
-                    </td>
-                    <td className="px-6 py-4">
-                      {order.productDetails.map((product, idx) => (
-                        <p key={idx}>{product.quantity}</p>
-                      ))}
-                    </td>
-                    <td className="px-6 py-4">
-                      {order.productDetails.map((product, idx) => (
-                        <p key={idx} className="text-nowrap">
-                          {displayNumbers(product.quantity * product.price)} Frw
-                        </p>
-                      ))}
-                    </td>
-                    <td className="px-6 py-4">{order.date}</td>
-                    <td className="px-6 py-4">
-                      <div
-                        className="p-2 rounded-2xl w-[80%] flex justify-center"
-                        style={getStatusStyles(order.status)}
-                      >
-                        {order.status}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          // <div className="my-5 overflow-x-auto">
+          //   <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 min-w-[600px] md:min-w-[1012px]">
+          //     <thead className="text-[16px] text-black font-poppins drop-shadow-lg my-[20px]">
+          //       <tr className="shadow-md">
+          //         <th scope="col" className="px-6 py-3">
+          //           Orders No ↓
+          //         </th>
+          //         <th scope="col" className="px-6 py-3">
+          //           Customer Name
+          //         </th>
+          //         <th scope="col" className="px-6 py-3">
+          //           Phone Number
+          //         </th>
+          //         <th scope="col" className="px-6 py-3">
+          //           Products Ordered
+          //         </th>
+          //         <th scope="col" className="px-6 py-3">
+          //           Order Quantity
+          //         </th>
+          //         <th scope="col" className="px-6 py-3">
+          //           Price ↑
+          //         </th>
+          //         <th scope="col" className="px-6 py-3">
+          //           Date ↑
+          //         </th>
+          //         <th scope="col" className="px-6 py-3">
+          //           Status
+          //         </th>
+          //       </tr>
+          //     </thead>
+          //     <tbody>
+          //       {orders.map((order, index) => (
+          //         <tr key={index} className="bg-white border-b">
+          //           <td className="px-6 py-4">
+          //             <p>{index + 1}</p>
+          //           </td>
+          //           <td className="px-6 py-4">{order.name}</td>
+          //           <td className="px-6 py-4">{order.phone}</td>
+          //           <td className="px-6 py-4 h-[73px]">
+          //             {order.productDetails.map((product, idx) => (
+          //               <p key={idx}>{product.name}</p>
+          //             ))}
+          //           </td>
+          //           <td className="px-6 py-4">
+          //             {order.productDetails.map((product, idx) => (
+          //               <p key={idx}>{product.quantity}</p>
+          //             ))}
+          //           </td>
+          //           <td className="px-6 py-4">
+          //             {order.productDetails.map((product, idx) => (
+          //               <p key={idx} className="text-nowrap">
+          //                 {displayNumbers(product.quantity * product.price)} Frw
+          //               </p>
+          //             ))}
+          //           </td>
+          //           <td className="px-6 py-4">{order.date}</td>
+          //           <td className="px-6 py-4">
+          //             <div
+          //               className="p-2 rounded-2xl w-[80%] flex justify-center"
+          //               style={getStatusStyles(order.status)}
+          //             >
+          //               {order.status}
+          //             </div>
+          //           </td>
+          //         </tr>
+          //       ))}
+          //     </tbody>
+          //   </table>
+          // </div>
+          <DataTable
+            columns={columns}
+            data={orders}
+            page={page}
+            limit={limit}
+          />
         )
       ) : (
         <div className="flex items-center justify-center h-[458px]">

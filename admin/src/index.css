@@ -46,3 +46,8 @@
          @apply bg-gray-100/10 border border-gray-800
     }
 }
+
+.rowspacing2 {
+    border-collapse: separate;
+    border-spacing: 0 8px;
+  }
