@@ -1,8 +1,8 @@
 const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
-const Product = require("../models/Product");
-const AdminPanel = require("../models/AdminPanel");
+const Product = require("../models/product");
+const AdminPanel = require("../models/adminPanel");
 
 const addProduct = async (req, res) => {
   try {
