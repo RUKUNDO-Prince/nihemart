@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useOrderStore from "../store/orderStore";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { SubHeading } from "../components";
 import { displayNumbers } from "../utils/usableFuncs";
 import SelectStatus from "../components/common/SelectStatus";
@@ -11,6 +11,8 @@ const OrderDetails = () => {
 
   const [order, setOrder] = useState(null);
   const [status, setStatus] = useState(null);
+
+  const navigate = useNavigate();
 
   const { getOrderById, isLoading, updateOrderStatus, deleteOrder } =
     useOrderStore();
@@ -33,6 +35,7 @@ const OrderDetails = () => {
 
   const handleOrderDeletion = async () => {
     await deleteOrder(orderId);
+    navigate("/orders")
   };
 
   const total = order?.productDetails?.reduce((acc, product) => {

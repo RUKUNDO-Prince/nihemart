@@ -93,6 +93,10 @@ const productSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  updated:{
+    type:Boolean,
+    default: false,
+  }
 });
 
 productSchema.virtual("averageRating").get(function () {
