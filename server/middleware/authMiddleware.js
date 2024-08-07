@@ -17,6 +17,19 @@ const authenticate = (req, res, next) => {
   }
 };
 
+const authMiddleware = (req, res, next) => {
+  const token = req.header('Authorization');
+  if (!token) return res.status(401).json({ message: 'No token, authorization denied' });
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded.user;
+    next();
+  } catch (error) {
+    res.status(401).json({ message: 'Token is not valid' });
+  }
+};
+
 // uploading the image
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -29,4 +42,4 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-module.exports = { authenticate, upload };
+module.exports = { authenticate, upload, authMiddleware };
