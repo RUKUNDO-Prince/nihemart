@@ -1,77 +1,65 @@
 import { create } from "zustand";
 import axios from "axios";
 import toast from "react-hot-toast";
+import useAuthStore from "./authStore";
+import { authorizedApi } from "../config/axiosInstance";
 
-// Helper function to get liked products from localStorage
-const getLikedProductsFromLocalStorage = () => {
-  const likedProducts = localStorage.getItem("likedProducts");
-  return likedProducts ? JSON.parse(likedProducts) : [];
-};
+
 
 const useLikedProductsStore = create((set, get) => ({
-  likedProducts: getLikedProductsFromLocalStorage(),
+  likedProducts: [],
   isLoading: false,
   error: null,
-  // Like a product
-  likeProduct: async (productId) => {
-    set({ isLoading: true, error: null });
 
-    const user = {
-      name: "ineza",
-      email: "test@gmail.com",
-      phone: "0782307064",
-    };
-    if (!user) {
-      toast.error("your're not logged in");
-      set({ isLoading: false });
-      return;
-    }
+  // Initialize liked products from backend and localStorage
+  initializeLikedProducts: async () => {
+    set({ isLoading: true });
     try {
-      const response = await authorizedApi.post(
-        `/product/${productId}/like`,
-        user
-      );
-      if (response.status === 200) {
-        toast.success(response?.message);
+      const response = await authorizedApi.get("/product/likes/all");
+      if (response.status === 201) {
+        const likedProducts = response.data;
+        set({ likedProducts });
       }
     } catch (error) {
-      set({ isLoading: false });
-      toast.error(error?.response?.data?.message);
+      set({ error: error.response.data.error });
     } finally {
       set({ isLoading: false });
     }
   },
 
-  // Unlike a product
-  unlikeProduct: async (productId) => {
+  // Like a product (Optimistic Update)
+  likeProduct: async (productId) => {
+    set({ isLoading: true });
     try {
-      const { likedProducts } = get();
-      if (likedProducts.includes(productId)) {
-        const newLikedProducts = likedProducts.filter((id) => id !== productId);
-
-        // Optionally sync with backend
-        await axios.post("/api/unlike", { productId });
-
-        // Update store and localStorage
-        set({ likedProducts: newLikedProducts });
-        localStorage.setItem("likedProducts", JSON.stringify(newLikedProducts));
+      const response = await authorizedApi.post(`/product/${productId}/like`);
+      if (response.status === 201) {
+        toast.success(response?.data.message);
       }
     } catch (error) {
-      console.error("Error unliking product:", error);
-      // Handle error as needed
+      toast.error(error?.response?.data?.message || "Failed to like product");
+    }finally{
+      set({isLoading: false})
     }
   },
 
-  // Check if a product is liked
-  isProductLiked: (productId) => {
-    const { likedProducts } = get();
-    return likedProducts.includes(productId);
+  // Unlike a product (Optimistic Update)
+  unlikeProduct: async (productId) => {
+    set({isLoading: true})
+    try {
+      const response = await authorizedApi.post(`/product/${productId}/unlike`);
+      if (response.status === 201) {
+        toast.success(response?.data.message);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Failed to unlike product");
+    }finally{
+      set({isLoading: false})
+    }
   },
 
-  // Load liked products from localStorage (optional)
-  loadLikedProducts: () => {
-    const likedProducts = getLikedProductsFromLocalStorage();
-    set({ likedProducts });
+  // remove all liked products
+  removeLikedProducts: () => {
+    set({ likedProducts: [] });
   },
 }));
 

@@ -94,7 +94,7 @@ const Analytics = () => {
       )}
       <button
         onClick={() => logout()}
-        className="flex items-center bg-blue3 py-3 px-8 rounded-lg outline-none text-white m-8 float-end hover:bg-blue2"
+        className="flex items-center w-fit self-end bg-blue3 py-3 px-8 rounded-lg outline-none text-white m-8 float-end hover:bg-blue2"
       >
         Log out
         <AiOutlineSwapRight />

@@ -62,10 +62,7 @@ const productSchema = new Schema({
       user: {
         type: Schema.Types.ObjectId,
         ref: "User",
-      },
-      userInfo: {
-        type: userSchema,
-      },
+      }
     },
   ],
   ratings: [

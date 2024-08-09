@@ -7,10 +7,16 @@ const getTokenFromLocalStorage = () => {
   return localStorage.getItem("authToken");
 };
 
+// Helper function to get user from localStorage
+const getUserFromLocalStorage = () => {
+  const user = localStorage.getItem("user");
+  return user ? JSON.parse(user) : null;
+};
+
 const useAuthStore = create((set) => ({
   isLoading: false,
   isAuthenticated: !!getTokenFromLocalStorage(),
-  user:localStorage.getItem("user") || null,
+  user: getUserFromLocalStorage() || null,
   token: getTokenFromLocalStorage(),
   error: null,
 
@@ -24,10 +30,18 @@ const useAuthStore = create((set) => ({
         password,
         phone,
       });
-      const { message, token, user } = response.data;
+      const { message, token, responseUser } = response.data;
+
       localStorage.setItem("authToken", token);
-      localStorage.setItem("user", user);
-      set({ isAuthenticated: true, token, isLoading: false ,user: user });
+
+      localStorage.setItem("user", responseUser);
+
+      set({
+        isAuthenticated: true,
+        token,
+        isLoading: false,
+        user: responseUser,
+      });
       toast.success(message);
     } catch (error) {
       console.error("Error registering user:", error);
@@ -47,10 +61,17 @@ const useAuthStore = create((set) => ({
         email,
         password,
       });
-      const { message, token, user } = response.data;
+      const { message, token, responseUser } = response.data;
       localStorage.setItem("authToken", token);
-      localStorage.setItem("user", user);
-      set({ isAuthenticated: true, token, isLoading: false, user: user });
+
+      localStorage.setItem("user", JSON.stringify(responseUser));
+      
+      set({
+        isAuthenticated: true,
+        token,
+        isLoading: false,
+        user: responseUser,
+      });
       toast.success(message);
     } catch (error) {
       console.error("Error logging in:", error);
@@ -65,6 +86,7 @@ const useAuthStore = create((set) => ({
   // Logout user
   logout: () => {
     localStorage.removeItem("authToken");
+    localStorage.removeItem("user");
     toast.success("Logged out!");
     set({ isAuthenticated: false, user: null, token: null });
   },

@@ -7,6 +7,9 @@ import { displayNumbers } from "../utils/usableFuncs";
 import useAuthStore from "../store/authStore";
 import useProductStore from "../store/productStore";
 import useLikedProductsStore from "../store/likedProducts";
+import { PiHeartFill } from "react-icons/pi";
+import { IoHeartOutline } from "react-icons/io5";
+import ExpandableText from "./ExpandableText";
 
 export const StarRating = ({ starCount }) => {
   const fullStars = Math.floor(starCount);
@@ -37,8 +40,32 @@ export const StarRating = ({ starCount }) => {
 
 const ProductCard = ({ product }) => {
   const [isLiked, setIsLiked] = useState(false);
-  const likeProduct = useLikedProductsStore((state)=>state.likeProduct)
+  const likeProduct = useLikedProductsStore((state) => state.likeProduct);
+  const unlikeProduct = useLikedProductsStore((state) => state.unlikeProduct);
+  const user = useAuthStore((state) => state.user);
   
+  useEffect(() => {
+    // Check if the current user liked the product
+    if (user) {
+      const userLiked = product.likes.some(
+        (like) => like.user === user?._id
+      );
+      setIsLiked(userLiked);
+    }else{
+      setIsLiked(false);
+    }
+  }, [user]);
+
+  const handleLikeProduct = async (prodId) => {
+    if (!isLiked) {
+      setIsLiked(true);
+      await likeProduct(prodId);
+    } else {
+      setIsLiked(false);
+      await unlikeProduct(prodId);
+    }
+  };
+
   return (
     <>
       <div className="h-[37vh]">
@@ -56,19 +83,14 @@ const ProductCard = ({ product }) => {
               {
                 <div className="p-2 rounded-full bg-white">
                   {isLiked ? (
-                    <Icon
-                      onClick={() => setIsLiked(false)}
-                      icon={"ph:heart-fill"}
+                    <PiHeartFill
+                      onClick={() => handleLikeProduct(product._id)}
                       className=" w-4 h-4 lg:w-6 lg:h-6"
                       color="red"
                     />
                   ) : (
-                    <Icon
-                      onClick={() => {
-                        setIsLiked(true)
-                        likeProduct(product._id)
-                      }}
-                      icon={"solar:heart-linear"}
+                    <IoHeartOutline
+                      onClick={() => handleLikeProduct(product._id)}
                       className=" w-4 h-4 lg:w-6 lg:h-6"
                     />
                   )}
@@ -86,7 +108,9 @@ const ProductCard = ({ product }) => {
             </div>
           </div>
           <Link to={`/igicuruzwa/${product._id}`}>
-            <h1 className="font-semibold">{product.name}</h1>
+            <h1 className="font-semibold">
+              <ExpandableText maxChars={23}>{product?.name}</ExpandableText>
+            </h1>
             <div className="flex gap-2">
               <p className="text-primary">
                 {displayNumbers(

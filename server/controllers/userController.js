@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const User = require("../models/User");
+const User = require("../models/user");
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -13,8 +13,6 @@ const generateToken = (user) => {
 const signup = async (req, res) => {
   try {
     const { name, email, password, phone } = req.body;
-
-    console.log({ name, email, password, phone });
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -47,7 +45,6 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body);
 
     const user = await User.findOne({ email });
     if (!user) {
@@ -62,6 +59,7 @@ const login = async (req, res) => {
     const token = generateToken(user);
 
     const responseUser = {
+      _id:user._id,
       name: user.name,
       phone: user.phone,
       email: user.email,
@@ -69,7 +67,7 @@ const login = async (req, res) => {
 
     res
       .status(200)
-      .json({ message: "Login successful", token, user: responseUser });
+      .json({ message: "Login successful", token,  responseUser });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });

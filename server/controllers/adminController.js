@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
-const Admin = require("../models/Admin");
-const userSchema = require("../models/User");
+const Admin = require("../models/admin");
+const userSchema = require("../models/user");
 const jwt = require("jsonwebtoken");
 
 const { genSalt, hash } = bcrypt;
