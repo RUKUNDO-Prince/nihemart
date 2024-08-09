@@ -67,7 +67,7 @@ const login = async (req, res) => {
 
     res
       .status(200)
-      .json({ message: "Login successful", token, user: responseUser });
+      .json({ message: "Login successful", token,  responseUser });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });

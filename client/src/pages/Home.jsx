@@ -16,27 +16,14 @@ import useAuthStore from "../store/authStore";
 
 const Home = () => {
   const { fetchProducts } = useProductStore();
-  const initializeLikedProducts = useLikedProductsStore(
-    (state) => state.initializeLikedProducts
-  );
-  const removeLikedProducts = useLikedProductsStore((state)=>state.removeLikedProducts);
-
-  const user = useAuthStore((state)=>state.user);
+  const user = useAuthStore((state) => state.user);
 
   const [currentCategory, setCurrentCategory] = useState(null);
   const scrollRef = useRef(null);
 
   useEffect(() => {
     fetchProducts();
-  }, []);
-
-  useEffect(()=>{
-    if(user){
-      initializeLikedProducts();
-    }else{
-      removeLikedProducts();
-    }
-  },[user])
+  }, [user]);
 
   const scrollLeft = () => {
     scrollRef.current.scrollBy({ left: -200, behavior: "smooth" });

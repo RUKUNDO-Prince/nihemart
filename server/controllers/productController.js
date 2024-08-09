@@ -145,12 +145,18 @@ const unLikeProduct = async (req, res) => {
 const getAllLikedProduct = async (req, res) => {
   const userId = req.user._id;
   try {
-    const products = await Product.find({ likes: { user: userId } });
+    const products = await Product.find({
+      likes: { $elemMatch: { user: userId } },
+    });
     if (!products) {
       return res.status(201).json({ message: "no liked Product so far" });
     }
 
-    return res.status(201).json({ products });
+    const productsWithPhotos = products.map((product) => ({
+      ...product.toObject({ virtuals: true }),
+      photo: product.photos.length > 0 ? product.photos[0] : null,
+    }));
+    return res.status(201).json(productsWithPhotos);
   } catch (error) {
     return res.status(500).json({ error: "failed to get liked products" });
   }
@@ -273,5 +279,5 @@ module.exports = {
   getProductById,
   getSearchResults,
   unLikeProduct,
-  getAllLikedProduct
+  getAllLikedProduct,
 };

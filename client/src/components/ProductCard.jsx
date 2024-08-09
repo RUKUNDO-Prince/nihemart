@@ -9,6 +9,7 @@ import useProductStore from "../store/productStore";
 import useLikedProductsStore from "../store/likedProducts";
 import { PiHeartFill } from "react-icons/pi";
 import { IoHeartOutline } from "react-icons/io5";
+import ExpandableText from "./ExpandableText";
 
 export const StarRating = ({ starCount }) => {
   const fullStars = Math.floor(starCount);
@@ -38,28 +39,28 @@ export const StarRating = ({ starCount }) => {
 };
 
 const ProductCard = ({ product }) => {
-
   const [isLiked, setIsLiked] = useState(false);
   const likeProduct = useLikedProductsStore((state) => state.likeProduct);
-  const unlikeProduct= useLikedProductsStore((state) => state.unlikeProduct);
+  const unlikeProduct = useLikedProductsStore((state) => state.unlikeProduct);
   const user = useAuthStore((state) => state.user);
-
   
   useEffect(() => {
     // Check if the current user liked the product
     if (user) {
       const userLiked = product.likes.some(
-        (like) => like.user._id === user?._id
+        (like) => like.user === user?._id
       );
       setIsLiked(userLiked);
+    }else{
+      setIsLiked(false);
     }
-  }, []);
+  }, [user]);
 
   const handleLikeProduct = async (prodId) => {
     if (!isLiked) {
       setIsLiked(true);
       await likeProduct(prodId);
-    }else{
+    } else {
       setIsLiked(false);
       await unlikeProduct(prodId);
     }
@@ -83,13 +84,13 @@ const ProductCard = ({ product }) => {
                 <div className="p-2 rounded-full bg-white">
                   {isLiked ? (
                     <PiHeartFill
-                    onClick={()=>handleLikeProduct(product._id)}
+                      onClick={() => handleLikeProduct(product._id)}
                       className=" w-4 h-4 lg:w-6 lg:h-6"
                       color="red"
                     />
                   ) : (
                     <IoHeartOutline
-                    onClick={()=>handleLikeProduct(product._id)}
+                      onClick={() => handleLikeProduct(product._id)}
                       className=" w-4 h-4 lg:w-6 lg:h-6"
                     />
                   )}
@@ -107,7 +108,9 @@ const ProductCard = ({ product }) => {
             </div>
           </div>
           <Link to={`/igicuruzwa/${product._id}`}>
-            <h1 className="font-semibold">{product.name}</h1>
+            <h1 className="font-semibold">
+              <ExpandableText maxChars={23}>{product?.name}</ExpandableText>
+            </h1>
             <div className="flex gap-2">
               <p className="text-primary">
                 {displayNumbers(

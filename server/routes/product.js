@@ -37,7 +37,7 @@ productRouter.delete(
 
 productRouter.post("/:productId/like", authenticate, likeProduct);
 productRouter.post("/:productId/unlike", authenticate, unLikeProduct);
-productRouter.post("/likes/all", authenticate, getAllLikedProduct);
+productRouter.get("/likes/all", authenticate, getAllLikedProduct);
 productRouter.post("/:productId/order", redirectToWhatsApp);
 productRouter.get("/allProducts", getAllProducts);
 productRouter.get("/singleProduct/:productId", getProductById);

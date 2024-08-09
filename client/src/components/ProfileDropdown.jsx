@@ -8,6 +8,7 @@ const ProfileDropdown = () => {
   const handleClose = (e) => {
     if (e.target.id === "modal") setIsLoginModalOpen(false);
   };
+  
 
   return (
     <>
