@@ -7,6 +7,8 @@ import { displayNumbers } from "../utils/usableFuncs";
 import useAuthStore from "../store/authStore";
 import useProductStore from "../store/productStore";
 import useLikedProductsStore from "../store/likedProducts";
+import { PiHeartFill } from "react-icons/pi";
+import { IoHeartOutline } from "react-icons/io5";
 
 export const StarRating = ({ starCount }) => {
   const fullStars = Math.floor(starCount);
@@ -36,9 +38,33 @@ export const StarRating = ({ starCount }) => {
 };
 
 const ProductCard = ({ product }) => {
+
   const [isLiked, setIsLiked] = useState(false);
-  const likeProduct = useLikedProductsStore((state)=>state.likeProduct)
+  const likeProduct = useLikedProductsStore((state) => state.likeProduct);
+  const unlikeProduct= useLikedProductsStore((state) => state.unlikeProduct);
+  const user = useAuthStore((state) => state.user);
+
   
+  useEffect(() => {
+    // Check if the current user liked the product
+    if (user) {
+      const userLiked = product.likes.some(
+        (like) => like.user._id === user?._id
+      );
+      setIsLiked(userLiked);
+    }
+  }, []);
+
+  const handleLikeProduct = async (prodId) => {
+    if (!isLiked) {
+      setIsLiked(true);
+      await likeProduct(prodId);
+    }else{
+      setIsLiked(false);
+      await unlikeProduct(prodId);
+    }
+  };
+
   return (
     <>
       <div className="h-[37vh]">
@@ -56,19 +82,14 @@ const ProductCard = ({ product }) => {
               {
                 <div className="p-2 rounded-full bg-white">
                   {isLiked ? (
-                    <Icon
-                      onClick={() => setIsLiked(false)}
-                      icon={"ph:heart-fill"}
+                    <PiHeartFill
+                    onClick={()=>handleLikeProduct(product._id)}
                       className=" w-4 h-4 lg:w-6 lg:h-6"
                       color="red"
                     />
                   ) : (
-                    <Icon
-                      onClick={() => {
-                        setIsLiked(true)
-                        likeProduct(product._id)
-                      }}
-                      icon={"solar:heart-linear"}
+                    <IoHeartOutline
+                    onClick={()=>handleLikeProduct(product._id)}
                       className=" w-4 h-4 lg:w-6 lg:h-6"
                     />
                   )}

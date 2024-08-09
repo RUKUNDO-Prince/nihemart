@@ -39,7 +39,11 @@ const useOrderStore = create((set) => ({
       const response = await authorizedApi.patch(`/orders/${orderId}/status`, {
         status,
       });
-      if (response.status === 201) toast.success(response.data);
+      if (response.status === 201) {
+        toast.success(response.data.message);
+        console.log(response.data);
+        
+      }
     } catch (error) {
       set({ isLoading: false });
       toast.error(error.response.data.error);

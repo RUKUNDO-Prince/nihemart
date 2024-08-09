@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const Product = require("../models/product");
 const AdminPanel = require("../models/adminPanel");
+const { response } = require("express");
 
 const addProduct = async (req, res) => {
   try {
@@ -95,8 +96,6 @@ const likeProduct = async (req, res) => {
     const { productId } = req.params;
     const userId = req.user._id;
 
-    const { name, email, phone } = req.body;
-
     const product = await Product.findById(productId);
 
     if (!product) {
@@ -104,24 +103,56 @@ const likeProduct = async (req, res) => {
     }
 
     if (product.likes.some((like) => like.user.equals(userId))) {
-      return res
-        .status(400)
-        .json({ message: "You have already liked this product" });
+      product.likes.pop({ user: userId });
+      await product.save();
+      return res.status(201).json({ message: "disliked the product" });
     }
 
     product.likes.push({
       user: userId,
-      userInfo: {
-        name,
-        email,
-        phone,
-      },
     });
     await product.save();
-    res.status(200).json({ message: "Product liked successfully", product });
+    res.status(201).json({ message: "Product liked successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "not liking the product" });
+  }
+};
+
+const unLikeProduct = async (req, res) => {
+  const { productId } = req.params;
+  const userId = req.user._id;
+
+  try {
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    if (product.likes.some((like) => like.user.equals(userId))) {
+      product.likes.pop({ user: userId });
+
+      await product.save();
+
+      return res.status(201).json({ message: "disliked the product" });
+    }
+  } catch (error) {
+    return res.status(500).json({ error: "failed to dislike product" });
+  }
+};
+
+const getAllLikedProduct = async (req, res) => {
+  const userId = req.user._id;
+  try {
+    const products = await Product.find({ likes: { user: userId } });
+    if (!products) {
+      return res.status(201).json({ message: "no liked Product so far" });
+    }
+
+    return res.status(201).json({ products });
+  } catch (error) {
+    return res.status(500).json({ error: "failed to get liked products" });
   }
 };
 
@@ -241,4 +272,6 @@ module.exports = {
   getAllProducts,
   getProductById,
   getSearchResults,
+  unLikeProduct,
+  getAllLikedProduct
 };

@@ -14,8 +14,6 @@ const signup = async (req, res) => {
   try {
     const { name, email, password, phone } = req.body;
 
-    console.log({ name, email, password, phone });
-
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(409).json({ message: "Email already in use" });
@@ -47,7 +45,6 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body);
 
     const user = await User.findOne({ email });
     if (!user) {
@@ -62,6 +59,7 @@ const login = async (req, res) => {
     const token = generateToken(user);
 
     const responseUser = {
+      _id:user._id,
       name: user.name,
       phone: user.phone,
       email: user.email,
