@@ -1,6 +1,6 @@
 import React from "react";
 import { figure, logo } from "../assets";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ErrorMessage, Form, Formik } from "formik";
 import * as Yup from "yup";
 import useAuthStore from "../store/authStore";
@@ -18,9 +18,14 @@ const Signup = () => {
       .required("Password is required"),
   });
 
+  const navigate = useNavigate();
+
   const handleRegisterFormsubmit = async (values) => {
     const { name, email, password } = values;
-    await register(name, email, password);
+    const status = await register(name, email, password);
+    if (status === 201) {
+      navigate("/");
+    }
   };
 
   return (

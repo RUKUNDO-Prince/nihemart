@@ -37,6 +37,7 @@ const useAuthStore = create((set) => ({
       localStorage.setItem("user", adminAccount);
       localStorage.setItem("adminToken", token);
       toast.success(message);
+      return response.status
     } catch (error) {
       console.error("Error registering Admin:", error);
       // Handle error as needed
@@ -61,6 +62,7 @@ const useAuthStore = create((set) => ({
       localStorage.setItem("user", adminAccount);
       localStorage.setItem("adminToken", token);
       toast.success(message);
+      return response.status
     } catch (error) {
       console.error("Error logging in:", error);
       // Handle error as needed

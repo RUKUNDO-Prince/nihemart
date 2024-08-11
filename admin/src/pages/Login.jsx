@@ -1,9 +1,10 @@
 import React from "react";
 import { figure, logo } from "../assets";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ErrorMessage, Form, Formik } from "formik";
 import * as Yup from "yup";
 import useAuthStore from "../store/authStore";
+
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -14,12 +15,18 @@ const loginSchema = Yup.object().shape({
     .required("Password is required"),
 });
 
+
 const Login = () => {
   const login = useAuthStore((state) => state.login);
 
+  const navigate = useNavigate();
+  
   const handleLoginFormSubmit = async (values) => {
     const { email, password } = values;
-    await login(email, password);
+    const status =  await login(email, password);
+    if(status === 201){
+      navigate("/")
+    }
   };
 
   return (
