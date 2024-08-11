@@ -1,9 +1,7 @@
-const multer = require("multer");
-const fs = require("fs");
-const path = require("path");
+
 const Product = require("../models/product");
 const AdminPanel = require("../models/adminPanel");
-const { response } = require("express");
+const Notification = require("../models/Notifications");
 
 const addProduct = async (req, res) => {
   try {
@@ -95,6 +93,7 @@ const likeProduct = async (req, res) => {
   try {
     const { productId } = req.params;
     const userId = req.user._id;
+    const username = req.user.name;
 
     const product = await Product.findById(productId);
 
@@ -112,6 +111,12 @@ const likeProduct = async (req, res) => {
       user: userId,
     });
     await product.save();
+
+    const notification = await Notification.create({
+      type: 'user Liked product',
+      message: `${username} liked a product`,
+    });
+
     res.status(201).json({ message: "Product liked successfully" });
   } catch (error) {
     console.error(error);
@@ -122,6 +127,7 @@ const likeProduct = async (req, res) => {
 const unLikeProduct = async (req, res) => {
   const { productId } = req.params;
   const userId = req.user._id;
+  const username = req.user.name;
 
   try {
     const product = await Product.findById(productId);
@@ -135,9 +141,15 @@ const unLikeProduct = async (req, res) => {
 
       await product.save();
 
+      const notification = await Notification.create({
+        type: 'user disliked a product',
+        message: `${username} disliked a product`,
+      });
+  
       return res.status(201).json({ message: "disliked the product" });
     }
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ error: "failed to dislike product" });
   }
 };

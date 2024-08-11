@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
+const Notification = require('../models/Notifications');
+const io = require ("../index");
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -11,8 +13,8 @@ const generateToken = (user) => {
 };
 
 const signup = async (req, res) => {
+  const { name, email, password, phone } = req.body;
   try {
-    const { name, email, password, phone } = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -24,6 +26,11 @@ const signup = async (req, res) => {
 
     await user.save();
 
+    const notification = await Notification.create({
+      type: 'Account creation success',
+      message: `User ${user.name} created an account`,
+    });
+    
     const token = generateToken(user);
 
     const responseUser = {

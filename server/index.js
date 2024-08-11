@@ -14,21 +14,25 @@ const { swaggerDoc } = require("./swagger");
 const userRouter = require("./routes/user");
 const OrderRouter = require("./routes/order");
 const cors = require("cors");
+const http = require("http");
+const {Server} = require("socket.io");
 require("dotenv").config();
 
-
-// ERROR IN AUTHENTICATION, SIGNUP AND SIGNIN
 
 
 dotenv.config();
 const app = express();
 
+const server = http.createServer(app);
+const io = new Server(server);
+
+
 dbConn();
+
 
 // added cors middleware
 app.use(
   cors({
-    // origin: ["http://localhost:5173","http://localhost:5174"],
     origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE","PATCH"],
     credentials: true,
@@ -49,6 +53,8 @@ app.use("/cart", cartRoute);
 app.use("/user", userRouter);
 app.use("/orders", OrderRouter);
 
+
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
+
