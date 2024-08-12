@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 
 const ProductsList = ({
   categoryFilter = "",
+  subcategoryFilter = "",
   priceRangeFilter = [0, Infinity],
   showProducts = 12, // Default value is 12
 }) => {
@@ -17,15 +18,17 @@ const ProductsList = ({
     setVisibleProductsCount((prevCount) => prevCount + 12);
   };
 
-  const sortedProducts = products?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-  const filteredProducts = sortedProducts?.filter(
-    (product) =>
-      (!categoryFilter ||
-        product.category.toLowerCase() === categoryFilter.toLowerCase()) &&
-      product.price >= priceRangeFilter[0] &&
-      product.price <= priceRangeFilter[1]
+  const sortedProducts = products?.sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   );
+
+  const filteredProducts = sortedProducts?.filter((product) => {
+    const categoryMatch = !categoryFilter || product.category.toLowerCase() === categoryFilter.toLowerCase();
+    const subcategoryMatch = !subcategoryFilter || product.subcategory?.toLowerCase() === subcategoryFilter.toLowerCase();
+    const priceMatch = product.price >= priceRangeFilter[0] && product.price <= priceRangeFilter[1];
+
+    return categoryMatch && subcategoryMatch && priceMatch;
+  });
 
   const limitedProducts =
     visibleProductsCount !== Infinity
@@ -56,12 +59,12 @@ const ProductsList = ({
             </div>
           ) : (
             <div className="flex items-center justify-center mt-[40px]">
-              <h4>Nta bicuruzwa byari byongerwamo, mukomeze kwihangana😟!</h4>
+              <h4>No products found 😟!</h4>
             </div>
           )}
         </>
       )}
-      {(location.pathname !== "/") && (
+      {location.pathname !== "/" && filteredProducts.length > visibleProductsCount && (
         <div className="my-9 mx-auto">
           <button
             onClick={showMoreProducts}

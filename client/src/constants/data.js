@@ -2,80 +2,122 @@ import { usa, rwanda, team1, team2, team3, team4, img1, img2, img3, img5, imirin
 
 export const categories = [
     {
-        name: "Imiringa",
-        icon: imiringa,
-        link: "categories/imiringa"
+      name: "Imiringa",
+      icon: imiringa,
+      link: "categories/imiringa",
+      subcategories: [
+        "irikumwe nibindi (set)",
+        "udukomo",
+        "amaherena",
+        "amashaneti",
+        "kumaguru",
+        "munda",
+        "iyo kwizuru",
+      ],
     },
     {
-        name: "Amasaha",
-        icon: amasaha,
-        link: "categories/amasaha"
+      name: "Amasaha",
+      icon: amasaha,
+      link: "categories/amasaha",
+      subcategories: [
+        "smart watch",
+        "ayimibare",
+        "ayurushinge",
+        "arikumwe nibindi (set)",
+      ],
     },
     {
-        name: "Ibikoresho byo mu rugo",
-        icon: rugo,
-        link: "categories/ibikoresho-byo-mu-rugo"
+      name: "Ibikoresho byo mu rugo",
+      icon: rugo,
+      link: "categories/ibikoresho-byo-mu-rugo",
+      subcategories: [
+        "mugikoni",
+        "muri saloon",
+        "mucyumba",
+        "mubwogero",
+        "ibyisuku",
+        "imitako",
+        "ibindi",
+      ],
     },
     {
-        name: "Abana",
-        icon: abana,
-        link: "categories/abana"
+      name: "Abana",
+      icon: abana,
+      link: "categories/abana",
+      subcategories: ["ibikinisho", "ibipupe", "ibifasha kwiga", "ibindi"],
     },
     {
-        name: "Ibikoresho bya siporo",
-        icon: siporo,
-        link: "categories/siporp"
+      name: "Ibikoresho bya siporo",
+      icon: siporo,
+      link: "categories/ibikoresho-bya-sport",
+      subcategories: [],
     },
     {
-        name: "Ibikoresho by'ibinyabiziga",
-        icon: ibinyabiziga,
-        link: "categories/ibinyabizinga"
+      name: "Ibikoresho by'ibinyabiziga",
+      icon: ibinyabiziga,
+      link: "categories/ibinyabizinga",
+      subcategories: ["ibyamoto", "iby’imodoka", "iby’igare"],
     },
     {
-        name: "Ibikapu",
-        icon: ibikapu,
-        link: "categories/ibikapu"
+      name: "Ibikapu",
+      icon: ibikapu,
+      link: "categories/ibikapu",
+      subcategories: ["ibyabagabo", "ibyabagore", "ibindi"],
     },
     {
-        name: "Ubwiza",
-        icon: ubwiza,
-        link: "categories/ubwiza"
+      name: "Ubwiza",
+      icon: ubwiza,
+      link: "categories/ubwiza",
+      subcategories: [],
     },
     {
-        name: "Imisatsi",
-        icon: imisatsi,
-        link: "categories/imisatsi"
+      name: "Imisatsi",
+      icon: imisatsi,
+      link: "categories/imisatsi",
+      subcategories: ["imiti y’umusatsi", "ibikoresho by’umusatsi"],
     },
     {
-        name: "Ikoranabuhanga",
-        icon: ikoranabuhanga,
-        link: "categories/ikoranabuhanga"
+      name: "Ikoranabuhanga",
+      icon: ikoranabuhanga,
+      link: "categories/ikoranabuhanga",
+      subcategories: [
+        "phones & accessories",
+        "computer & accessories",
+        "electronic devices & accessories",
+        "office",
+      ],
     },
     {
-        name: "Ubuzima",
-        icon: ubuzima,
-        link: "categories/ubuzima"
+      name: "Ubuzima",
+      icon: ubuzima,
+      link: "categories/ubuzima",
+      subcategories: ["kubyibuha & kunanuka", "uruhu", "amaso", "ibindi"],
     },
     {
-        name: "Imyambaro",
-        icon: imyambaro,
-        link: "categories/imyambaro"
+      name: "Imyambaro",
+      icon: imyambaro,
+      link: "categories/imyambaro",
+      subcategories: ["Amarinete", "Amashati", "Iby'abana", "inkweto", "ibindi"],
     },
     {
-        name: "Ibindi",
-        icon: ibindi,
-        link: "/ibicuruzwa-byose"
+      name: "Ibindi",
+      icon: ibindi,
+      link: "/ibicuruzwa-byose",
+      subcategories: [],
     },
-];
+  ];
+  
 
 export const languages = [
     {
         name: "En - US",
         icon: usa,
+        code: "en"
     },
     {
         name: "Kinya",
         icon: rwanda,
+        code: "rw"
     },
 ];
 

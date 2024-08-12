@@ -7,10 +7,13 @@ import { Icon } from "@iconify/react";
 import { FaX } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import Profile from "./Profile";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
   const [search, setSearch] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const { t } = useTranslation();
 
   const handleSidebarOpen = () => {
     setSidebarOpen(true);
@@ -35,7 +38,7 @@ const Navbar = () => {
           className="hover:text-primary transition-colors"
         >
           
-          Ahabanza
+          {t('home')}
         </NavLink>
         <NavLink
           to={"/tumenye"}
@@ -70,8 +73,8 @@ const Navbar = () => {
         >
           <Icon icon={"material-symbols-light:search"} className="w-6 h-6" />
         </div>
-        <div className="hidden md:block">
-        {/* <Languages /> */}
+        <div className="hidden md:flex items-center justify-between gap-5">
+        <Languages />
         <Profile />
         </div>
         <Link
@@ -135,7 +138,7 @@ const Navbar = () => {
           <Link to={"/"}>
             <img src="/logo.svg" alt="logo" className="w-[50px]"/>
           </Link>
-          {/* <Languages /> */}
+          <Languages />
           <Profile />
           <div
             onClick={() => setSidebarOpen(false)}
