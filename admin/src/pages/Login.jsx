@@ -103,7 +103,7 @@ const Login = () => {
         </div>
       </div>
       <div className="hidden md:flex bg-primary w-full md:w-1/2 justify-center items-center">
-        <img src={figure} className="w-3/4" alt="figure" />
+        <img src={figure} className="w-3/4 h-[100vh]" alt="figure" />
       </div>
     </div>
   );
