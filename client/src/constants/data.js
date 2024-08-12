@@ -112,10 +112,12 @@ export const languages = [
     {
         name: "En - US",
         icon: usa,
+        code: "en"
     },
     {
         name: "Kinya",
         icon: rwanda,
+        code: "rw"
     },
 ];
 
