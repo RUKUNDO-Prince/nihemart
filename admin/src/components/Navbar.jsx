@@ -8,6 +8,7 @@ import { HiOutlineBell } from "react-icons/hi2";
 import { CiSearch } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
+import Search from "./Search";
 
 const Navbar = () => {
   const location = useLocation();
@@ -58,8 +59,7 @@ const Navbar = () => {
           <Link to="/notifications">
             <HiOutlineBell size={26} color="#5D6E8B" />
           </Link>
-          <CiSearch size={26} color="#5D6E8B" />
-          {/* <Link to="/profile"><img src={profile} alt="profile" className="w-[32px]" /></Link> */}
+          <Search />
         </div>
       </div>
 
@@ -117,8 +117,7 @@ const Navbar = () => {
             <Link to="/notifications">
               <HiOutlineBell size={26} color="#5D6E8B" />
             </Link>
-            <CiSearch size={26} color="#5D6E8B" />
-            {/* <Link to="/profile"><img src={profile} alt="profile" className="w-[32px]" /></Link> */}
+            <Search />
           </div>
         </div>
       </div>
