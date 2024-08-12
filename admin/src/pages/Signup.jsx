@@ -31,7 +31,7 @@ const Signup = () => {
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
       <div className="hidden md:flex bg-primary w-full md:w-1/2 justify-center items-center">
-        <img src={figure} className="w-3/4" alt="figure" />
+        <img src={figure} className="w-3/4 h-[100vh]" alt="figure" />
       </div>
       <div className="flex items-center justify-center w-full md:w-1/2 m-auto p-6">
         <div className="flex flex-col shadow-lg p-6 w-full md:w-3/4 lg:w-1/2">
