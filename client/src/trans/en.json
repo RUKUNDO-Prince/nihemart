@@ -1,8 +1,18 @@
 {
+  "_COMMENT": "NAVBAR DATA",
   "home": "Home",
   "about": "About",
   "contact": "Contact",
   "logout": "Logout",
   "help": "Help",
-  "searchProducts": "Search products"
+  "searchProducts": "Search products",
+
+  "_COMMENT": "FOOTER DATA",
+  "first": "Buy and order products online using our online platform",
+  "links": "Useful Links",
+  "actions": "Quick Actions",
+  "likes": "Likes",
+  "cart": "Cart",
+  "order": "Order",
+  "social": "Social Media"
 }

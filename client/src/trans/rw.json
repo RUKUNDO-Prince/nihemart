@@ -1,8 +1,18 @@
 {
+  "_COMMENT": "NAVBAR DATA",
   "home": "Ahabanza",
   "about": "Tumenye",
   "contact": "Tuvugishe",
   "logout": "Sohoka",
   "help": "Ubufasha",
-  "searchProducts": "Shakisha ibicuruzwa"
+  "searchProducts": "Shakisha ibicuruzwa",
+
+  "_COMMENT": "FOOTER DATA",
+  "first": "Gura unatumize ibicuruzwa kuri murandasi ukoresheje urubuga rwacu",
+  "links": "Link z'ingenzi",
+  "actions": "Ibikirwa Byihuse",
+  "likes": "Ibyo Wakunze",
+  "cart": "Agatebo",
+  "order": "Tumiza",
+  "social": "Imbuga Nkoranyambaga Zacu"
 }

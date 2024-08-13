@@ -4,8 +4,11 @@ import { footerEndData, footerLinks, footerActions } from "../constants/data";
 import { Link } from "react-router-dom";
 import { FaInstagram, FaWhatsapp, FaTiktok } from "react-icons/fa";
 import { logo } from "../assets";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className="bg-gradient-to-b from-blue to-dark">
       {/* <Newsletter /> */}
@@ -19,8 +22,7 @@ const Footer = () => {
               <div>
                 <h1 className="text-white font-bold text-[1.2em]">Nihe Mart</h1>
                 <p className="text-white">
-                  Gura unatumize ibicuruzwa kuri murandasi ukoresheje urubuga
-                  rwacu
+                  {t('first')}
                 </p>
               </div>
             </div>
@@ -56,7 +58,7 @@ const Footer = () => {
             ))}
             <div>
               <h1 className="text-white font-bold mb-3">
-                Imbuga nkoranyambaga zacu
+                {t('social')}
               </h1>
               <div className="flex gap-5">
                 <Link
