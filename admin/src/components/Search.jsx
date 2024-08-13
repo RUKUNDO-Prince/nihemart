@@ -8,20 +8,16 @@ import { displayNumbers } from "../utils/usableFuncs";
 
 const Search = ({ search = true }) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isInputVisible, setIsInputVisible] = useState(false);
+  const [popoverOpen, setPopoverOpen] = useState(false);
 
   const navigate = useNavigate();
-
-  const [popoverOpen, setPopoverOpen] = useState(false);
 
   useEffect(() => {
     if (search === false) setPopoverOpen(false);
   }, [search]);
 
-  const {
-    data: searchResults,
-    isLoading,
-    isError,
-  } = useQuery({
+  const { data: searchResults, isLoading, isError } = useQuery({
     queryKey: ["search", searchQuery],
     queryFn: async () => {
       const response = await publicApi.get(
@@ -40,8 +36,6 @@ const Search = ({ search = true }) => {
       setPopoverOpen(true);
     } else if (searchResults?.length > 0) {
       setPopoverOpen(true);
-    } else {
-      // setPopoverOpen(false);
     }
   }, [isLoading, searchResults]);
 
@@ -61,30 +55,32 @@ const Search = ({ search = true }) => {
 
   return (
     <div className="flex items-center justify-between bg-gray-default rounded-full border-gray-10 p-1 gap-2 relative">
-      <div className="flex md:gap-5 pl-5 w-full">
-        <input
-          type="text"
-          name="searchQuery"
-          placeholder="shakisha ibicuruzwa"
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="bg-transparent outline-none w-full text-gray-10 text-[16px] font-medium flex-1"
-        />
+      <div className={`flex items-center w-full ${isInputVisible ? "pl-5" : "pl-0"}`}>
+        {isInputVisible ? (
+          <input
+            type="text"
+            name="searchQuery"
+            placeholder="Search products"
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="bg-transparent outline-none w-full text-gray-10 text-[16px] font-medium flex-1 transition-all duration-300"
+            autoFocus
+          />
+        ) : null}
         <button
-          onClick={() => {
-            setPopoverOpen((prev) => !prev);
-          }}
+          onClick={() => setIsInputVisible((prev) => !prev)}
+          className={`transition-all duration-1000 ${isInputVisible ? "ml-2" : ""}`}
         >
           <Icon
             icon={"material-symbols-light:search"}
-            className="bg-primary rounded-full p-2"
-            color="white"
-            fontSize={40}
+            className={`rounded-full p-1 ${isInputVisible ? "bg-primary" : "bg-transparent"}`}
+            color={isInputVisible ? "white" : "black"}
+            fontSize={isInputVisible ? 30 : 30}
           />
         </button>
       </div>
-      {/* search results */}
+      {/* Search results */}
       <div
-        className={`w-full xl:w-[600px] absolute xl:-right-36 top-10 mt-7 bg-gray-default border  max-h-[600px] overflow-y-scroll border-white/60 py-5 px-4 rounded-lg ${
+        className={`w-full xl:w-[600px] absolute xl:-right-0 top-10 mt-7 bg-gray-default border max-h-[600px] overflow-y-scroll border-white/60 py-5 px-4 rounded-lg ${
           popoverOpen
             ? "-translate-y-0 opacity-100 scale-100"
             : "-translate-y-10 opacity-0 scale-0"
@@ -113,7 +109,7 @@ const Search = ({ search = true }) => {
                   <div className="flex items-center justify-center w-[60px] min-w-[60px] min-h-[60px] rounded-full border border-primary">
                     <img
                       src={`${api + "/" + product?.photos[0]}`}
-                      className=" w-full object-contain hover:scale-105 transition-all duration-75"
+                      className="w-full object-contain hover:scale-105 transition-all duration-75"
                       alt="img"
                     />
                   </div>
