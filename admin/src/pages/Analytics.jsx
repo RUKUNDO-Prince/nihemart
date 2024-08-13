@@ -4,6 +4,7 @@ import { AiOutlineSwapRight } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../store/authStore";
 import { getAdminDashboardStats } from "../services/dashboard";
+import { categories } from "../constants/data";
 
 const Analytics = () => {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ const Analytics = () => {
       ) : (
         stats && (
           <div className="grid grid-rows-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 w-full p-8 ">
-            <div className="bg-white border-[1px] border-gray-90 row-span-1 col-span-1 p-8 rounded-lg ">
+            <div className="bg-white border-[1px] border-gray-90 row-span-1 col-span-1 p-8 rounded-lg">
               <div className="flex items-center md:gap-3 gap-2 md:justify-normal">
                 <img src={icon} alt="icon" />
                 <p className="font-lato font-semibold text-16 text-[#5D6E8B]">
@@ -86,7 +87,7 @@ const Analytics = () => {
                 </p>
               </div>
               <p className="font-lato font-semibold md:text-[48px] text-[38px]">
-                9
+                {categories.length}
               </p>
             </div>
           </div>
