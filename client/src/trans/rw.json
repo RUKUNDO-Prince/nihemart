@@ -1,5 +1,8 @@
 {
-    "welcome": "Murakaza neza",
-    "home": "Ahabanza"
-  }
-  
+  "home": "Ahabanza",
+  "about": "Tumenye",
+  "contact": "Tuvugishe",
+  "logout": "Sohoka",
+  "help": "Ubufasha",
+  "searchProducts": "Shakisha ibicuruzwa"
+}

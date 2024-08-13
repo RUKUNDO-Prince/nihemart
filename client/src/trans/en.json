@@ -1,5 +1,8 @@
 {
-    "welcome": "Welcome",
-    "home": "Home"
-  }
-  
+  "home": "Home",
+  "about": "About",
+  "contact": "Contact",
+  "logout": "Logout",
+  "help": "Help",
+  "searchProducts": "Search products"
+}

@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import useAuthStore from "../store/authStore";
 import AuthModal from "./AuthModal";
+import { useTranslation } from "react-i18next";
 
 const ProfileDropdown = () => {
   const { user, isAuthenticated, logout } = useAuthStore();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
+  const { t } = useTranslation();
+
   const handleClose = (e) => {
     if (e.target.id === "modal") setIsLoginModalOpen(false);
   };
@@ -28,7 +32,7 @@ const ProfileDropdown = () => {
               className="hover:border-gray-10 border p-1 class-border"
               onClick={logout}
             >
-              Logout
+              {t('logout')}
             </button>
           )}
         </ul>

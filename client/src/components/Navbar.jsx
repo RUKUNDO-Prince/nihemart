@@ -45,21 +45,21 @@ const Navbar = () => {
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          Tumenye
+          {t('about')}
         </NavLink>
         <NavLink
           to={"/tuvugishe"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          Tuvugishe
+          {t('contact')}
         </NavLink>
         <NavLink
           to={"/ubufasha"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          Ubufasha
+          {t('help')}
         </NavLink>
       </ul>
 
@@ -153,28 +153,28 @@ const Navbar = () => {
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          Home
+          {t('home')}
         </NavLink>
         <NavLink
-          to={"/about"}
+          to={"/tumenye"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          About
+          {t('about')}
         </NavLink>
         <NavLink
-          to={"/contact"}
+          to={"/tuvugishe"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          Contact
+          {t('contact')}
         </NavLink>
         <NavLink
-          to={"/help"}
+          to={"/ubufasha"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          Help
+          {t('help')}
         </NavLink>
       </div>
       </div>
