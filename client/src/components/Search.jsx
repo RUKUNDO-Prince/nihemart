@@ -6,10 +6,12 @@ import { useQuery } from "react-query";
 import publicApi, { api } from "../config/axiosInstance";
 import { displayNumbers } from "../utils/usableFuncs";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Search = ({ search = true }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [popoverOpen, setPopoverOpen] = useState(false);
@@ -66,7 +68,7 @@ const Search = ({ search = true }) => {
         <input
           type="text"
           name="searchQuery"
-          placeholder="shakisha ibicuruzwa"
+          placeholder={t('searchProducts')}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="bg-transparent outline-none w-full text-gray-10 text-[16px] font-medium flex-1"
         />
