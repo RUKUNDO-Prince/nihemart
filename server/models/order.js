@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 // Define the productDetails schema
 const productDetailsSchema = new mongoose.Schema({
-  id: {
+  productId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Product",
   },

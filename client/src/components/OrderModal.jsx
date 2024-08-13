@@ -26,6 +26,10 @@ const OrderModal1 = ({ isOpen, onClose }) => {
       setTimeout(() => {
         window.open(whatsappLink, "_blank", "noopener,noreferrer");
       }, 2000);
+
+      setTimeout(() => {
+        clearOrderDetails();
+      }, 3000);
     }
   };
   return (

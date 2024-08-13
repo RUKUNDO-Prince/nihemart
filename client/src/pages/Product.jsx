@@ -88,11 +88,12 @@ const Product = () => {
 
   const handleOrderNowClick = () => {
     const productDetails = {
-      id:product._id,
+      productId:product._id,
       name: product.name,
       price: currentPrice,
       quantity: quantity,
       variation: Object.values(selectedValues),
+      directOrder:true,
     };
     addProduct(productDetails);
     navigate(

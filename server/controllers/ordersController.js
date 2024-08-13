@@ -7,62 +7,7 @@ const { sendEmailToAdmin } = require("../utils/emailService");
 const addOrder = async (req, res) => {
   const { name, phone, province, city, deliveryFee, productDetails } = req.body;
 
-  try {
-    const order = new OrderDetails({
-      name,
-      phone,
-      province,
-      city,
-      deliveryFee,
-      productDetails,
-    });
-
-    await order.save();
-
-    const totalPrice = order.productDetails.reduce((acc, product) => {
-      return acc + product.price * product.quantity;
-    }, 0);
-
-    const subject = "New Order Placed";
-    // Format the email message
-    const emailBody = `
-     <h2>New Order Placed</h2>
-     <p><strong>Name:</strong> ${order.name}</p>
-     <p><strong>Phone:</strong> ${order.phone}</p>
-     <p><strong>Province:</strong> ${order.province}</p>
-     <p><strong>City:</strong> ${order.city ? order.city : order.province}</p>
-     <p><strong>Delivery Fee:</strong> ${displayNumbers(
-       order.deliveryFee
-     )} Frw</p>
-     <p><strong>Product Details:</strong></p>
-     <ul>
-       ${order.productDetails
-         .map(
-           (item) =>
-             `<li>${item.name} (Qty: ${
-               item.quantity
-             }, subtotal: ${displayNumbers(
-               item.quantity * item.price
-             )}) Frw</li>`
-         )
-         .join("")}
-     </ul>
-     <p><strong>total price:</strong> ${displayNumbers(totalPrice)} Frw</p>
-   `;
-
-    // Send the email using the utility function
-    await sendEmailToAdmin(subject, emailBody);
-
-    res.status(201).json({ message: "Order added successfully" });
-  } catch (error) {
-    console.log(error.message);
-    res.status(400).json({ message: "failed to order, try again from home" });
-  }
-};
-
-// Add a new order
-const addDirectOrder = async (req, res) => {
-  const { name, phone, province, city, deliveryFee, productDetails } = req.body;
+  const directOrder = productDetails[0].directOrder;
 
   try {
     const order = new OrderDetails({
@@ -75,6 +20,14 @@ const addDirectOrder = async (req, res) => {
     });
 
     await order.save();
+
+    if (directOrder !== undefined && directOrder === true) {
+      const product = await Product.findById(productDetails[0].productId);
+
+      product.quantity -= productDetails[0].quantity;
+
+      await product.save();
+    }
 
     const totalPrice = order.productDetails.reduce((acc, product) => {
       return acc + product.price * product.quantity;
@@ -121,6 +74,9 @@ const addDirectOrder = async (req, res) => {
 const updateOrderStatus = async (req, res) => {
   const id = req.params.id;
   const newStatus = req.body.status;
+
+  console.log(newStatus);
+  
   try {
     const order = await OrderDetails.findById(id);
     if (!order) {
@@ -130,7 +86,7 @@ const updateOrderStatus = async (req, res) => {
     // If the status is being changed to 'cancelled', re-add the product quantities
     if (newStatus === "cancelled" && order.status !== "cancelled") {
       for (const item of order.productDetails) {
-        const product = await Product.findById(item.id);
+        const product = await Product.findById(item.productId);
         if (product) {
           product.quantity += item.quantity;
           await product.save();
@@ -142,7 +98,7 @@ const updateOrderStatus = async (req, res) => {
     order.status = newStatus;
     await order.save();
 
-    res.status(200).json({ message: "status updated" });
+    res.status(201).json({ message: "status updated" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -213,5 +169,4 @@ module.exports = {
   getTotalOrders,
   getAllOrders,
   getOrderById,
-  addDirectOrder
 };
