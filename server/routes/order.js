@@ -8,6 +8,7 @@ const {
   getAllOrders,
   deleteOrder,
   getOrderById,
+  addDirectOrder,
 } = require("../controllers/ordersController");
 
 const OrderRouter = express.Router();

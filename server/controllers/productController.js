@@ -19,6 +19,7 @@ const addProduct = async (req, res) => {
     const variations = JSON.parse(req.body.variations);
     const attributes = JSON.parse(req.body.attributes);
 
+    
     const photos = Array.isArray(req.files)
       ? req.files.map((file) => "images/" + file.filename)
       : [];

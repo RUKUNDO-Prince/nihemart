@@ -1,7 +1,12 @@
+const { ref } = require("joi");
 const mongoose = require("mongoose");
 
 // Define the productDetails schema
 const productDetailsSchema = new mongoose.Schema({
+  productId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Product",
+  },
   name: {
     type: String,
     required: true,
@@ -21,38 +26,41 @@ const productDetailsSchema = new mongoose.Schema({
 });
 
 // Define the orderDetails schema
-const orderDetailsSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const orderDetailsSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    province: {
+      type: String,
+      required: true,
+    },
+    city: {
+      type: String,
+    },
+    deliveryFee: {
+      type: Number,
+      required: true,
+    },
+    productDetails: {
+      type: [productDetailsSchema],
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: ["processing", "completed", "cancelled"],
+      default: "processing",
+    },
   },
-  phone: {
-    type: String,
-    required: true,
-  },
-  province: {
-    type: String,
-    required: true,
-  },
-  city: {
-    type: String,
-  },
-  deliveryFee: {
-    type: Number,
-    required: true,
-  },
-  productDetails: {
-    type: [productDetailsSchema],
-    required: true,
-  },
-  status: {
-    type: String,
-    enum: ["processing", "completed", "cancelled"],
-    default: "processing",
-  },
-},{
-  timestamps: true,
-});
+  {
+    timestamps: true,
+  }
+);
 
 // Create the model from the schema and export it
 const OrderDetails = mongoose.model("OrderDetails", orderDetailsSchema);

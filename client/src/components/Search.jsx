@@ -118,7 +118,7 @@ const Search = ({ search = true }) => {
                     />
                   </div>
                   <div className="flex flex-col">
-                    <div className="px-2 py-1 flex items-center justify-center bg-gray-20 rounded-xl">
+                    <div className="px-2 py-1 flex items-center justify-center bg-gray-20 rounded-xl w-fit">
                       <h2 className="text-xs leading-3 font-medium text-gray-default">
                         {product.category}
                       </h2>

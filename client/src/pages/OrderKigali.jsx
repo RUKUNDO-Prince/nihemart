@@ -18,7 +18,9 @@ const OrderKigali = () => {
 
     setTimeout(() => {
       clearOrderDetails();
+      navigate("/")
     }, 2000);
+    
   };
 
   const productDetails = orderDetails.productDetails;

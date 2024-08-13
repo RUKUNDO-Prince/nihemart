@@ -7,13 +7,12 @@ const addToCart = async (req, res) => {
     const { productId } = req.params;
     const { _id: userId } = req.user;
 
-    const quantity = req.query.quantity;
+    const quantity = parseInt(req.query.quantity,10);
 
     if (!userId) {
       return res.status(400).json({ message: "User ID is required" });
     }
     const product = await Product.findById(productId);
-    console.log(product);
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
@@ -39,7 +38,7 @@ const addToCart = async (req, res) => {
         subtotal: product.price * quantity,
       });
     }
-    product.quantity -= 1;
+    product.quantity -= quantity;
     await cart.save();
     await product.save();
     return res

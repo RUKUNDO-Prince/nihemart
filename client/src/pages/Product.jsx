@@ -15,6 +15,7 @@ const Product = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const { getProductById, fetchProducts, isLoading } = useProductStore();
   const [currentPrice, setCurrentPrice] = useState(0);
+  const [currentQuantity, setCurrentQuantity] = useState(0);
   const addToCart = useCartStore((state) => state.addToCart);
   const [selectedValues, setSelectedValues] = useState({});
   const { addProduct } = useOrderStore();
@@ -32,6 +33,7 @@ const Product = () => {
         : productData.price
     );
     setSelectedImage(productData.photos[0]);
+    setCurrentQuantity(productData.quantity - 1);
 
     const initialSelectedValues = productData.attributes?.reduce(
       (acc, attr) => {
@@ -86,13 +88,17 @@ const Product = () => {
 
   const handleOrderNowClick = () => {
     const productDetails = {
-      name:product.name,
+      productId:product._id,
+      name: product.name,
       price: currentPrice,
-      quantity:quantity,
-      variation:Object.values(selectedValues),
-    }
-    addProduct(productDetails)
-    navigate(`/tumiza/${selectedProductId}?quantity=${quantity}&category=${product.category}`);
+      quantity: quantity,
+      variation: Object.values(selectedValues),
+      directOrder:true,
+    };
+    addProduct(productDetails);
+    navigate(
+      `/tumiza/${selectedProductId}?quantity=${quantity}&category=${product.category}`
+    );
   };
 
   const handleNavigateToHelp = () => {
@@ -106,10 +112,22 @@ const Product = () => {
       }
       return prev;
     });
+    setCurrentQuantity((prev)=>{
+      if(prev > 0){
+        return prev - 1;
+      }
+      return 0
+    })
   };
 
   const decrementQuantity = () => {
     setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+    setCurrentQuantity((prev)=>{
+      if(prev <= product.quantity){
+        return prev + 1;
+      }
+      return prev
+    })
   };
 
   const handleAddToCart = (productId) => {
@@ -163,7 +181,7 @@ const Product = () => {
                   <p className="text-gray-90">({product.ratings?.length})</p> | */}
                     <p className="text-[#00FF66]">
                       {product.quantity
-                        ? ` ${product.quantity} muri stock`
+                        ? ` ${currentQuantity} muri stock`
                         : "dutegereje ibindi"}
                     </p>
                   </div>
