@@ -114,7 +114,6 @@ const Order = () => {
     );
   };
 
-  console.log(orderDetails);
   return (
     <>
       <div className="px-5 md:px-10 py-5">

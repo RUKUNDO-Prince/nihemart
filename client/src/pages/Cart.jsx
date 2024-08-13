@@ -36,6 +36,7 @@ const Cart = () => {
   const handleCartOrder = ()=>{
     if(user && cart){
       const productDetails = cart.map(product => ({
+        id: product._id,
         name: product.name,
         price: product.price,
         quantity: product.quantity,

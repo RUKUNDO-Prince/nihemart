@@ -8,11 +8,13 @@ const {
   getAllOrders,
   deleteOrder,
   getOrderById,
+  addDirectOrder,
 } = require("../controllers/ordersController");
 
 const OrderRouter = express.Router();
 
 OrderRouter.post("/add", authenticate, addOrder);
+OrderRouter.post("/direct-order", authenticate, addDirectOrder);
 OrderRouter.patch("/:id/status", adminMiddleware, updateOrderStatus);
 OrderRouter.get("/total", adminMiddleware, getTotalOrders);
 OrderRouter.get("/all", adminMiddleware, getAllOrders);
