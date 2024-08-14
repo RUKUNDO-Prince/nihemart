@@ -11,6 +11,7 @@ const {
   getSearchResults,
   unLikeProduct,
   getAllLikedProduct,
+  updateProductQuantity,
 } = require("../controllers/productController");
 const { authenticate, upload } = require("../middleware/authMiddleware");
 const { adminMiddleware } = require("../middleware/adminMiddleware");

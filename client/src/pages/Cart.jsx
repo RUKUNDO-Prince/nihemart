@@ -73,7 +73,7 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {cart.length !== 0 ? (
+              {cart?.length !== 0 ? (
                 cart?.map((item, index) => (
                   <tr key={index} className="bg-white border-b">
                     <th

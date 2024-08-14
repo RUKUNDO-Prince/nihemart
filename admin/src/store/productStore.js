@@ -89,7 +89,7 @@ const useProductStore = create((set) => ({
     }
   },
 
-  // search
+  // SEARCH
   getSearchResults: async (searchQuery) => {
     set({ isLoading: true, error: null });
     try {

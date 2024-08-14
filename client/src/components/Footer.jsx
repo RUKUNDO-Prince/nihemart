@@ -1,11 +1,14 @@
 import React from "react";
 import Newsletter from "./Newsletter";
-import { footerEndData, footerLinks, footerActions } from "../constants/data";
+import { footerLinks, footerActions } from "../constants/data";
 import { Link } from "react-router-dom";
 import { FaInstagram, FaWhatsapp, FaTiktok } from "react-icons/fa";
 import { logo } from "../assets";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className="bg-gradient-to-b from-blue to-dark">
       {/* <Newsletter /> */}
@@ -19,8 +22,7 @@ const Footer = () => {
               <div>
                 <h1 className="text-white font-bold text-[1.2em]">Nihe Mart</h1>
                 <p className="text-white">
-                  Gura unatumize ibicuruzwa kuri murandasi ukoresheje urubuga
-                  rwacu
+                  {t('first')}
                 </p>
               </div>
             </div>
@@ -56,7 +58,7 @@ const Footer = () => {
             ))}
             <div>
               <h1 className="text-white font-bold mb-3">
-                Imbuga nkoranyambaga zacu
+                {t('social')}
               </h1>
               <div className="flex gap-5">
                 <Link
@@ -86,19 +88,19 @@ const Footer = () => {
               to={"#"}
               className="text-white font-semibold text-nowrap xs:border-r-2 border-r-white pr-5 text-center md:text-start hover:underline"
             >
-              Privacy policy
+              Privacy Policy
             </Link>
             <Link
               to={"#"}
               className="text-white font-semibold text-nowrap xs:border-r-2 border-r-white pr-5 text-center md:text-start hover:underline"
             >
-              Terms and conditions
+              Terms and Conditions
             </Link>
             <Link
               to={"#"}
               className="text-white font-semibold text-nowrap xs:border-r-2 border-r-white pr-5 text-center md:text-start hover:underline"
             >
-              User agreement
+              User Agreement
             </Link>
             <Link
               to={"#"}
