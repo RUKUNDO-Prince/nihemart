@@ -37,29 +37,28 @@ const Navbar = () => {
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          
-          {t('home')}
+          {t("home")}
         </NavLink>
         <NavLink
           to={"/tumenye"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          {t('about')}
+          {t("about")}
         </NavLink>
         <NavLink
           to={"/tuvugishe"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          {t('contact')}
+          {t("contact")}
         </NavLink>
         <NavLink
           to={"/ubufasha"}
           activeclassname="active"
           className="hover:text-primary transition-colors"
         >
-          {t('help')}
+          {t("help")}
         </NavLink>
       </ul>
 
@@ -74,8 +73,8 @@ const Navbar = () => {
           <Icon icon={"material-symbols-light:search"} className="w-6 h-6" />
         </div>
         <div className="hidden md:flex items-center justify-between gap-5">
-        <Languages />
-        <Profile />
+          <Languages />
+          <Profile />
         </div>
         <Link
           to={"/ibyo-wakunze"}
@@ -102,10 +101,9 @@ const Navbar = () => {
         >
           <Icon icon={"clarity:bars-line"} fontSize={24} />
         </div>
-
       </div>
 
-{/* mobile search */}
+      {/* mobile search */}
       <div
         className={` xl:hidden absolute bg-white p-4 w-full flex items-center justify-center gap-4 ${
           search ? "top-0" : "-top-[100%]"
@@ -136,10 +134,8 @@ const Navbar = () => {
       >
         <div className={"flex items-center justify-between"}>
           <Link to={"/"}>
-            <img src="/logo.svg" alt="logo" className="w-[50px]"/>
+            <img src="/logo.svg" alt="logo" className="w-[50px]" />
           </Link>
-          <Languages />
-          <Profile />
           <div
             onClick={() => setSidebarOpen(false)}
             className="flex items-center justify-center border border-primary rounded-full p-2 hover:bg-primary hover:text-white"
@@ -148,38 +144,41 @@ const Navbar = () => {
           </div>
         </div>
         <div className=" md:hidden flex flex-col gap-5 xl:gap-10 mt-5">
-        <NavLink
-          to={"/"}
-          activeclassname="active"
-          className="hover:text-primary transition-colors"
-        >
-          {t('home')}
-        </NavLink>
-        <NavLink
-          to={"/tumenye"}
-          activeclassname="active"
-          className="hover:text-primary transition-colors"
-        >
-          {t('about')}
-        </NavLink>
-        <NavLink
-          to={"/tuvugishe"}
-          activeclassname="active"
-          className="hover:text-primary transition-colors"
-        >
-          {t('contact')}
-        </NavLink>
-        <NavLink
-          to={"/ubufasha"}
-          activeclassname="active"
-          className="hover:text-primary transition-colors"
-        >
-          {t('help')}
-        </NavLink>
-      </div>
+          <NavLink
+            to={"/"}
+            activeclassname="active"
+            className="hover:text-primary transition-colors"
+          >
+            {t("home")}
+          </NavLink>
+          <NavLink
+            to={"/tumenye"}
+            activeclassname="active"
+            className="hover:text-primary transition-colors"
+          >
+            {t("about")}
+          </NavLink>
+          <NavLink
+            to={"/tuvugishe"}
+            activeclassname="active"
+            className="hover:text-primary transition-colors"
+          >
+            {t("contact")}
+          </NavLink>
+          <NavLink
+            to={"/ubufasha"}
+            activeclassname="active"
+            className="hover:text-primary transition-colors"
+          >
+            {t("help")}
+          </NavLink>
+          <div className="flex items-center gap-5">
+            <Languages />
+            <Profile />
+          </div>
+        </div>
       </div>
     </div>
-    
   );
 };
 

@@ -121,8 +121,6 @@ export const languages = [
     },
 ];
 
-export const footerEndData = ["Privacy Policy", "Terms and Conditions", "User Agreement", "License"];
-
 export const footerLinks = [
     {
         title: "Links z'ingenzi",

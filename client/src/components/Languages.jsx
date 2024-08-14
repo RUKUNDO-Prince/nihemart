@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Language } from "../assets";
 import { languages } from "../constants/data";
 import { PiCaretDownBold, PiCaretUpBold } from "react-icons/pi";
@@ -13,8 +13,24 @@ const Languages = () => {
     setIsOpen(false); // Close the dropdown after selecting a language
   };
 
+  const dropdownRef = useRef(null);
+
+  // Close the dropdown if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
+
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       <button
         className="flex justify-center items-center gap-1"
         onClick={() => setIsOpen((prev) => !prev)}
