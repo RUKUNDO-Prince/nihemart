@@ -14,5 +14,23 @@
   "likes": "Ibyo Wakunze",
   "cart": "Agatebo",
   "order": "Tumiza",
-  "social": "Imbuga Nkoranyambaga Zacu"
+  "social": "Imbuga Nkoranyambaga Zacu",
+
+  "_COMMENT": "HOME DATA",
+  "products": "Ibicuruzwa Byacu",
+  "month": "Ibyasohotse uku kwezi",
+  "view": "Reba Byose",
+  "buying": "Tangira ugure",
+  "categories": "Reba category zose",
+  "watches": "Amasaha",
+  "watchDesc": "Amasaha meza utasanga mu Rwanda ku biciro binogeye buri wese.",
+  "jewelry": "Imiringa",
+  "jewelryDesc": "Gura imiringa myiza ku mafaranga make.",
+  "electronic": "Ibikoresho bya Electronic",
+  "electronicDesc": "Ibikoresho byose wakenera bya electronic",
+  "sport": "Ibikoresho bya Sport",
+  "sportDesc": "Ubaka gym iwawe",
+  "fastDelivery": "Tubikugezaho vuba",
+  "fastDeliveryDesc": "Tugeza ibicuruzwa byihuse kubakiriya bose hirya no hino mu Rwanda",
+  "customerSupport": "Dutanga serivisi zo kwita ku bakiriya 24/7"
 }
