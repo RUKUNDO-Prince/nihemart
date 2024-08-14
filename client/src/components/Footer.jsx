@@ -1,6 +1,6 @@
 import React from "react";
 import Newsletter from "./Newsletter";
-import { footerEndData, footerLinks, footerActions } from "../constants/data";
+import { footerLinks, footerActions } from "../constants/data";
 import { Link } from "react-router-dom";
 import { FaInstagram, FaWhatsapp, FaTiktok } from "react-icons/fa";
 import { logo } from "../assets";
@@ -88,19 +88,19 @@ const Footer = () => {
               to={"#"}
               className="text-white font-semibold text-nowrap xs:border-r-2 border-r-white pr-5 text-center md:text-start hover:underline"
             >
-              Privacy policy
+              Privacy Policy
             </Link>
             <Link
               to={"#"}
               className="text-white font-semibold text-nowrap xs:border-r-2 border-r-white pr-5 text-center md:text-start hover:underline"
             >
-              Terms and conditions
+              Terms and Conditions
             </Link>
             <Link
               to={"#"}
               className="text-white font-semibold text-nowrap xs:border-r-2 border-r-white pr-5 text-center md:text-start hover:underline"
             >
-              User agreement
+              User Agreement
             </Link>
             <Link
               to={"#"}
