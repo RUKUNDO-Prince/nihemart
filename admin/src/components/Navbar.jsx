@@ -56,9 +56,6 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="flex gap-5 items-center">
-          <Link to="/notifications">
-            <HiOutlineBell size={26} color="#5D6E8B" />
-          </Link>
           <Search />
         </div>
       </div>

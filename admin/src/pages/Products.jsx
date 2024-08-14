@@ -18,7 +18,6 @@ const Products = () => {
     handleAuth();
     fetchProducts();
   }, [navigate, isAuthenticated]);
-  console.log(products);
   return (
     <div className="m-[50px] flex-1">
       <div className="flex justify-between flex-col gap-2 sm:flex-row">
