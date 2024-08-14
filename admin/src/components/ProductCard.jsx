@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { FaCaretUp, FaCaretDown } from "react-icons/fa";
 import { api } from "../config/axiosInstance";
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams } from "react-router-dom";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { displayNumbers } from "../utils/usableFuncs";
 import useProductStore from "../store/productStore";
 
 const ProductCard = ({ product }) => {
+  const basePrice = product.price;
+
+  const variationPrices = product.variations.map((variation) =>
+    Number(variation.price)
+  );
+
+  const allPrices = [basePrice, ...variationPrices];
+
+  const minPrice = Math.min(...allPrices);
+  const maxPrice = Math.max(...allPrices);
 
   return (
     <div className="h-full">
@@ -35,25 +45,33 @@ const ProductCard = ({ product }) => {
           <div>
             <h1 className="font-semibold">{product.name}</h1>
             <div className="flex gap-2">
-              <p className="text-primary">
-                {displayNumbers(
+              <p className="text-primary flex items-center gap-2">
+                {/* {displayNumbers(
                   product.priceAfterDiscount
                     ? product.priceAfterDiscount
                     : product.price
                 )}
-                frw
+                frw */}
+                <span>
+                  {displayNumbers(
+                    product.variations.length > 0 ? minPrice : product.price
+                  )}
+                   frw
+                </span>
+                -<span>
+                {displayNumbers(
+                    product.variations.length > 0 ? maxPrice : product.price
+                  )}
+                   frw
+                </span>
               </p>
             </div>
           </div>
           <div className="px-2 border border-gray-90 rounded-md flex justify-between items-center gap-2">
             <p>{product.quantity}</p>
             <div>
-              <FaCaretUp
-                className="cursor-pointer"
-              />
-              <FaCaretDown
-                className="cursor-pointer"
-              />
+              <FaCaretUp className="cursor-pointer" />
+              <FaCaretDown className="cursor-pointer" />
             </div>
           </div>
         </div>

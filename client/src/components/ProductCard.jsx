@@ -66,6 +66,17 @@ const ProductCard = ({ product }) => {
     }
   };
 
+  const basePrice = product.price;
+
+  const variationPrices = product.variations.map((variation) =>
+    Number(variation.price)
+  );
+
+  const allPrices = [basePrice, ...variationPrices];
+
+  const minPrice = Math.min(...allPrices);
+  const maxPrice = Math.max(...allPrices);
+
   return (
     <>
       <div className="h-[37vh]">
@@ -112,13 +123,19 @@ const ProductCard = ({ product }) => {
               <ExpandableText maxChars={23}>{product?.name}</ExpandableText>
             </h1>
             <div className="flex gap-2">
-              <p className="text-primary">
+              <p className="text-primary flex items-center gap-2">
+              <span>
+                  {displayNumbers(
+                    product.variations.length > 0 ? minPrice : product.price
+                  )}
+                   frw
+                </span>
+                -<span>
                 {displayNumbers(
-                  product.priceAfterDiscount
-                    ? product.priceAfterDiscount
-                    : product.price
-                )}
-                frw
+                    product.variations.length > 0 ? maxPrice : product.price
+                  )}
+                   frw
+                </span>
               </p>
               {product.priceAfterDiscount && (
                 <p className="text-gray-80 line-through">
