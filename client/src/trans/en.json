@@ -50,5 +50,10 @@
   "email": "Your email",
   "telephone": "Your telephone",
   "message": "Your message",
-  "send": "Send message"
+  "send": "Send message",
+
+  "_COMMENT": "HELP PAGE DATA",
+  "where": "Help Center",
+  "answers": "Get all the answers you need",
+  "searchAbove": "Search above or refer to the articles below for answers to your questions"
 }

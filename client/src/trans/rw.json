@@ -50,5 +50,10 @@
   "email": "Email yawe",
   "telephone": "Telefone yawe",
   "message": "Ubutumwa bwawe",
-  "send": "Ohereza Ubutumwa"
+  "send": "Ohereza Ubutumwa",
+
+  "_COMMENT": "HELP PAGE DATA",
+  "where": "Aho tubafashiriza",
+  "answers": "Bona ibisubizo byose ukeneye",
+  "searchAbove": "Shakisha ruguru cyangwa urebe mu ngingo zikurikira kugirango ubone ibisubizo by'ibibazo wibaza"
 }
