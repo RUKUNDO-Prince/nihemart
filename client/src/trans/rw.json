@@ -32,5 +32,12 @@
   "sportDesc": "Ubaka gym iwawe",
   "fastDelivery": "Tubikugezaho vuba",
   "fastDeliveryDesc": "Tugeza ibicuruzwa byihuse kubakiriya bose hirya no hino mu Rwanda",
-  "customerSupport": "Dutanga serivisi zo kwita ku bakiriya 24/7"
+  "customerSupport": "Dutanga serivisi zo kwita ku bakiriya 24/7",
+
+  "_COMMENT": "ABOUT PAGE DATA",
+  "about": "Ibyerekeye Twe",
+  "who": "Turi bande?",
+  "whoDesc": "NIHE-MART ni ikigo gikorera kuri murandasi gishyira imbere ibyifuzo byumukiriya no kunyurwa kwe. Turangura ibicuruzwa byacu hanze, ibicuruzwa bidasanzwe byujuje ubuziranenge kandi bitaboneka mu Rwanda tukabigurisha dufite intego yo kubigurisha make ashoboka kuri serivisi yihuse kandi yizewe.",
+  "mission": "Intego yacu",
+  "missionDesc": "NIHE-MART ifite intego yo kuba igisubizo cy'ikibaza ngo NIHE nakura igikoresho runaka. Vuba cyane twifuza kuba twaba dufite ibikoresho bigera kuri 70% y'ibiba kw'isi yose, bityo ntihagire umunyarwanda wongera kwifuza ikintu ngo agitumize hanze cyagwa ngo akibure."
 }
