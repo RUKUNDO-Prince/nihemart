@@ -39,5 +39,16 @@
   "who": "Who are we?",
   "whoDesc": "NIHE-MART is a one-stop shop that puts the customer's needs and satisfaction first. We export our products, special quality products that are not available in Rwanda and sell them with the aim of selling them as low as possible with fast and reliable service.",
   "mission": "Our Mission",
-  "missionDesc": "NIHE-MART aims to be the answer to the question of WHERE to buy a particular device. Very soon we would like to have equipment for up to 70% of what is happening all over the world, so that no Rwandan would want to import something that would be lost."
+  "missionDesc": "NIHE-MART aims to be the answer to the question of WHERE to buy a particular device. Very soon we would like to have equipment for up to 70% of what is happening all over the world, so that no Rwandan would want to import something that would be lost.",
+
+  "_COMMENT": "CONTACT PAGE DATA",
+  "call": "Call us",
+  "line": "We are available online 24/7.",
+  "write": "Twandikire",
+  "form": "Fill out the contact form, we will see your comment immediately.",
+  "names": "Your names",
+  "email": "Your email",
+  "telephone": "Your telephone",
+  "message": "Your message",
+  "send": "Send message"
 }
