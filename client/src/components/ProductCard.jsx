@@ -137,11 +137,11 @@ const ProductCard = ({ product }) => {
                    frw
                 </span>
               </p>
-              {product.priceAfterDiscount && (
+              {/* {product.priceAfterDiscount && (
                 <p className="text-gray-80 line-through">
                   {displayNumbers(product.price)}frw
                 </p>
-              )}
+              )} */}
             </div>
           </Link>
         </div>
