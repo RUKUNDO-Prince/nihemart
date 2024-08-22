@@ -1,14 +1,17 @@
 import React from "react";
 import { about, shop } from "../assets";
 import { Cta, Team } from "../components";
+import { useTranslation } from "react-i18next";
 
 const About = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col font-poppins m-0">
       <div className="bg-gradient-to-r from-blue2 to-deepBlue flex flex-col md:flex-row justify-around px-[40px] gap-3">
         <div className="content-center md:w-[50%] px-5">
           <h1 className="text-white text-[28px] md:text-[48px] lg:text-[60px] font-bold text-center md:text-start">
-            Ibyerekeye Twe
+            {t("about")}
           </h1>
           <p className="text-white text-base md:text-[22px] text-center md:text-start md:w-[70%]">
             Explore a world of possibilities and join thousands of satisfied
@@ -24,18 +27,18 @@ const About = () => {
         <div className="flex flex-col md:w-[50%] gap-5">
           <div>
             <h1 className="text-black font-bold text-[30px] text-center md:text-start">
-              Turi bande?
+              {t("who")}
             </h1>
             <p className="text-[16px] font-poppins text-center md:text-start">
-            NIHE-MART ni ikigo gikorera kuri murandasi gishyira imbere ibyifuzo byumukiriya no kunyurwa kwe. Turangura ibicuruzwa byacu hanze, ibicuruzwa bidasanzwe byujuje ubuziranenge kandi bitaboneka mu Rwanda tukabigurisha dufite intego yo kubigurisha make ashoboka kuri serivisi yihuse kandi yizewe.
+            {t("whoDesc")}
             </p>
           </div>
           <div>
             <h1 className="text-black font-bold text-[30px] text-center md:text-start">
-              Intego yavu
+              {t("mission")}
             </h1>
             <p className="text-[16px] font-poppins text-center md:text-start">
-            NIHE-MART ifite intego yo kuba igisubizo cy'ikibaza ngo NIHE nakura igikoresho runaka. Vuba cyane twifuza kuba twaba dufite ibikoresho bigera kuri 70% y'ibiba kw'isi yose, bityo ntihagire umunyarwanda wongera kwifuza ikintu ngo agitumize hanze cyagwa ngo akibure.
+            {t("missionDesc")}
             </p>
           </div>
           <div>

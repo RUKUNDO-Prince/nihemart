@@ -1,17 +1,20 @@
 import React from "react";
 import { help2, search } from "../assets";
 import { helpData } from "../constants/data";
+import { useTranslation } from "react-i18next";
 
 const Help = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="m-[20px] rounded-lg border-[2px] border-gray-90">
       <div className="bg-gradient-to-r from-blueGradient to-orangeGradient w-full flex items-center flex-col md:flex-row">
         <div className="flex flex-col items-center md:w-[50%]">
           <h1 className="text-[60px] font-poppins font-bold text-white">
-            Aho Tubafashiriza
+            {t('where')}
           </h1>
           <p className="text-[20px] font-poppins font-regular text-white">
-            Bona ibisubizo byose ukeneye
+            {t('answers')}
           </p>
           <form
             action=""
@@ -34,7 +37,7 @@ const Help = () => {
       </div>
       <div className="p-[20px] flex flex-col items-center gap-5">
         <p className="text-gray-10 mt-[20px]">
-          Shakisha ruguru cyangwa urebe mu ngingo zikurikira kugirango ubone ibisubizo by'ibibazo wibaza
+          {t('searchAbove')}
         </p>
         <div className=" my-[50px] grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {helpData.map((item, index) => (
