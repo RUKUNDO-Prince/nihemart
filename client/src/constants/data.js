@@ -110,7 +110,7 @@ export const categories = [
 
 export const languages = [
     {
-        name: "Kinya",
+        name: "Kin",
         icon: rwanda,
         code: "rw"
     },
