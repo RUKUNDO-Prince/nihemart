@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const RelatedProductList = ({
   categoryFilter = "",
   productId,
-  showProducts = 8, // Default value for initially visible products
+  showProducts = 4, // Default value for initially visible products
 }) => {
   const { products, isLoading, error } = useProductStore();
   const [visibleProductsCount, setVisibleProductsCount] = useState(showProducts);
