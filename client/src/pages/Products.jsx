@@ -25,9 +25,9 @@ const Products = () => {
 
   return (
     <div className="p-[50px] flex-1">
-      <div className="flex justify-between items-center mb-4">
+      <div className="lg:flex justify-between items-center mb-4">
         <SubHeading title="Ibicuruzwa byose" />
-        <div className="flex gap-4">
+        <div className="flex md:flex-row flex-col gap-4 mt-5 lg:mt-0">
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}

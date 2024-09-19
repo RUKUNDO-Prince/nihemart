@@ -41,9 +41,9 @@ const CategoryResults = () => {
   return (
     <section className="flex-1">
       <div className="p-[50px] flex-1">
-        <div className="flex justify-between items-center mb-4">
+        <div className="lg:flex justify-between items-center mb-4">
           <SubHeading title={category?.toUpperCase() || "CATEGORY"} />
-          <div className="flex gap-4">
+          <div className="flex md:flex-row flex-col gap-4 mt-5 lg:mt-0">
             <input
               type="number"
               placeholder="Min Price"
