@@ -174,8 +174,8 @@ const Product = () => {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-3 lg:w-1/2 px-5">
-                  <h1 className="text-[24px] font-semibold">{product.name}</h1>
+                <div className="flex flex-col gap-3 lg:w-1/2">
+                  <h1 className="md:text-[24px] text-[20px] font-semibold break-words whitespace-normal">{product.name}</h1>
                   <div className="flex gap-3 items-center">
                     {/* <StarRating starCount={product.averageRating} />
                   <p className="text-gray-90">({product.ratings?.length})</p> | */}
@@ -185,7 +185,7 @@ const Product = () => {
                         : "dutegereje ibindi"}
                     </p>
                   </div>
-                  <p className="text-primary font-semibold text-[24px] flex items-center gap-3">
+                  <p className="text-primary font-semibold md:text-[24px] flex items-center gap-3">
                     {currentPrice} frw{" "}
                     {product.priceAfterDiscount && (
                       <span className="text-gray-90 line-through text-lg">
@@ -218,14 +218,14 @@ const Product = () => {
                     ))}
                   </div>
                   <div className="flex gap-5">
-                    <div className="w-[100px] md:min-w-[150px] px-[10px] border-[1px] border-gray-90 rounded-md flex justify-between items-center">
+                    <div className="w-[100px] md:min-w-[150px] px-[5px] border-[1px] border-gray-90 rounded-md flex justify-between items-center">
                       <button
                         className="flex items-center gap-2 justify-between"
                         onClick={decrementQuantity}
                         disabled={quantity === 1}
                       >
                         <FaMinus className="cursor-pointer" />
-                        <div className="h-[40px] w-[0.5px] bg-black"></div>
+                        <div className="h-[45px] w-[0.5px] bg-black"></div>
                       </button>
                       <p>{quantity}</p>
                       <button
@@ -233,24 +233,24 @@ const Product = () => {
                         onClick={incrementQuantity}
                         disabled={quantity === product.quantity}
                       >
-                        <div className="h-[40px] w-[0.5px] bg-black"></div>
+                        <div className="h-[45px] w-[0.5px] bg-black"></div>
                         <FaPlus className="cursor-pointer" />
                       </button>
                     </div>
                     <button
                       onClick={() => handleAddToCart(product._id)}
-                      className="bg-primary w-[29%] px-2 py-[10px] rounded-md hover:bg-opacity-[60%] transition-all duration-600 text-white flex justify-between items-start"
+                      className="bg-primary px-2 py-[10px] rounded-md hover:bg-opacity-[60%] transition-all duration-600 text-white flex justify-between items-center md:text-[16px] text-[14px]"
                     >
                       <img src={cart} alt="" />
                       Shyira mu gatebo
                     </button>
                   </div>
-                  <div className="border-[2px] border-gray-80 rounded-lg ">
+                  <div className="border-[2px] border-gray-80 rounded-lg  my-5">
                     <div className="m-[20px] flex justify-between">
                       <div className="">
                         <img src={delivery} alt="icon" />
                         <div>
-                          <p>
+                          <p className="hidden md:block">
                             Niba ukunze iki gicuruzwa ukaba ushaka kugitumiza
                             kanda aha →
                           </p>
@@ -265,7 +265,7 @@ const Product = () => {
                       </div>
                     </div>
                     <hr className="bg-gray-90 h-[2px]" />
-                    <div className="m-[20px]">
+                    <div className="m-[20px] hidden md:block">
                       <img src={circle} alt="icon" />
                       <div>
                         <h1>Igihe wasubizwa amafaranga</h1>
@@ -287,10 +287,10 @@ const Product = () => {
             </div>
           </div>
           <div className="my-2">
-            <h1 className="font-semibold font-poppins text-2xl">
+            <h1 className="font-semibold font-poppins md:text-2xl text-xl">
               Ubusobanuro bw'igicuruzwa
             </h1>
-            <p className="text-black text-[16px]">{product.description}</p>
+            <p className="text-black text-[16px] md:text-lg text-base leading-relaxed md:leading-loose mt-2 md:mt-4 break-words whitespace-normal">{product.description}</p>
           </div>
           <div className="my-[20px]">
             <SubHeading title="Ibindi byerekeranye" />

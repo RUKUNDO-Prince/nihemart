@@ -58,6 +58,7 @@ const CategoryResults = () => {
             />
             {subcategories.length > 0 && (
               <select
+                title="categories"
                 value={selectedSubcategory}
                 onChange={handleSubcategoryChange}
                 className="p-2 border rounded"
