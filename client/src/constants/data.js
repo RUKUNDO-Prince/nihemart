@@ -110,14 +110,14 @@ export const categories = [
 
 export const languages = [
     {
-        name: "En - US",
-        icon: usa,
-        code: "en"
-    },
-    {
         name: "Kinya",
         icon: rwanda,
         code: "rw"
+    },
+    {
+        name: "En",
+        icon: usa,
+        code: "en"
     },
 ];
 
