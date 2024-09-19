@@ -11,30 +11,30 @@ const ArrivalsGrid = () => {
         <img src={amasaha} className="w-[50%] m-auto" alt="img" />
         <div className="absolute bottom-3 left-3 text-white">
           <h1 className="text-lg md:text-[1.5em] font-bold">{t('watches')}</h1>
-          <p className="md:text-[1.2em]">
+          {/* <p className="md:text-[1.2em]">
             {t('watchDesc')}
-          </p>
+          </p> */}
         </div>
       </div>
       <div className="sm:col-span-2 row-span-1 bg-primary bg-opacity-[80%] relative flex justify-end">
         <img src={imiringa} className="md:w-[400px] md:h-[300px] w-[200px]" alt="img" />
         <div className="absolute bottom-3 left-3 text-white">
           <h1 className="text-lg md:text-[1.5em] font-bold">{t('jewelry')}</h1>
-          <p className="md:text-[1.2em]">{t('jewelryDesc')}</p>
+          {/* <p className="md:text-[1.2em]">{t('jewelryDesc')}</p> */}
         </div>
       </div>
       <div className="sm:col-span-1 row-span-1 bg-blue3 bg-opacity-[100%] relative flex justify-center p-[20px]">
         <img src={electronic} alt="img" />
         <div className="absolute bottom-3 left-3 text-white">
           <h1 className="text-lg md:text-[1.5em] font-bold">{t('electronic')}</h1>
-          <p className="md:text-[1.2em]">{t('electronicDesc')}</p>
+          {/* <p className="md:text-[1.2em]">{t('electronicDesc')}</p> */}
         </div>
       </div>
       <div className="sm:col-span-1 row-span-1 bg-blue3 bg-opacity-[100%] relative flex justify-center p-[20px]">
         <img src={siporo} alt="img" />
         <div className="absolute bottom-3 left-3 text-white">
           <h1 className="text-lg md:text-[1.5em] font-bold">{t('sport')}</h1>
-          <p className="md:text-[1.2em]">{t('sportDesc')}</p>
+          {/* <p className="md:text-[1.2em]">{t('sportDesc')}</p> */}
         </div>
       </div>
     </div>

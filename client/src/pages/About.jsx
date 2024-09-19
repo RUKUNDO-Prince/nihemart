@@ -53,10 +53,10 @@ const About = () => {
             </ul>
           </div>
         </div>
-        <div className="md:w-[50%] flex flex-col items-center">
+        {/* <div className="md:w-[50%] flex flex-col items-center">
           <h1 className="text-black font-bold text-[30px]">Meet Our Team</h1>
           <Team />
-        </div>
+        </div> */}
       </div>
       <Cta />
     </div>
