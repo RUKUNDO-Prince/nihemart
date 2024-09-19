@@ -10,7 +10,7 @@ const Languages = () => {
 
   const handleLanguageChange = (languageCode) => {
     i18n.changeLanguage(languageCode);
-    setIsOpen(false); // Close the dropdown after selecting a language
+    setIsOpen(false);
   };
 
   const dropdownRef = useRef(null);
