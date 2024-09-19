@@ -26,13 +26,13 @@ const CarouselCard = ({
             {ProductName}
           </h2>
         </div>
-        <h2 className="text-[26px] md:text-[44px] font-semibold text-[#fafafa] text-center md:text-start">
+        <h2 className="text-[26px] sm:text-[36px] md:text-[44px] font-semibold text-[#fafafa] text-center md:text-start">
           {heading}
         </h2>
-        <p className="text-white text-[16px] md:text-[20px] my-5">{desc}</p>
+        <p className="text-white text-[16px] md:text-[20px] sm:text-[18px] my-5 hidden md:block">{desc}</p>
         <Link
           to="/ibicuruzwa-byose"
-          className="px-5 py-2 border border-[2px] hover:bg-blue3 border-primary rounded-sm flex items-center gap-3 w-fit transition-all delay-75 mt-9"
+          className="px-5 py-2 border-[2px] hover:bg-blue3 border-primary rounded-sm flex items-center gap-3 w-fit transition-all delay-75 mt-9"
         >
           <span className="font-medium text-white">Tangira ugure</span>
           <FaArrowRight fontSize={16} color="#fafafa" />
