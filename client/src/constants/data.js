@@ -233,10 +233,6 @@ export const faqs = [
         answer: "1.Jya ahanditse ibicuruzwa  Jya ahanditse ibicuruzwa byose , cyagwa category, niba bidahagije ukoreshe ishakiro riri hejuru maze ushakishe igicuruzwa ushaka. \n 2. KANDA KURI NAGIKUNZE CYAGWA AGATEBO \n iyo ukanze kuri shyira mugatebo gihita cyijya hejuru ahari ishusho yagatebo, maze niba wakunze nibindi ushaka kubigurira rimwe ukomeza ukanda kuri shyira mugatebo maze bigakomeza kujya hamwe. ARIKO iyo ushaka kugura kimwe gusa, uhita ukanda kukamenyetso ka nagikunze maze ukahita ugura ako kanya utiriwe ubishyira hamwe nibindi."
     },
     {
-        question: "Ni ibicuruzwa bingana iki bigurishirizwa kuri Nihemart?",
-        answer: ""
-    },
-    {
         question: "Ni gute nakorana na Nihe-Mart?",
         answer: "Ufite ibicuruzwa ushaka ko tugucururiza cyangwa ushaka gushora muri nihemart, watwandikira kuri email: nihemart@gmail.com / number: 0792412177"
     },
