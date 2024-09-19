@@ -120,7 +120,8 @@ const ProductCard = ({ product }) => {
           </div>
           <Link to={`/igicuruzwa/${product._id}`}>
             <h1 className="font-semibold">
-              <ExpandableText maxChars={23}>{product?.name}</ExpandableText>
+              {/* <ExpandableText maxChars={23}>{product?.name}</ExpandableText> */}
+              {product?.name}
             </h1>
             <div className="flex gap-2">
               <p className="text-primary flex items-center gap-2">
