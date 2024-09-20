@@ -10,8 +10,8 @@ i18n
       en: { translation: en },
       rw: { translation: rw },
     },
-    lng: 'en', // Default language
-    fallbackLng: 'en', // Fallback language
+    lng: 'rw', // Default language
+    fallbackLng: 'rw', // Fallback language
     interpolation: {
       escapeValue: false, // React already does escaping
     },
