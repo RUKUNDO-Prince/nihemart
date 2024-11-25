@@ -162,6 +162,8 @@ const Product = () => {
                         alt="img"
                         key={index}
                         onClick={() => setSelectedImage(img)}
+                        width={800}
+                        height={800}
                       />
                     ))}
                   </div>
