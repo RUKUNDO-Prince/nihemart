@@ -37,11 +37,19 @@ const productSchema = new Schema({
     {
       variation: {
         type: String,
-        required: true,
+        required: true, // e.g., "Size", "Color"
+      },
+      value: {
+        type: String,
+        required: true, // e.g., "Small", "Red"
       },
       price: {
-        type: String,
+        type: Number, // Additional price for this variation
         required: true,
+      },
+      stock: {
+        type: Number, // Stock specific to this variation
+        default: 0,
       },
     },
   ],
@@ -62,7 +70,7 @@ const productSchema = new Schema({
       user: {
         type: Schema.Types.ObjectId,
         ref: "User",
-      }
+      },
     },
   ],
   ratings: [
@@ -90,10 +98,10 @@ const productSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  updated:{
-    type:Boolean,
+  updated: {
+    type: Boolean,
     default: false,
-  }
+  },
 });
 
 productSchema.virtual("averageRating").get(function () {
@@ -114,6 +122,11 @@ productSchema.virtual("priceAfterDiscount").get(function () {
   if (this.discountType === "Amount") {
     return this.price - this.discount;
   }
+});
+
+productSchema.virtual("totalStock").get(function () {
+  // Calculate total stock from variations if they exist
+  return this.variations.reduce((total, variation) => total + (variation.stock || 0), this.quantity);
 });
 
 const Product = mongoose.model("Product", productSchema);

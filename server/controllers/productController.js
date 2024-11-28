@@ -10,34 +10,41 @@ const addProduct = async (req, res) => {
       description,
       price,
       subCategory,
-      quantity,
       category,
       discountType,
       discount,
     } = req.body;
 
-    const variations = JSON.parse(req.body.variations);
+    const variations = JSON.parse(req.body.variations); // Variations should include `stock`
     const attributes = JSON.parse(req.body.attributes);
-
-    
     const photos = Array.isArray(req.files)
       ? req.files.map((file) => "images/" + file.filename)
       : [];
+
+    // Validate variations
+    for (const variation of variations) {
+      if (!variation.variation || typeof variation.stock !== "number") {
+        return res.status(400).json({
+          message:
+            "Each variation must include a 'variation' name and a 'stock' number.",
+        });
+      }
+    }
 
     const product = new Product({
       name,
       description,
       price,
-      quantity,
       subCategory,
-      variations,
-      attributes,
       category,
-      photos,
       discountType,
       discount,
-      createdAt: Date.now(), // Ensure createdAt is set
+      variations,
+      attributes,
+      photos,
+      createdAt: Date.now(),
     });
+
     await product.save();
 
     res.status(201).json({ message: "Product added successfully", product });
@@ -54,6 +61,22 @@ const editProduct = async (req, res) => {
 
     if (req.files && req.files.length > 0) {
       updates.photos = req.files.map((file) => "images/" + file.filename);
+    }
+
+    // Parse and validate variations if provided
+    if (updates.variations) {
+      const variations = JSON.parse(updates.variations);
+
+      for (const variation of variations) {
+        if (!variation.variation || typeof variation.stock !== "number") {
+          return res.status(400).json({
+            message:
+              "Each variation must include a 'variation' name and a 'stock' number.",
+          });
+        }
+      }
+
+      updates.variations = variations;
     }
 
     const product = await Product.findByIdAndUpdate(
