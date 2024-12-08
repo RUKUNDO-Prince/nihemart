@@ -172,6 +172,8 @@ const Product = () => {
                       src={`${api + "/" + selectedImage}`}
                       alt="item"
                       className=" w-full md:min-w-[441px] max-h-[331px] object-contain"
+                      width={800}
+                      height={800}
                     />
                   </div>
                 </div>
