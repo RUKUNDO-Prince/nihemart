@@ -28,6 +28,7 @@
     "react-query": "^3.39.3",
     "react-router-dom": "^6.23.0",
     "react-toastify": "^10.0.5",
+    "swiper": "^11.1.15",
     "yup": "^1.4.0",
     "zustand": "^4.5.2"
   },
