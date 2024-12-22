@@ -5,6 +5,9 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import {QueryClient,QueryClientProvider} from  "react-query"
 import './utils/i18n.js'
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
 
 const client = new QueryClient();
 
