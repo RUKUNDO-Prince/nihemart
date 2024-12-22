@@ -54,6 +54,15 @@ const Product = () => {
   // Function to get the price based on selected attribute values
   const getPrice = () => {
     if (!product) return "";
+    console.log(!product.variations)
+    // If product has no variations, just return the base price or discounted price
+    if (!product.variations || product.variations.length === 0) {
+      setCurrentPrice(
+        product.priceAfterDiscount ? product.priceAfterDiscount : product.price
+      );
+      return;
+    }
+
     const selectedValuesArray = Object.values(selectedValues);
     if (selectedValuesArray.includes(null)) {
       setCurrentPrice(
