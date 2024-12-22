@@ -67,15 +67,12 @@ const ProductCard = ({ product }) => {
   };
 
   const basePrice = product.price;
-
-  const variationPrices = product.variations.map((variation) =>
-    Number(variation.price)
-  );
-
-  const allPrices = [basePrice, ...variationPrices];
-
-  const minPrice = Math.min(...allPrices);
-  const maxPrice = Math.max(...allPrices);
+  const minPrice = product.variations && product.variations.length > 0
+    ? Math.min(basePrice, ...product.variations.map(v => Number(v.price)))
+    : basePrice;
+  const maxPrice = product.variations && product.variations.length > 0
+    ? Math.max(basePrice, ...product.variations.map(v => Number(v.price)))
+    : basePrice;
 
   return (
     <>
@@ -125,24 +122,23 @@ const ProductCard = ({ product }) => {
             </h1>
             <div className="flex gap-2">
               <p className="text-primary flex items-center gap-2">
-              <span>
-                  {displayNumbers(
-                    product.variations.length > 0 ? minPrice : product.price
-                  )}
-                   frw
-                </span>
-                -<span>
-                {displayNumbers(
-                    product.variations.length > 0 ? maxPrice : product.price
-                  )}
-                   frw
-                </span>
+                {product.variations && product.variations.length > 0 ? (
+                  <>
+                    <span>{displayNumbers(minPrice)} frw</span>
+                    -
+                    <span>{displayNumbers(maxPrice)} frw</span>
+                  </>
+                ) : (
+                  <span>
+                    {displayNumbers(product.priceAfterDiscount ? product.priceAfterDiscount : product.price)} frw
+                  </span>
+                )}
               </p>
-              {/* {product.priceAfterDiscount && (
+              {product.priceAfterDiscount && !product.variations && (
                 <p className="text-gray-80 line-through">
                   {displayNumbers(product.price)}frw
                 </p>
-              )} */}
+              )}
             </div>
           </Link>
         </div>
