@@ -23,6 +23,7 @@ const productSchema = new Schema({
   quantity: {
     type: Number,
     required: true,
+    default: 0
   },
   attributes: [
     {
@@ -37,18 +38,15 @@ const productSchema = new Schema({
     {
       variation: {
         type: String,
-        required: true, // e.g., "Size", "Color"
-      },
-      value: {
-        type: String,
-        required: true, // e.g., "Small", "Red"
+        required: true,
       },
       price: {
-        type: Number, // Additional price for this variation
+        type: Number,
         required: true,
       },
       stock: {
-        type: Number, // Stock specific to this variation
+        type: Number,
+        required: true,
         default: 0,
       },
     },
@@ -125,8 +123,10 @@ productSchema.virtual("priceAfterDiscount").get(function () {
 });
 
 productSchema.virtual("totalStock").get(function () {
-  // Calculate total stock from variations if they exist
-  return this.variations.reduce((total, variation) => total + (variation.stock || 0), this.quantity);
+  if (!this.variations || this.variations.length === 0) {
+    return this.quantity;
+  }
+  return this.variations.reduce((total, variation) => total + variation.stock, 0);
 });
 
 const Product = mongoose.model("Product", productSchema);

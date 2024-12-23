@@ -445,24 +445,37 @@ const Product = () => {
                     <div className="w-[40%]">
                       <h1>Variations</h1>
                       <div>
-                        {generateVariations(values.attributes).map(
-                          (variation, index) => (
-                            <div className="flex justify-between gap-5 my-2">
-                              <p key={index}>{variation}</p>
+                        {generateVariations(values.attributes).map((variation, index) => (
+                          <div className="flex justify-between gap-5 my-2" key={index}>
+                            <p>{variation}</p>
+                            <div className="flex gap-2">
                               <input
-                                type="text"
+                                type="number"
                                 placeholder="Price"
                                 onChange={(e) =>
                                   setFieldValue(`variations[${index}]`, {
+                                    ...values.variations[index],
                                     variation,
                                     price: e.target.value,
                                   })
                                 }
-                                className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none"
+                                className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none w-24"
+                              />
+                              <input
+                                type="number"
+                                placeholder="Stock"
+                                onChange={(e) =>
+                                  setFieldValue(`variations[${index}]`, {
+                                    ...values.variations[index],
+                                    variation,
+                                    stock: parseInt(e.target.value) || 0,
+                                  })
+                                }
+                                className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-8 rounded-md outline-none w-24"
                               />
                             </div>
-                          )
-                        )}
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>

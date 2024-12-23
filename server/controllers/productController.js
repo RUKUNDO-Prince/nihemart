@@ -1,4 +1,3 @@
-
 const Product = require("../models/product");
 const AdminPanel = require("../models/adminPanel");
 const Notification = require("../models/Notifications");
@@ -15,7 +14,7 @@ const addProduct = async (req, res) => {
       discount,
     } = req.body;
 
-    const variations = JSON.parse(req.body.variations); // Variations should include `stock`
+    const variations = JSON.parse(req.body.variations);
     const attributes = JSON.parse(req.body.attributes);
     const photos = Array.isArray(req.files)
       ? req.files.map((file) => "images/" + file.filename)
@@ -23,18 +22,23 @@ const addProduct = async (req, res) => {
 
     // Validate variations
     for (const variation of variations) {
-      if (!variation.variation || typeof variation.stock !== "number") {
+      if (!variation.variation || !variation.price || typeof variation.stock !== 'number') {
         return res.status(400).json({
-          message:
-            "Each variation must include a 'variation' name and a 'stock' number.",
+          message: "Each variation must include a variation name, price, and stock number.",
         });
       }
     }
+
+    // Calculate total stock from variations or use base quantity
+    const quantity = variations.length > 0 
+      ? variations.reduce((total, v) => total + (v.stock || 0), 0)
+      : req.body.quantity || 0;
 
     const product = new Product({
       name,
       description,
       price,
+      quantity,
       subCategory,
       category,
       discountType,
@@ -68,14 +72,15 @@ const editProduct = async (req, res) => {
       const variations = JSON.parse(updates.variations);
 
       for (const variation of variations) {
-        if (!variation.variation || typeof variation.stock !== "number") {
+        if (!variation.variation || !variation.price || typeof variation.stock !== 'number') {
           return res.status(400).json({
-            message:
-              "Each variation must include a 'variation' name and a 'stock' number.",
+            message: "Each variation must include a variation name, price, and stock number.",
           });
         }
       }
 
+      // Update total quantity based on variation stocks
+      updates.quantity = variations.reduce((total, v) => total + (v.stock || 0), 0);
       updates.variations = variations;
     }
 
