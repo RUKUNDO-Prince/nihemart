@@ -64,6 +64,9 @@ const Product = () => {
   const ImageRef = useRef(null);
   const selectedRef = useRef(null);
 
+  // Add a new state for the main image
+  const [mainImage, setMainImage] = useState(null);
+
   const selectFiles = () => {
     ImageRef.current.click();
   };
@@ -113,8 +116,19 @@ const Product = () => {
       discountType,
       discount,
     } = values;
-    // checking if the files have been selected
+
+    // Check if files have been selected and main image is set
     if (filess.length > 0 && filess.length <= 10) {
+      if (mainImage === null) {
+        toast.error("Please select a main image for the product");
+        return;
+      }
+
+      // Reorder files array to put main image first
+      const reorderedFiles = [...filess];
+      const mainFile = reorderedFiles.splice(mainImage, 1)[0];
+      reorderedFiles.unshift(mainFile);
+
       await addProduct({
         productName,
         productDesc,
@@ -126,7 +140,7 @@ const Product = () => {
         ProductSubCategory,
         discountType,
         discount,
-        files: filess,
+        files: reorderedFiles, // Use reordered files array
       });
     } else {
       toast.error("missing product images");
@@ -377,19 +391,41 @@ const Product = () => {
                         className={`relative rounded-lg border-2 ${
                           images[selectedImage]?.url === image.url
                             ? "border-primary"
-                            : "border-gray-200"
+                            : mainImage === idx 
+                              ? "border-green-500"
+                              : "border-gray-200"
                         } cursor-pointer group`}
                         onClick={() => handleSelectedImage(idx)}
                       >
+                        {/* Delete Button */}
                         <button
                           className="absolute -right-2 -top-2 w-6 h-6 bg-primary text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                           onClick={(e) => {
                             e.stopPropagation();
+                            if (mainImage === idx) {
+                              setMainImage(null);
+                            }
                             removeImage(image.name);
                           }}
                         >
                           ×
                         </button>
+
+                        {/* Set as Main Image Button */}
+                        <button
+                          className={`absolute left-2 top-2 px-2 py-1 rounded-md text-xs font-medium transition-opacity ${
+                            mainImage === idx 
+                              ? "bg-green-500 text-white opacity-100" 
+                              : "bg-gray-700 text-white opacity-0 group-hover:opacity-100"
+                          }`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setMainImage(idx);
+                          }}
+                        >
+                          {mainImage === idx ? "Main" : "Set Main"}
+                        </button>
+
                         <img
                           className="w-full h-24 object-contain p-2"
                           src={image.url}
@@ -414,6 +450,13 @@ const Product = () => {
                     className="hidden"
                     multiple
                   />
+
+                  {/* Warning message if no main image is selected */}
+                  {images.length > 0 && mainImage === null && (
+                    <p className="mt-2 text-yellow-600 text-sm">
+                      Please select a main image for the product
+                    </p>
+                  )}
                 </div>
 
                 {/* Pricing and Stock Section */}
