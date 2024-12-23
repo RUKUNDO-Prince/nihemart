@@ -19,6 +19,7 @@ const Product = () => {
   const addToCart = useCartStore((state) => state.addToCart);
   const [selectedValues, setSelectedValues] = useState({});
   const { addProduct } = useOrderStore();
+  const [currentStock, setCurrentStock] = useState(0);
 
   const params = useParams();
   const selectedProductId = params.id;
@@ -51,15 +52,16 @@ const Product = () => {
     fetchProducts();
   }, [selectedProductId]);
 
-  // Function to get the price based on selected attribute values
-  const getPrice = () => {
-    if (!product) return "";
-    console.log(!product.variations)
-    // If product has no variations, just return the base price or discounted price
+  // Function to get the price and stock based on selected attribute values
+  const getPriceAndStock = () => {
+    if (!product) return;
+    
+    // If product has no variations, use base price and stock
     if (!product.variations || product.variations.length === 0) {
       setCurrentPrice(
         product.priceAfterDiscount ? product.priceAfterDiscount : product.price
       );
+      setCurrentStock(product.quantity);
       return;
     }
 
@@ -68,24 +70,30 @@ const Product = () => {
       setCurrentPrice(
         product.priceAfterDiscount ? product.priceAfterDiscount : product.price
       );
+      setCurrentStock(product.quantity);
+      return;
     }
+
     const variationString = selectedValuesArray.join(" ");
     const variation = product.variations?.find(
       (v) => v.variation === variationString
     );
-    setCurrentPrice(
-      variation
-        ? variation.price
-        : product.priceAfterDiscount
-        ? product.priceAfterDiscount
-        : product.price
-    );
+
+    if (variation) {
+      setCurrentPrice(variation.price);
+      setCurrentStock(variation.stock);
+    } else {
+      setCurrentPrice(
+        product.priceAfterDiscount ? product.priceAfterDiscount : product.price
+      );
+      setCurrentStock(product.quantity);
+    }
   };
 
-  // setting the current price based on selected attribute values
+  // Update useEffect to use new function
   useEffect(() => {
-    getPrice();
-  }, [selectedValues]);
+    getPriceAndStock();
+  }, [selectedValues, product]);
 
   // Function to handle attribute value changes
   const handleValueChange = (attrName, value) => {
@@ -114,29 +122,18 @@ const Product = () => {
     navigate("/ubufasha");
   };
 
+  // Update the increment/decrement functions to use currentStock
   const incrementQuantity = () => {
     setQuantity((prev) => {
-      if (prev < product.quantity) {
+      if (prev < currentStock) {
         return prev + 1;
       }
       return prev;
     });
-    setCurrentQuantity((prev)=>{
-      if(prev > 0){
-        return prev - 1;
-      }
-      return 0
-    })
   };
 
   const decrementQuantity = () => {
     setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
-    setCurrentQuantity((prev)=>{
-      if(prev <= product.quantity){
-        return prev + 1;
-      }
-      return prev
-    })
   };
 
   const handleAddToCart = (productId) => {
@@ -190,11 +187,9 @@ const Product = () => {
                 <div className="flex flex-col gap-3 lg:w-1/2">
                   <h1 className="md:text-[24px] text-[20px] font-semibold break-words whitespace-normal">{product.name}</h1>
                   <div className="flex gap-3 items-center">
-                    {/* <StarRating starCount={product.averageRating} />
-                  <p className="text-gray-90">({product.ratings?.length})</p> | */}
                     <p className="text-[#00FF66]">
-                      {product.quantity
-                        ? ` ${currentQuantity} muri stock`
+                      {currentStock > 0
+                        ? `${currentStock} muri stock`
                         : "dutegereje ibindi"}
                     </p>
                   </div>
@@ -237,17 +232,17 @@ const Product = () => {
                         onClick={decrementQuantity}
                         disabled={quantity === 1}
                       >
-                        <FaMinus className="cursor-pointer" />
+                        <FaMinus className={`cursor-pointer ${quantity === 1 ? 'opacity-50' : ''}`} />
                         <div className="h-[45px] w-[0.5px] bg-black"></div>
                       </button>
                       <p>{quantity}</p>
                       <button
                         className="flex items-center gap-2 justify-between"
                         onClick={incrementQuantity}
-                        disabled={quantity === product.quantity}
+                        disabled={quantity === currentStock}
                       >
                         <div className="h-[45px] w-[0.5px] bg-black"></div>
-                        <FaPlus className="cursor-pointer" />
+                        <FaPlus className={`cursor-pointer ${quantity === currentStock ? 'opacity-50' : ''}`} />
                       </button>
                     </div>
                     <button
