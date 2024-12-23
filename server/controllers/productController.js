@@ -14,18 +14,27 @@ const addProduct = async (req, res) => {
       discount,
     } = req.body;
 
-    const variations = JSON.parse(req.body.variations);
-    const attributes = JSON.parse(req.body.attributes);
+    const variations = JSON.parse(req.body.variations || '[]');
+    const attributes = JSON.parse(req.body.attributes || '[]');
     const photos = Array.isArray(req.files)
       ? req.files.map((file) => "images/" + file.filename)
       : [];
 
-    // Validate variations
-    for (const variation of variations) {
-      if (!variation.variation || !variation.price || typeof variation.stock !== 'number') {
-        return res.status(400).json({
-          message: "Each variation must include a variation name, price, and stock number.",
-        });
+    // Validate that either base price/stock or variations are provided
+    if (variations.length === 0 && (!price || !req.body.quantity)) {
+      return res.status(400).json({
+        message: "Either base price and stock or variations must be provided",
+      });
+    }
+
+    // Validate variations if they exist
+    if (variations.length > 0) {
+      for (const variation of variations) {
+        if (!variation.variation || !variation.price || typeof variation.stock !== 'number') {
+          return res.status(400).json({
+            message: "Each variation must include a variation name, price, and stock number.",
+          });
+        }
       }
     }
 
@@ -37,7 +46,7 @@ const addProduct = async (req, res) => {
     const product = new Product({
       name,
       description,
-      price,
+      price: price || 0, // Default to 0 if not provided
       quantity,
       subCategory,
       category,

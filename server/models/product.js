@@ -18,11 +18,15 @@ const productSchema = new Schema({
   },
   price: {
     type: Number,
-    required: true,
+    required: function() {
+      return !this.variations || this.variations.length === 0;
+    }
   },
   quantity: {
     type: Number,
-    required: true,
+    required: function() {
+      return !this.variations || this.variations.length === 0;
+    },
     default: 0
   },
   attributes: [

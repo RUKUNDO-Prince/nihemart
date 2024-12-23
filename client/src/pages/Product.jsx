@@ -122,7 +122,6 @@ const Product = () => {
     navigate("/ubufasha");
   };
 
-  // Update the increment/decrement functions to use currentStock
   const incrementQuantity = () => {
     setQuantity((prev) => {
       if (prev < currentStock) {
@@ -133,7 +132,7 @@ const Product = () => {
   };
 
   const decrementQuantity = () => {
-    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+    setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
   };
 
   const handleAddToCart = (productId) => {
@@ -232,17 +231,17 @@ const Product = () => {
                         onClick={decrementQuantity}
                         disabled={quantity === 1}
                       >
-                        <FaMinus className={`cursor-pointer ${quantity === 1 ? 'opacity-50' : ''}`} />
+                        <FaMinus className="cursor-pointer" />
                         <div className="h-[45px] w-[0.5px] bg-black"></div>
                       </button>
                       <p>{quantity}</p>
                       <button
                         className="flex items-center gap-2 justify-between"
                         onClick={incrementQuantity}
-                        disabled={quantity === currentStock}
+                        disabled={quantity === product.quantity}
                       >
                         <div className="h-[45px] w-[0.5px] bg-black"></div>
-                        <FaPlus className={`cursor-pointer ${quantity === currentStock ? 'opacity-50' : ''}`} />
+                        <FaPlus className="cursor-pointer" />
                       </button>
                     </div>
                     <button
