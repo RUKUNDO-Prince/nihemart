@@ -52,7 +52,7 @@ const ProductsList = ({
       ) : (
         <>
           {limitedProducts.length > 0 ? (
-            <div className="mt-[40px] grid xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7">
+            <div className="mt-[40px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-7">
               {limitedProducts.map((product, index) => (
                 <ProductCard product={product} key={index} />
               ))}

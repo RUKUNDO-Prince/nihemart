@@ -48,7 +48,7 @@ const Products = () => {
           modules={[FreeMode, Navigation, Autoplay]}
           className="w-full"
         >
-          {products.slice(0, 6).map((product) => (
+          {products.slice(0, 100).map((product) => (
             <SwiperSlide key={product._id}>
               <ProductCard product={product} />
             </SwiperSlide>
