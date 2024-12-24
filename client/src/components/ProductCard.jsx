@@ -78,16 +78,18 @@ const ProductCard = ({ product }) => {
     <>
       <div className="h-[37vh]">
         <div className="h-full flex flex-col">
-          <div className="flex bg-blue2 bg-opacity-[20%] p-[20px] justify-between items-start max-h-[206.38px]  mb-[10px] flex-1 relative">
-            <Link className="m-auto" to={`/igicuruzwa/${product._id}`}>
+          <div className="bg-opacity-[20%] justify-between items-start max-h-[206.38px]  mb-[10px] flex-1 relative">
+            <Link className="m-auto w-full h-full" to={`/igicuruzwa/${product._id}`}>
               <img
                 src={`${api + "/" + product?.photo}`}
-                className="max-h-[150px] object-cover"
+                className="object-center max-h-full w-full"
                 alt="img"
+                // width={250}
+                // height={250}
               />
             </Link>
 
-            <div className="absolute right-0 top-0  flex flex-col p-4 gap-2">
+            {/* <div className="absolute right-0 top-0  flex flex-col p-4 gap-2">
               {
                 <div className="p-2 rounded-full bg-white">
                   {isLiked ? (
@@ -113,7 +115,7 @@ const ProductCard = ({ product }) => {
                   className=" w-4 h-4 lg:w-6 lg:h-6"
                 />
               </Link>
-            </div>
+            </div> */}
           </div>
           <Link to={`/igicuruzwa/${product._id}`}>
             <h1 className="font-semibold">
@@ -121,7 +123,7 @@ const ProductCard = ({ product }) => {
               {product?.name}
             </h1>
             <div className="flex gap-2">
-              <p className="text-primary flex items-center gap-2">
+              <p className="">
                 {product.variations && product.variations.length > 0 ? (
                   <>
                     <span>{displayNumbers(minPrice)} frw</span>
