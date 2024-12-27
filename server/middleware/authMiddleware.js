@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 
 const authenticate = (req, res, next) => {
   const token = req.header("Authorization")?.split(" ")[1];
@@ -33,13 +34,33 @@ const authMiddleware = (req, res, next) => {
 // uploading the image
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/images");
+    // Create uploads/images directory if it doesn't exist
+    const dir = path.join(__dirname, "../uploads/images");
+    fs.mkdirSync(dir, { recursive: true });
+    cb(null, dir);
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+    // Add file extension to ensure proper file type
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
   },
 });
 
-const upload = multer({ storage: storage });
+// Add file filter to only allow images
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image/')) {
+    cb(null, true);
+  } else {
+    cb(new Error('Not an image! Please upload an image.'), false);
+  }
+};
+
+const upload = multer({ 
+  storage: storage,
+  fileFilter: fileFilter,
+  limits: {
+    fileSize: 5 * 1024 * 1024 // 5MB limit
+  }
+});
 
 module.exports = { authenticate, upload, authMiddleware };

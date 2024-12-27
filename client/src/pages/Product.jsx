@@ -33,7 +33,7 @@ const Product = () => {
         ? productData.priceAfterDiscount
         : productData.price
     );
-    setSelectedImage(productData.photos[0]);
+    setSelectedImage(productData.photos?.[0] || null);
     setCurrentQuantity(productData.quantity - 1);
 
     const initialSelectedValues = productData.attributes?.reduce(
@@ -62,6 +62,7 @@ const Product = () => {
         product.priceAfterDiscount ? product.priceAfterDiscount : product.price
       );
       setCurrentStock(product.quantity);
+      setSelectedImage(product.photos?.find(p => p.isDefault) || product.photos?.[0] || null);
       return;
     }
 
@@ -71,6 +72,8 @@ const Product = () => {
         product.priceAfterDiscount ? product.priceAfterDiscount : product.price
       );
       setCurrentStock(product.quantity);
+      // Reset to default product image when no variation is selected
+      setSelectedImage(product.photos?.find(p => p.isDefault) || product.photos?.[0] || null);
       return;
     }
 
@@ -80,13 +83,35 @@ const Product = () => {
     );
 
     if (variation) {
-      setCurrentPrice(variation.price);
+      // Apply discount to variation price if applicable
+      if (product.discountType && product.discount) {
+        const discountAmount = product.discountType === 'percentage' 
+          ? (variation.price * product.discount) / 100
+          : product.discount;
+        setCurrentPrice(variation.price - discountAmount);
+      } else {
+        setCurrentPrice(variation.price);
+      }
       setCurrentStock(variation.stock);
+
+      // Update selected image if variation has an image
+      if (variation.image) {
+        // Set the selected image to the variation image
+        setSelectedImage({
+          url: variation.image, // Ensure this is the correct path
+          isDefault: false
+        });
+      } else {
+        // Fallback to default product image
+        setSelectedImage(product.photos?.find(p => p.isDefault) || product.photos?.[0] || null);
+      }
     } else {
       setCurrentPrice(
         product.priceAfterDiscount ? product.priceAfterDiscount : product.price
       );
       setCurrentStock(product.quantity);
+      // Reset to default product image when variation is not found
+      setSelectedImage(product.photos?.find(p => p.isDefault) || product.photos?.[0] || null);
     }
   };
 
@@ -97,10 +122,13 @@ const Product = () => {
 
   // Function to handle attribute value changes
   const handleValueChange = (attrName, value) => {
-    setSelectedValues((prevValues) => ({
-      ...prevValues,
-      [attrName]: prevValues[attrName] === value ? null : value,
-    }));
+    setSelectedValues((prevValues) => {
+      const newValues = {
+        ...prevValues,
+        [attrName]: prevValues[attrName] === value ? null : value
+      };
+      return newValues;
+    });
   };
 
   const handleOrderNowClick = () => {
@@ -139,6 +167,9 @@ const Product = () => {
   const handleAddToCart = (productId) => {
     addToCart(productId, quantity);
   };
+
+  console.log("Product Data:", product);
+
   return (
     <div className=" px-5 md:px-10 font-poppins">
       {isLoading ? (
@@ -157,28 +188,44 @@ const Product = () => {
                 {/* images container */}
                 <div className="flex lg:w-1/2 flex-col md:flex-row">
                   <div className=" md:min-w-[100px] w-full md:w-[15%] md:h-[560px] flex gap-5 flex-row md:flex-col justify-between md:justify-start my-[10px] overflow-x-auto no-scrollbar ">
-                    {product?.photos?.map((img, index) => (
+                    {product?.photos?.map((photo, index) => (
                       <img
                         className={`bg-gray-90 bg-opacity-[30%] p-[20px] hover:bg-opacity-[20%] w-[150px] md:w-full ${
-                          selectedImage === img
+                          selectedImage?.url === photo.url
                             ? "border-2 border-primary/50"
                             : "border-2"
                         } rounded-md`}
-                        src={`${api + "/" + img}`}
-                        alt="img"
+                        src={`${api}/uploads/images/${photo.url}`}
+                        alt={`Product view ${index + 1}`}
                         key={index}
-                        onClick={() => setSelectedImage(img)}
-                        width={800}
-                        height={800}
+                        onClick={() => setSelectedImage(photo)}
+                        loading="lazy"
                       />
                     ))}
                   </div>
-                  <div className="bg-gray-90 bg-opacity-[30%] flex items-center justify-center px-[40px] my-[10px]  md:ml-[20px] hover:bg-opacity-[20%] w-full rounded-md overflow-hidden h-[92%]">
-                    <img
-                      src={`${api + "/" + selectedImage}`}
-                      alt="item"
-                      className="w-full md:min-w-[441px] max-h-[331px] object-contain"
-                    />
+                  <div className="bg-gray-90 bg-opacity-[30%] flex items-center justify-center px-[40px] my-[10px] md:ml-[20px] hover:bg-opacity-[20%] w-full rounded-md overflow-hidden h-[92%]">
+                    {selectedImage ? (
+                      <img
+                        src={`${api}/uploads/images/${selectedImage.url}`}
+                        alt={`${product.name} - ${Object.values(selectedValues).join(" ")}`}
+                        className="w-full md:min-w-[441px] max-h-[331px] object-contain"
+                        loading="lazy"
+                        onError={(e) => {
+                          console.error('Failed to load image:', selectedImage.url);
+                          // Fallback to default product image
+                          const defaultImage = product.photos?.find(p => p.isDefault) || product.photos?.[0];
+                          if (defaultImage && defaultImage.url !== selectedImage.url) {
+                            setSelectedImage(defaultImage);
+                          } else {
+                            e.target.src = '/placeholder.png';
+                          }
+                        }}
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                        No Image Available
+                      </div>
+                    )}
                   </div>
                 </div>
 
