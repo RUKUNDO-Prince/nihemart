@@ -1,12 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-  name: String,
-  email: String,
-  phone: String,
-});
-
 const productSchema = new Schema({
   name: {
     type: String,
@@ -24,6 +18,10 @@ const productSchema = new Schema({
     type: Number,
     required: true,
     default: 0
+  },
+  hasVariations: {
+    type: Boolean,
+    default: false
   },
   attributes: [
     {
@@ -49,6 +47,10 @@ const productSchema = new Schema({
         required: true,
         default: 0,
       },
+      image: {
+        type: String,
+        required: false
+      },
     },
   ],
   discount: {
@@ -57,32 +59,20 @@ const productSchema = new Schema({
   },
   discountType: {
     type: String,
+    enum: ['percentage', 'amount', ''],
+    default: ''
   },
   photos: [
     {
-      type: String,
-    },
-  ],
-  likes: [
-    {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
+      url: {
+        type: String,
+        required: true
       },
-    },
-  ],
-  ratings: [
-    {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-      rating: {
-        type: Number,
-        min: 1,
-        max: 5,
-      },
-    },
+      isDefault: {
+        type: Boolean,
+        default: false
+      }
+    }
   ],
   category: {
     type: String,
@@ -103,8 +93,7 @@ const productSchema = new Schema({
 });
 
 productSchema.virtual("averageRating").get(function () {
-  if (this.ratings.length === 0) return 0;
-
+  if (!this.ratings || this.ratings.length === 0) return 0;
   const sum = this.ratings.reduce((total, rating) => total + rating.rating, 0);
   return sum / this.ratings.length;
 });

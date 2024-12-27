@@ -100,27 +100,35 @@ const Product = () => {
               </p>
               <div className="flex flex-col lg:flex-row justify-between md:gap-5">
                 <div className="flex lg:w-1/2 flex-col md:flex-row">
-                  <div className=" md:min-w-[100px] w-full md:w-[15%] md:h-[560px] flex gap-5 flex-row md:flex-col justify-between md:justify-start my-[10px] overflow-x-auto no-scrollbar ">
-                    {product?.photos?.map((img, index) => (
+                  <div className="md:min-w-[100px] w-full md:w-[15%] md:h-[560px] flex gap-5 flex-row md:flex-col justify-between md:justify-start my-[10px] overflow-x-auto no-scrollbar">
+                    {product?.photos?.map((photo, index) => (
                       <img
                         className={`bg-gray-90 bg-opacity-[30%] p-[20px] hover:bg-opacity-[20%] w-[150px] md:w-full ${
-                          selectedImage === img
+                          selectedImage?.url === photo.url
                             ? "border-2 border-primary/50"
                             : "border-2"
                         } rounded-md`}
-                        src={`${api + "/" + img}`}
-                        alt="img"
+                        src={`${api}/uploads/images/${photo.url}`}
+                        alt={`Product view ${index + 1}`}
                         key={index}
-                        onClick={() => setSelectedImage(img)}
+                        onClick={() => setSelectedImage(photo)}
+                        loading="lazy"
                       />
                     ))}
                   </div>
-                  <div className="bg-gray-90 bg-opacity-[30%] flex items-center justify-center content-center px-[40px] my-[10px]  md:ml-[20px] hover:bg-opacity-[20%] w-full rounded-md overflow-hidden h-[91%]">
-                    <img
-                      src={`${api + "/" + selectedImage}`}
-                      alt="item"
-                      className=" w-full md:min-w-[441px] max-h-[331px] object-contain"
-                    />
+                  <div className="bg-gray-90 bg-opacity-[30%] flex items-center justify-center content-center px-[40px] my-[10px] md:ml-[20px] hover:bg-opacity-[20%] w-full rounded-md overflow-hidden h-[91%]">
+                    {selectedImage ? (
+                      <img
+                        src={`${api}/uploads/images/${selectedImage.url}`}
+                        alt="Selected product view"
+                        className="w-full md:min-w-[441px] max-h-[331px] object-contain"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                        No Image Available
+                      </div>
+                    )}
                   </div>
                 </div>
 

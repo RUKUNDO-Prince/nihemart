@@ -16,6 +16,7 @@ const OrderRouter = require("./routes/order");
 const cors = require("cors");
 const http = require("http");
 const {Server} = require("socket.io");
+const path = require('path');
 require("dotenv").config();
 
 
@@ -39,7 +40,9 @@ app.use(
   })
 );
 
-app.use(express.static("uploads"))
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads/images', express.static(path.join(__dirname, 'uploads', 'images')));
+
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(morgan("tiny"));

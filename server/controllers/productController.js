@@ -7,32 +7,62 @@ const addProduct = async (req, res) => {
     const {
       name,
       description,
-      price,
       subCategory,
       category,
       discountType,
       discount,
+      hasVariations,
+      defaultImageIndex
     } = req.body;
 
-    const variations = JSON.parse(req.body.variations);
-    const attributes = JSON.parse(req.body.attributes);
-    const photos = Array.isArray(req.files)
-      ? req.files.map((file) => "images/" + file.filename)
+    // Parse price as a number and validate
+    const price = parseFloat(req.body.price);
+    if (isNaN(price) || price < 0) {
+      return res.status(400).json({ 
+        message: "Please provide a valid price" 
+      });
+    }
+
+    let variations = [];
+    let attributes = [];
+    let quantity = parseInt(req.body.quantity) || 0;
+
+    // Process main product photos
+    const photos = Array.isArray(req.files) 
+      ? req.files.map((file, index) => ({
+          url: file.filename,
+          isDefault: index === parseInt(defaultImageIndex || 0)
+        }))
       : [];
 
-    // Validate variations
-    for (const variation of variations) {
-      if (!variation.variation || !variation.price || typeof variation.stock !== 'number') {
+    if (hasVariations === 'true') {
+      try {
+        variations = JSON.parse(req.body.variations).map(variation => ({
+          ...variation,
+          price: parseFloat(variation.price),
+          stock: parseInt(variation.stock) || 0,
+          image: variation.image ? variation.image : undefined
+        }));
+        attributes = JSON.parse(req.body.attributes);
+
+        // Validate variations
+        for (const variation of variations) {
+          if (!variation.variation || isNaN(variation.price) || typeof variation.stock !== 'number') {
+            return res.status(400).json({
+              message: "Each variation must include a variation name, valid price, and stock number.",
+            });
+          }
+        }
+
+        // Calculate total stock from variations
+        quantity = variations.reduce((total, v) => total + (v.stock || 0), 0);
+      } catch (error) {
         return res.status(400).json({
-          message: "Each variation must include a variation name, price, and stock number.",
+          message: "Invalid variation data provided",
+          error: error.message
         });
       }
     }
-
-    // Calculate total stock from variations or use base quantity
-    const quantity = variations.length > 0 
-      ? variations.reduce((total, v) => total + (v.stock || 0), 0)
-      : req.body.quantity || 0;
 
     const product = new Product({
       name,
@@ -41,8 +71,9 @@ const addProduct = async (req, res) => {
       quantity,
       subCategory,
       category,
-      discountType,
-      discount,
+      discountType: discountType || '',
+      discount: parseFloat(discount) || 0,
+      hasVariations: hasVariations === 'true',
       variations,
       attributes,
       photos,
@@ -53,8 +84,11 @@ const addProduct = async (req, res) => {
 
     res.status(201).json({ message: "Product added successfully", product });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    console.error("Product addition error:", error);
+    res.status(500).json({ 
+      message: "Failed to add product", 
+      error: error.message 
+    });
   }
 };
 
@@ -63,12 +97,17 @@ const editProduct = async (req, res) => {
     const { productId } = req.params;
     const updates = req.body;
 
+    // Handle photos if new ones are uploaded
     if (req.files && req.files.length > 0) {
-      updates.photos = req.files.map((file) => "images/" + file.filename);
+      const defaultImageIndex = parseInt(updates.defaultImageIndex || 0);
+      updates.photos = req.files.map((file, index) => ({
+        url: "images/" + file.filename,
+        isDefault: index === defaultImageIndex
+      }));
     }
 
-    // Parse and validate variations if provided
-    if (updates.variations) {
+    // Handle variations if product has them
+    if (updates.hasVariations === 'true') {
       const variations = JSON.parse(updates.variations);
 
       for (const variation of variations) {
@@ -79,9 +118,13 @@ const editProduct = async (req, res) => {
         }
       }
 
-      // Update total quantity based on variation stocks
       updates.quantity = variations.reduce((total, v) => total + (v.stock || 0), 0);
       updates.variations = variations;
+      updates.attributes = JSON.parse(updates.attributes);
+    } else {
+      // Reset variations and attributes if variations are disabled
+      updates.variations = [];
+      updates.attributes = [];
     }
 
     const product = await Product.findByIdAndUpdate(
@@ -261,9 +304,10 @@ const getAllProducts = async (req, res) => {
     if (!Products) {
       return res.status(404).json({ message: "No products found" });
     }
+    
     const productsWithPhotos = Products.map((product) => ({
       ...product.toObject({ virtuals: true }),
-      photo: product.photos.length > 0 ? product.photos[0] : null,
+      photo: product.photos.find(p => p.isDefault)?.url || product.photos[0]?.url
     }));
 
     res.status(200).json({ products: productsWithPhotos });

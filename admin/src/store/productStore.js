@@ -7,43 +7,26 @@ const useProductStore = create((set) => ({
   products: [] || null,
 
   // adding products
-  addProduct: async ({
-    productName,
-    productDesc,
-    attributes,
-    variations,
-    productPrice,
-    ProductInStock,
-    ProductCategory,
-    ProductSubCategory,
-    discountType,
-    discount,
-    files,
-  }) => {
+  addProduct: async (formData) => {
     set({ isLoading: true });
     try {
-      const formdata = new FormData();
+      // Validate required fields
+      const price = formData.get('price');
+      if (!price || isNaN(parseFloat(price))) {
+        throw new Error('Please provide a valid price');
+      }
 
-      formdata.append("name", productName);
-      formdata.append("description", productDesc);
-      formdata.append("price", productPrice);
-      formdata.append("quantity", ProductInStock);
-      formdata.append("category", ProductCategory);
-      formdata.append("subCategory", ProductSubCategory);
-      formdata.append("attributes", JSON.stringify(attributes));
-      formdata.append("variations", JSON.stringify(variations));
-      formdata.append("discountType", discountType);
-      formdata.append("discount", discount);
-
-      if (files && files.length > 0) {
-        files.forEach((file) => {
-          formdata.append("files", file);
-        });
+      // If there are variations, validate them
+      if (formData.get('hasVariations') === 'true') {
+        const variations = JSON.parse(formData.get('variations') || '[]');
+        if (variations.some(v => !v.price || isNaN(parseFloat(v.price)))) {
+          throw new Error('All variations must have valid prices');
+        }
       }
 
       const response = await authorizedApi.post(
         "/product/addProduct",
-        formdata,
+        formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -54,8 +37,8 @@ const useProductStore = create((set) => ({
       const { message } = response.data;
       toast.success(message);
     } catch (error) {
-      console.log(error);
-      toast.error(error.response.data.message);
+      console.error("Product addition error:", error);
+      toast.error(error.response?.data?.message || error.message);
     } finally {
       set({ isLoading: false });
     }
