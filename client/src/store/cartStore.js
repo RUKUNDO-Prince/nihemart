@@ -20,20 +20,27 @@ const useCartStore = create((set) => ({
   },
 
   // Add item to the cart
-  addToCart: async (productId,quantity) => {
-    set({ isLoading: true, error: null });
-    try {
-      const response = await authorizedApi.post(`/cart/cart/${productId}?quantity=${quantity}`); // Replace with your actual API endpoint
-      if(response.data) toast.success("product added to cart");
-      set((state) => ({
-        cartItems: [...state.cartItems, response.data],
-        isLoading: false,
-      }));
-      
-    } catch (error) {
-      set({ error: error.message, isLoading: false });
-      toast.error(error.response.data.message)
+  addToCart: (productId, quantity) => {
+    const product = products.find((p) => p._id === productId);
+    if (!product) {
+      toast.error("Product not found.");
+      return;
     }
+
+    // Check if the product has variations
+    if (product.hasVariations) {
+      const selectedValuesArray = Object.values(selectedValues);
+      if (selectedValuesArray.includes(null)) {
+        toast.error("Please select at least one variation before adding to cart.");
+        return;
+      }
+    }
+
+    // Add product to cart logic
+    set((state) => ({
+      cart: [...state.cart, { productId, quantity }],
+    }));
+    toast.success("Product added to cart!");
   },
 
   // Remove item from the cart

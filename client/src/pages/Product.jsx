@@ -9,6 +9,7 @@ import { IoBagCheckOutline } from "react-icons/io5";
 import useCartStore from "../store/cartStore";
 import RelatedProductList from "../components/RelatedProductList";
 import useOrderStore from "../store/OrderDetails";
+
 const Product = () => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
@@ -55,7 +56,7 @@ const Product = () => {
   // Function to get the price and stock based on selected attribute values
   const getPriceAndStock = () => {
     if (!product) return;
-    
+
     // If product has no variations, use base price and stock
     if (!product.variations || product.variations.length === 0) {
       setCurrentPrice(
@@ -127,23 +128,57 @@ const Product = () => {
         ...prevValues,
         [attrName]: prevValues[attrName] === value ? null : value
       };
+
+      // Update the selected image based on the selected variant
+      const selectedVariant = product.variations.find(variation => {
+        return Object.entries(newValues).every(([key, val]) => {
+          return val === null || variation[key] === val;
+        });
+      });
+
+      console.log("Selected Variant:", selectedVariant); // Debugging line
+
+      if (selectedVariant) {
+        // Check if the selected variant has an image
+        if (selectedVariant.image) {
+          console.log("Selected Variant Image URL:", selectedVariant.image); // Debugging line
+          setSelectedImage({
+            url: selectedVariant.image, // Ensure this is the correct path
+            isDefault: false
+          });
+        } else {
+          console.log("No image found for selected variant, falling back to default."); // Debugging line
+          // Fallback to default product image if no variant image
+          setSelectedImage(product.photos?.find(p => p.isDefault) || product.photos?.[0] || null);
+        }
+      } else {
+        console.log("No variant selected, falling back to default image."); // Debugging line
+        // Fallback to default product image if no variant is selected
+        setSelectedImage(product.photos?.find(p => p.isDefault) || product.photos?.[0] || null);
+      }
+
       return newValues;
     });
   };
 
   const handleOrderNowClick = () => {
+    // Check if at least one variation is selected
+    const selectedValuesArray = Object.values(selectedValues);
+    if (selectedValuesArray.includes(null)) {
+      alert("Please select at least one variation before placing an order.");
+      return;
+    }
+
     const productDetails = {
-      productId:product._id,
+      productId: product._id,
       name: product.name,
       price: currentPrice,
       quantity: quantity,
       variation: Object.values(selectedValues),
-      directOrder:true,
+      directOrder: true,
     };
     addProduct(productDetails);
-    navigate(
-      `/tumiza/${selectedProductId}?quantity=${quantity}&category=${product.category}`
-    );
+    navigate(`/tumiza/${selectedProductId}?quantity=${quantity}&category=${product.category}`);
   };
 
   const handleNavigateToHelp = () => {
@@ -164,11 +199,15 @@ const Product = () => {
     setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
   };
 
-  const handleAddToCart = (productId) => {
-    addToCart(productId, quantity);
+  const handleAddToCart = () => {
+    // Check if at least one variation is selected
+    const selectedValuesArray = Object.values(selectedValues);
+    if (selectedValuesArray.includes(null)) {
+      alert("Please select at least one variation before adding to cart.");
+      return;
+    }
+    addToCart(product._id, quantity);
   };
-
-  console.log("Product Data:", product);
 
   return (
     <div className="px-5 md:px-10 font-poppins">
@@ -281,7 +320,7 @@ const Product = () => {
                       </button>
                     </div>
                     <button
-                      onClick={() => handleAddToCart(product._id)}
+                      onClick={handleAddToCart}
                       className="bg-primary px-2 py-[10px] rounded-md hover:bg-opacity-[60%] transition-all duration-600 text-white flex justify-between items-center md:text-[16px] text-[14px]"
                     >
                       <img src={cart} alt="" />
