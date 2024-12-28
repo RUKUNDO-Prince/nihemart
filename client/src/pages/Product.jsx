@@ -171,7 +171,7 @@ const Product = () => {
   console.log("Product Data:", product);
 
   return (
-    <div className=" px-5 md:px-10 font-poppins">
+    <div className="px-5 md:px-10 font-poppins">
       {isLoading ? (
         <div className="min-h-screen flex items-center justify-center text-lg">
           Loading...
@@ -187,7 +187,7 @@ const Product = () => {
               <div className="flex flex-col lg:flex-row justify-between md:gap-5">
                 {/* images container */}
                 <div className="flex lg:w-1/2 flex-col md:flex-row">
-                  <div className=" md:min-w-[100px] w-full md:w-[15%] md:h-[560px] flex gap-5 flex-row md:flex-col justify-between md:justify-start my-[10px] overflow-x-auto no-scrollbar ">
+                  <div className="md:min-w-[100px] w-full md:w-[15%] md:h-[560px] flex gap-5 flex-row md:flex-col justify-between md:justify-start my-[10px] overflow-x-auto no-scrollbar ">
                     {product?.photos?.map((photo, index) => (
                       <img
                         className={`bg-gray-90 bg-opacity-[30%] p-[20px] hover:bg-opacity-[20%] w-[150px] md:w-full ${
@@ -210,16 +210,6 @@ const Product = () => {
                         alt={`${product.name} - ${Object.values(selectedValues).join(" ")}`}
                         className="w-full md:min-w-[441px] max-h-[331px] object-contain"
                         loading="lazy"
-                        onError={(e) => {
-                          console.error('Failed to load image:', selectedImage.url);
-                          // Fallback to default product image
-                          const defaultImage = product.photos?.find(p => p.isDefault) || product.photos?.[0];
-                          if (defaultImage && defaultImage.url !== selectedImage.url) {
-                            setSelectedImage(defaultImage);
-                          } else {
-                            e.target.src = '/placeholder.png';
-                          }
-                        }}
                       />
                     ) : (
                       <div className="w-full h-full bg-gray-200 flex items-center justify-center">

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useProductStore from "../store/productStore";
 import { api } from "../config/axiosInstance";
-import { toast } from "react-toastify";
 import { categories } from "../constants/data";
+import { toast } from "react-toastify";
 
 const UpdateProduct = () => {
   const [product, setProduct] = useState({
@@ -29,7 +29,7 @@ const UpdateProduct = () => {
   const returnSelectedProduct = async () => {
     const productData = await getProductById(selectedProductId);
     setProduct(productData);
-    setSelectedImage(productData.photos[0]);
+    setSelectedImage(productData.photos[0]?.url);
     const selectedCategoryObject = categories.find(
       (cat) => cat.category === productData.category
     );
@@ -51,8 +51,26 @@ const UpdateProduct = () => {
   };
 
   const handleUpdateProduct = async () => {
-    await updateProduct(selectedProductId, product);
-    navigate(`/product/${selectedProductId}`);
+    const formData = new FormData();
+    // Append product data to formData
+    Object.keys(product).forEach(key => {
+      if (key === "photos") {
+        product.photos.forEach(photo => {
+          formData.append('files', photo); // Append each photo
+        });
+      } else {
+        formData.append(key, product[key]);
+      }
+    });
+    // Append variations as a JSON string
+    formData.append('variations', JSON.stringify(product.variations));
+    try {
+      await updateProduct(selectedProductId, formData);
+      navigate(`/product/${selectedProductId}`);
+    } catch (error) {
+      console.error("Error updating product:", error);
+      toast.error("Failed to update product. Please try again.");
+    }
   };
 
   const handleCategoryChange = (e) => {
@@ -83,26 +101,26 @@ const UpdateProduct = () => {
           <h1 className="text-2xl font-semibold">Update Product</h1>
           <div className="flex flex-col lg:flex-row justify-between md:gap-5">
             <div className="flex lg:w-1/2 flex-col md:flex-row">
-              <div className=" md:min-w-[100px] w-full md:w-[15%] md:h-[560px] flex gap-5 flex-row md:flex-col justify-between md:justify-start my-[10px] overflow-x-auto no-scrollbar ">
+              <div className="md:min-w-[100px] w-full md:w-[15%] md:h-[560px] flex gap-5 flex-row md:flex-col justify-between md:justify-start my-[10px] overflow-x-auto no-scrollbar">
                 {product?.photos?.map((img, index) => (
                   <img
                     className={`bg-gray-90 bg-opacity-[30%] p-[20px] hover:bg-opacity-[20%] w-[150px] md:w-full ${
-                      selectedImage === img
+                      selectedImage === img.url
                         ? "border-2 border-primary/50"
                         : "border-2"
                     } rounded-md`}
-                    src={`${api + "/" + img}`}
+                    src={`${api}/uploads/images/${img.url}`}
                     alt="img"
                     key={index}
-                    onClick={() => setSelectedImage(img)}
+                    onClick={() => setSelectedImage(img.url)}
                   />
                 ))}
               </div>
-              <div className="bg-gray-90 bg-opacity-[30%] flex items-center justify-center content-center px-[40px] my-[10px]  md:ml-[20px] hover:bg-opacity-[20%] w-full rounded-md overflow-hidden h-[91%]">
+              <div className="bg-gray-90 bg-opacity-[30%] flex items-center justify-center content-center px-[40px] my-[10px] md:ml-[20px] hover:bg-opacity-[20%] w-full rounded-md overflow-hidden h-[91%]">
                 <img
-                  src={`${api + "/" + selectedImage}`}
+                  src={`${api}/uploads/images/${selectedImage}`}
                   alt="item"
-                  className=" w-full md:min-w-[441px] max-h-[331px] object-contain"
+                  className="w-full md:min-w-[441px] max-h-[331px] object-contain"
                 />
               </div>
             </div>
@@ -146,68 +164,59 @@ const UpdateProduct = () => {
                   className="w-full px-2 py-1 border rounded"
                 />
               </label>
-              <div className="flex gap-5">
-                <div className="flex flex-col w-1/2">
-                  <div className=" w-full flex flex-col">
-                    <p>Product category</p>
-                    <select
-                      name="category"
-                      value={product.category}
-                      onChange={handleCategoryChange}
-                      className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-10 rounded-md outline-none"
-                    >
-                      <option value="">Choose the category</option>
-                      {categories.map((category, index) => (
-                        <option key={index} value={category.category}>
-                          {category.category}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className=" w-full">
-                    <p>Product subcategory</p>
-                    <select
-                      name="subCategory"
-                      value={product.subCategory}
-                      onChange={handleInputChange}
-                      className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-10 rounded-md outline-none w-full"
-                    >
-                      <option value="">Choose the subcategory</option>
-                      {subcategories.map((subcategory, index) => (
-                        <option key={index} value={subcategory}>
-                          {subcategory}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <div className="flex flex-col w-1/2">
-                  <div className="flex flex-col">
-                    <label>Discount</label>
+              <h2 className="text-lg font-semibold">Variations</h2>
+              {product.variations.map((variation, index) => (
+                <div key={index} className="border p-2 rounded">
+                  <label>
+                    Variation Name:
                     <input
-                      className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-10 rounded-md outline-none"
                       type="text"
-                      name="discount"
-                      placeholder={`${product.discount}`}
-                      onChange={handleInputChange}
+                      value={variation.variation}
+                      onChange={(e) => {
+                        const newVariations = [...product.variations];
+                        newVariations[index].variation = e.target.value;
+                        setProduct((prev) => ({
+                          ...prev,
+                          variations: newVariations,
+                        }));
+                      }}
+                      className="w-full px-2 py-1 border rounded"
                     />
-                  </div>
-                  <div className="flex flex-col">
-                    <label>Discount Type</label>
-                    <select
-                      onChange={handleInputChange}
-                      name="discountType"
-                      value={product.discountType}
-                      className="font-poppins font-medium text-[15px] bg-gray-90 bg-opacity-[40%] p-2 h-10 rounded-md outline-none"
-                    >
-                      <option value="">discount Type</option>
-                      <option value="percentage">Percentage</option>
-                      <option value="amount">Amount</option>
-                    </select>
-                  </div>
+                  </label>
+                  <label>
+                    Price:
+                    <input
+                      type="number"
+                      value={variation.price}
+                      onChange={(e) => {
+                        const newVariations = [...product.variations];
+                        newVariations[index].price = parseFloat(e.target.value);
+                        setProduct((prev) => ({
+                          ...prev,
+                          variations: newVariations,
+                        }));
+                      }}
+                      className="w-full px-2 py-1 border rounded"
+                    />
+                  </label>
+                  <label>
+                    Stock:
+                    <input
+                      type="number"
+                      value={variation.stock}
+                      onChange={(e) => {
+                        const newVariations = [...product.variations];
+                        newVariations[index].stock = parseInt(e.target.value);
+                        setProduct((prev) => ({
+                          ...prev,
+                          variations: newVariations,
+                        }));
+                      }}
+                      className="w-full px-2 py-1 border rounded"
+                    />
+                  </label>
                 </div>
-              </div>
-
+              ))}
               <button
                 className="bg-blue3 px-5 py-2 rounded-md text-white hover:bg-blue2 transition-all duration-600 mt-4"
                 onClick={handleUpdateProduct}

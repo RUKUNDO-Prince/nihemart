@@ -95,7 +95,12 @@ const useProductStore = create((set) => ({
     try {
       const response = await authorizedApi.put(
         `/product/editProduct/${productId}`,
-        updatedProductData
+        updatedProductData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       const { message } = response.data;
       toast.success(message);

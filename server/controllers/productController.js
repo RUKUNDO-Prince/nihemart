@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Product = require("../models/product");
 const AdminPanel = require("../models/adminPanel");
 const Notification = require("../models/Notifications");
@@ -95,38 +96,48 @@ const addProduct = async (req, res) => {
 const editProduct = async (req, res) => {
   try {
     const { productId } = req.params;
-    const updates = req.body;
+    let updates = req.body;
 
-    // Handle photos if new ones are uploaded
-    if (req.files && req.files.length > 0) {
-      const defaultImageIndex = parseInt(updates.defaultImageIndex || 0);
+    // Validate productId
+    if (!mongoose.Types.ObjectId.isValid(productId)) {
+      return res.status(400).json({ message: "Invalid product ID" });
+    }
+
+    // Handle photos
+    if (Array.isArray(req.files) && req.files.length > 0) {
+      const defaultImageIndex = Number.isInteger(Number(updates.defaultImageIndex))
+        ? parseInt(updates.defaultImageIndex)
+        : 0;
       updates.photos = req.files.map((file, index) => ({
         url: "images/" + file.filename,
-        isDefault: index === defaultImageIndex
+        isDefault: index === defaultImageIndex,
       }));
     }
 
-    // Handle variations if product has them
+    // Handle variations
     if (updates.hasVariations === 'true') {
-      const variations = JSON.parse(updates.variations);
+      updates.variations = JSON.parse(updates.variations || '[]');
+      updates.attributes = JSON.parse(updates.attributes || '[]');
 
-      for (const variation of variations) {
-        if (!variation.variation || !variation.price || typeof variation.stock !== 'number') {
+      for (const variation of updates.variations) {
+        if (
+          typeof variation.variation !== 'string' ||
+          typeof variation.price !== 'number' ||
+          typeof variation.stock !== 'number'
+        ) {
           return res.status(400).json({
-            message: "Each variation must include a variation name, price, and stock number.",
+            message: "Each variation must include a valid name (string), price (number), and stock (number).",
           });
         }
       }
 
-      updates.quantity = variations.reduce((total, v) => total + (v.stock || 0), 0);
-      updates.variations = variations;
-      updates.attributes = JSON.parse(updates.attributes);
+      updates.quantity = updates.variations.reduce((total, v) => total + (v.stock || 0), 0);
     } else {
-      // Reset variations and attributes if variations are disabled
       updates.variations = [];
       updates.attributes = [];
     }
 
+    // Update product in database
     const product = await Product.findByIdAndUpdate(
       productId,
       { ...updates, updated: true },
@@ -140,7 +151,10 @@ const editProduct = async (req, res) => {
     res.status(200).json({ message: "Product updated successfully", product });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    const isProduction = process.env.NODE_ENV === 'production';
+    res.status(500).json({
+      message: isProduction ? "Internal server error" : error.message,
+    });
   }
 };
 
