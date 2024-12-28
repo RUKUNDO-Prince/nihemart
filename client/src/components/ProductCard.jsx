@@ -8,7 +8,7 @@ const ProductCard = ({ product }) => {
   const displayImage = product.photo || 
     (product.photos && product.photos.length > 0 ? 
       (product.photos.find(photo => photo.isDefault)?.url || 
-       product.photos[0].url) : 
+       product.photos[0]?.url) : 
       null);
 
   // Calculate price range for variations
