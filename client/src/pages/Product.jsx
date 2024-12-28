@@ -128,6 +128,35 @@ const Product = () => {
         ...prevValues,
         [attrName]: prevValues[attrName] === value ? null : value
       };
+
+      // Update the selected image based on the selected variant
+      const selectedVariant = product.variations.find(variation => {
+        return Object.entries(newValues).every(([key, val]) => {
+          return val === null || variation[key] === val;
+        });
+      });
+
+      console.log("Selected Variant:", selectedVariant); // Debugging line
+
+      if (selectedVariant) {
+        // Check if the selected variant has an image
+        if (selectedVariant.image) {
+          console.log("Selected Variant Image URL:", selectedVariant.image); // Debugging line
+          setSelectedImage({
+            url: selectedVariant.image, // Ensure this is the correct path
+            isDefault: false
+          });
+        } else {
+          console.log("No image found for selected variant, falling back to default."); // Debugging line
+          // Fallback to default product image if no variant image
+          setSelectedImage(product.photos?.find(p => p.isDefault) || product.photos?.[0] || null);
+        }
+      } else {
+        console.log("No variant selected, falling back to default image."); // Debugging line
+        // Fallback to default product image if no variant is selected
+        setSelectedImage(product.photos?.find(p => p.isDefault) || product.photos?.[0] || null);
+      }
+
       return newValues;
     });
   };
