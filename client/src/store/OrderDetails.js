@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { authorizedApi } from "../config/axiosInstance";
 import toast from "react-hot-toast";
+import { displayNumbers } from "../utils/usableFuncs";
 
 const useOrderStore = create((set,get) => ({
   orderDetails: {
@@ -40,13 +41,11 @@ const useOrderStore = create((set,get) => ({
       let message = `Ndashaka kugura igicuruzwa kuri nihemart%0A`;
       message += ` phone: ${phone} %0A`;
       productDetails.forEach((product) => {
-        message += `- ${product.name}: ${
-          product.price * product.quantity
-        } Frw%0A`;
+        message += `- ${product.name} (Qty: ${product.quantity}, subtotal: ${displayNumbers(product.quantity * product.price)}) Frw%0A`;
       });
       message += ` Province: ${province}%0A`;
       message += `${province === "Kigali" ? "city: " + city : " "}`;
-      message += ` delivary fee: ${deliveryFee} Frw%0A`;
+      message += ` delivery fee: ${deliveryFee} Frw%0A`;
       message += ` Total: ${totalAmount} Frw%0A`;
       return { whatsappMessage: message };
     });
@@ -80,13 +79,14 @@ const useOrderStore = create((set,get) => ({
         state.orderDetails
       );
       if (response.status === 201) {
-        set({success: true});
-        toast.success(
-          "Murakoze kugura iki gicuruzwa, ibyo mwatumije birabageraho vuba!"
-        );
+        set({ success: true });
+        toast.success("Murakoze kugura iki gicuruzwa, ibyo mwatumije birabageraho vuba!");
+      } else {
+        toast.error("Failed to place order. Please try again.");
       }
     } catch (error) {
-      toast.error(error?.response?.data?.error);
+      console.error("Error placing order:", error); // Log the error for debugging
+      toast.error(error?.response?.data?.error || "An error occurred while placing the order.");
     }
   },
 

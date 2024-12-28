@@ -7,6 +7,11 @@ const { sendEmailToAdmin } = require("../utils/emailService");
 const addOrder = async (req, res) => {
   const { name, phone, province, city, deliveryFee, productDetails } = req.body;
 
+  // Check if productDetails is defined and has at least one item
+  if (!productDetails || productDetails.length === 0) {
+    return res.status(400).json({ message: "No product details provided." });
+  }
+
   const directOrder = productDetails[0].directOrder;
 
   try {
@@ -23,50 +28,14 @@ const addOrder = async (req, res) => {
 
     if (directOrder !== undefined && directOrder === true) {
       const product = await Product.findById(productDetails[0].productId);
-
       product.quantity -= productDetails[0].quantity;
-
       await product.save();
     }
 
-    const totalPrice = order.productDetails.reduce((acc, product) => {
-      return acc + product.price * product.quantity;
-    }, 0);
-
-    const subject = "New Order Placed";
-    // Format the email message
-    const emailBody = `
-     <h2>New Order Placed</h2>
-     <p><strong>Name:</strong> ${order.name}</p>
-     <p><strong>Phone:</strong> ${order.phone}</p>
-     <p><strong>Province:</strong> ${order.province}</p>
-     <p><strong>City:</strong> ${order.city ? order.city : order.province}</p>
-     <p><strong>Delivery Fee:</strong> ${displayNumbers(
-       order.deliveryFee
-     )} Frw</p>
-     <p><strong>Product Details:</strong></p>
-     <ul>
-       ${order.productDetails
-         .map(
-           (item) =>
-             `<li>${item.name} (Qty: ${
-               item.quantity
-             }, subtotal: ${displayNumbers(
-               item.quantity * item.price
-             )}) Frw</li>`
-         )
-         .join("")}
-     </ul>
-     <p><strong>total price:</strong> ${displayNumbers(totalPrice)} Frw</p>
-   `;
-
-    // Send the email using the utility function
-    await sendEmailToAdmin(subject, emailBody);
-
     res.status(201).json({ message: "Order added successfully" });
   } catch (error) {
-    console.log(error.message);
-    res.status(400).json({ message: "failed to order, try again from home" });
+    console.error("Error saving order:", error);
+    res.status(500).json({ message: "Failed to place order, please try again." });
   }
 };
 

@@ -1,3 +1,6 @@
-export const displayNumbers = (num) => {
-    return num?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
+export const displayNumbers = (number) => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(number);
+};

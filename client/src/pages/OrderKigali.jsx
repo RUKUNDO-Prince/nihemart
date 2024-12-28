@@ -9,18 +9,19 @@ const OrderKigali = () => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
-  const { orderDetails, kigaliOrder, clearOrderDetails } = useOrderStore();
+  const { orderDetails, kigaliOrder, clearOrderDetails, generateWhatsAppMessage } = useOrderStore();
 
   console.log("this is the order details: ", orderDetails);
 
   const handleBuyClick = async () => {
     await kigaliOrder();
 
-    setTimeout(() => {
-      clearOrderDetails();
-      navigate("/")
-    }, 2000);
-    
+    if (orderDetails.city !== "Kigali") {
+      generateWhatsAppMessage();
+      setShowModal(true);
+    } else {
+      navigate("/");
+    }
   };
 
   const productDetails = orderDetails.productDetails;

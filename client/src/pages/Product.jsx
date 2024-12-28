@@ -162,6 +162,13 @@ const Product = () => {
   };
 
   const handleOrderNowClick = () => {
+    // Check if at least one variation is selected
+    const selectedValuesArray = Object.values(selectedValues);
+    if (selectedValuesArray.includes(null)) {
+      alert("Please select at least one variation before placing an order.");
+      return;
+    }
+
     const productDetails = {
       productId: product._id,
       name: product.name,
@@ -171,9 +178,7 @@ const Product = () => {
       directOrder: true,
     };
     addProduct(productDetails);
-    navigate(
-      `/tumiza/${selectedProductId}?quantity=${quantity}&category=${product.category}`
-    );
+    navigate(`/tumiza/${selectedProductId}?quantity=${quantity}&category=${product.category}`);
   };
 
   const handleNavigateToHelp = () => {
