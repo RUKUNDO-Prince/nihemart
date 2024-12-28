@@ -30,17 +30,16 @@ const useAuthStore = create((set) => ({
         password,
         phone,
       });
-      const { message, token, responseUser } = response.data;
+      const { message, token, user } = response.data;
 
       localStorage.setItem("authToken", token);
-
-      localStorage.setItem("user", responseUser);
+      localStorage.setItem("user", JSON.stringify(user));
 
       set({
         isAuthenticated: true,
         token,
         isLoading: false,
-        user: responseUser,
+        user: user,
       });
       toast.success(message);
     } catch (error) {
@@ -63,9 +62,8 @@ const useAuthStore = create((set) => ({
       });
       const { message, token, responseUser } = response.data;
       localStorage.setItem("authToken", token);
-
       localStorage.setItem("user", JSON.stringify(responseUser));
-      
+
       set({
         isAuthenticated: true,
         token,
