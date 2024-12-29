@@ -61,7 +61,7 @@ const ProductsList = ({
           )}
         </>
       )}
-      {(location.pathname !== "/") && (
+      {(location.pathname !== "/") && limitedProducts.length > visibleProductsCount && (
         <div className="my-9 mx-auto">
           <button
             onClick={showMoreProducts}
