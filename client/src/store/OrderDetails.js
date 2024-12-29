@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { authorizedApi } from "../config/axiosInstance";
 import toast from "react-hot-toast";
 import { displayNumbers } from "../utils/usableFuncs";
+import { toast } from "react-toastify";
 
 const useOrderStore = create((set,get) => ({
   orderDetails: {

@@ -221,6 +221,7 @@ const Product = () => {
 
       await addProduct(formData);
       navigate("/products");
+      toast.success("Product added successfully!");
     } catch (error) {
       toast.error("Failed to add product. Please try again.");
       console.error(error);

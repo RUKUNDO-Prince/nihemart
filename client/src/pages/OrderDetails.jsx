@@ -5,6 +5,7 @@ import { SubHeading } from "../components";
 import { displayNumbers } from "../utils/usableFuncs";
 import SelectStatus from "../components/common/SelectStatus";
 import useStatusUpdater from "../store/statusStore";
+import { toast } from "react-toastify";
 
 const OrderDetails = () => {
   const params = useParams();
@@ -37,6 +38,7 @@ const OrderDetails = () => {
 
   const handleOrderDeletion = async () => {
     await deleteOrder(orderId);
+    toast.success("Order deleted successfully.");
     navigate("/orders");
   };
 

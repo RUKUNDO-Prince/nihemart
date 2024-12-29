@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 import { authorizedApi } from "../config/axiosInstance";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 
 const useCartStore = create((set) => ({
   cartItems: [],

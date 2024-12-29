@@ -6,6 +6,7 @@ import { api } from "../config/axiosInstance";
 import useAuthStore from "../store/authStore";
 import { displayNumbers } from "../utils/usableFuncs";
 import useOrderStore from "../store/OrderDetails";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const {
@@ -33,8 +34,8 @@ const Cart = () => {
 
   const cart = cartItems?.cart?.items;
 
-  const handleCartOrder = ()=>{
-    if(user && cart){
+  const handleCartOrder = () => {
+    if (user && cart) {
       const productDetails = cart.map(product => ({
         productId: product._id,
         name: product.name,
@@ -44,6 +45,9 @@ const Cart = () => {
       setProductDetails(productDetails)
 
       navigate("/tumiza/agatebo")
+      toast.success("Order placed successfully!");
+    } else {
+      toast.error("Please log in to place an order.");
     }
   };
 

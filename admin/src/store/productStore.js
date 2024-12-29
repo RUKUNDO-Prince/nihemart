@@ -108,7 +108,7 @@ const useProductStore = create((set) => ({
       await useProductStore.getState().fetchProducts();
     } catch (error) {
       console.error("Error updating product:", error);
-      toast.error(error.response.data.message);
+      toast.error("Failed to update product. Please try again.");
     } finally {
       set({ isLoading: false });
     }

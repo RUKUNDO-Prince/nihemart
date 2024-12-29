@@ -9,6 +9,7 @@ import { IoBagCheckOutline } from "react-icons/io5";
 import useCartStore from "../store/cartStore";
 import RelatedProductList from "../components/RelatedProductList";
 import useOrderStore from "../store/OrderDetails";
+import { toast } from "react-toastify";
 
 const Product = () => {
   const [product, setProduct] = useState({});
@@ -165,7 +166,7 @@ const Product = () => {
     // Check if at least one variation is selected
     const selectedValuesArray = Object.values(selectedValues);
     if (selectedValuesArray.includes(null)) {
-      alert("Please select at least one variation before placing an order.");
+      toast.error("Please select at least one variation before placing an order.");
       return;
     }
 
