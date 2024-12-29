@@ -10,6 +10,7 @@ import useCartStore from "../store/cartStore";
 import RelatedProductList from "../components/RelatedProductList";
 import useOrderStore from "../store/OrderDetails";
 import { toast } from "react-toastify";
+import ReactMarkdown from 'react-markdown';
 
 const Product = () => {
   const [product, setProduct] = useState({});
@@ -373,7 +374,9 @@ const Product = () => {
             <h1 className="font-semibold font-poppins md:text-2xl text-xl">
               Ubusobanuro bw'igicuruzwa
             </h1>
-            <p className="text-black text-[16px] md:text-lg text-base leading-relaxed md:leading-loose mt-2 md:mt-4 break-words whitespace-normal">{product.description}</p>
+            <ReactMarkdown className="text-black text-[16px] md:text-lg text-base leading-relaxed md:leading-loose mt-2 md:mt-4 break-words whitespace-normal">
+              {product.description}
+            </ReactMarkdown>
           </div>
           <div className="my-[20px]">
             <SubHeading title="Ibindi byerekeranye" />

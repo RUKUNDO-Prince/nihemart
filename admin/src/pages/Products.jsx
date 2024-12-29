@@ -21,9 +21,6 @@ const Products = () => {
   useEffect(() => {
     handleAuth();
     fetchProducts()
-      .then(() => {
-        // toast.success("Products fetched successfully!");
-      })
       .catch((error) => {
         toast.error("Failed to fetch products.");
       });
