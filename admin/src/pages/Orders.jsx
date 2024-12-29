@@ -28,6 +28,9 @@ const Orders = () => {
 
   console.log(orders);
 
+  // Ensure orders are sorted by createdAt timestamp (most recent first)
+  const sortedOrders = orders.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
   return (
     <div className="m-[30px] flex-1 flex flex-col">
       <SubHeading title="Orders" />
@@ -36,10 +39,10 @@ const Orders = () => {
           Loading...
         </div>
       ) : orders.length > 0 ? (
-        orders && (
+        sortedOrders && (
           <DataTable
             columns={columns}
-            data={orders}
+            data={sortedOrders}
             page={page}
             limit={limit}
           />
