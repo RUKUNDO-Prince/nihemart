@@ -90,6 +90,33 @@ const UpdateProduct = () => {
     }
   };
 
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      photos: [...prevProduct.photos, ...files], // Append new files to existing photos
+    }));
+  };
+
+  const removeImage = (index) => {
+    setProduct((prevProduct) => {
+      const updatedPhotos = prevProduct.photos.filter((_, i) => i !== index);
+      return { ...prevProduct, photos: updatedPhotos };
+    });
+    // Check if the removed image was the selected one
+    if (selectedImage === product.photos[index]?.url) {
+      setSelectedImage(null); // Reset selected image if removed
+    }
+  };
+
+  const setDefaultImage = (url) => {
+    setSelectedImage(url);
+  };
+
+  const handleCancel = () => {
+    navigate(-1); // Go back to the previous page
+  };
+
   return (
     <div className="px-5 md:px-10 font-poppins">
       {isLoading ? (
@@ -103,17 +130,24 @@ const UpdateProduct = () => {
             <div className="flex lg:w-1/2 flex-col md:flex-row">
               <div className="md:min-w-[100px] w-full md:w-[15%] md:h-[560px] flex gap-5 flex-row md:flex-col justify-between md:justify-start my-[10px] overflow-x-auto no-scrollbar">
                 {product?.photos?.map((img, index) => (
-                  <img
-                    className={`bg-gray-90 bg-opacity-[30%] p-[20px] hover:bg-opacity-[20%] w-[150px] md:w-full ${
-                      selectedImage === img.url
-                        ? "border-2 border-primary/50"
-                        : "border-2"
-                    } rounded-md`}
-                    src={`${api}/uploads/images/${img.url}`}
-                    alt="img"
-                    key={index}
-                    onClick={() => setSelectedImage(img.url)}
-                  />
+                  <div key={index} className="relative">
+                    <img
+                      className={`bg-gray-90 bg-opacity-[30%] p-[20px] hover:bg-opacity-[20%] w-[150px] md:w-full ${
+                        selectedImage === img.url
+                          ? "border-2 border-primary/50"
+                          : "border-2"
+                      } rounded-md`}
+                      src={img instanceof File ? URL.createObjectURL(img) : `${api}/uploads/images/${img.url}`} // Correctly construct the image URL
+                      alt="img"
+                      onClick={() => setDefaultImage(img.url)}
+                    />
+                    <button
+                      className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
+                      onClick={() => removeImage(index)}
+                    >
+                      X
+                    </button>
+                  </div>
                 ))}
               </div>
               <div className="bg-gray-90 bg-opacity-[30%] flex items-center justify-center content-center px-[40px] my-[10px] md:ml-[20px] hover:bg-opacity-[20%] w-full rounded-md overflow-hidden h-[91%]">
@@ -125,6 +159,15 @@ const UpdateProduct = () => {
               </div>
             </div>
             <div className="flex flex-col gap-3 lg:w-1/2 px-5">
+              <label>
+                Update Images:
+                <input
+                  type="file"
+                  multiple
+                  onChange={handleFileChange}
+                  className="w-full px-2 py-1 border rounded"
+                />
+              </label>
               <label>
                 Product Name:
                 <input
@@ -222,6 +265,12 @@ const UpdateProduct = () => {
                 onClick={handleUpdateProduct}
               >
                 Update Product
+              </button>
+              <button
+                className="bg-gray-500 px-5 py-2 rounded-md text-white hover:bg-gray-400 transition-all duration-600 mt-4"
+                onClick={handleCancel}
+              >
+                Cancel
               </button>
             </div>
           </div>
