@@ -62,7 +62,7 @@ const OrderModal1 = ({ isOpen, onClose }) => {
           </p>
           <div className="flex items-center gap-3 bg-[#00FF38] rounded-lg px-[50px] py-[10px] m-auto">
             <img src={whatsapp} alt="" />
-            <a href={`https://wa.me/250792412177?text="Ndashaka gutumiza igicuruzwa kuri nihemart"`} target="_blank">
+            <a href={`https://wa.me/250792412177?text="Ndashaka gutumiza igicuruzwa kuri nihemart "`} target="_blank">
               <button className="text-white">Whatsapp</button>
             </a>
           </div>
