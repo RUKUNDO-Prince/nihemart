@@ -108,10 +108,18 @@ const editProduct = async (req, res) => {
       const defaultImageIndex = Number.isInteger(Number(updates.defaultImageIndex))
         ? parseInt(updates.defaultImageIndex)
         : 0;
-      updates.photos = req.files.map((file, index) => ({
-        url: "images/" + file.filename,
-        isDefault: index === defaultImageIndex,
-      }));
+
+      // Fetch existing product to merge photos
+      const existingProduct = await Product.findById(productId);
+      const existingPhotos = existingProduct.photos || [];
+
+      updates.photos = [
+        ...existingPhotos,
+        ...req.files.map((file, index) => ({
+          url: "/" + file.filename,
+          isDefault: index === defaultImageIndex,
+        })),
+      ];
     }
 
     // Handle variations
