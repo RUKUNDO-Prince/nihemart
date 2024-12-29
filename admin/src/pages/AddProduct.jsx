@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import { categories } from "../constants/data";
 import { generateVariations } from "../utils/generateVariations";
 import { Switch } from '@headlessui/react';
+import MDEditor from '@uiw/react-md-editor';
 
 const productSchema = Yup.object({
   productName: Yup.string().required("please Enter the product name"),
@@ -221,7 +222,11 @@ const Product = () => {
 
       await addProduct(formData);
       navigate("/products");
-      toast.success("Product added successfully!");
+      
+      // Show success toast only if not already active
+      if (!toast.isActive("add-success")) {
+        toast.success("Product added successfully!", { toastId: "add-success" });
+      }
     } catch (error) {
       toast.error("Failed to add product. Please try again.");
       console.error(error);
@@ -229,7 +234,7 @@ const Product = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-6">
+    <div className="min-h-screen bg-gray-100 p-4 md:p-6">
       <Formik
         initialValues={{
           productName: "",
@@ -255,7 +260,7 @@ const Product = () => {
                 <img src={anonymous} alt="product" className="w-8 h-8" />
                 <h1 className="text-xl md:text-2xl font-semibold">Add New Product</h1>
               </div>
-              <div className="flex items-center gap-3 w-full sm:w-auto">
+              {/* <div className="flex items-center gap-3 w-full sm:w-auto">
                 <button
                   type="button"
                   className="flex items-center gap-2 px-4 py-2 border rounded-lg hover:bg-gray-50 w-full sm:w-auto justify-center"
@@ -270,7 +275,7 @@ const Product = () => {
                   <img src={tick} alt="publish" className="w-5 h-5" />
                   <span>Publish Product</span>
                 </button>
-              </div>
+              </div> */}
             </div>
 
             {/* Variations toggle */}
@@ -327,11 +332,10 @@ const Product = () => {
 
                     <div>
                       <label className="block mb-1">Description</label>
-                      <textarea
-                        name="productDesc"
-                        onChange={handleChange}
-                        rows="4"
-                        className="w-full p-2 border rounded-lg"
+                      <MDEditor
+                        value={values.productDesc}
+                        onChange={(value) => setFieldValue("productDesc", value)}
+                        height={200}
                       />
                       <ErrorMessage
                         name="productDesc"
@@ -532,7 +536,7 @@ const Product = () => {
                   <div className="bg-white p-6 rounded-lg shadow-sm">
                     <div className="flex items-center justify-between mb-4">
                       <h2 className="text-lg font-semibold">Product Variations</h2>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 ">
                         <Switch
                           checked={variationWithImages}
                           onChange={setVariationWithImages}
@@ -552,7 +556,7 @@ const Product = () => {
                     </div>
 
                     {/* Add attribute form */}
-                    <div className="bg-gray-50 p-4 rounded-lg mb-6">
+                    <div className="bg-gray-90 p-4 rounded-lg mb-6">
                       <h3 className="font-medium mb-3">Add New Attribute</h3>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                         <div>
@@ -591,7 +595,7 @@ const Product = () => {
                         <h3 className="font-medium mb-3">Current Attributes</h3>
                         <div className="space-y-2">
                           {attributes.map((attr, index) => (
-                            <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div key={index} className="flex items-center justify-between p-3 bg-gray-90 rounded-lg">
                               <div>
                                 <span className="font-medium">{attr.name}:</span>{' '}
                                 {attr.values.join(', ')}
