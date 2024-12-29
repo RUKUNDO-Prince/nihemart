@@ -34,6 +34,18 @@ const useOrderStore = create((set) => ({
     }
   },
 
+  kigaliOrder: async () => {
+    const state = get();
+    try {
+      const response = await authorizedApi.post("/orders/add", state.orderDetails);
+      if (response.status === 201) {
+        toast.success("Murakoze kugura iki gicuruzwa, ibyo mwatumije birabageraho vuba!");
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Failed to place order.");
+    }
+  },
+
   // Other functions...
 }));
 
