@@ -48,14 +48,14 @@ const ProductCard = ({ product }) => {
             <p className="text-primary">
               {product.hasVariations ? (
                 <>
-                  {displayNumbers(minPrice)} - {displayNumbers(maxPrice)} frw
+                  {displayNumbers(minPrice)} - {displayNumbers(maxPrice)}
                 </>
               ) : (
                 <>
-                  {displayNumbers(product.priceAfterDiscount || product.price)} frw
+                  {displayNumbers(product.priceAfterDiscount || product.price)}
                   {product.priceAfterDiscount && (
                     <span className="text-gray-90 line-through ml-2">
-                      {displayNumbers(product.price)} frw
+                      {displayNumbers(product.price)}
                     </span>
                   )}
                 </>
