@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { delivery, whatsapp } from "../assets";
 import useOrderStore from "../store/OrderDetails";
 
@@ -9,29 +10,50 @@ const OrderModal1 = ({ isOpen, onClose }) => {
     if (e.target.id === "wrapper") onClose();
   };
 
-  const {
-    whatsappMessage,
-    orderDetails,
-    kigaliOrder,
-    generalOrder,
-    clearOrderDetails,
-    success
-  } = useOrderStore();
+  const { id } = useParams();
+  const [productDetails, setProductDetails] = useState(null);
+  const [error, setError] = useState(null);
+  
+  const queryParams = new URLSearchParams(window.location.search);
+  const quantity = queryParams.get("quantity");
+  const category = queryParams.get("category");
 
-  const whatsappLink = `https://wa.me/250792412177?text=${whatsappMessage}`;
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:3000/product/singleProduct/${id}`);
+        
+        console.log(`Response status: ${response.status}`);
 
-  // const handleOrder = async () => {
-  //    await generalOrder();
-  //   if (success) {
-  //     setTimeout(() => {
-  //       window.open(whatsappLink, "_blank", "noopener,noreferrer");
-  //     }, 2000);
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("Error response:", errorText);
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
-  //     setTimeout(() => {
-  //       clearOrderDetails();
-  //     }, 3000);
-  //   }
-  // };
+        const data = await response.json();
+        console.log("Fetched product details:", data);
+        setProductDetails(data.product);
+      } catch (error) {
+        console.error("Error fetching product details:", error);
+        setError(error.message);
+      }
+    };
+
+    fetchProductDetails();
+  }, [id]);
+
+  if (error) return <div>Error: {error}</div>;
+  if (!productDetails) return <div>Loading...</div>;
+
+  const { name: itemName, price } = productDetails;
+
+  const whatsappMessage = `Ndashaka gutumiza igicuruzwa kuri nihemart: ` +
+    `Izina: ${itemName} | ` +
+    `Umubare: ${quantity} | ` +
+    `Icyiciro: ${category} | ` +
+    `Igiciro: ${price} Frw`;
+
   return (
     <div
       className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center"
@@ -62,7 +84,7 @@ const OrderModal1 = ({ isOpen, onClose }) => {
           </p>
           <div className="flex items-center gap-3 bg-[#00FF38] rounded-lg px-[50px] py-[10px] m-auto">
             <img src={whatsapp} alt="" />
-            <a href={`https://wa.me/250792412177?text="Ndashaka gutumiza igicuruzwa kuri nihemart "`} target="_blank">
+            <a href={`https://wa.me/250792412177?text=${encodeURIComponent(whatsappMessage)}`} target="_blank">
               <button className="text-white">Whatsapp</button>
             </a>
           </div>
