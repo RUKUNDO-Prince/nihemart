@@ -58,12 +58,12 @@ const UpdateProduct = () => {
         product.photos.forEach(photo => {
           formData.append('files', photo); // Append each photo
         });
+      } else if (key === "variations" || key === "attributes") {
+        formData.append(key, JSON.stringify(product[key])); // Convert to JSON string
       } else {
         formData.append(key, product[key]);
       }
     });
-    // Append variations as a JSON string
-    formData.append('variations', JSON.stringify(product.variations));
     try {
       await updateProduct(selectedProductId, formData);
       navigate(`/product/${selectedProductId}`);

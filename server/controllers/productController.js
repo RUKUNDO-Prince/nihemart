@@ -137,6 +137,8 @@ const editProduct = async (req, res) => {
       updates.attributes = [];
     }
 
+    console.log("Received updates:", updates);
+
     // Update product in database
     const product = await Product.findByIdAndUpdate(
       productId,
