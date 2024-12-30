@@ -263,11 +263,11 @@ const Product = () => {
                 <div className="flex flex-col gap-3 lg:w-1/2">
                   <h1 className="md:text-[24px] text-[20px] font-semibold break-words whitespace-normal">{product.name}</h1>
                   <div className="flex gap-3 items-center">
-                    <p className="text-[#00FF66]">
+                    {/* <p className="text-[#00FF66]">
                       {currentStock > 0
                         ? `${currentStock} muri stock`
                         : "dutegereje ibindi"}
-                    </p>
+                    </p> */}
                   </div>
                   <p className="text-primary font-semibold md:text-[24px] flex items-center gap-3">
                     {currentPrice} frw{" "}

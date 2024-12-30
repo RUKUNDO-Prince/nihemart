@@ -83,17 +83,19 @@ const Analytics = () => {
                 </p>
               </div>
             </Link>
-            <div className="bg-white border-[1px] border-gray-90 row-span-1 col-span-1 p-8 rounded-lg ">
-              <div className="flex items-center md:gap-3 gap-2 md:justify-normal">
-                <img src={icon} alt="icon" />
-                <p className="font-lato font-semibold text-16 text-[#5D6E8B]">
-                  Categories
+            <Link to="/categories">
+              <div className="bg-white border-[1px] border-gray-90 row-span-1 col-span-1 p-8 rounded-lg ">
+                <div className="flex items-center md:gap-3 gap-2 md:justify-normal">
+                  <img src={icon} alt="icon" />
+                  <p className="font-lato font-semibold text-16 text-[#5D6E8B]">
+                    Categories
+                  </p>
+                </div>
+                <p className="font-lato font-semibold md:text-[48px] text-[38px]">
+                  {categories.length}
                 </p>
               </div>
-              <p className="font-lato font-semibold md:text-[48px] text-[38px]">
-                {categories.length}
-              </p>
-            </div>
+            </Link>
           </div>
         )
       )}
