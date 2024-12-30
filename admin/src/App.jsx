@@ -26,6 +26,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import "./App.css";
 import OrderDetails from "./pages/OrderDetails";
+import Categories from "./pages/Categories";
 
 const App = () => {
   const location = useLocation();
@@ -91,6 +92,10 @@ const App = () => {
           element={
             isAuthenticated ? <OrderDetails /> : <Navigate to="/signup" />
           }
+        />
+        <Route
+          path="/categories"
+          element={isAuthenticated ? <Categories /> : <Navigate to="/signup" />}
         />
 
         {/* Fallback route */}
