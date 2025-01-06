@@ -8,8 +8,8 @@ const {
 const { authenticate } = require("../middleware/authMiddleware");
 const cartRoute = express.Router();
 
-cartRoute.post("/cart/:productId", authenticate, addToCart);
-cartRoute.get("/cart", authenticate, getCart);
-cartRoute.delete("/cart/delete/:itemId", authenticate, deleteCartItem);
+cartRoute.post("/:productId", authenticate, addToCart);
+cartRoute.get("/", authenticate, getCart);
+cartRoute.delete("/delete/:itemId", authenticate, deleteCartItem);
 
 module.exports = cartRoute;

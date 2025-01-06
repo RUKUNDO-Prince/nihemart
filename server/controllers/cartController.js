@@ -1,4 +1,3 @@
-
 const Cart = require("../models/cart");
 const Product = require("../models/product");
 
@@ -22,8 +21,8 @@ const addToCart = async (req, res) => {
         user: userId,
         items: [],
       });
-    } else {
     }
+
     const cartItem = cart.items.find((item) => item.product.equals(productId));
     if (cartItem) {
       cartItem.quantity += quantity;

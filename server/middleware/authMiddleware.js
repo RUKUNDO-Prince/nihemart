@@ -6,7 +6,8 @@ const fs = require("fs");
 const authenticate = (req, res, next) => {
   const token = req.header("Authorization")?.split(" ")[1];
   if (!token) {
-    return res.status(401).json({ message: "you're not logged in" });
+    console.log("No token provided");
+    return res.status(401).json({ message: "You're not logged in" });
   }
   try {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
