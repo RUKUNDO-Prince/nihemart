@@ -35,16 +35,18 @@ const useCartStore = create((set) => ({
   },
 
   // Remove item from the cart
-  removeFromCart: async (productId) => {
+  removeFromCart: async (itemId) => {
     set({ isLoading: true, error: null });
     try {
-      await authorizedApi.delete(`/cart/delete/${productId}`); // Replace with your actual API endpoint
+      await authorizedApi.delete(`/cart/delete/${itemId}`); // Call the API to delete the item
       set((state) => ({
-        cartItems: state.cartItems.filter((item) => item.id !== productId),
+        cartItems: state.cartItems.filter((item) => item._id !== itemId), // Update the cart items in the state
         isLoading: false,
       }));
+      toast.success("Item removed from cart!");
     } catch (error) {
       set({ error: error.message, isLoading: false });
+      toast.error("Failed to remove item from cart.");
     }
   },
 

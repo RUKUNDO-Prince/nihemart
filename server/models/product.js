@@ -66,13 +66,13 @@ const productSchema = new Schema({
     {
       url: {
         type: String,
-        required: true
+        required: true,
       },
       isDefault: {
         type: Boolean,
-        default: false
-      }
-    }
+        default: false,
+      },
+    },
   ],
   category: {
     type: String,

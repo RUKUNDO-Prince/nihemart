@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { likesData } from "../constants/data";
 import useCartStore from "../store/cartStore";
 import { Link, useNavigate } from "react-router-dom";
 import { api } from "../config/axiosInstance";
@@ -11,7 +10,6 @@ import { toast } from "react-toastify";
 const Cart = () => {
   const {
     cartItems,
-    addToCart,
     fetchCartItems,
     removeFromCart,
     isLoading,
@@ -19,10 +17,8 @@ const Cart = () => {
   } = useCartStore();
 
   const navigate = useNavigate();
-
   const user = useAuthStore((state) => state.user);
-
-  const setProductDetails = useOrderStore((state)=>state.setProductDetails)
+  const setProductDetails = useOrderStore((state) => state.setProductDetails);
 
   useEffect(() => {
     fetchCartItems();
@@ -42,9 +38,8 @@ const Cart = () => {
         price: product.price,
         quantity: product.quantity,
       }));
-      setProductDetails(productDetails)
-
-      navigate("/tumiza/agatebo")
+      setProductDetails(productDetails);
+      navigate("/tumiza/agatebo");
       toast.success("Order placed successfully!");
     } else {
       toast.error("Please log in to place an order.");
@@ -62,48 +57,40 @@ const Cart = () => {
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 min-w-[1012px]">
             <thead className="text-[16px] text-black font-poppins drop-shadow-lg my-[20px]">
               <tr className="shadow-md">
-                <th scope="col" className="px-6 py-8">
-                  Product
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Price
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Quantity
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Subtotal
-                </th>
+                <th scope="col" className="px-6 py-8">Product</th>
+                <th scope="col" className="px-6 py-3">Price</th>
+                <th scope="col" className="px-6 py-3">Quantity</th>
+                <th scope="col" className="px-6 py-3">Subtotal</th>
+                <th scope="col" className="px-6 py-3">Remove</th>
               </tr>
             </thead>
             <tbody>
               {cart?.length !== 0 ? (
                 cart?.map((item, index) => (
                   <tr key={index} className="bg-white border-b">
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white flex gap-5 items-center"
-                    >
+                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white flex gap-5 items-center">
                       <img
-                        src={`${api + "/" + item?.photo}`}
+                        src={`${api}/uploads/images/${item.photo}`}
                         className="w-[60px]"
                         alt="img"
                       />{" "}
                       <p className="text-[16px] text-black">{item.name}</p>
                     </th>
+                    <td className="px-6 py-4">{displayNumbers(item.price)} Frw</td>
+                    <td className="px-6 py-4">{displayNumbers(item.quantity)} items</td>
+                    <td className="px-6 py-4">{displayNumbers(item.subtotal)} Frw</td>
                     <td className="px-6 py-4">
-                      {displayNumbers(item.price)} Frw
-                    </td>
-                    <td className="px-6 py-4">
-                      {displayNumbers(item.quantity)} items
-                    </td>
-                    <td className="px-6 py-4">
-                      {displayNumbers(item.subtotal)} Frw
+                      <button
+                        onClick={() => removeFromCart(item._id)}
+                        className="text-red-500 hover:text-red-700"
+                      >
+                        Remove
+                      </button>
                     </td>
                   </tr>
                 ))
               ) : (
-                <tr>Ntakintu kiri mu gatebo</tr>
+                <tr><td colSpan="5" className="text-center">Ntakintu kiri mu gatebo</td></tr>
               )}
             </tbody>
           </table>
