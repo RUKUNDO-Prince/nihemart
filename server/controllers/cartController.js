@@ -6,7 +6,7 @@ const addToCart = async (req, res) => {
     const { productId } = req.params;
     const { _id: userId } = req.user;
 
-    const quantity = parseInt(req.query.quantity,10);
+    const quantity = parseInt(req.query.quantity, 10);
 
     if (!userId) {
       return res.status(400).json({ message: "User ID is required" });
@@ -15,6 +15,7 @@ const addToCart = async (req, res) => {
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
+    console.log("Product Object:", product);
     let cart = await Cart.findOne({ user: userId });
     if (!cart) {
       cart = new Cart({
@@ -28,18 +29,20 @@ const addToCart = async (req, res) => {
       cartItem.quantity += quantity;
       cartItem.subtotal = cartItem.quantity * product.price;
     } else {
+      const photoUrl = product.photos[0]?.url || ''; // Extract only the URL
       cart.items.push({
         product: productId,
         name: product.name,
         price: product.price,
         quantity: quantity,
-        photos: product.photos[0],
+        photo: photoUrl, // Save only the URL
         subtotal: product.price * quantity,
       });
     }
     product.quantity -= quantity;
     await cart.save();
     await product.save();
+
     return res
       .status(200)
       .json({ message: "Product added to your cart successfully" });
@@ -61,6 +64,8 @@ const getCart = async (req, res) => {
     if (!cart) {
       return res.status(404).json({ message: "Cart not found" });
     }
+
+    console.log("Cart Object:", JSON.stringify(cart, null, 2));
 
     return res.status(200).json({
       cart,
