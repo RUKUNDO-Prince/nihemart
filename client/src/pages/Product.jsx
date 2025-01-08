@@ -11,6 +11,7 @@ import RelatedProductList from "../components/RelatedProductList";
 import useOrderStore from "../store/OrderDetails";
 import { toast } from "react-toastify";
 import ReactMarkdown from 'react-markdown';
+import Comments from "../components/Comments";
 
 const Product = () => {
   const [product, setProduct] = useState({});
@@ -386,6 +387,7 @@ const Product = () => {
               showProducts={4}
             />
           </div>
+          <Comments productId={product._id} />
         </>
       ) : (
         <div className="flex items-center justify-center">

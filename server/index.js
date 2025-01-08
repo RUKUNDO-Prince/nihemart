@@ -17,6 +17,7 @@ const cors = require("cors");
 const http = require("http");
 const {Server} = require("socket.io");
 const path = require('path');
+const commentRouter = require("./routes/comment");
 require("dotenv").config();
 
 
@@ -55,6 +56,7 @@ app.use("/contact", contactRouter);
 app.use("/cart", cartRoute);
 app.use("/user", userRouter);
 app.use("/orders", OrderRouter);
+app.use("/comments", commentRouter);
 
 
 app.listen(3000, () => {

@@ -51,10 +51,6 @@ const useProductStore = create((set) => ({
       set({ isLoading: false });
     }
   },
-
-  
-
-  // Additional product store functionalities can go here
 }));
 
 export default useProductStore;
