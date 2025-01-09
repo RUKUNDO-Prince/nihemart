@@ -10,7 +10,7 @@ import useCartStore from "../store/cartStore";
 import RelatedProductList from "../components/RelatedProductList";
 import useOrderStore from "../store/OrderDetails";
 import { toast } from "react-toastify";
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from "react-markdown";
 import Comments from "../components/Comments";
 
 const Product = () => {
@@ -24,6 +24,7 @@ const Product = () => {
   const [selectedValues, setSelectedValues] = useState({});
   const { addProduct } = useOrderStore();
   const [currentStock, setCurrentStock] = useState(0);
+  const [selectedVariant, setSelectedVariant] = useState(null);
 
   const params = useParams();
   const selectedProductId = params.id;
@@ -32,13 +33,20 @@ const Product = () => {
   const returnSelectedProduct = async () => {
     const productData = await getProductById(selectedProductId);
     setProduct(productData);
-    setCurrentPrice(
-      productData.priceAfterDiscount
-        ? productData.priceAfterDiscount
-        : productData.price
-    );
-    setSelectedImage(productData.photos?.[0] || null);
-    setCurrentQuantity(productData.quantity - 1);
+    setCurrentPrice(productData.priceAfterDiscount || productData.price);
+    setCurrentStock(productData.quantity);
+
+    // Safely find the default image or use the first available image
+    const defaultImage =
+      productData.photos?.find((p) => p.isDefault)?.url ||
+      productData.photos?.[0]?.url;
+
+    if (defaultImage) {
+      setSelectedImage(defaultImage);
+    } else {
+      console.warn("No default or fallback image found for product.");
+      setSelectedImage(null); // Or set a placeholder image URL
+    }
 
     const initialSelectedValues = productData.attributes?.reduce(
       (acc, attr) => {
@@ -51,7 +59,6 @@ const Product = () => {
   };
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
     returnSelectedProduct();
     fetchProducts();
   }, [selectedProductId]);
@@ -59,65 +66,54 @@ const Product = () => {
   // Function to get the price and stock based on selected attribute values
   const getPriceAndStock = () => {
     if (!product) return;
-
-    // If product has no variations, use base price and stock
+  
+    // If no variations, use base price, stock, and default image
     if (!product.variations || product.variations.length === 0) {
-      setCurrentPrice(
-        product.priceAfterDiscount ? product.priceAfterDiscount : product.price
-      );
+      setCurrentPrice(product.priceAfterDiscount || product.price);
       setCurrentStock(product.quantity);
-      setSelectedImage(product.photos?.find(p => p.isDefault) || product.photos?.[0] || null);
+      const defaultImage =
+        product.photos?.find((p) => p.isDefault)?.url ||
+        product.photos?.[0]?.url;
+      setSelectedImage(defaultImage);
       return;
     }
-
+  
     const selectedValuesArray = Object.values(selectedValues);
     if (selectedValuesArray.includes(null)) {
-      setCurrentPrice(
-        product.priceAfterDiscount ? product.priceAfterDiscount : product.price
-      );
+      setCurrentPrice(product.priceAfterDiscount || product.price);
       setCurrentStock(product.quantity);
-      // Reset to default product image when no variation is selected
-      setSelectedImage(product.photos?.find(p => p.isDefault) || product.photos?.[0] || null);
+      const defaultImage =
+        product.photos?.find((p) => p.isDefault)?.url ||
+        product.photos?.[0]?.url;
+      setSelectedImage(defaultImage);
       return;
     }
-
+  
     const variationString = selectedValuesArray.join(" ");
     const variation = product.variations?.find(
       (v) => v.variation === variationString
     );
-
+  
     if (variation) {
-      // Apply discount to variation price if applicable
-      if (product.discountType && product.discount) {
-        const discountAmount = product.discountType === 'percentage' 
-          ? (variation.price * product.discount) / 100
-          : product.discount;
-        setCurrentPrice(variation.price - discountAmount);
-      } else {
-        setCurrentPrice(variation.price);
-      }
+      setCurrentPrice(variation.price);
       setCurrentStock(variation.stock);
-
-      // Update selected image if variation has an image
+  
+      // Only change the image if the variation has an image
       if (variation.image) {
-        // Set the selected image to the variation image
-        setSelectedImage({
-          url: variation.image, // Ensure this is the correct path
-          isDefault: false
-        });
+        setSelectedImage(variation.image); // Use variant image
       } else {
-        // Fallback to default product image
-        setSelectedImage(product.photos?.find(p => p.isDefault) || product.photos?.[0] || null);
+        const defaultImage =
+          product.photos?.find((p) => p.isDefault)?.url ||
+          product.photos?.[0]?.url;
+        setSelectedImage(defaultImage); // Fall back to default image if no variant image
       }
     } else {
-      setCurrentPrice(
-        product.priceAfterDiscount ? product.priceAfterDiscount : product.price
-      );
-      setCurrentStock(product.quantity);
-      // Reset to default product image when variation is not found
-      setSelectedImage(product.photos?.find(p => p.isDefault) || product.photos?.[0] || null);
+      const defaultImage =
+        product.photos?.find((p) => p.isDefault)?.url ||
+        product.photos?.[0]?.url;
+      setSelectedImage(defaultImage); // Default image if no variation matches
     }
-  };
+  };  
 
   // Update useEffect to use new function
   useEffect(() => {
@@ -129,46 +125,46 @@ const Product = () => {
     setSelectedValues((prevValues) => {
       const newValues = {
         ...prevValues,
-        [attrName]: prevValues[attrName] === value ? null : value
+        [attrName]: prevValues[attrName] === value ? null : value,
       };
-
+  
       // Update the selected image based on the selected variant
-      const selectedVariant = product.variations.find(variation => {
+      const selectedVariant = product.variations.find((variation) => {
         return Object.entries(newValues).every(([key, val]) => {
           return val === null || variation[key] === val;
         });
       });
-
-      console.log("Selected Variant:", selectedVariant); // Debugging line
-
+  
       if (selectedVariant) {
         // Check if the selected variant has an image
         if (selectedVariant.image) {
-          console.log("Selected Variant Image URL:", selectedVariant.image); // Debugging line
-          setSelectedImage({
-            url: selectedVariant.image, // Ensure this is the correct path
-            isDefault: false
-          });
+          setSelectedImage(selectedVariant.image); // Set the selected image to the variant's image
         } else {
-          console.log("No image found for selected variant, falling back to default."); // Debugging line
-          // Fallback to default product image if no variant image
-          setSelectedImage(product.photos?.find(p => p.isDefault) || product.photos?.[0] || null);
+          // Fall back to default product image if no variant image is available
+          const defaultImage =
+            product.photos?.find((p) => p.isDefault)?.url ||
+            product.photos?.[0]?.url;
+          setSelectedImage(defaultImage);
         }
       } else {
-        console.log("No variant selected, falling back to default image."); // Debugging line
         // Fallback to default product image if no variant is selected
-        setSelectedImage(product.photos?.find(p => p.isDefault) || product.photos?.[0] || null);
+        const defaultImage =
+          product.photos?.find((p) => p.isDefault)?.url ||
+          product.photos?.[0]?.url;
+        setSelectedImage(defaultImage);
       }
-
+  
       return newValues;
     });
-  };
+  };  
 
   const handleOrderNowClick = () => {
     // Check if at least one variation is selected
     const selectedValuesArray = Object.values(selectedValues);
     if (selectedValuesArray.includes(null)) {
-      toast.error("Please select at least one variation before placing an order.");
+      toast.error(
+        "Please select at least one variation before placing an order."
+      );
       return;
     }
 
@@ -181,7 +177,9 @@ const Product = () => {
       directOrder: true,
     };
     addProduct(productDetails);
-    navigate(`/tumiza/${selectedProductId}?quantity=${quantity}&category=${product.category}`);
+    navigate(
+      `/tumiza/${selectedProductId}?quantity=${quantity}&category=${product.category}`
+    );
   };
 
   const handleNavigateToHelp = () => {
@@ -233,36 +231,40 @@ const Product = () => {
                     {product?.photos?.map((photo, index) => (
                       <img
                         className={`bg-gray-90 bg-opacity-[30%] p-[20px] hover:bg-opacity-[20%] w-[150px] md:w-full ${
-                          selectedImage?.url === photo.url
+                          selectedImage === photo.url
                             ? "border-2 border-primary/50"
                             : "border-2"
                         } rounded-md`}
                         src={`${api}/uploads/images/${photo.url}`}
                         alt={`Product view ${index + 1}`}
                         key={index}
-                        onClick={() => setSelectedImage(photo)}
+                        onClick={() => setSelectedImage(photo.url)}
                         loading="lazy"
                       />
                     ))}
                   </div>
-                  <div className="bg-gray-90 bg-opacity-[30%] flex items-center justify-center px-[40px] my-[10px] md:ml-[20px] hover:bg-opacity-[20%] w-full rounded-md overflow-hidden h-[92%]">
-                    {selectedImage ? (
-                      <img
-                        src={`${api}/uploads/images/${selectedImage.url}`}
-                        alt={`${product.name} - ${Object.values(selectedValues).join(" ")}`}
-                        className="w-full md:min-w-[441px] max-h-[331px] object-contain"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                        No Image Available
-                      </div>
-                    )}
+                  <div className="bg-gray-90 bg-opacity-[30%] flex items-center justify-center content-center px-[40px] my-[10px] md:ml-[20px] hover:bg-opacity-[20%] w-full rounded-md overflow-hidden h-[91%]">
+                    <img
+                      src={
+                        selectedImage
+                          ? `${api}/uploads/images/${selectedImage}`
+                          : `${api}/uploads/images/placeholder.jpg` // Use a placeholder image
+                      }
+                      alt={
+                        selectedImage
+                          ? "Selected product view"
+                          : "Default product view"
+                      }
+                      className="w-full md:min-w-[441px] max-h-[331px] object-contain"
+                      loading="lazy"
+                    />
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-3 lg:w-1/2">
-                  <h1 className="md:text-[24px] text-[20px] font-semibold break-words whitespace-normal">{product.name}</h1>
+                  <h1 className="md:text-[24px] text-[20px] font-semibold break-words whitespace-normal">
+                    {product.name}
+                  </h1>
                   <div className="flex gap-3 items-center">
                     {/* <p className="text-[#00FF66]">
                       {currentStock > 0
@@ -309,7 +311,11 @@ const Product = () => {
                         onClick={decrementQuantity}
                         disabled={quantity === 1}
                       >
-                        <FaMinus className={`cursor-pointer ${quantity === 1 ? 'opacity-50' : ''}`} />
+                        <FaMinus
+                          className={`cursor-pointer ${
+                            quantity === 1 ? "opacity-50" : ""
+                          }`}
+                        />
                         <div className="h-[45px] w-[0.5px] bg-black"></div>
                       </button>
                       <p>{quantity}</p>
@@ -319,7 +325,11 @@ const Product = () => {
                         disabled={quantity === currentStock}
                       >
                         <div className="h-[45px] w-[0.5px] bg-black"></div>
-                        <FaPlus className={`cursor-pointer ${quantity === currentStock ? 'opacity-50' : ''}`} />
+                        <FaPlus
+                          className={`cursor-pointer ${
+                            quantity === currentStock ? "opacity-50" : ""
+                          }`}
+                        />
                       </button>
                     </div>
                     <button

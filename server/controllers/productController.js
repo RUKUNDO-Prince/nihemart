@@ -38,12 +38,16 @@ const addProduct = async (req, res) => {
 
     if (hasVariations === 'true') {
       try {
-        variations = JSON.parse(req.body.variations).map(variation => ({
-          ...variation,
-          price: parseFloat(variation.price),
-          stock: parseInt(variation.stock) || 0,
-          image: variation.image ? variation.image : undefined
-        }));
+        variations = JSON.parse(req.body.variations).map(variation => {
+          // Ensure the image filename is replaced with the correct URL
+          const imageUrl = variation.image ? req.files.find(file => file.originalname === variation.image)?.filename : undefined;
+          return {
+            ...variation,
+            price: parseFloat(variation.price),
+            stock: parseInt(variation.stock) || 0,
+            image: imageUrl // Store the URL instead of just the filename
+          };
+        });
         attributes = JSON.parse(req.body.attributes);
 
         // Validate variations
