@@ -76,7 +76,7 @@ const useAuthStore = create((set) => ({
       localStorage.removeItem("user");
       localStorage.removeItem("adminToken");
       set({ isAuthenticated: false, user: null, token: null });
-      toast.success("you have logged out!");
+      toast.success("You have logged out!");
     } catch (error) {
       toast.error(error.response.data.message);
     }
