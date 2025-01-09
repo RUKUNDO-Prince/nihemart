@@ -11,6 +11,7 @@ const useOrderStore = create((set,get) => ({
     province: "",
     city: "",
     deliveryFee: 0,
+    fullAddress: "",
     productDetails: [],
   },
   success:false,
@@ -23,7 +24,10 @@ const useOrderStore = create((set,get) => ({
     set((state) => ({
       orderDetails: {
         ...state.orderDetails,
-        productDetails: [...state?.orderDetails?.productDetails, product],
+        productDetails: [
+          ...state?.orderDetails?.productDetails,
+          { ...product, selectedVariants: product.variations },
+        ],
       },
     })),
   setProductDetails: (productDetails) =>
@@ -100,6 +104,7 @@ const useOrderStore = create((set,get) => ({
         province: "",
         city: "",
         deliveryFee: 0,
+        fullAddress: "",
         productDetails: [],
       },
       success:false

@@ -16,6 +16,8 @@ const Orders = () => {
 
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(6);
+  const [sortBy, setSortBy] = useState("date");
+
   const handleAuth = () => {
     if (!isAuthenticated) {
       navigate("/signup");
@@ -31,9 +33,19 @@ const Orders = () => {
   // Ensure orders are sorted by createdAt timestamp (most recent first)
   const sortedOrders = orders.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
+  const handleSortChange = (e) => {
+    setSortBy(e.target.value);
+    getOrders(e.target.value); // Fetch orders with selected sorting
+  };
+
   return (
     <div className="m-[30px] flex-1 flex flex-col">
       <SubHeading title="Orders" />
+      <select onChange={handleSortChange} className="w-fit flex items-center">
+        <option value="date">Sort by Date</option>
+        <option value="category">Sort by Category</option>
+        <option value="status">Sort by Status</option>
+      </select>
       {isLoading ? (
         <div className="flex items-center justify-center flex-1">
           Loading...

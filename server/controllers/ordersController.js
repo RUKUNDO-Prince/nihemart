@@ -2,10 +2,11 @@ const Product = require("../models/product");
 const OrderDetails = require("../models/order");
 const { displayNumbers } = require("../utils/usableFuncs");
 const { sendEmailToAdmin } = require("../utils/emailService");
+const { sendWhatsAppMessage } = require("../utils/whatsappService");
 
 // Add a new order
 const addOrder = async (req, res) => {
-  const { name, phone, province, city, deliveryFee, productDetails } = req.body;
+  const { name, phone, province, city, deliveryFee, fullAddress, productDetails } = req.body;
 
   // Check if productDetails is defined and has at least one item
   if (!productDetails || productDetails.length === 0) {
@@ -21,10 +22,15 @@ const addOrder = async (req, res) => {
       province,
       city,
       deliveryFee,
+      fullAddress,
       productDetails,
     });
 
     await order.save();
+
+    // Send email and WhatsApp notifications
+    await sendEmailToAdmin(order);
+    await sendWhatsAppMessage(phone, `Your order has been placed successfully!`);
 
     if (directOrder !== undefined && directOrder === true) {
       const product = await Product.findById(productDetails[0].productId);
@@ -85,8 +91,18 @@ const getTotalOrders = async (req, res) => {
 
 // Get all orders
 const getAllOrders = async (req, res) => {
+  const { sortBy } = req.query; // Get sorting parameter
   try {
-    const orders = await OrderDetails.find();
+    let orders;
+    if (sortBy === "date") {
+      orders = await OrderDetails.find().sort({ createdAt: -1 });
+    } else if (sortBy === "category") {
+      orders = await OrderDetails.find().sort({ category: 1 });
+    } else if (sortBy === "status") {
+      orders = await OrderDetails.find().sort({ status: 1 });
+    } else {
+      orders = await OrderDetails.find();
+    }
     res.status(201).json(orders);
   } catch (error) {
     res.status(400).json({ error: error.message });

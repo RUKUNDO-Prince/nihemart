@@ -6,10 +6,10 @@ const useOrderStore = create((set) => ({
   isLoading: false,
   orders: [] || null,
 
-  getOrders: async () => {
+  getOrders: async (sortBy) => {
     set({ isLoading: true });
     try {
-      const response = await authorizedApi.get("/orders/all");
+      const response = await authorizedApi.get(`/orders/all?sortBy=${sortBy}`);
       set({ orders: response.data });
     } catch (error) {
       set({ isLoading: false });
