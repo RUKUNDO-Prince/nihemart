@@ -9,7 +9,7 @@ const OrderKigali = () => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
-  const { orderDetails, kigaliOrder, clearOrderDetails, generateWhatsAppMessage } = useOrderStore();
+  const { orderDetails, kigaliOrder, clearOrderDetails, generateWhatsAppMessage, setOrderDetail } = useOrderStore();
 
   console.log("this is the order details: ", orderDetails);
 
@@ -99,6 +99,15 @@ const OrderKigali = () => {
         </button>
       </div>
       <OrderModal2 isOpen={showModal} onClose={() => setShowModal(false)} />
+      <div>
+        <label>Full Address:</label>
+        <input
+          type="text"
+          value={orderDetails.fullAddress}
+          onChange={(e) => setOrderDetail("fullAddress", e.target.value)}
+          required
+        />
+      </div>
     </>
   );
 };
