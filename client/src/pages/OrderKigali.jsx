@@ -99,15 +99,6 @@ const OrderKigali = () => {
         </button>
       </div>
       <OrderModal2 isOpen={showModal} onClose={() => setShowModal(false)} />
-      <div>
-        <label>Full Address:</label>
-        <input
-          type="text"
-          value={orderDetails.fullAddress}
-          onChange={(e) => setOrderDetail("fullAddress", e.target.value)}
-          required
-        />
-      </div>
     </>
   );
 };
