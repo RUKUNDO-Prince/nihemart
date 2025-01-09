@@ -13,81 +13,86 @@ const getUserFromLocalStorage = () => {
   return user ? JSON.parse(user) : null;
 };
 
-const useAuthStore = create((set) => ({
-  isLoading: false,
-  isAuthenticated: !!getTokenFromLocalStorage(),
-  user: getUserFromLocalStorage() || null,
-  token: getTokenFromLocalStorage(),
-  error: null,
+const useAuthStore = create((set) => {
+  const token = getTokenFromLocalStorage();
+  const user = getUserFromLocalStorage();
 
-  // Register new user
-  register: async (name, email, password, phone) => {
-    set({ isLoading: true, error: null });
-    try {
-      const response = await publicApi.post("/user/signup", {
-        name,
-        email,
-        password,
-        phone,
-      });
-      const { message, token, user } = response.data;
+  return {
+    isLoading: false,
+    isAuthenticated: !!token,
+    user: user,
+    token: token,
+    error: null,
 
-      localStorage.setItem("authToken", token);
-      localStorage.setItem("user", JSON.stringify(user));
+    // Register new user
+    register: async (name, email, password, phone) => {
+      set({ isLoading: true, error: null });
+      try {
+        const response = await publicApi.post("/user/signup", {
+          name,
+          email,
+          password,
+          phone,
+        });
+        const { message, token, user } = response.data;
 
-      set({
-        isAuthenticated: true,
-        token,
-        isLoading: false,
-        user: user,
-      });
-      toast.success(message);
-    } catch (error) {
-      console.error("Error registering user:", error);
-      set({
-        error: error.response?.data?.message || error.message,
-        isLoading: false,
-      });
-      toast.error(error.response?.data?.message || error.message);
-    }
-  },
+        localStorage.setItem("authToken", token);
+        localStorage.setItem("user", JSON.stringify(user));
 
-  // Login existing user
-  login: async (email, password) => {
-    set({ isLoading: true, error: null });
-    try {
-      const response = await publicApi.post("/user/signin", {
-        email,
-        password,
-      });
-      const { message, token, responseUser } = response.data;
-      localStorage.setItem("authToken", token);
-      localStorage.setItem("user", JSON.stringify(responseUser));
+        set({
+          isAuthenticated: true,
+          token,
+          isLoading: false,
+          user: user,
+        });
+        toast.success(message);
+      } catch (error) {
+        console.error("Error registering user:", error);
+        set({
+          error: error.response?.data?.message || error.message,
+          isLoading: false,
+        });
+        toast.error(error.response?.data?.message || error.message);
+      }
+    },
 
-      set({
-        isAuthenticated: true,
-        token,
-        isLoading: false,
-        user: responseUser,
-      });
-      toast.success(message);
-    } catch (error) {
-      console.error("Error logging in:", error);
-      set({
-        error: error.response?.data?.message || error.message,
-        isLoading: false,
-      });
-      toast.error(error.response?.data?.message);
-    }
-  },
+    // Login existing user
+    login: async (email, password) => {
+      set({ isLoading: true, error: null });
+      try {
+        const response = await publicApi.post("/user/signin", {
+          email,
+          password,
+        });
+        const { message, token, responseUser } = response.data;
+        localStorage.setItem("authToken", token);
+        localStorage.setItem("user", JSON.stringify(responseUser));
 
-  // Logout user
-  logout: () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("user");
-    toast.success("Logged out!");
-    set({ isAuthenticated: false, user: null, token: null });
-  },
-}));
+        set({
+          isAuthenticated: true,
+          token,
+          isLoading: false,
+          user: responseUser,
+        });
+        toast.success(message);
+      } catch (error) {
+        console.error("Error logging in:", error);
+        set({
+          error: error.response?.data?.message || error.message,
+          isLoading: false,
+        });
+        toast.error(error.response?.data?.message);
+      }
+    },
+
+    // Logout user
+    logout: () => {
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("user");
+      toast.success("Logged out!");
+      set({ isAuthenticated: false, user: null, token: null });
+    },
+  };
+});
 
 export default useAuthStore;
