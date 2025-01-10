@@ -9,9 +9,10 @@ import { IoBagCheckOutline } from "react-icons/io5";
 import useCartStore from "../store/cartStore";
 import RelatedProductList from "../components/RelatedProductList";
 import useOrderStore from "../store/OrderDetails";
-import { toast } from "react-toastify";
 import ReactMarkdown from "react-markdown";
 import Comments from "../components/Comments";
+import { useAuthStore } from '../store/authStore';
+import toast from "react-hot-toast"
 
 const Product = () => {
   const [product, setProduct] = useState({});
@@ -25,6 +26,9 @@ const Product = () => {
   const { addProduct } = useOrderStore();
   const [currentStock, setCurrentStock] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState(null);
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+
+  const { user } = useAuthStore();
 
   const params = useParams();
   const selectedProductId = params.id;
@@ -200,14 +204,31 @@ const Product = () => {
     setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
   };
 
-  const handleAddToCart = () => {
-    // Check if at least one variation is selected
-    const selectedValuesArray = Object.values(selectedValues);
-    if (selectedValuesArray.includes(null)) {
-      alert("Please select at least one variation before adding to cart.");
+  const handleAddToCart = async () => {
+    if (!user) {
+      toast.error("Please login to add to cart");
       return;
     }
-    addToCart(product._id, quantity);
+  
+    // Get selected values array before validation
+    const selectedValuesArray = product.hasVariations ? Object.values(selectedValues) : [];
+    
+    // Validate variations
+    if (product.hasVariations && (!selectedValues || selectedValuesArray.some(value => !value))) {
+      toast.error("Please select any variation");
+      return;
+    }
+  
+    try {
+      setIsAddingToCart(true);
+      await addToCart(product._id, quantity, selectedValuesArray);
+      toast.success("Added to cart successfully!");
+    } catch (error) {
+      toast.error("Failed to add to cart. Please try again.");
+      console.error("Add to cart error:", error);
+    } finally {
+      setIsAddingToCart(false);
+    }
   };
 
   return (

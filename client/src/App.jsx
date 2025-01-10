@@ -2,7 +2,6 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { Navbar, Footer } from './components'
 import { Home,  About, Contact, Help, Product, Products, NotFound, Cart, Likes, Order, Categories, OrderKigali } from './pages'
-import 'react-toastify/dist/ReactToastify.css';
 import { Toaster } from 'react-hot-toast';
 import CategoryResults from './pages/CategoryResults';
 
@@ -27,7 +26,7 @@ const App = () => {
         <Route path={"*"} element={<NotFound />} />
       </Routes>
       <Footer />
-      <Toaster position='top-center' toastOptions={{duration:3000}}/>
+      <Toaster position='top-center' toastOptions={{duration:3000}} reverseOrder={false} />
     </div>
   )
 }

@@ -93,7 +93,7 @@ const OrderKigali = () => {
         </div>
         <button
           className="py-[10px] px-[50px] rounded-lg bg-blue2 text-white hover:bg-blue3 transition-all duration-3000"
-          onClick={handleBuyClick}
+          onClick={() => setShowModal(true)}
         >
           Gura
         </button>

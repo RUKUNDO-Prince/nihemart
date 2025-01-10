@@ -1,54 +1,44 @@
 const Cart = require("../models/cart");
 const Product = require("../models/product");
 
+// cartController.js
 const addToCart = async (req, res) => {
   try {
     const { productId } = req.params;
+    const { quantity, selectedVariations } = req.query;
     const { _id: userId } = req.user;
 
-    const quantity = parseInt(req.query.quantity, 10);
-
     if (!userId) {
-      return res.status(400).json({ message: "User ID is required" });
+      return res.status(400).json({ message: "Authentication required" });
     }
+
     const product = await Product.findById(productId);
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
-    console.log("Product Object:", product);
+
     let cart = await Cart.findOne({ user: userId });
     if (!cart) {
-      cart = new Cart({
-        user: userId,
-        items: [],
-      });
+      cart = new Cart({ user: userId, items: [] });
     }
 
-    const cartItem = cart.items.find((item) => item.product.equals(productId));
-    if (cartItem) {
-      cartItem.quantity += quantity;
-      cartItem.subtotal = cartItem.quantity * product.price;
-    } else {
-      const photoUrl = product.photos[0]?.url || ''; // Extract only the URL
-      cart.items.push({
-        product: productId,
-        name: product.name,
-        price: product.price,
-        quantity: quantity,
-        photo: photoUrl, // Save only the URL
-        subtotal: product.price * quantity,
-      });
-    }
-    product.quantity -= quantity;
+    const cartItem = {
+      product: productId,
+      name: product.name,
+      price: product.price,
+      quantity: parseInt(quantity),
+      photo: product.photos[0]?.url,
+      selectedVariations: selectedVariations ? JSON.parse(selectedVariations) : [],
+      subtotal: product.price * parseInt(quantity)
+    };
+
+    cart.items.push(cartItem);
     await cart.save();
-    await product.save();
 
-    return res
-      .status(200)
-      .json({ message: "Product added to your cart successfully" });
+    res.status(200).json({ message: "Product added to cart successfully" });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Failed to add to cart" });
   }
 };
 

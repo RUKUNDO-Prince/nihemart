@@ -2,14 +2,26 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { delivery, whatsapp } from "../assets";
 import toast, { Toaster } from "react-hot-toast";
+import useOrderStore from "../store/OrderDetails";
 
 const OrderModal2 = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
+  const { orderDetails, kigaliOrder, generateWhatsAppMessage } = useOrderStore();
 
   if (!isOpen) return null;
 
   const handleClose = (e) => {
     if (e.target.id === "wrapper") onClose();
+  };
+
+  const handleBuyClick = async () => {
+    await kigaliOrder();
+
+    if (orderDetails.city !== "Kigali") {
+      generateWhatsAppMessage();
+    } else {
+      navigate("/");
+    }
   };
 
   const handleViewProducts = () => {
@@ -50,7 +62,7 @@ const OrderModal2 = ({ isOpen, onClose }) => {
             // onClick={handleViewProducts}
             onClick={() => onClose()}
           >
-            <button className="text-white" >Gura</button>
+            <button onClick={handleBuyClick} className="text-white" >Gura</button>
           </div>
         </div>
       </div>
