@@ -22,15 +22,25 @@ const useCartStore = create((set) => ({
   addToCart: async (productId, quantity) => {
     set({ isLoading: true, error: null });
     try {
+      if (!useAuthStore.getState().user) {
+        toast.error("Please login first to add items to cart");
+        return;
+      }
+
       const response = await authorizedApi.post(`/cart/${productId}?quantity=${quantity}`);
       set((state) => ({
         cartItems: [...state.cartItems, response.data],
         isLoading: false,
       }));
-      toast.success("Product added to cart!");
+      if (response.status === 200) {
+        toast.success("Product added to cart successfully!");
+        await useCartStore.getState().fetchCartItems();
+      }
     } catch (error) {
       set({ error: error.message, isLoading: false });
       toast.error("Failed to add product to cart.");
+    } finally {
+      set({ isLoading: false }); 
     }
   },
 
@@ -39,6 +49,8 @@ const useCartStore = create((set) => ({
     set({ isLoading: true, error: null });
     try {
       await authorizedApi.delete(`/cart/delete/${itemId}`); // Call the API to delete the item
+      toast.success("Item removed from cart!");
+      await useCartStore.getState().fetchCartItems();
       set((state) => ({
         cartItems: state.cartItems.filter((item) => item._id !== itemId), // Update the cart items in the state
         isLoading: false,
@@ -47,6 +59,8 @@ const useCartStore = create((set) => ({
     } catch (error) {
       set({ error: error.message, isLoading: false });
       toast.error("Failed to remove item from cart.");
+    } finally {
+      set({ isLoading: false });
     }
   },
 
@@ -55,8 +69,11 @@ const useCartStore = create((set) => ({
     set({ isLoading: true, error: null });
     try {
       set({ cartItems: [], isLoading: false });
+      toast.success("Cart cleared successfully");
     } catch (error) {
       set({ error: error.message, isLoading: false });
+    } finally { 
+      set({ isLoading: false });
     }
   },
 }));

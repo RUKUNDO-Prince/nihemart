@@ -68,9 +68,10 @@ const useOrderStore = create((set,get) => ({
         toast.success(
           "Murakoze kugura iki gicuruzwa, ibyo mwatumije birabageraho vuba!"
         );
+        set({ success: true });
       }
     } catch (error) {
-      toast.error(error?.response?.data?.message);
+      toast.error(error?.response?.data?.message || "Failed to place order");
     }
   },
 

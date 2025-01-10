@@ -13,7 +13,7 @@ const getUserFromLocalStorage = () => {
   return user ? JSON.parse(user) : null;
 };
 
-const useAuthStore = create((set) => {
+export const useAuthStore = create((set) => {
   const token = getTokenFromLocalStorage();
   const user = getUserFromLocalStorage();
 
